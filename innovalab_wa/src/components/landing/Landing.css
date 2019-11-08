@@ -1,0 +1,65 @@
+.landing {
+    position: absolute;    
+    min-height: 100vh;
+    background-image: url("../../images/background.jpg");
+    background-position: center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.welcomeText {    
+    padding: 12px;
+    max-width: 90%;
+    border-radius: 12%;
+    background-color: rgba(20, 100, 170, 0.8);
+    background-image: linear-gradient(rgba(20, 100, 170, 0.5), rgba(78, 182, 246, 0.5));
+}
+
+.welcomeBorder {
+    border: 2px solid white;
+    border-radius: 12%;
+    color: white;
+    padding: 30px;
+}
+
+
+.welcomeBorder p {
+    text-align: justify;
+    margin-bottom: 4vh;
+    font-size: 1.17rem;
+    line-height: 118%;
+}
+
+#btn-login {
+    border-radius: 12px;
+    color: white;
+    font-size: 1.17rem;
+}
+
+.logoLanding {
+    margin-bottom: 24vh;
+    margin-top: 6vh;
+}
+
+.imgLogoLanding {
+    padding: 0 !important;
+}
+
+@media only screen and (min-width: 992px) {    
+    .welcomeBorder {
+        padding-top: 8vh;
+    }
+    .welcomeBorder p {
+        margin-bottom: 10vh;
+    }
+    .logoLanding {
+        margin-bottom: 6vh;
+        margin-top: 5vh;
+    }
+}
