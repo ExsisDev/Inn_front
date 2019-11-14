@@ -16,7 +16,7 @@ const Landing = () => {
                     <Col md={5} lg={4} className="welcomeText">
                         <div className="welcomeBorder">
                             <Switch>
-                                <Route path="/" component={WelcomeText} exact />
+                                <Route path="/" exact component={WelcomeText} />
                                 <Route path="/login" component={LoginForm} />
                             </Switch>
                         </div>

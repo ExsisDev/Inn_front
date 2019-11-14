@@ -1,5 +1,6 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
+import { Link } from 'react-router-dom';
 import './WelcomeText.css'
 
 const WelcomeText = () => {
@@ -9,8 +10,8 @@ const WelcomeText = () => {
                 Bienvenido al portal de impulso TIC de innovalab
                 y la Cámara de comercio de Bogotá, para continuar
                 por favor inicia sesión
-            </p>
-            <Button href="/login" id="btn-login" variant="warning" block>Iniciar Sesión</Button>
+            </p>            
+            <Button as={Link} to="/login" id="btnLoginWelcome" variant="warning" block>Iniciar Sesión</Button>
         </div>
     )
 }

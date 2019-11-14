@@ -1,3 +1,21 @@
 * {
     width: 100%;
 }
+
+.centerContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#btnLoginForm {
+    width: 60%;
+    max-height: 5vh;
+    color: white;
+    border-radius: 18px;    
+}
+
+#linkForgetPaswword {
+    color: white;
+    font-size: 0.7rem;
+}
