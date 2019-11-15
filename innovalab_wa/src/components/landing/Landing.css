@@ -13,7 +13,7 @@
     align-items: center;
 }
 
-.welcomeText {    
+.landingMain {    
     padding: 12px;
     max-width: 90%;
     border-radius: 12%;
@@ -21,19 +21,11 @@
     background-image: linear-gradient(rgba(20, 100, 170, 0.5), rgba(78, 182, 246, 0.5));
 }
 
-.welcomeBorder {
+.landingBorder {
     border: 2px solid white;
     border-radius: 12%;
     color: white;
-    padding: 30px;
-}
-
-
-.welcomeBorder p {
-    text-align: justify;
-    margin-bottom: 4vh;
-    font-size: 1.17rem;
-    line-height: 118%;
+    padding: 20px 10px;
 }
 
 .logoLanding {
@@ -43,17 +35,4 @@
 
 .imgLogoLanding {
     padding: 0 !important;
-}
-
-@media only screen and (min-width: 992px) {    
-    .welcomeBorder {
-        padding-top: 8vh;
-    }
-    .welcomeBorder p {
-        margin-bottom: 10vh;
-    }
-    .logoLanding {
-        margin-bottom: 6vh;
-        margin-top: 5vh;
-    }
 }

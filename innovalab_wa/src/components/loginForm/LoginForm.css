@@ -8,6 +8,11 @@
     align-items: center;
 }
 
+.loginFormInput {
+    margin-top: 1.5vh;
+    border-radius: 0.8rem !important;
+}
+
 #btnLoginForm {
     width: 60%;
     max-height: 5vh;
@@ -15,7 +20,8 @@
     border-radius: 18px;    
 }
 
-#linkForgetPaswword {
+#linkForgetPassword {
     color: white;
     font-size: 0.7rem;
+    margin-top: 1vh;
 }

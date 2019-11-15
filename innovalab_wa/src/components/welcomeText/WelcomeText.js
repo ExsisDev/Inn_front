@@ -5,7 +5,7 @@ import './WelcomeText.css'
 
 const WelcomeText = () => {
     return (
-        <div>
+        <div className="welcomeText">
             <p>
                 Bienvenido al portal de impulso TIC de innovalab
                 y la Cámara de comercio de Bogotá, para continuar
