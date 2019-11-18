@@ -9,13 +9,17 @@
     background-size: cover;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
+}
+
+#landingFirstRow {
+    flex: 1;
 }
 
 .landingMain {    
     padding: 12px;
-    max-width: 90%;
+    max-width: 90%;    
     border-radius: 12%;
     background-color: rgba(20, 100, 170, 0.8);
     background-image: linear-gradient(rgba(20, 100, 170, 0.5), rgba(78, 182, 246, 0.5));
@@ -28,11 +32,11 @@
     padding: 20px 10px;
 }
 
-.logoLanding {
-    margin-bottom: 24vh;
-    margin-top: 6vh;
+#landingLogoRow {
+    position: relative;
 }
 
-.imgLogoLanding {
+.imgLogoLanding {    
     padding: 0 !important;
+    margin-bottom: 1vh;    
 }

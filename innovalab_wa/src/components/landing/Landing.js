@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
 import WelcomeText from '../welcomeText/WelcomeText';
 import LoginForm from '../loginForm/LoginForm';
-import PageNotFound from '../pageNotFound/PageNotFound';
 import Image from 'react-bootstrap/Image'
 import './Landing.css';
 import logoInnovalab from '../../images/INVLB_CCB_LOGO.png';
@@ -13,19 +12,17 @@ const Landing = () => {
     return (
         <Router>
             <Container className="landing" fluid>
-                <Row className="justify-content-center">
+                <Row id="landingFirstRow" className="justify-content-center align-items-center">
                     <Col md={5} lg={4} className="landingMain">
                         <div className="landingBorder">
                             <Switch>
                                 <Route path="/" exact component={WelcomeText} />
-                                <Route path="/login" component={LoginForm} />                                
+                                <Route path="/login" component={LoginForm} />
                             </Switch>
                         </div>
                     </Col>
                 </Row>
-            </Container>
-            <Container>
-                <Row className="logoLanding justify-content-center">
+                <Row className="justify-content-center">
                     <Col xs={6} md={4} lg={3} className="imgLogoLanding">
                         <Image src={logoInnovalab} alt="logo innovalab" fluid />
                     </Col >
