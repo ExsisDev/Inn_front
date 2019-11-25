@@ -6,19 +6,19 @@ import "./LoginForm.css"
 const LoginForm = () => {
     return (
         <div className="centerContent">
-            <h6> Iniciar Sesión </h6>
+            <h6 className="mt-3 mb-3"> Iniciar Sesión </h6>
             <Form >
                 <Form.Group  controlId="email">
-                    <Form.Control className="loginFormInput" type="email" placeholder="Correo electrónico" />
+                    <Form.Control className="formInput" type="email" placeholder="Correo electrónico" />
                 </Form.Group>
                 <Form.Group  controlId="password">
-                    <Form.Control className="loginFormInput" type="password" placeholder="Contraseña" />
+                    <Form.Control className="formInput" type="password" placeholder="Contraseña" />
                 </Form.Group>
-                <Button id="btnLoginForm" variant="warning" type="submit">
+                <Button className="sendButton mt-4" variant="warning" type="submit">
                     Iniciar Sesión
                 </Button>
             </Form>
-            <Link to="#" id="linkForgetPassword" >Olvidé mi contraseña</Link>
+            <Link to="/recover-password/email" id="linkForgetPassword" >Olvidé mi contraseña</Link>
         </div>
     );
 }
