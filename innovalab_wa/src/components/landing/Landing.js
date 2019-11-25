@@ -11,9 +11,9 @@ import logoCamara from '../../images/CCB_LOGO.png';
 const Landing = () => {
     return (
         <Router>
-            <Container className="landing" fluid>
-                <Row id="landingFirstRow" className="justify-content-center align-items-center">
-                    <Col md={5} lg={4} className="landingMain">
+            <Container className="landing d-flex flex-column align-items-center" fluid>
+                <Row id="landingFirstRow" className="d-flex justify-content-center align-items-center">
+                    <Col md={5} xl={4} lg={4} sm={6} className="landingMain">
                         <div className="landingBorder">
                             <Switch>
                                 <Route path="/" exact component={WelcomeText} />

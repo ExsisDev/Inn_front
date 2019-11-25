@@ -18,6 +18,7 @@
     max-height: 5vh;
     color: white;
     border-radius: 18px;    
+    padding-top: 0;
 }
 
 #linkForgetPassword {

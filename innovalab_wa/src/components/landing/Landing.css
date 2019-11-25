@@ -7,10 +7,6 @@
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
 }
 
 #landingFirstRow {
@@ -39,4 +35,16 @@
 .imgLogoLanding {    
     padding: 0 !important;
     margin-bottom: 1vh;    
+}
+
+@media (min-width: 1200px){
+    .landingMain {
+        max-width: 28% !important;
+    }
+}
+
+@media (min-width: 460px) and (max-width: 576px){
+    .landingMain {
+        max-width: 60% !important;
+    }
 }
