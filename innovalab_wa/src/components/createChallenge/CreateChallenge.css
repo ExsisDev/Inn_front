@@ -1,0 +1,68 @@
+div {
+   border: 1px solid red;
+}
+
+.creationBackground {
+   padding: 0px !important;
+}
+
+.elementsRow {
+   height: 100vh;
+   margin: 0 !important;
+}
+
+.backButton {
+   height: 50px;
+   width: 80px;
+   margin-left: 50px;
+   margin-top: 30px;
+}
+
+.logoHeader {
+   height: 50px;
+   width: 30%;
+   margin-top: -50px;
+   margin-bottom: 30px;
+}
+
+.createNewChallengeText {
+   height: 50px;
+   margin-bottom: 30px;
+}
+
+.plusSign{
+   height: 100%;
+   width: auto;
+}
+
+.newChallengeText{
+   width: auto;
+   margin-left: 20px;
+   color: #a5a5a5;
+}
+
+.formCreation {
+   border-radius: 20px;
+   box-shadow: 0px 5px 10px gray;
+   height: 70%;
+   width: auto;
+   margin: 0 3% 30px 3%;
+}
+
+.imageFormCreation {
+   margin-top: 20px;
+   width: 150px;
+   height: 150px;
+   padding: 10px;
+}
+
+.formData {
+   margin-top: -120px;
+   width: calc(100% - 150px);
+   height: calc(100% - 50px);
+}
+
+.camaraLogo {
+   height: 100%;
+
+}
