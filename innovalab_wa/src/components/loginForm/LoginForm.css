@@ -8,12 +8,12 @@
     align-items: center;
 }
 
-.loginFormInput {
+.formInput {
     margin-top: 1.5vh;
     border-radius: 0.8rem !important;
 }
 
-#btnLoginForm {
+button.sendButton {
     width: 60%;
     max-height: 5vh;
     color: white;

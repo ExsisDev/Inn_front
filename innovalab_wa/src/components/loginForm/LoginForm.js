@@ -88,7 +88,7 @@ class LoginForm extends React.Component {
         return (
             <div className="centerContent">
                 <ToastContainer />
-                <h6> Iniciar Sesión </h6>                
+                <h6 className="mt-3 mb-3"> Iniciar Sesión </h6>                
                 <Form validated={this.state.validated} onSubmit={this.handleSubmit}>
                     <Form.Group controlId="email">
                         <Form.Control className="loginFormInput" 
@@ -112,6 +112,7 @@ class LoginForm extends React.Component {
                         />
                     </Form.Group>
                     <Button id="btnLoginForm" 
+                            className="sendButton mt-4"
                             variant="warning" 
                             type="submit"
                             disabled={isLoading}
@@ -119,7 +120,7 @@ class LoginForm extends React.Component {
                         {isLoading ? 'Iniciando Sesión...' : 'Iniciar Sesión'}
                     </Button>
                 </Form>
-                <Link to="#" id="linkForgetPassword" >Olvidé mi contraseña</Link>
+                <Link to="/recover-password/email" id="linkForgetPassword" >Olvidé mi contraseña</Link>
             </div>
         );
     }
