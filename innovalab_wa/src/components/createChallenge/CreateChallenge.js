@@ -50,7 +50,7 @@ class CreateChallenge extends React.Component {
 
    render() {
       return (
-         <Container className="creationBackground d-flex" fluid>            
+         <Container className="creationBackground d-flex" fluid>
             <Row className="elementsRow flex-column flex-nowrap ">
                <Col className="elementsCol">
                   <a className="mt-auto" href="#">
