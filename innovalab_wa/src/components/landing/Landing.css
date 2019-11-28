@@ -34,7 +34,7 @@
 
 .imgLogoLanding {    
     padding: 0 !important;
-    margin-bottom: 1vh;    
+    margin-bottom: 50px; 
 }
 
 @media (min-width: 1200px){
