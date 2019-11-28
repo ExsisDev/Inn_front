@@ -91,7 +91,7 @@ class LoginForm extends React.Component {
                 <h6 className="mt-3 mb-3"> Iniciar Sesión </h6>                
                 <Form validated={this.state.validated} onSubmit={this.handleSubmit}>
                     <Form.Group controlId="email">
-                        <Form.Control className="loginFormInput" 
+                        <Form.Control className="formInput" 
                                       name="email"
                                       type="email"
                                       placeholder="Correo electrónico" 
@@ -101,7 +101,7 @@ class LoginForm extends React.Component {
                         />
                     </Form.Group>
                     <Form.Group controlId="password">
-                        <Form.Control className="loginFormInput" 
+                        <Form.Control className="formInput" 
                                       name="password"
                                       type="password" 
                                       placeholder="Contraseña" 
