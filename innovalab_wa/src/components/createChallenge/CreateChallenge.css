@@ -2,6 +2,8 @@ div {
    /* border: 1px solid red; */
 }
 
+/* full component */
+
 .creationBackground {
    padding: 0px !important;
 }
@@ -11,6 +13,12 @@ div {
    margin: 0 !important;
 }
 
+.elementsCol{
+   padding-bottom: 3%;
+}
+
+/* header  */
+
 .backButton {
    height: 50px;
    width: 80px;
@@ -18,14 +26,21 @@ div {
    margin-top: 30px;
 }
 
-.logoHeader {
+.camaraLogoBox {
    height: 50px;
-   width: 30%;
+   width: 25%;
    margin-top: -50px;
    margin-bottom: 30px;
+   margin-right: 3%;
 }
 
-.createNewChallengeText {
+.camaraLogo {
+   height: 100%;
+}
+
+/* title  */
+
+.createNewChallengeBox{
    height: 50px;
    margin-bottom: 30px;
 }
@@ -41,12 +56,14 @@ div {
    color: #a5a5a5;
 }
 
+/* form  */
+
 .formCreation {
    border-radius: 20px;
    box-shadow: 0px 5px 10px gray;
    height: 70%;
    width: auto;
-   margin: 0 3% 30px 3%;
+   margin: 0 3% 0 3%;
    padding-right: 5%;
 }
 
@@ -60,10 +77,14 @@ div {
 .formData {
    margin-top: -120px;
    width: calc(100% - 150px);
-   height: calc(100% - 50px);
 }
 
-.camaraLogo {
-   height: 100%;
+/* removable list */
 
+.listRemovable{
+   list-style-type: none;
+}
+
+.crossLink:hover{
+   color: red !important;
 }
