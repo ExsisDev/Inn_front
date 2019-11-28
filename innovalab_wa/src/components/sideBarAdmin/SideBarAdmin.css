@@ -1,0 +1,52 @@
+.lateralBar {
+   max-width: 20%;
+   background-color: #313333;
+}
+
+.logoAdminBox {
+   height: 150px;
+   width: 100%;
+   padding: 10px 0;
+}
+
+.logoAdmin {
+   height: 80%;
+   width: auto;
+}
+
+.adminText {
+   height: 60px;
+   margin-bottom: 20px;
+}
+
+.adminText h3 {
+   font-size: 2vw;
+   color: white;
+   font-weight: bold;
+}
+
+.sideLinkBox {
+   height: 80px;
+}
+
+.sideLinkBox:hover {
+   background-color: #333333;
+}
+
+a .sideLinkBox p {
+   font-size: 1.3vw;
+   color: white;
+   margin: 0;
+}
+
+a .sideLinkBox:hover {
+   background-color: #272626 !important;
+}
+
+a:hover {
+   text-decoration: none !important;
+}
+
+.logoutIcon {
+   width: 40px;
+}

@@ -1,7 +1,7 @@
 .landing {
     position: absolute;    
     min-height: 100vh;
-    background-image: url("../../images/background.jpg");
+    background-image: url("../../images/background1.jpg");
     background-position: center center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -34,7 +34,7 @@
 
 .imgLogoLanding {    
     padding: 0 !important;
-    margin-bottom: 1vh;    
+    margin-bottom: 50px; 
 }
 
 @media (min-width: 1200px){

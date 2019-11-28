@@ -1,0 +1,90 @@
+div {
+   /* border: 1px solid red; */
+}
+
+/* full component */
+
+.creationBackground {
+   padding: 0px !important;
+}
+
+.elementsRow {
+   height: 100vh;
+   margin: 0 !important;
+}
+
+.elementsCol{
+   padding-bottom: 3%;
+}
+
+/* header  */
+
+.backButton {
+   height: 50px;
+   width: 80px;
+   margin-left: 50px;
+   margin-top: 30px;
+}
+
+.camaraLogoBox {
+   height: 50px;
+   width: 25%;
+   margin-top: -50px;
+   margin-bottom: 30px;
+   margin-right: 3%;
+}
+
+.camaraLogo {
+   height: 100%;
+}
+
+/* title  */
+
+.createNewChallengeBox{
+   height: 50px;
+   margin-bottom: 30px;
+}
+
+.plusSign{
+   height: 100%;
+   width: auto;
+}
+
+.newChallengeText{
+   width: auto;
+   margin-left: 20px;
+   color: #a5a5a5;
+}
+
+/* form  */
+
+.formCreation {
+   border-radius: 20px;
+   box-shadow: 0px 5px 10px gray;
+   height: 70%;
+   width: auto;
+   margin: 0 3% 0 3%;
+   padding-right: 5%;
+}
+
+.imageFormCreation {
+   margin-top: 20px;
+   width: 150px;
+   height: 150px;
+   padding: 10px;
+}
+
+.formData {
+   margin-top: -120px;
+   width: calc(100% - 150px);
+}
+
+/* removable list */
+
+.listRemovable{
+   list-style-type: none;
+}
+
+.crossLink:hover{
+   color: red !important;
+}

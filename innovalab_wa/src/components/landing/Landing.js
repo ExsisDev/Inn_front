@@ -8,9 +8,8 @@ import RecoverPasswordEmail from '../recoverPasswordEmail/RecoverPasswordEmail'
 import RecoverNewPassword from '../recoverNewPassword/RecoverNewPassword';
 
 import Image from 'react-bootstrap/Image'
-import logoInnovalab from '../../images/INVLB_CCB_LOGO.png';
-import logoCamara from '../../images/CCB_LOGO.png';
-
+import innovaCamarLogo from '../../images/innovaCamaraLogo.png';
+ 
 import './Landing.css';
 
 const Landing = () => {
@@ -36,8 +35,21 @@ const Landing = () => {
                         <Image src={logoCamara} alt="logo camara de comercio de bogotá" fluid />
                     </Col>
                 </Row>
+<<<<<<< HEAD
         </Container>        
     );
 }
         
+=======
+                <Row className="justify-content-center">
+                    <Col xs={6} md={4} lg={4} className="imgLogoLanding">
+                        <Image src={innovaCamarLogo} alt="logo innovalab" fluid />
+                    </Col >
+                </Row>
+            </Container>
+        </Router>
+    );
+}
+
+>>>>>>> createChallenge
 export default Landing;
