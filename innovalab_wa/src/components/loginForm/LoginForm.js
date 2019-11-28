@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { Form, Button } from 'react-bootstrap';
-import { Link, withRouter } from 'react-router-dom';
+import { Link, withRouter, Redirect } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import "./LoginForm.css"
@@ -9,7 +9,8 @@ import "./LoginForm.css"
 class LoginForm extends React.Component {
     constructor() {
         super();
-        this.state = { 
+        this.state = {
+            isLogged: false,
             email: "",
             password: "",
             validated: false,
@@ -41,7 +42,7 @@ class LoginForm extends React.Component {
         
         axios.post( url, credentials )
             .then( res => {
-                this.props.history.push('/home')
+                this.setState({isLogged: true});
             })
             .catch(error => {
                 const res = error.response;
@@ -84,43 +85,48 @@ class LoginForm extends React.Component {
     }
 
     render() {
-        let { isLoading } = this.state;
+        let { isLoading, isLogged } = this.state;
         return (
-            <div className="centerContent">
-                <ToastContainer />
-                <h6 className="mt-3 mb-3"> Iniciar Sesión </h6>                
-                <Form validated={this.state.validated} onSubmit={this.handleSubmit}>
-                    <Form.Group controlId="email">
-                        <Form.Control className="formInput" 
-                                      name="email"
-                                      type="email"
-                                      placeholder="Correo electrónico" 
-                                      values={this.state.email}
-                                      onChange={this.handleChange}
-                                      required
-                        />
-                    </Form.Group>
-                    <Form.Group controlId="password">
-                        <Form.Control className="formInput" 
-                                      name="password"
-                                      type="password" 
-                                      placeholder="Contraseña" 
-                                      values={this.state.password}
-                                      onChange={this.handleChange}
-                                      maxLength={8}
-                                      required
-                        />
-                    </Form.Group>
-                    <Button id="btnLoginForm" 
-                            className="sendButton mt-4"
-                            variant="warning" 
-                            type="submit"
-                            disabled={isLoading}
-                    >
-                        {isLoading ? 'Iniciando Sesión...' : 'Iniciar Sesión'}
-                    </Button>
-                </Form>
-                <Link to="/recover-password/email" id="linkForgetPassword" >Olvidé mi contraseña</Link>
+            <div> 
+            {
+                isLogged ? <Redirect to="/home" /> :
+                <div className="centerContent">
+                    <ToastContainer />
+                    <h6 className="mt-3 mb-3"> Iniciar Sesión </h6>                
+                    <Form validated={this.state.validated} onSubmit={this.handleSubmit}>
+                        <Form.Group controlId="email">
+                            <Form.Control className="formInput" 
+                                        name="email"
+                                        type="email"
+                                        placeholder="Correo electrónico" 
+                                        values={this.state.email}
+                                        onChange={this.handleChange}
+                                        required
+                            />
+                        </Form.Group>
+                        <Form.Group controlId="password">
+                            <Form.Control className="formInput" 
+                                        name="password"
+                                        type="password" 
+                                        placeholder="Contraseña" 
+                                        values={this.state.password}
+                                        onChange={this.handleChange}
+                                        maxLength={8}
+                                        required
+                            />
+                        </Form.Group>
+                        <Button id="btnLoginForm" 
+                                className="sendButton mt-4"
+                                variant="warning" 
+                                type="submit"
+                                disabled={isLoading}
+                        >
+                            {isLoading ? 'Iniciando Sesión...' : 'Iniciar Sesión'}
+                        </Button>
+                    </Form>
+                    <Link to="/recover-password/email" id="linkForgetPassword" >Olvidé mi contraseña</Link>
+                </div>
+            }
             </div>
         );
     }
