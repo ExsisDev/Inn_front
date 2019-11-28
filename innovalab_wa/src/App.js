@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Landing from "./components/landing/Landing";
 import Home from "./components/home/Home";
 
@@ -8,9 +8,11 @@ import './App.css';
 function App() {
   return (
     <Router >
-      <div className="App">      
-        <Route path="/home" component={Home}/>
-        <Route path="/" exact component={Landing}/>
+      <div className="App">
+        <Switch>
+          <Route path="/home" component={Home} />
+          <Route path="/" component={Landing} />
+        </Switch>
       </div>
     </Router>
 
