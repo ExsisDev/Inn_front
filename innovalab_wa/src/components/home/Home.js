@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
-import CreateAlly from "../ally/CreateAlly";
+// import CreateAlly from "../ally/CreateAlly";
 import './Home.css';
 
 class Home extends React.Component {
@@ -11,7 +11,7 @@ class Home extends React.Component {
                 <Row noGutters>
                     <Col className="d-flex">
                         <div className="fakeSideBox"></div>
-                        <Route path="/home/ally" component={CreateAlly} />
+                        {/* <Route path="/home/ally" component={CreateAlly} /> */}
                     </Col>
                 </Row>
             </Container>
