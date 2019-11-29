@@ -51,6 +51,7 @@ class CreateChallenge extends React.Component {
    render() {
       return (
          <Container className="creationBackground d-flex" fluid>
+            <SideBarAdmin />
             <Row className="elementsRow flex-column flex-nowrap ">
                <Col className="elementsCol">
                   <a className="mt-auto" href="#">
@@ -128,7 +129,6 @@ class CreateChallenge extends React.Component {
                               </ul>
                            </Col>
                         </Row>
-
                      </div>
                   </div>
                </Col>
