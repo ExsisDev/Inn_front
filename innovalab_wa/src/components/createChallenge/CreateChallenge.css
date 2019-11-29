@@ -17,45 +17,6 @@ div {
    padding-bottom: 3%;
 }
 
-/* header  */
-
-.backButton {
-   height: 50px;
-   width: 80px;
-   margin-left: 50px;
-   margin-top: 30px;
-}
-
-.camaraLogoBox {
-   height: 50px;
-   width: 25%;
-   margin-top: -50px;
-   margin-bottom: 30px;
-   margin-right: 3%;
-}
-
-.camaraLogo {
-   height: 100%;
-}
-
-/* title  */
-
-.createNewChallengeBox{
-   height: 50px;
-   margin-bottom: 30px;
-}
-
-.plusSign{
-   height: 100%;
-   width: auto;
-}
-
-.newChallengeText{
-   width: auto;
-   margin-left: 20px;
-   color: #a5a5a5;
-}
-
 /* form  */
 
 .formCreation {
