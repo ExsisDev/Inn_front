@@ -1,48 +1,8 @@
-div {
-   /* border: 1px solid red; */
-}
-
-/* full component */
-
-.creationBackground {
-   padding: 0px !important;
-}
-
-.elementsRow {
-   height: 100vh;
-   margin: 0 !important;
-}
-
-.elementsCol {
-   padding-bottom: 3%;
-}
-
-/* header  */
-
-.backButton {
-   height: 50px;
-   width: 80px;
-   margin-left: 50px;
-   margin-top: 30px;
-}
-
-.camaraLogoBox {
-   height: 50px;
-   width: 25%;
-   margin-top: -50px;
-   margin-bottom: 30px;
-   margin-right: 3%;
-}
-
-.camaraLogo {
-   height: 100%;
-}
-
 /* title  */
 
 .createNewChallengeBox {
    height: 50px;
-   margin-bottom: 30px;
+   margin: 20px 0;
 }
 
 .plusSign {
@@ -58,38 +18,57 @@ div {
 
 /* form  */
 
-.formCreation {
+.formCentering{
+   margin: 20px 0;
+}
+
+.formBox {
    border-radius: 20px;
    box-shadow: 0px 5px 10px gray;
-   height: 70%;
-   width: auto;
-   margin: 0 3% 0 3%;
-   padding-right: 5%;
    background-color: #f0f0f0;
 }
 
-.imageFormCreation {
-   margin-top: 20px;
-   width: 150px;
-   height: 150px;
-   padding: 10px;
-}
-
-.formData {
-   margin-top: -120px;
-   width: calc(100% - 150px);
+.challengeName{
+   background-color: #e8e8e8 !important;
 }
 
 .textArea {
    resize: none;
+   background-color: #e8e8e8 !important;
+}
+
+.selectCategoryCompany {
+   padding: 5px;
+   -webkit-appearance: none;
+   -moz-appearance: none;
+   background: url(http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png) no-repeat right #e8e8e8;
+   background-position-x: 205px;
+   width: 230px !important;
+   background-color: #e8e8e8 !important;
+   border-color: black !important;
+}
+
+.dateWidth {
+   width: 230px !important;
 }
 
 /* removable list */
 
 .listRemovable {
    list-style-type: none;
+   height: 60px;
 }
 
 .crossLink:hover {
    color: red !important;
+}
+
+.createButton{
+   width: 120px;
+   height: 35px;
+   padding-top: 0 !important;
+   border-radius: 18px !important;
+   background-color: #fa995d !important;
+   color: white !important;
+   font-size: 18px !important;
 }

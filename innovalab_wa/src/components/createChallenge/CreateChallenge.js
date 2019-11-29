@@ -1,13 +1,10 @@
 import React from 'react';
-import { Container, Row, Form, Col } from 'react-bootstrap';
+import { Row, Form, Col, Button } from 'react-bootstrap';
 import { IconContext } from "react-icons";
 import { IoIosCloseCircle } from 'react-icons/io';
 import _ from 'lodash';
 
 import './CreateChallenge.css';
-import SideBarAdmin from '../sideBarAdmin/SideBarAdmin';
-import backButton from '../../images/backButton.png';
-import innovaCamaraLogo from '../../images/innovaCamaraLogo.png';
 import newChallenge from '../../images/newChallenge.png';
 
 class CreateChallenge extends React.Component {
@@ -29,7 +26,7 @@ class CreateChallenge extends React.Component {
    }
 
    getAllCategories() {
-      return ["categoría 4", "categoría 3"];
+      return ["categoría 1", "categoría 2", "categoría 3", "categoría 4", "categoría 5", "categoría 6", "categoría 7", "categoría 8", "categoría 9", "categoría 10"];
    }
 
    componentDidMount() {
@@ -51,97 +48,89 @@ class CreateChallenge extends React.Component {
    handleDeleteClick(e) {
       const categoryToDelete = e.currentTarget.dataset.id;
       let newArray = this.state.categoriesSelected;
-      newArray = _.remove(newArray, function(n){
+      newArray = _.remove(newArray, function (n) {
          return n !== categoryToDelete;
       });
-      this.setState({ categoriesSelected: newArray});
+      this.setState({ categoriesSelected: newArray });
    }
 
    render() {
       return (
-         <Container className="creationBackground d-flex" fluid>
-            <Row className="elementsRow flex-column flex-nowrap ">
-               <Col className="elementsCol">
-                  <a className="mt-auto" href="#">
-                     <div className="backButton d-flex">
-                        <img className="align-self-center" src={backButton} alt="Back button" />
-                     </div>
-                  </a>
-                  <div className="camaraLogoBox ml-auto">
-                     <img className="camaraLogo align-self-center" src={innovaCamaraLogo} alt="logo icon" />
-                  </div>
-                  <div className="createNewChallengeBox d-flex justify-content-center">
-                     <img className="plusSign" src={newChallenge} alt="New Challenge" />
-                     <h3 className="newChallengeText align-self-center">Crear Nuevo Reto</h3>
-                  </div>
-                  <div className="formCreation">
-                     <div className="imageFormCreation">
-                        image form
-                     </div>
-                     <div className="formData ml-auto">
-                        <Form className="d-flex flex-column">
-                           <Form.Row>
-                              <Form.Control className="challengeName formInput" type="input" placeholder="Nombre del reto" />
-                           </Form.Row>
+         <Row className="m-0">
+            <Col className="p-0">
+               <Row className="m-0">
+                  <Col>
+                     <div className="formBox">
+                        <Row className="m-0 d-flex justify-content-center">
+                           <Col sm={9} className="formCentering">
+                              <Form className="d-flex flex-column">
+                                 <Form.Row className="m-0">
+                                    <Form.Group as={Col}>
+                                       <Form.Control className="challengeName formInput" type="input" placeholder="Nombre del reto" />
+                                    </Form.Group>
+                                 </Form.Row>
 
-                           <Form.Row className="mt-4">
-                              <Form.Group className="d-flex align-items-start flex-column" controlId="formGridDescription">
-                                 <Form.Label className="w-auto">Descripción: </Form.Label>
-                                 <Form.Control as="textarea" className="formInput textArea" />
-                              </Form.Group>
-                           </Form.Row>
+                                 <Form.Row className="m-0">
+                                    <Form.Group as={Col} className="d-flex align-items-start form-group flex-column mt-2">
+                                       <Form.Label className="w-auto ">Descripción: </Form.Label>
+                                       <Form.Control as="textarea" className="formInput textArea mt-0" />
+                                    </Form.Group>
+                                 </Form.Row>
 
-                           <Form.Row className="mt-4">
-                              <Form.Group className="d-flex align-items-start flex-column" as={Col} controlId="formGridCategories">
-                                 <Form.Label className="w-auto">Categorias:</Form.Label>
-                                 <Form.Control as="select" ref="selectCategory" onChange={() => { this.fillSelectedElements(this.state.categoriesSelected, this.refs.selectCategory.value) }}>
-                                    <option disabled selected>Seleccione las categorias</option>
-                                    {this.state.categories.map((item) => {
-                                       return <option name={item} key={item}>{item}</option>
-                                    })}
-                                 </Form.Control>
-                              </Form.Group>
+                                 <Form.Row className="mt-2">
+                                    <Form.Group as={Col} xl={4} sm={12} controlId="formGridCategories" className="d-flex align-items-center flex-column col-sm-12 col-md-12 col-xl-4" >
+                                       <Form.Label className="w-auto">Categorias:</Form.Label>
+                                       <Form.Control className="formSelect selectCategoryCompany" as="select" ref="selectCategory" onChange={() => { this.fillSelectedElements(this.state.categoriesSelected, this.refs.selectCategory.value) }}>
+                                          <option disabled selected>Seleccione las categorias</option>
+                                          {this.state.categories.map((item) => {
+                                             return <option className="overflow-auto" name={item} key={item}>{item}</option>
+                                          })}
+                                       </Form.Control>
+                                    </Form.Group>
 
-                              <Form.Group className="d-flex align-items-start flex-column col-sm-12 col-md-12 col-xl-4" as={Col} controlId="formGridCompanies">
-                                 <Form.Label className="w-auto">Empresa proponente:</Form.Label>
-                                 <Form.Control as="select" ref="selectCompany" onChange={() => { this.setState({ companieSelected: this.refs.selectCompany.value }) }}>
-                                    <option disabled selected>Seleccione una empresa</option>
-                                    {this.state.companies.map((item) => {
-                                       return <option name={item} key={item}>{item}</option>
-                                    })}
-                                 </Form.Control>
-                              </Form.Group>
+                                    <Form.Group as={Col} xl={4} sm={12} controlId="formGridCompanies" className="d-flex align-items-center flex-column col-sm-12 col-md-12 col-xl-4" >
+                                       <Form.Label className="w-auto">Empresa proponente:</Form.Label>
+                                       <Form.Control className="formSelect selectCategoryCompany" as="select" ref="selectCompany" onChange={() => { this.setState({ companieSelected: this.refs.selectCompany.value }) }}>
+                                          <option disabled selected>Seleccione una empresa</option>
+                                          {this.state.companies.map((item) => {
+                                             return <option name={item} key={item}>{item}</option>
+                                          })}
+                                       </Form.Control>
+                                    </Form.Group>
 
-                              <Form.Group className="d-flex align-items-start flex-column" as={Col} controlId="formGridCloseDate">
-                                 <Form.Label className="w-auto"> Fecha de cierre:</Form.Label>
-                                 <Form.Control type="date" />
-                              </Form.Group>
-                           </Form.Row>
-                        </Form>
-
-                        <Row>
-                           <Col sm={4}>
-                              <ul className="listRemovable d-flex flex-column align-items-start" >
-                                 {this.state.categoriesSelected.map((item) => {
-                                    return (
-                                       <IconContext.Provider key={item} value={{ className: "logoutIcon" }}>
-                                          <li key={item} className="w-auto" ><span data-id={item} className="crossLink" onClick={this.handleDeleteClick.bind(this)}><IoIosCloseCircle /></span>{item}</li>
-                                       </IconContext.Provider>
-                                    )
-                                 })}
-                              </ul>
-                           </Col>
-                           <Col sm={4}>
-                              <ul className="listRemovable d-flex flex-column align-items-start" >
-                                 <li className="w-auto">{this.state.companieSelected}</li>
-                              </ul>
+                                    <Form.Group as={Col} xl={4} sm={12} controlId="formGridCloseDate" className="d-flex align-items-center flex-column col-sm-12 col-md-12 col-xl-4" >
+                                       <Form.Label className="w-auto"> Fecha de cierre:</Form.Label>
+                                       <Form.Control className="formDate dateWidth" type="date" />
+                                    </Form.Group>
+                                 </Form.Row>
+                              </Form>
+                              <Row className="m-0 justify-content-center">
+                                 <Col className="justify-content-center" sm={10}>
+                                    <ul className="listRemovable p-0 d-flex flex-column align-items-center flex-wrap" >
+                                       {this.state.categoriesSelected.map((item) => {
+                                          return (
+                                             <IconContext.Provider key={item} value={{ className: "logoutIcon" }}>
+                                                <li key={item} className="w-auto" ><span data-id={item} className="crossLink" onClick={this.handleDeleteClick.bind(this)}><IoIosCloseCircle /></span>{item}</li>
+                                             </IconContext.Provider>
+                                          )
+                                       })}
+                                    </ul>
+                                 </Col>
+                              </Row>
+                              <Row className="m-0">
+                                 <Col className="d-flex justify-content-end" >
+                                    <Button className="createButton mt-0" variant="warning" >
+                                       Crear Reto
+                                    </Button>
+                                 </Col>
+                              </Row>
                            </Col>
                         </Row>
                      </div>
-                  </div>
-               </Col>
-            </Row>
-         </Container >
+                  </Col>
+               </Row>
+            </Col>
+         </Row>
       );
    }
 }
