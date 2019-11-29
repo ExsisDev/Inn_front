@@ -21,3 +21,8 @@ button.sendButton {
     font-size: 0.7rem;
     margin-top: 1vh;
 }
+
+.Toastify__toast-body {
+    margin: auto 0;
+    flex: 1 1 ;
+}

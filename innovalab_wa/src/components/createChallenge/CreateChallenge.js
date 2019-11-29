@@ -51,6 +51,10 @@ class CreateChallenge extends React.Component {
    render() {
       return (
          <Container className="creationBackground d-flex" fluid>
+<<<<<<< HEAD
+=======
+            <SideBarAdmin />
+>>>>>>> 984207714ecb4c8a7bb28d467b873e495f227460
             <Row className="elementsRow flex-column flex-nowrap ">
                <Col className="elementsCol">
                   <a className="mt-auto" href="#">
