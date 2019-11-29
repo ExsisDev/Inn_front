@@ -9,6 +9,7 @@ import RecoverNewPassword from '../recoverNewPassword/RecoverNewPassword';
 
 import Image from 'react-bootstrap/Image'
 import innovaCamarLogo from '../../images/innovaCamaraLogo.png';
+ 
 import './Landing.css';
 
 const Landing = () => {
