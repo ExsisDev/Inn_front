@@ -13,7 +13,7 @@ div {
    margin: 0 !important;
 }
 
-.elementsCol{
+.elementsCol {
    padding-bottom: 3%;
 }
 
@@ -40,17 +40,17 @@ div {
 
 /* title  */
 
-.createNewChallengeBox{
+.createNewChallengeBox {
    height: 50px;
    margin-bottom: 30px;
 }
 
-.plusSign{
+.plusSign {
    height: 100%;
    width: auto;
 }
 
-.newChallengeText{
+.newChallengeText {
    width: auto;
    margin-left: 20px;
    color: #a5a5a5;
@@ -65,6 +65,7 @@ div {
    width: auto;
    margin: 0 3% 0 3%;
    padding-right: 5%;
+   background-color: #f0f0f0;
 }
 
 .imageFormCreation {
@@ -79,12 +80,16 @@ div {
    width: calc(100% - 150px);
 }
 
+.textArea {
+   resize: none;
+}
+
 /* removable list */
 
-.listRemovable{
+.listRemovable {
    list-style-type: none;
 }
 
-.crossLink:hover{
+.crossLink:hover {
    color: red !important;
 }

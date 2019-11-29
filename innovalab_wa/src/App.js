@@ -11,7 +11,6 @@ function App() {
       <div className="App">
         <Switch>
           <Route path="/home" component={Home} />
-          <Route path="/create-challenge" component={CreateChallenge} />
           <Route path="/" component={Landing} />
         </Switch>
       </div>

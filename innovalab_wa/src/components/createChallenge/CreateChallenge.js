@@ -2,6 +2,7 @@ import React from 'react';
 import { Container, Row, Form, Col } from 'react-bootstrap';
 import { IconContext } from "react-icons";
 import { IoIosCloseCircle } from 'react-icons/io';
+import _ from 'lodash';
 
 import './CreateChallenge.css';
 import SideBarAdmin from '../sideBarAdmin/SideBarAdmin';
@@ -39,13 +40,21 @@ class CreateChallenge extends React.Component {
       if (!array.includes(element)) {
          this.setState({ array: array.push(element) });
       }
-      console.log(this)
    }
 
    removeFromSelectedElements(array, element) {
       if (array.includes(element)) {
          this.setState({ array: array.splice(array.indexOf(element)) });
       }
+   }
+
+   handleDeleteClick(e) {
+      const categoryToDelete = e.currentTarget.dataset.id;
+      let newArray = this.state.categoriesSelected;
+      newArray = _.remove(newArray, function(n){
+         return n !== categoryToDelete;
+      });
+      this.setState({ categoriesSelected: newArray});
    }
 
    render() {
@@ -73,13 +82,13 @@ class CreateChallenge extends React.Component {
                      <div className="formData ml-auto">
                         <Form className="d-flex flex-column">
                            <Form.Row>
-                              <Form.Control className="challengeName" type="input" placeholder="Nombre del reto" />
+                              <Form.Control className="challengeName formInput" type="input" placeholder="Nombre del reto" />
                            </Form.Row>
 
                            <Form.Row className="mt-4">
                               <Form.Group className="d-flex align-items-start flex-column" controlId="formGridDescription">
                                  <Form.Label className="w-auto">Descripción: </Form.Label>
-                                 <Form.Control as="textarea" />
+                                 <Form.Control as="textarea" className="formInput textArea" />
                               </Form.Group>
                            </Form.Row>
 
@@ -117,7 +126,7 @@ class CreateChallenge extends React.Component {
                                  {this.state.categoriesSelected.map((item) => {
                                     return (
                                        <IconContext.Provider key={item} value={{ className: "logoutIcon" }}>
-                                          <li key={item} className="w-auto" ref="categorySelected"><a href="#" className="crossLink" onClick={() => this.removeFromSelectedElements(this.state.categoriesSelected, this.refs.categorySelected.textContent)}><IoIosCloseCircle /></a>{item}</li>
+                                          <li key={item} className="w-auto" ><span data-id={item} className="crossLink" onClick={this.handleDeleteClick.bind(this)}><IoIosCloseCircle /></span>{item}</li>
                                        </IconContext.Provider>
                                     )
                                  })}
