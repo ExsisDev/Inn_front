@@ -9,38 +9,11 @@ import RecoverNewPassword from '../recoverNewPassword/RecoverNewPassword';
 
 import Image from 'react-bootstrap/Image'
 import innovaCamarLogo from '../../images/innovaCamaraLogo.png';
-<<<<<<< HEAD
  
-=======
-
->>>>>>> 984207714ecb4c8a7bb28d467b873e495f227460
 import './Landing.css';
 
 const Landing = () => {
     return (
-<<<<<<< HEAD
-        <Router>
-            <Container className="landing d-flex flex-column align-items-center" fluid>
-                <Row id="landingFirstRow" className="d-flex justify-content-center align-items-center">
-                    <Col md={5} xl={4} lg={4} sm={6} className="landingMain">
-                        <div className="landingBorder">
-                            <Switch>
-                                <Route path="/" exact component={WelcomeText} />
-                                <Route path="/login" component={LoginForm} />
-                                <Route path="/recover-password/email" component={RecoverPasswordEmail} />
-                                <Route path="/recover-password" component={RecoverNewPassword} />
-                            </Switch>
-                        </div>
-                    </Col>
-                </Row>
-                <Row className="justify-content-center">
-                    <Col xs={6} md={4} lg={4} className="imgLogoLanding">
-                        <Image src={innovaCamarLogo} alt="logo innovalab" fluid />
-                    </Col >
-                </Row>
-            </Container>
-        </Router>
-=======
         <Container className="landing d-flex flex-column align-items-center" fluid>
             <Row id="landingFirstRow" className="d-flex justify-content-center align-items-center">
                 <Col md={5} xl={4} lg={4} sm={6} className="landingMain">
@@ -60,7 +33,6 @@ const Landing = () => {
                 </Col >
             </Row>
         </Container>
->>>>>>> 984207714ecb4c8a7bb28d467b873e495f227460
     );
 }
 
