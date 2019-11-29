@@ -42,14 +42,16 @@
    -webkit-appearance: none;
    -moz-appearance: none;
    background: url(http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png) no-repeat right #e8e8e8;
-   background-position-x: 205px;
-   width: 230px !important;
+   background-position-x: 195px;
+   width: 220px !important;
    background-color: #e8e8e8 !important;
    border-color: black !important;
 }
 
 .dateWidth {
    width: 230px !important;
+   background-color: #e8e8e8 !important;
+   border-color: black !important;
 }
 
 /* removable list */

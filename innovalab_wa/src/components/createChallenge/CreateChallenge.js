@@ -5,7 +5,6 @@ import { IoIosCloseCircle } from 'react-icons/io';
 import _ from 'lodash';
 
 import './CreateChallenge.css';
-import newChallenge from '../../images/newChallenge.png';
 
 class CreateChallenge extends React.Component {
    constructor() {
@@ -14,9 +13,7 @@ class CreateChallenge extends React.Component {
          categories: [],
          categoriesSelected: [],
          companies: [],
-         companieSelected: "",
-         actualCategory: "",
-         actualCompany: ""
+         companieSelected: ""
       }
 
    }
@@ -35,13 +32,9 @@ class CreateChallenge extends React.Component {
 
    fillSelectedElements(array, element) {
       if (!array.includes(element)) {
-         this.setState({ array: array.push(element) });
-      }
-   }
-
-   removeFromSelectedElements(array, element) {
-      if (array.includes(element)) {
-         this.setState({ array: array.splice(array.indexOf(element)) });
+         let newArray = array;
+         newArray = newArray.push(element);
+         this.setState({ array: newArray });
       }
    }
 
@@ -77,8 +70,8 @@ class CreateChallenge extends React.Component {
                                     </Form.Group>
                                  </Form.Row>
 
-                                 <Form.Row className="mt-2">
-                                    <Form.Group as={Col} xl={4} sm={12} controlId="formGridCategories" className="d-flex align-items-center flex-column col-sm-12 col-md-12 col-xl-4" >
+                                 <Form.Row className="mt-2 d-flex justify-content-around">
+                                    <Form.Group as={Col} xl={3} sm={12} controlId="formGridCategories" className="d-flex align-items-center flex-column " >
                                        <Form.Label className="w-auto">Categorias:</Form.Label>
                                        <Form.Control className="formSelect selectCategoryCompany" as="select" ref="selectCategory" onChange={() => { this.fillSelectedElements(this.state.categoriesSelected, this.refs.selectCategory.value) }}>
                                           <option disabled selected>Seleccione las categorias</option>
@@ -88,7 +81,7 @@ class CreateChallenge extends React.Component {
                                        </Form.Control>
                                     </Form.Group>
 
-                                    <Form.Group as={Col} xl={4} sm={12} controlId="formGridCompanies" className="d-flex align-items-center flex-column col-sm-12 col-md-12 col-xl-4" >
+                                    <Form.Group as={Col} xl={3} sm={12} controlId="formGridCompanies" className="d-flex align-items-center flex-column " >
                                        <Form.Label className="w-auto">Empresa proponente:</Form.Label>
                                        <Form.Control className="formSelect selectCategoryCompany" as="select" ref="selectCompany" onChange={() => { this.setState({ companieSelected: this.refs.selectCompany.value }) }}>
                                           <option disabled selected>Seleccione una empresa</option>
@@ -98,7 +91,7 @@ class CreateChallenge extends React.Component {
                                        </Form.Control>
                                     </Form.Group>
 
-                                    <Form.Group as={Col} xl={4} sm={12} controlId="formGridCloseDate" className="d-flex align-items-center flex-column col-sm-12 col-md-12 col-xl-4" >
+                                    <Form.Group as={Col} xl={3} sm={12} controlId="formGridCloseDate" className="d-flex align-items-center flex-column " >
                                        <Form.Label className="w-auto"> Fecha de cierre:</Form.Label>
                                        <Form.Control className="formDate dateWidth" type="date" />
                                     </Form.Group>
@@ -110,7 +103,7 @@ class CreateChallenge extends React.Component {
                                        {this.state.categoriesSelected.map((item) => {
                                           return (
                                              <IconContext.Provider key={item} value={{ className: "logoutIcon" }}>
-                                                <li key={item} className="w-auto" ><span data-id={item} className="crossLink" onClick={this.handleDeleteClick.bind(this)}><IoIosCloseCircle /></span>{item}</li>
+                                                <li key={item} className="w-auto" ><span data-id={item} className="crossLink" onClick={ this.handleDeleteClick.bind(this) }><IoIosCloseCircle /></span>{item}</li>
                                              </IconContext.Provider>
                                           )
                                        })}
