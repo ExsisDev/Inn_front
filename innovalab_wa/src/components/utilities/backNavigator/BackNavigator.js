@@ -1,8 +1,9 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { Row, Col, Button, Image } from 'react-bootstrap';
-import backButton from '../../images/backButton.png';
-import innovaCamaraLogo from '../../images/innovaCamaraLogo.png';
+import backButton from '../../../images/backButton.png';
+import innovaCamaraLogo from '../../../images/innovaCamaraLogo.png';
+import './BackNavigator.css';
 
 const BackNavigator = () => {
     let history = useHistory();
