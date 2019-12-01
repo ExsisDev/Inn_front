@@ -12,17 +12,23 @@ class Home extends React.Component {
     constructor() {
         super();
         this.state = {
-            token: "" 
+            token: this.getSession()
         }
     }
 
+
+    getSession() {
+        return sessionStorage.getItem('auth-token');
+    }
+
+
     render() {
-        let { isLogged } = this.state;
+        let { token } = this.state;
 
         return (
             <div>
                 {
-                    !isLogged && <Redirect to="/login" />
+                    !token && <Redirect to="/login" />
                 }
                 <Container fluid className="p-0">
                     <Row noGutters>

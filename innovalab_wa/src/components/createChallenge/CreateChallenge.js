@@ -8,6 +8,7 @@ import _ from 'lodash';
 import './CreateChallenge.css';
 
 class CreateChallenge extends React.Component {
+   
    constructor() {
       super();
       this.state = {
@@ -16,9 +17,14 @@ class CreateChallenge extends React.Component {
          companies: [],
          companySelected: ""
       }
-
+      
+   }
+   
+   componentDidMount() {
+      this.setState({ categories: this.getAllCategories(), companies: this.getAllCompanies() });
    }
 
+   
    getAllCompanies() {
       const url = `${process.env.REACT_APP_BACK_URL}/companies`;
 
@@ -33,6 +39,7 @@ class CreateChallenge extends React.Component {
          });
       return ["empresa 1", "empresa 2"];
    }
+
 
    getAllCategories() {
       const url = `${process.env.REACT_APP_BACK_URL}/ally_categories`;
@@ -49,9 +56,6 @@ class CreateChallenge extends React.Component {
       return ["categoría 1", "categoría 2", "categoría 3", "categoría 4", "categoría 5", "categoría 6", "categoría 7", "categoría 8", "categoría 9", "categoría 10"];
    }
 
-   componentDidMount() {
-      this.setState({ categories: this.getAllCategories(), companies: this.getAllCompanies() });
-   }
 
    fillSelectedElements(array, element) {
       if (!array.includes(element)) {

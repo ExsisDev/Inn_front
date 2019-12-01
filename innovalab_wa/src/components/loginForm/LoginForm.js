@@ -7,6 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import "./LoginForm.css"
 
 class LoginForm extends React.Component {
+
    constructor() {
       super();
       this.state = {
@@ -31,9 +32,10 @@ class LoginForm extends React.Component {
    /**
     * Guardar el token de sesion
     */
-   saveSession(token){
+   saveSession(token) {
       sessionStorage.setItem('auth-token', token);
    }
+
 
    /**
     * Enviar credenciales para autenticación
@@ -52,8 +54,7 @@ class LoginForm extends React.Component {
 
       axios.post(url, credentials)
          .then(res => {
-            this.setState({ isLogged: true });
-            this.saveSession(res.headers['x-auth-token']);
+            this.setState({ isLogged: true }, () => { this.saveSession(res.headers['x-auth-token']) });
          })
          .catch(error => {
             const res = error.response;
@@ -69,8 +70,8 @@ class LoginForm extends React.Component {
             this.deactivateButton(false);
          })
    }
-   
-   
+
+
    /**
     * Habilita o desabilita el botón dependiendo del argumento.
     * Si bool es true el boton se desactiva.
@@ -82,7 +83,7 @@ class LoginForm extends React.Component {
       this.setState({ isLoading: bool })
    }
 
-   
+
    notify = (error) => toast.error(error,
       {
          position: "top-right",
@@ -94,12 +95,12 @@ class LoginForm extends React.Component {
       }
    );
 
-   
+
    getIntegerPart(decimal) {
       return Math.ceil(decimal)
    }
 
-   
+
    render() {
       let { isLoading, isLogged } = this.state;
 
