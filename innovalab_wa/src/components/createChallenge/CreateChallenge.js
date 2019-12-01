@@ -61,7 +61,7 @@ class CreateChallenge extends React.Component {
       }
    }
 
-   handleDeleteClick(e) {
+   handleDeleteClick = e => {
       const categoryToDelete = e.currentTarget.dataset.id;
       let newArray = this.state.categoriesSelected;
       newArray = _.remove(newArray, function (n) {
@@ -126,7 +126,7 @@ class CreateChallenge extends React.Component {
                                        {this.state.categoriesSelected.map((item) => {
                                           return (
                                              <IconContext.Provider key={item} value={{ className: "logoutIcon" }}>
-                                                <li key={item} className="w-auto" ><span data-id={item} className="crossLink" onClick={this.handleDeleteClick.bind(this)}><IoIosCloseCircle /></span>{item}</li>
+                                                <li key={item} className="w-auto" ><span data-id={item} className="crossLink" onClick={this.handleDeleteClick}><IoIosCloseCircle /></span>{item}</li>
                                              </IconContext.Provider>
                                           )
                                        })}
