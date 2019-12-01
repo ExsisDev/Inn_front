@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import { Row, Form, Col, Button } from 'react-bootstrap';
 import { IconContext } from "react-icons";
 import { IoIosCloseCircle } from 'react-icons/io';
@@ -13,16 +14,38 @@ class CreateChallenge extends React.Component {
          categories: [],
          categoriesSelected: [],
          companies: [],
-         companieSelected: ""
+         companySelected: ""
       }
 
    }
 
    getAllCompanies() {
+      const url = `${process.env.REACT_APP_BACK_URL}/companies`;
+
+      axios.get(url, {
+         headers: {'x-auth-token': 'kl'}
+      })
+         .then(res => {
+            console.log(res);
+         })
+         .catch(error => {
+            console.log(error);
+         });
       return ["empresa 1", "empresa 2"];
    }
 
    getAllCategories() {
+      const url = `${process.env.REACT_APP_BACK_URL}/ally_categories`;
+
+      axios.get(url, {
+         headers: {'x-auth-token': 'kl'}
+      })
+         .then(res => {
+            console.log(res);
+         })
+         .catch(error => {
+            console.log(error);
+         });
       return ["categoría 1", "categoría 2", "categoría 3", "categoría 4", "categoría 5", "categoría 6", "categoría 7", "categoría 8", "categoría 9", "categoría 10"];
    }
 
@@ -83,7 +106,7 @@ class CreateChallenge extends React.Component {
 
                                     <Form.Group as={Col} xl={3} sm={12} controlId="formGridCompanies" className="d-flex align-items-center flex-column " >
                                        <Form.Label className="w-auto">Empresa proponente:</Form.Label>
-                                       <Form.Control className="formSelect selectCategoryCompany" as="select" ref="selectCompany" onChange={() => { this.setState({ companieSelected: this.refs.selectCompany.value }) }}>
+                                       <Form.Control className="formSelect selectCategoryCompany" as="select" ref="selectCompany" onChange={() => { this.setState({ companySelected: this.refs.selectCompany.value }) }}>
                                           <option disabled selected>Seleccione una empresa</option>
                                           {this.state.companies.map((item) => {
                                              return <option name={item} key={item}>{item}</option>
@@ -103,7 +126,7 @@ class CreateChallenge extends React.Component {
                                        {this.state.categoriesSelected.map((item) => {
                                           return (
                                              <IconContext.Provider key={item} value={{ className: "logoutIcon" }}>
-                                                <li key={item} className="w-auto" ><span data-id={item} className="crossLink" onClick={ this.handleDeleteClick.bind(this) }><IoIosCloseCircle /></span>{item}</li>
+                                                <li key={item} className="w-auto" ><span data-id={item} className="crossLink" onClick={this.handleDeleteClick.bind(this)}><IoIosCloseCircle /></span>{item}</li>
                                              </IconContext.Provider>
                                           )
                                        })}

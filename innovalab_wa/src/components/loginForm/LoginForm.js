@@ -21,7 +21,7 @@ class LoginForm extends React.Component {
      * Cambiar estado de la entrada mientras se ingresa un valor
      * @return {VoidFunction}
      */
-    handleChange = event => {        
+    handleChange = event => {
         this.setState({ [event.target.name]: event.target.value });
     }
 
@@ -39,21 +39,21 @@ class LoginForm extends React.Component {
             user_password: this.state.password,
         };
         const url = `${process.env.REACT_APP_BACK_URL}/login`;
-        
-        axios.post( url, credentials )
-            .then( res => {
-                this.setState({isLogged: true});
+
+        axios.post(url, credentials)
+            .then(res => {
+                this.setState({ isLogged: true });
             })
             .catch(error => {
                 const res = error.response;
                 let msg = "";
-                if(res.status === 429){                    
-                    msg =  `${res.data.msj}.`;
+                if (res.status === 429) {
+                    msg = `${res.data.msj}.`;
                     msg += `Intente ingresar de nuevo en ${this.getIntegerPart(res.data.minutes)} minutos.`
                 }
-                else{
+                else {
                     msg = res.data;
-                }                    
+                }
                 this.notify(msg);
                 this.deactivateButton(false);
             })
@@ -66,10 +66,10 @@ class LoginForm extends React.Component {
      * @returns {VoidFunction}
      */
     deactivateButton = (bool) => {
-        this.setState({isLoading: bool})
+        this.setState({ isLoading: bool })
     }
 
-    notify = (error) => toast.error(error, 
+    notify = (error) => toast.error(error,
         {
             position: "top-right",
             autoClose: 5000,
@@ -87,46 +87,46 @@ class LoginForm extends React.Component {
     render() {
         let { isLoading, isLogged } = this.state;
         return (
-            <div> 
-            {
-                isLogged ? <Redirect to="/home" /> :
-                <div className="centerContent">
-                    <ToastContainer />
-                    <h6 className="mt-3 mb-3"> Iniciar Sesión </h6>                
-                    <Form validated={this.state.validated} onSubmit={this.handleSubmit}>
-                        <Form.Group controlId="email">
-                            <Form.Control className="formInput" 
+            <div>
+                {
+                    isLogged ? <Redirect to="/home" /> :
+                        <div className="centerContent">
+                            <ToastContainer />
+                            <h6 className="mt-3 mb-3"> Iniciar Sesión </h6>
+                            <Form validated={this.state.validated} onSubmit={this.handleSubmit}>
+                                <Form.Group controlId="email">
+                                    <Form.Control className="formInput"
                                         name="email"
                                         type="email"
-                                        placeholder="Correo electrónico" 
+                                        placeholder="Correo electrónico"
                                         values={this.state.email}
                                         onChange={this.handleChange}
                                         required
-                            />
-                        </Form.Group>
-                        <Form.Group controlId="password">
-                            <Form.Control className="formInput" 
+                                    />
+                                </Form.Group>
+                                <Form.Group controlId="password">
+                                    <Form.Control className="formInput"
                                         name="password"
-                                        type="password" 
-                                        placeholder="Contraseña" 
+                                        type="password"
+                                        placeholder="Contraseña"
                                         values={this.state.password}
                                         onChange={this.handleChange}
                                         maxLength={8}
                                         required
-                            />
-                        </Form.Group>
-                        <Button id="btnLoginForm" 
-                                className="sendButton mt-4"
-                                variant="warning" 
-                                type="submit"
-                                disabled={isLoading}
-                        >
-                            {isLoading ? 'Iniciando Sesión...' : 'Iniciar Sesión'}
-                        </Button>
-                    </Form>
-                    <Link to="/recover-password/email" id="linkForgetPassword" >Olvidé mi contraseña</Link>
-                </div>
-            }
+                                    />
+                                </Form.Group>
+                                <Button id="btnLoginForm"
+                                    className="sendButton mt-4"
+                                    variant="warning"
+                                    type="submit"
+                                    disabled={isLoading}
+                                >
+                                    {isLoading ? 'Iniciando Sesión...' : 'Iniciar Sesión'}
+                                </Button>
+                            </Form>
+                            <Link to="/recover-password/email" id="linkForgetPassword" >Olvidé mi contraseña</Link>
+                        </div>
+                }
             </div>
         );
     }
