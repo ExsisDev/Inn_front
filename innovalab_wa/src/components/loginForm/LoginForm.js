@@ -24,8 +24,8 @@ class LoginForm extends React.Component {
     * Cambiar estado de la entrada mientras se ingresa un valor
     * @return {VoidFunction}
     */
-   handleChange = (event) => {
-      this.setState({ [event.target.name]: event.target.value });
+   handleChange = (e) => {
+      this.setState({ [e.target.name]: e.target.value });
    }
 
 
@@ -41,8 +41,8 @@ class LoginForm extends React.Component {
     * Enviar credenciales para autenticación
     * @return {VoidFunction}
     */
-   handleSubmit = event => {
-      event.preventDefault();
+   handleSubmit = e => {
+      e.preventDefault();
 
       this.deactivateButton(true);
 

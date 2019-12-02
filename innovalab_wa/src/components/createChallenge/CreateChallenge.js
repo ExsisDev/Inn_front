@@ -8,55 +8,87 @@ import _ from 'lodash';
 import './CreateChallenge.css';
 
 class CreateChallenge extends React.Component {
-   
+
    constructor() {
       super();
       this.state = {
          categories: [],
          categoriesSelected: [],
          companies: [],
-         companySelected: ""
+         companySelected: "",
+         token: this.getSession()
       }
-      
-   }
-   
-   componentDidMount() {
-      this.setState({ categories: this.getAllCategories(), companies: this.getAllCompanies() });
    }
 
-   
+
+   componentDidMount() {
+      if (this.state.token) {
+         this.getAllCategories();
+         this.getAllCompanies();
+      }
+   }
+
+
+   /**
+     * Obtener el token de sesion
+     * @return {String} token 
+     */
+   getSession() {
+      return sessionStorage.getItem('auth-token');
+   }
+
+
+
+   /**
+    * Obtener todas las compañias
+    * @return {Object} companies
+    */
    getAllCompanies() {
       const url = `${process.env.REACT_APP_BACK_URL}/companies`;
 
       axios.get(url, {
-         headers: {'x-auth-token': 'kl'}
+         headers: { 'x-auth-token': `${this.state.token}` }
       })
          .then(res => {
-            console.log(res);
+            let companiesObtained = res.data.map((item) => {
+               return item['company_name'];
+            });
+            this.setState({ companies: companiesObtained });
          })
          .catch(error => {
             console.log(error);
          });
-      return ["empresa 1", "empresa 2"];
    }
 
 
+   /**
+    * Obtener todas las categorias para compañia
+    * @return {Object} categories
+    */
    getAllCategories() {
       const url = `${process.env.REACT_APP_BACK_URL}/ally_categories`;
 
       axios.get(url, {
-         headers: {'x-auth-token': 'kl'}
+         headers: { 'x-auth-token': `${this.state.token}` }
       })
          .then(res => {
-            console.log(res);
+            let categoriesObtained = res.data.map((item) => {
+               return item['category_name'];
+            });
+            this.setState({ categories: categoriesObtained });
          })
          .catch(error => {
             console.log(error);
          });
-      return ["categoría 1", "categoría 2", "categoría 3", "categoría 4", "categoría 5", "categoría 6", "categoría 7", "categoría 8", "categoría 9", "categoría 10"];
    }
 
 
+   /**
+    * Llenar el arreglo de elementos seleccionados
+    * 
+    * @param {Array} array 
+    * @param {String} element 
+    */
    fillSelectedElements(array, element) {
       if (!array.includes(element)) {
          let newArray = array;
@@ -65,6 +97,10 @@ class CreateChallenge extends React.Component {
       }
    }
 
+
+   /**
+    * Manejar el click de eliminación de elemento 
+    */
    handleDeleteClick = e => {
       const categoryToDelete = e.currentTarget.dataset.id;
       let newArray = this.state.categoriesSelected;
@@ -73,6 +109,16 @@ class CreateChallenge extends React.Component {
       });
       this.setState({ categoriesSelected: newArray });
    }
+
+
+   /**
+    * Manejar el click de creación de un reto
+    */
+   handleChallengeCreation = e => {
+      e.preventDefault();
+
+   }
+
 
    render() {
       return (
@@ -83,7 +129,7 @@ class CreateChallenge extends React.Component {
                      <div className="formBox">
                         <Row className="m-0 d-flex justify-content-center">
                            <Col sm={9} className="formCentering">
-                              <Form className="d-flex flex-column">
+                              <Form className="d-flex flex-column" onSubmit={this.handleChallengeCreation}>
                                  <Form.Row className="m-0">
                                     <Form.Group as={Col}>
                                        <Form.Control className="challengeName formInput" type="input" placeholder="Nombre del reto" />
@@ -123,27 +169,27 @@ class CreateChallenge extends React.Component {
                                        <Form.Control className="formDate dateWidth" type="date" />
                                     </Form.Group>
                                  </Form.Row>
+                                 <Row className="m-0 justify-content-center">
+                                    <Col className="justify-content-center">
+                                       <ul className="listRemovable p-0 d-flex flex-column align-items-center flex-wrap" >
+                                          {this.state.categoriesSelected.map((item) => {
+                                             return (
+                                                <IconContext.Provider key={item} value={{ className: "logoutIcon" }}>
+                                                   <li key={item} className="w-auto" ><span data-id={item} className="crossLink" onClick={this.handleDeleteClick}><IoIosCloseCircle /></span>{item}</li>
+                                                </IconContext.Provider>
+                                             )
+                                          })}
+                                       </ul>
+                                    </Col>
+                                 </Row>
+                                 <Form.Row className="m-0">
+                                    <Form.Group as={Col} className="d-flex justify-content-end">
+                                       <Button className="createButton mt-0" variant="warning" type="submit">
+                                          Crear Reto
+                                       </Button>
+                                    </Form.Group>
+                                 </Form.Row>
                               </Form>
-                              <Row className="m-0 justify-content-center">
-                                 <Col className="justify-content-center" sm={10}>
-                                    <ul className="listRemovable p-0 d-flex flex-column align-items-center flex-wrap" >
-                                       {this.state.categoriesSelected.map((item) => {
-                                          return (
-                                             <IconContext.Provider key={item} value={{ className: "logoutIcon" }}>
-                                                <li key={item} className="w-auto" ><span data-id={item} className="crossLink" onClick={this.handleDeleteClick}><IoIosCloseCircle /></span>{item}</li>
-                                             </IconContext.Provider>
-                                          )
-                                       })}
-                                    </ul>
-                                 </Col>
-                              </Row>
-                              <Row className="m-0">
-                                 <Col className="d-flex justify-content-end" >
-                                    <Button className="createButton mt-0" variant="warning" >
-                                       Crear Reto
-                                    </Button>
-                                 </Col>
-                              </Row>
                            </Col>
                         </Row>
                      </div>

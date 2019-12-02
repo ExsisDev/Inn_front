@@ -58,7 +58,7 @@
 
 .listRemovable {
    list-style-type: none;
-   height: 60px;
+   min-height: 60px;
 }
 
 .crossLink:hover {

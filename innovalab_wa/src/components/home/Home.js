@@ -16,7 +16,12 @@ class Home extends React.Component {
         }
     }
 
-
+    
+    /**
+     * Obtener el token de sesion
+     * 
+     * @return {String} token 
+     */
     getSession() {
         return sessionStorage.getItem('auth-token');
     }
