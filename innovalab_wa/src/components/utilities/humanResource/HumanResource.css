@@ -1,0 +1,16 @@
+/* .humanCard {
+    min-width: 50% !important;
+} */
+
+.cardImage {
+    width: 70px !important;
+    height: 70px;
+}
+
+.cardTitle {
+    font-size: .9rem !important;
+}
+
+.cardText {
+    font-size: .7rem;
+}
