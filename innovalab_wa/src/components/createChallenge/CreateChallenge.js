@@ -3,6 +3,8 @@ import axios from 'axios';
 import { Row, Form, Col, Button } from 'react-bootstrap';
 import { IconContext } from "react-icons";
 import { IoIosCloseCircle } from 'react-icons/io';
+import { DateTime } from 'luxon';
+import jwt from 'jsonwebtoken';
 import _ from 'lodash';
 
 import './CreateChallenge.css';
@@ -12,11 +14,12 @@ class CreateChallenge extends React.Component {
    constructor() {
       super();
       this.state = {
-         categories: [],
+         allCategories: [],
          categoriesSelected: [],
-         companies: [],
+         allCompanies: [],
          companySelected: "",
          closeDate: "",
+         idSurveyCreated: 0,
          token: this.getSession()
       }
    }
@@ -39,6 +42,13 @@ class CreateChallenge extends React.Component {
    }
 
 
+   /**
+    * Obtener los elementos del token
+    */
+   getElementsToken() {
+      return jwt.verify(this.state.token, `${process.env.REACT_APP_PRIVATE_KEY}`);
+   }
+
 
    /**
     * Obtener todas las compañias
@@ -51,7 +61,7 @@ class CreateChallenge extends React.Component {
          headers: { 'x-auth-token': `${this.state.token}` }
       })
          .then(res => {
-            this.setState({ companies: res.data });
+            this.setState({ allCompanies: res.data });
          })
          .catch(error => {
             console.log(error);
@@ -70,7 +80,7 @@ class CreateChallenge extends React.Component {
          headers: { 'x-auth-token': `${this.state.token}` }
       })
          .then(res => {
-            this.setState({ categories: res.data });
+            this.setState({ allCategories: res.data });
          })
          .catch(error => {
             console.log(error);
@@ -94,6 +104,14 @@ class CreateChallenge extends React.Component {
 
 
    /**
+    * Alamacenar fecha en el estado
+    */
+   saveDate = e => {
+      this.setState({ closeDate: e.target.value });
+   }
+
+
+   /**
     * Manejar el click de eliminación de elemento 
     */
    handleDeleteClick = e => {
@@ -109,14 +127,57 @@ class CreateChallenge extends React.Component {
    /**
     * Manejar el click de creación de un reto
     */
-   handleChallengeCreation = e => {
+   async handleChallengeCreation(e) {
       e.preventDefault();
+
+      const urlSurveys = `${process.env.REACT_APP_BACK_URL}/surveys`;
+
+      let bodySurvey = {
+         survey_date: DateTime.local().setZone('America/Bogota'),
+         user_id_creator: this.getElementsToken().id_user
+      };
+
+      await axios.post(urlSurveys, bodySurvey, {
+         headers: { 'x-auth-token': `${this.state.token}` }
+      })
+         .then((result) => {
+            this.setState({ idSurveyCreated: result.data.id_survey });
+         })
+         .catch((error) => {
+            console.log(error);
+         });
+
+
+      const urlChallenges = `${process.env.REACT_APP_BACK_URL}/challenges`;
+
+      let bodyChallenge = {
+         fk_id_challenge_state: 5,
+         fk_id_survey: this.state.idSurveyCreated,
+         fk_id_company: this.state.companySelected,
+         challenge_name: this.refs.ChallengeName.value,
+         challenge_description: this.refs.ChallengeDescription.value,
+         close_date: this.state.closeDate
+      };
+
+      await axios.post(urlChallenges, bodyChallenge, {
+         headers: { 'x-auth-token': `${this.state.token}` }
+      })
+         .then((result) => {
+            console.log(result);
+            
+         })
+         .catch((error) => {
+            console.log(error);
+            
+         });
 
       console.log(this.refs.ChallengeName.value);
       console.log(this.refs.ChallengeDescription.value);
       console.log(this.state.categoriesSelected);
       console.log(this.state.companySelected);
       console.log(this.state.closeDate);
+      console.log(this.refs);
+      
    }
 
 
@@ -129,26 +190,26 @@ class CreateChallenge extends React.Component {
                      <div className="formBox">
                         <Row className="m-0 d-flex justify-content-center">
                            <Col sm={9} className="formCentering">
-                              <Form className="d-flex flex-column" onSubmit={this.handleChallengeCreation}>
+                              <Form className="d-flex flex-column" onSubmit={this.handleChallengeCreation.bind(this)}>
                                  <Form.Row className="m-0">
                                     <Form.Group as={Col}>
-                                       <Form.Control className="challengeName formInput" type="input" placeholder="Nombre del reto" ref="ChallengeName"/>
+                                       <Form.Control className="challengeName formInput" type="input" placeholder="Nombre del reto" ref="ChallengeName" required />
                                     </Form.Group>
                                  </Form.Row>
 
                                  <Form.Row className="m-0">
                                     <Form.Group as={Col} className="d-flex align-items-start form-group flex-column mt-2">
                                        <Form.Label className="w-auto ">Descripción: </Form.Label>
-                                       <Form.Control as="textarea" className="formInput textArea mt-0" ref="ChallengeDescription"/>
+                                       <Form.Control as="textarea" className="formInput textArea mt-0" ref="ChallengeDescription" required />
                                     </Form.Group>
                                  </Form.Row>
 
                                  <Form.Row className="mt-2 d-flex justify-content-around">
                                     <Form.Group as={Col} xl={3} sm={12} controlId="formGridCategories" className="d-flex align-items-center flex-column " >
                                        <Form.Label className="w-auto">Categorias:</Form.Label>
-                                       <Form.Control className="formSelect selectCategoryCompany" as="select" ref="SelectCategory" onChange={() => { this.fillSelectedElements(this.state.categoriesSelected, this.refs.SelectCategory.value) }}>
+                                       <Form.Control className="formSelect selectCategoryCompany" as="select" ref="SelectCategory" onChange={() => { this.fillSelectedElements(this.state.categoriesSelected, this.refs.SelectCategory.value) }} required>
                                           <option disabled selected>Seleccione las categorias</option>
-                                          {this.state.categories.map((item) => {
+                                          {this.state.allCategories.map((item) => {
                                              return <option name={item.id_category} key={item.id_category}>{item.category_name}</option>
                                           })}
                                        </Form.Control>
@@ -156,17 +217,17 @@ class CreateChallenge extends React.Component {
 
                                     <Form.Group as={Col} xl={3} sm={12} controlId="formGridCompanies" className="d-flex align-items-center flex-column " >
                                        <Form.Label className="w-auto">Empresa proponente:</Form.Label>
-                                       <Form.Control className="formSelect selectCategoryCompany" as="select" ref="SelectCompany" onChange={() => { this.setState({ companySelected: this.refs.SelectCompany.value }) }}>
+                                       <Form.Control className="formSelect selectCategoryCompany" as="select" ref="SelectCompany" onChange={() => { this.setState({ companySelected: this.refs.SelectCompany.value }) }} required>
                                           <option disabled selected>Seleccione una empresa</option>
-                                          {this.state.companies.map((item) => {
-                                             return <option name={item.id_company} key={item.id_company}>{item.company_name}</option>
+                                          {this.state.allCompanies.map((item) => {
+                                             return <option value={item.id_company} key={item.id_company}>{item.company_name}</option>
                                           })}
                                        </Form.Control>
                                     </Form.Group>
 
                                     <Form.Group as={Col} xl={3} sm={12} controlId="formGridCloseDate" className="d-flex align-items-center flex-column " >
-                                       <Form.Label className="w-auto" onChange={(event) => this.setState({closeDate: event.target.value})}> Fecha de cierre:</Form.Label>
-                                       <Form.Control className="formDate dateWidth" type="date" />
+                                       <Form.Label className="w-auto"> Fecha de cierre:</Form.Label>
+                                       <Form.Control className="formDate dateWidth" type="date" onChange={this.saveDate} required />
                                     </Form.Group>
                                  </Form.Row>
                                  <Row className="m-0 justify-content-center">

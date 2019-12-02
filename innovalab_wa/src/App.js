@@ -15,7 +15,7 @@ class App extends React.Component {
          <Router >
             <div className="App">
                <Switch>
-                  <Route path="/pageNotFound" exact component={PageNotFound} />
+                  <Route path="/pageNotFound" component={PageNotFound} />
                   <Route path="/home" component={Home} />
                   <Route path="/" component={Landing} />
                </Switch>
