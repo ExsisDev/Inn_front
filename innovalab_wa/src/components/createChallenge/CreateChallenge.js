@@ -16,6 +16,7 @@ class CreateChallenge extends React.Component {
          categoriesSelected: [],
          companies: [],
          companySelected: "",
+         closeDate: "",
          token: this.getSession()
       }
    }
@@ -50,10 +51,7 @@ class CreateChallenge extends React.Component {
          headers: { 'x-auth-token': `${this.state.token}` }
       })
          .then(res => {
-            let companiesObtained = res.data.map((item) => {
-               return item['company_name'];
-            });
-            this.setState({ companies: companiesObtained });
+            this.setState({ companies: res.data });
          })
          .catch(error => {
             console.log(error);
@@ -72,10 +70,7 @@ class CreateChallenge extends React.Component {
          headers: { 'x-auth-token': `${this.state.token}` }
       })
          .then(res => {
-            let categoriesObtained = res.data.map((item) => {
-               return item['category_name'];
-            });
-            this.setState({ categories: categoriesObtained });
+            this.setState({ categories: res.data });
          })
          .catch(error => {
             console.log(error);
@@ -117,6 +112,11 @@ class CreateChallenge extends React.Component {
    handleChallengeCreation = e => {
       e.preventDefault();
 
+      console.log(this.refs.ChallengeName.value);
+      console.log(this.refs.ChallengeDescription.value);
+      console.log(this.state.categoriesSelected);
+      console.log(this.state.companySelected);
+      console.log(this.state.closeDate);
    }
 
 
@@ -132,40 +132,40 @@ class CreateChallenge extends React.Component {
                               <Form className="d-flex flex-column" onSubmit={this.handleChallengeCreation}>
                                  <Form.Row className="m-0">
                                     <Form.Group as={Col}>
-                                       <Form.Control className="challengeName formInput" type="input" placeholder="Nombre del reto" />
+                                       <Form.Control className="challengeName formInput" type="input" placeholder="Nombre del reto" ref="ChallengeName"/>
                                     </Form.Group>
                                  </Form.Row>
 
                                  <Form.Row className="m-0">
                                     <Form.Group as={Col} className="d-flex align-items-start form-group flex-column mt-2">
                                        <Form.Label className="w-auto ">Descripción: </Form.Label>
-                                       <Form.Control as="textarea" className="formInput textArea mt-0" />
+                                       <Form.Control as="textarea" className="formInput textArea mt-0" ref="ChallengeDescription"/>
                                     </Form.Group>
                                  </Form.Row>
 
                                  <Form.Row className="mt-2 d-flex justify-content-around">
                                     <Form.Group as={Col} xl={3} sm={12} controlId="formGridCategories" className="d-flex align-items-center flex-column " >
                                        <Form.Label className="w-auto">Categorias:</Form.Label>
-                                       <Form.Control className="formSelect selectCategoryCompany" as="select" ref="selectCategory" onChange={() => { this.fillSelectedElements(this.state.categoriesSelected, this.refs.selectCategory.value) }}>
+                                       <Form.Control className="formSelect selectCategoryCompany" as="select" ref="SelectCategory" onChange={() => { this.fillSelectedElements(this.state.categoriesSelected, this.refs.SelectCategory.value) }}>
                                           <option disabled selected>Seleccione las categorias</option>
                                           {this.state.categories.map((item) => {
-                                             return <option className="overflow-auto" name={item} key={item}>{item}</option>
+                                             return <option name={item.id_category} key={item.id_category}>{item.category_name}</option>
                                           })}
                                        </Form.Control>
                                     </Form.Group>
 
                                     <Form.Group as={Col} xl={3} sm={12} controlId="formGridCompanies" className="d-flex align-items-center flex-column " >
                                        <Form.Label className="w-auto">Empresa proponente:</Form.Label>
-                                       <Form.Control className="formSelect selectCategoryCompany" as="select" ref="selectCompany" onChange={() => { this.setState({ companySelected: this.refs.selectCompany.value }) }}>
+                                       <Form.Control className="formSelect selectCategoryCompany" as="select" ref="SelectCompany" onChange={() => { this.setState({ companySelected: this.refs.SelectCompany.value }) }}>
                                           <option disabled selected>Seleccione una empresa</option>
                                           {this.state.companies.map((item) => {
-                                             return <option name={item} key={item}>{item}</option>
+                                             return <option name={item.id_company} key={item.id_company}>{item.company_name}</option>
                                           })}
                                        </Form.Control>
                                     </Form.Group>
 
                                     <Form.Group as={Col} xl={3} sm={12} controlId="formGridCloseDate" className="d-flex align-items-center flex-column " >
-                                       <Form.Label className="w-auto"> Fecha de cierre:</Form.Label>
+                                       <Form.Label className="w-auto" onChange={(event) => this.setState({closeDate: event.target.value})}> Fecha de cierre:</Form.Label>
                                        <Form.Control className="formDate dateWidth" type="date" />
                                     </Form.Group>
                                  </Form.Row>
