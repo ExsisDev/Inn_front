@@ -19,7 +19,7 @@ class CreateChallenge extends React.Component {
          allCompanies: [],
          companySelected: "",
          closeDate: "",
-         idSurveyCreated: 0,
+         createButtonRedirection: false,
          token: this.getSession()
       }
    }
@@ -95,6 +95,7 @@ class CreateChallenge extends React.Component {
     * @param {String} element 
     */
    fillSelectedElements(array, element) {
+      element = parseInt(element);
       if (!array.includes(element)) {
          let newArray = array;
          newArray = newArray.push(element);
@@ -130,54 +131,64 @@ class CreateChallenge extends React.Component {
    async handleChallengeCreation(e) {
       e.preventDefault();
 
-      const urlSurveys = `${process.env.REACT_APP_BACK_URL}/surveys`;
-
-      let bodySurvey = {
-         survey_date: DateTime.local().setZone('America/Bogota'),
-         user_id_creator: this.getElementsToken().id_user
-      };
-
-      await axios.post(urlSurveys, bodySurvey, {
-         headers: { 'x-auth-token': `${this.state.token}` }
-      })
-         .then((result) => {
-            this.setState({ idSurveyCreated: result.data.id_survey });
-         })
-         .catch((error) => {
-            console.log(error);
-         });
-
-
-      const urlChallenges = `${process.env.REACT_APP_BACK_URL}/challenges`;
+      const url = `${process.env.REACT_APP_BACK_URL}/challenges`;
 
       let bodyChallenge = {
-         fk_id_challenge_state: 5,
-         fk_id_survey: this.state.idSurveyCreated,
          fk_id_company: this.state.companySelected,
          challenge_name: this.refs.ChallengeName.value,
          challenge_description: this.refs.ChallengeDescription.value,
-         close_date: this.state.closeDate
+         fk_id_challenge_state: 5,
+         close_date: this.state.closeDate,
+         survey_date: DateTime.local().setZone('America/Bogota').toString(),
+         user_id_creator: this.getElementsToken().id_user,
+         categories_selected: this.state.categoriesSelected
       };
 
-      await axios.post(urlChallenges, bodyChallenge, {
+      await axios.post(url, bodyChallenge, {
          headers: { 'x-auth-token': `${this.state.token}` }
       })
          .then((result) => {
-            console.log(result);
-            
+            this.setState({createButtonRedirection: true});
          })
          .catch((error) => {
             console.log(error);
-            
          });
 
-      console.log(this.refs.ChallengeName.value);
-      console.log(this.refs.ChallengeDescription.value);
-      console.log(this.state.categoriesSelected);
-      console.log(this.state.companySelected);
-      console.log(this.state.closeDate);
-      console.log(this.refs);
-      
+      console.log(bodyChallenge);
+
+      // await axios.post(urlSurveys, bodySurvey, {
+      //    headers: { 'x-auth-token': `${this.state.token}` }
+      // })
+      //    .then((result) => {
+      //       this.setState({ idSurveyCreated: result.data.id_survey });
+      //    })
+      //    .catch((error) => {
+      //       console.log(error);
+      //    });
+
+
+      // const urlChallenges = `${process.env.REACT_APP_BACK_URL}/challenges`;
+
+      // let bodyChallenge = {
+      //    fk_id_challenge_state: 5,
+      //    fk_id_survey: this.state.idSurveyCreated,
+      //    fk_id_company: this.state.companySelected,
+      //    challenge_name: this.refs.ChallengeName.value,
+      //    challenge_description: this.refs.ChallengeDescription.value,
+      //    close_date: this.state.closeDate
+      // };
+
+      // await axios.post(urlChallenges, bodyChallenge, {
+      //    headers: { 'x-auth-token': `${this.state.token}` }
+      // })
+      //    .then((result) => {
+      //       console.log(result);
+
+      //    })
+      //    .catch((error) => {
+      //       console.log(error);
+
+      //    });      
    }
 
 
@@ -210,7 +221,7 @@ class CreateChallenge extends React.Component {
                                        <Form.Control className="formSelect selectCategoryCompany" as="select" ref="SelectCategory" onChange={() => { this.fillSelectedElements(this.state.categoriesSelected, this.refs.SelectCategory.value) }} required>
                                           <option disabled selected>Seleccione las categorias</option>
                                           {this.state.allCategories.map((item) => {
-                                             return <option name={item.id_category} key={item.id_category}>{item.category_name}</option>
+                                             return <option value={item.id_category} key={item.id_category}>{item.category_name}</option>
                                           })}
                                        </Form.Control>
                                     </Form.Group>
