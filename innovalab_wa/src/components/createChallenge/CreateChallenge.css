@@ -1,51 +1,76 @@
-div {
-   /* border: 1px solid red; */
+/* title  */
+
+.createNewChallengeBox {
+   height: 50px;
+   margin: 20px 0;
 }
 
-/* full component */
-
-.creationBackground {
-   padding: 0px !important;
+.plusSign {
+   height: 100%;
+   width: auto;
 }
 
-.elementsRow {
-   height: 100vh;
-   margin: 0 !important;
-}
-
-.elementsCol{
-   padding-bottom: 3%;
+.newChallengeText {
+   width: auto;
+   margin-left: 20px;
+   color: #a5a5a5;
 }
 
 /* form  */
 
-.formCreation {
+.formCentering{
+   margin: 20px 0;
+}
+
+.formBox {
    border-radius: 20px;
    box-shadow: 0px 5px 10px gray;
-   height: 70%;
-   width: auto;
-   margin: 0 3% 0 3%;
-   padding-right: 5%;
+   background-color: #f0f0f0;
 }
 
-.imageFormCreation {
-   margin-top: 20px;
-   width: 150px;
-   height: 150px;
-   padding: 10px;
+.challengeName{
+   background-color: #e8e8e8 !important;
 }
 
-.formData {
-   margin-top: -120px;
-   width: calc(100% - 150px);
+.textArea {
+   resize: none;
+   background-color: #e8e8e8 !important;
+}
+
+.selectCategoryCompany {
+   padding: 5px;
+   -webkit-appearance: none;
+   -moz-appearance: none;
+   background: url(http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png) no-repeat right #e8e8e8;
+   background-position-x: 195px;
+   width: 220px !important;
+   background-color: #e8e8e8 !important;
+   border-color: black !important;
+}
+
+.dateWidth {
+   width: 230px !important;
+   background-color: #e8e8e8 !important;
+   border-color: black !important;
 }
 
 /* removable list */
 
-.listRemovable{
+.listRemovable {
    list-style-type: none;
+   min-height: 60px;
 }
 
-.crossLink:hover{
+.crossLink:hover {
    color: red !important;
+}
+
+.createButton{
+   width: 120px;
+   height: 35px;
+   padding-top: 0 !important;
+   border-radius: 18px !important;
+   background-color: #fa995d !important;
+   color: white !important;
+   font-size: 18px !important;
 }

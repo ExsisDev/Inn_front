@@ -1,139 +1,202 @@
 import React from 'react';
-import { Container, Row, Form, Col } from 'react-bootstrap';
+import axios from 'axios';
+import { Row, Form, Col, Button } from 'react-bootstrap';
 import { IconContext } from "react-icons";
 import { IoIosCloseCircle } from 'react-icons/io';
+import _ from 'lodash';
 
 import './CreateChallenge.css';
-import SideBarAdmin from '../sideBarAdmin/SideBarAdmin';
-import backButton from '../../images/backButton.png';
-import innovaCamaraLogo from '../../images/innovaCamaraLogo.png';
-import newChallenge from '../../images/newChallenge.png';
 
 class CreateChallenge extends React.Component {
+
    constructor() {
       super();
       this.state = {
          categories: [],
          categoriesSelected: [],
          companies: [],
-         companieSelected: "",
-         actualCategory: "",
-         actualCompany: ""
+         companySelected: "",
+         closeDate: "",
+         token: this.getSession()
       }
-
    }
 
-   getAllCompanies() {
-      return ["empresa 1", "empresa 2"];
-   }
-
-   getAllCategories() {
-      return ["categoría 4", "categoría 3"];
-   }
 
    componentDidMount() {
-      this.setState({ categories: this.getAllCategories(), companies: this.getAllCompanies() });
+      if (this.state.token) {
+         this.getAllCategories();
+         this.getAllCompanies();
+      }
    }
 
+
+   /**
+     * Obtener el token de sesion
+     * @return {String} token 
+     */
+   getSession() {
+      return sessionStorage.getItem('auth-token');
+   }
+
+
+
+   /**
+    * Obtener todas las compañias
+    * @return {Object} companies
+    */
+   getAllCompanies() {
+      const url = `${process.env.REACT_APP_BACK_URL}/companies`;
+
+      axios.get(url, {
+         headers: { 'x-auth-token': `${this.state.token}` }
+      })
+         .then(res => {
+            this.setState({ companies: res.data });
+         })
+         .catch(error => {
+            console.log(error);
+         });
+   }
+
+
+   /**
+    * Obtener todas las categorias para compañia
+    * @return {Object} categories
+    */
+   getAllCategories() {
+      const url = `${process.env.REACT_APP_BACK_URL}/ally_categories`;
+
+      axios.get(url, {
+         headers: { 'x-auth-token': `${this.state.token}` }
+      })
+         .then(res => {
+            this.setState({ categories: res.data });
+         })
+         .catch(error => {
+            console.log(error);
+         });
+   }
+
+
+   /**
+    * Llenar el arreglo de elementos seleccionados
+    * 
+    * @param {Array} array 
+    * @param {String} element 
+    */
    fillSelectedElements(array, element) {
       if (!array.includes(element)) {
-         this.setState({ array: array.push(element) });
+         let newArray = array;
+         newArray = newArray.push(element);
+         this.setState({ array: newArray });
       }
-      console.log(this)
    }
 
-   removeFromSelectedElements(array, element) {
-      if (array.includes(element)) {
-         this.setState({ array: array.splice(array.indexOf(element)) });
-      }
+
+   /**
+    * Manejar el click de eliminación de elemento 
+    */
+   handleDeleteClick = e => {
+      const categoryToDelete = e.currentTarget.dataset.id;
+      let newArray = this.state.categoriesSelected;
+      newArray = _.remove(newArray, function (n) {
+         return n !== categoryToDelete;
+      });
+      this.setState({ categoriesSelected: newArray });
    }
+
+
+   /**
+    * Manejar el click de creación de un reto
+    */
+   handleChallengeCreation = e => {
+      e.preventDefault();
+
+      console.log(this.refs.ChallengeName.value);
+      console.log(this.refs.ChallengeDescription.value);
+      console.log(this.state.categoriesSelected);
+      console.log(this.state.companySelected);
+      console.log(this.state.closeDate);
+   }
+
 
    render() {
       return (
-         <Container className="creationBackground d-flex" fluid>
-            <Row className="elementsRow flex-column flex-nowrap ">
-               <Col className="elementsCol">
-                  <a className="mt-auto" href="#">
-                     <div className="backButton d-flex">
-                        <img className="align-self-center" src={backButton} alt="Back button" />
-                     </div>
-                  </a>
-                  <div className="camaraLogoBox ml-auto">
-                     <img className="camaraLogo align-self-center" src={innovaCamaraLogo} alt="logo icon" />
-                  </div>
-                  <div className="createNewChallengeBox d-flex justify-content-center">
-                     <img className="plusSign" src={newChallenge} alt="New Challenge" />
-                     <h3 className="newChallengeText align-self-center">Crear Nuevo Reto</h3>
-                  </div>
-                  <div className="formCreation">
-                     <div className="imageFormCreation">
-                        image form
-                     </div>
-                     <div className="formData ml-auto">
-                        <Form className="d-flex flex-column">
-                           <Form.Row>
-                              <Form.Control className="challengeName" type="input" placeholder="Nombre del reto" />
-                           </Form.Row>
+         <Row className="m-0">
+            <Col className="p-0">
+               <Row className="m-0">
+                  <Col>
+                     <div className="formBox">
+                        <Row className="m-0 d-flex justify-content-center">
+                           <Col sm={9} className="formCentering">
+                              <Form className="d-flex flex-column" onSubmit={this.handleChallengeCreation}>
+                                 <Form.Row className="m-0">
+                                    <Form.Group as={Col}>
+                                       <Form.Control className="challengeName formInput" type="input" placeholder="Nombre del reto" ref="ChallengeName"/>
+                                    </Form.Group>
+                                 </Form.Row>
 
-                           <Form.Row className="mt-4">
-                              <Form.Group className="d-flex align-items-start flex-column" controlId="formGridDescription">
-                                 <Form.Label className="w-auto">Descripción: </Form.Label>
-                                 <Form.Control as="textarea" />
-                              </Form.Group>
-                           </Form.Row>
+                                 <Form.Row className="m-0">
+                                    <Form.Group as={Col} className="d-flex align-items-start form-group flex-column mt-2">
+                                       <Form.Label className="w-auto ">Descripción: </Form.Label>
+                                       <Form.Control as="textarea" className="formInput textArea mt-0" ref="ChallengeDescription"/>
+                                    </Form.Group>
+                                 </Form.Row>
 
-                           <Form.Row className="mt-4">
-                              <Form.Group className="d-flex align-items-start flex-column" as={Col} controlId="formGridCategories">
-                                 <Form.Label className="w-auto">Categorias:</Form.Label>
-                                 <Form.Control as="select" ref="selectCategory" onChange={() => { this.fillSelectedElements(this.state.categoriesSelected, this.refs.selectCategory.value) }}>
-                                    <option disabled selected>Seleccione las categorias</option>
-                                    {this.state.categories.map((item) => {
-                                       return <option name={item} key={item}>{item}</option>
-                                    })}
-                                 </Form.Control>
-                              </Form.Group>
+                                 <Form.Row className="mt-2 d-flex justify-content-around">
+                                    <Form.Group as={Col} xl={3} sm={12} controlId="formGridCategories" className="d-flex align-items-center flex-column " >
+                                       <Form.Label className="w-auto">Categorias:</Form.Label>
+                                       <Form.Control className="formSelect selectCategoryCompany" as="select" ref="SelectCategory" onChange={() => { this.fillSelectedElements(this.state.categoriesSelected, this.refs.SelectCategory.value) }}>
+                                          <option disabled selected>Seleccione las categorias</option>
+                                          {this.state.categories.map((item) => {
+                                             return <option name={item.id_category} key={item.id_category}>{item.category_name}</option>
+                                          })}
+                                       </Form.Control>
+                                    </Form.Group>
 
-                              <Form.Group className="d-flex align-items-start flex-column col-sm-12 col-md-12 col-xl-4" as={Col} controlId="formGridCompanies">
-                                 <Form.Label className="w-auto">Empresa proponente:</Form.Label>
-                                 <Form.Control as="select" ref="selectCompany" onChange={() => { this.setState({ companieSelected: this.refs.selectCompany.value }) }}>
-                                    <option disabled selected>Seleccione una empresa</option>
-                                    {this.state.companies.map((item) => {
-                                       return <option name={item} key={item}>{item}</option>
-                                    })}
-                                 </Form.Control>
-                              </Form.Group>
+                                    <Form.Group as={Col} xl={3} sm={12} controlId="formGridCompanies" className="d-flex align-items-center flex-column " >
+                                       <Form.Label className="w-auto">Empresa proponente:</Form.Label>
+                                       <Form.Control className="formSelect selectCategoryCompany" as="select" ref="SelectCompany" onChange={() => { this.setState({ companySelected: this.refs.SelectCompany.value }) }}>
+                                          <option disabled selected>Seleccione una empresa</option>
+                                          {this.state.companies.map((item) => {
+                                             return <option name={item.id_company} key={item.id_company}>{item.company_name}</option>
+                                          })}
+                                       </Form.Control>
+                                    </Form.Group>
 
-                              <Form.Group className="d-flex align-items-start flex-column" as={Col} controlId="formGridCloseDate">
-                                 <Form.Label className="w-auto"> Fecha de cierre:</Form.Label>
-                                 <Form.Control type="date" />
-                              </Form.Group>
-                           </Form.Row>
-                        </Form>
-
-                        <Row>
-                           <Col sm={4}>
-                              <ul className="listRemovable d-flex flex-column align-items-start" >
-                                 {this.state.categoriesSelected.map((item) => {
-                                    return (
-                                       <IconContext.Provider key={item} value={{ className: "logoutIcon" }}>
-                                          <li key={item} className="w-auto" ref="categorySelected"><a href="#" className="crossLink" onClick={() => this.removeFromSelectedElements(this.state.categoriesSelected, this.refs.categorySelected.textContent)}><IoIosCloseCircle /></a>{item}</li>
-                                       </IconContext.Provider>
-                                    )
-                                 })}
-                              </ul>
-                           </Col>
-                           <Col sm={4}>
-                              <ul className="listRemovable d-flex flex-column align-items-start" >
-                                 <li className="w-auto">{this.state.companieSelected}</li>
-                              </ul>
+                                    <Form.Group as={Col} xl={3} sm={12} controlId="formGridCloseDate" className="d-flex align-items-center flex-column " >
+                                       <Form.Label className="w-auto" onChange={(event) => this.setState({closeDate: event.target.value})}> Fecha de cierre:</Form.Label>
+                                       <Form.Control className="formDate dateWidth" type="date" />
+                                    </Form.Group>
+                                 </Form.Row>
+                                 <Row className="m-0 justify-content-center">
+                                    <Col className="justify-content-center">
+                                       <ul className="listRemovable p-0 d-flex flex-column align-items-center flex-wrap" >
+                                          {this.state.categoriesSelected.map((item) => {
+                                             return (
+                                                <IconContext.Provider key={item} value={{ className: "logoutIcon" }}>
+                                                   <li key={item} className="w-auto" ><span data-id={item} className="crossLink" onClick={this.handleDeleteClick}><IoIosCloseCircle /></span>{item}</li>
+                                                </IconContext.Provider>
+                                             )
+                                          })}
+                                       </ul>
+                                    </Col>
+                                 </Row>
+                                 <Form.Row className="m-0">
+                                    <Form.Group as={Col} className="d-flex justify-content-end">
+                                       <Button className="createButton mt-0" variant="warning" type="submit">
+                                          Crear Reto
+                                       </Button>
+                                    </Form.Group>
+                                 </Form.Row>
+                              </Form>
                            </Col>
                         </Row>
-
                      </div>
-                  </div>
-               </Col>
-            </Row>
-         </Container >
+                  </Col>
+               </Row>
+            </Col>
+         </Row>
       );
    }
 }

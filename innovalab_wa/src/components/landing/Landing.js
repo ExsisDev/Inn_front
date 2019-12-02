@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
 
 import WelcomeText from '../welcomeText/WelcomeText';
@@ -19,10 +19,11 @@ const Landing = () => {
                 <Col md={5} xl={4} lg={4} sm={6} className="landingMain">
                     <div className="landingBorder">
                         <Switch>
-                            <Route path="/login" component={LoginForm} />
-                            <Route path="/recover-password/email" component={RecoverPasswordEmail} />
-                            <Route path="/recover-password" component={RecoverNewPassword} />
                             <Route path="/" exact component={WelcomeText} />
+                            <Route path="/login" exact component={LoginForm} />
+                            <Route path="/recover-password/email" exact component={RecoverPasswordEmail} />
+                            <Route path="/recover-password" exact component={RecoverNewPassword} />
+                            <Redirect from="*" to="/pageNotFound" />
                         </Switch>
                     </div>
                 </Col>
