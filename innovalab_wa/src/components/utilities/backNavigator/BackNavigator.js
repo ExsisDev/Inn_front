@@ -8,9 +8,9 @@ import './BackNavigator.css';
 const BackNavigator = () => {
     let history = useHistory();
     return ( 
-        <Row className="my-3">
+        <Row className="my-3 align-items-center">
             <Col md={2} className="p-0">
-                <Button variant="link" className="backButton px-0 d-flex justify-content-start" onClick={()=>history.goBack()}>
+                <Button variant="link" className="backButton px-0 d-flex justify-content-start align-items-center" onClick={()=>history.goBack()}>
                     <Image src={backButton} alt="Back button" 
                            className="backButtonImg" />
                     Volver

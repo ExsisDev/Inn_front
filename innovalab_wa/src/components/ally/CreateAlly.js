@@ -46,6 +46,29 @@ class CreateAlly extends React.Component {
             categoriesSelected: []
         }
     }
+    /**
+    * Obtener todas las categorias para compañia
+    * @return {Object} categories
+    */
+    // getAllCategories() {
+    //     const url = `${process.env.REACT_APP_BACK_URL}/ally_categories`;
+
+    //     axios.get(url, {
+    //         headers: { 'x-auth-token': `${this.state.token}` }
+    //     })
+    //         .then(res => {
+    //             this.setState({ categories: res.data });
+    //         })
+    //         .catch(error => {
+    //             console.log(error);
+    //         });
+    // }
+
+    /**
+     * Agregar elemento seleccionado en la lista desplegable al
+     * estado del componente
+     * @return {VoidFunction}
+     */
     fillSelectedElement = (event) => {
         let selectedElement = event.target.value;
         let currentCategories = this.state.categoriesSelected;
@@ -53,8 +76,9 @@ class CreateAlly extends React.Component {
         if (!currentCategories.includes(selectedElement)) {
             currentCategories.push(selectedElement);
             this.setState({ categoriesSelected: currentCategories })
-        }        
+        }
     }
+
     render() {
         const titleProps = {
             text: "Crear Nuevo Aliado",
@@ -120,7 +144,7 @@ class CreateAlly extends React.Component {
                                         <ul className="listRemovable p-0 d-flex flex-column align-items-center flex-wrap" >
                                             {this.state.categoriesSelected.map((item) => {
                                                 return (
-                                                    <IconContext.Provider key={item} value={ {color: "gray", className:"logoutIcon"}}>
+                                                    <IconContext.Provider key={item} value={{ color: "gray", className: "logoutIcon" }}>
                                                         <li key={item} className="w-auto" >
                                                             <span data-id={item} className="crossLink" onClick={this.handleDeleteClick}>
                                                                 <IoIosCloseCircle />
