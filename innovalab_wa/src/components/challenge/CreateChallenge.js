@@ -38,7 +38,9 @@ class CreateChallenge extends React.Component {
      * @return {String} token 
      */
    getSession() {
-      return sessionStorage.getItem('auth-token');
+      let token = localStorage.getItem('auth-token');      
+      // let tokenElements = jwt.verify(token, `${process.env.REACT_APP_PRIVATE_KEY}`);
+      return token;
    }
 
 
@@ -154,41 +156,6 @@ class CreateChallenge extends React.Component {
             console.log(error);
          });
 
-      console.log(bodyChallenge);
-
-      // await axios.post(urlSurveys, bodySurvey, {
-      //    headers: { 'x-auth-token': `${this.state.token}` }
-      // })
-      //    .then((result) => {
-      //       this.setState({ idSurveyCreated: result.data.id_survey });
-      //    })
-      //    .catch((error) => {
-      //       console.log(error);
-      //    });
-
-
-      // const urlChallenges = `${process.env.REACT_APP_BACK_URL}/challenges`;
-
-      // let bodyChallenge = {
-      //    fk_id_challenge_state: 5,
-      //    fk_id_survey: this.state.idSurveyCreated,
-      //    fk_id_company: this.state.companySelected,
-      //    challenge_name: this.refs.ChallengeName.value,
-      //    challenge_description: this.refs.ChallengeDescription.value,
-      //    close_date: this.state.closeDate
-      // };
-
-      // await axios.post(urlChallenges, bodyChallenge, {
-      //    headers: { 'x-auth-token': `${this.state.token}` }
-      // })
-      //    .then((result) => {
-      //       console.log(result);
-
-      //    })
-      //    .catch((error) => {
-      //       console.log(error);
-
-      //    });      
    }
 
 

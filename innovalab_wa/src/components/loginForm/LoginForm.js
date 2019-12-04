@@ -33,7 +33,7 @@ class LoginForm extends React.Component {
     * Guardar el token de sesion
     */
    saveSession(token) {
-      sessionStorage.setItem('auth-token', token);
+      localStorage.setItem('auth-token', token);
    }
 
 

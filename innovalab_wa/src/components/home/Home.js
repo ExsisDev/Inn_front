@@ -3,9 +3,10 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
 
 import CreateAlly from "../ally/CreateAlly";
-import CreateChallenge from '../createChallenge/CreateChallenge';
+import CreateChallenge from '../challenge/CreateChallenge';
 import SideBarAdmin from '../sideBarAdmin/SideBarAdmin';
 import './Home.css';
+import AllChallenges from '../challenge/AllChallenges';
 
 class Home extends React.Component {
 
@@ -23,7 +24,7 @@ class Home extends React.Component {
      * @return {String} token 
      */
     getSession() {
-        return sessionStorage.getItem('auth-token');
+        return localStorage.getItem('auth-token');
     }
 
 
@@ -42,6 +43,7 @@ class Home extends React.Component {
                             <Switch>
                                 <Route path="/home/ally" component={CreateAlly} />
                                 <Route path="/home/challenge" component={CreateChallenge} />
+                                <Route path="/home" component={AllChallenges}/>
                             </Switch>
                         </Col>
                     </Row>
