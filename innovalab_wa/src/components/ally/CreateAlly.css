@@ -1,3 +1,16 @@
-div {
-    border: 1px red solid;
+.paddingBox {
+    padding: 40px;
+}
+
+.formButton {
+    margin-top: 1vh;
+    border-radius: 20px !important;
+    color: white !important;
+}
+
+.formAllyTitles {    
+    text-align: left;
+    color: #747474;
+    font-size: 1.1rem;
+    font-weight: bold;
 }

@@ -9,16 +9,16 @@ const BackNavigator = () => {
     let history = useHistory();
     return ( 
         <Row className="my-3">
-            <Col md={2}>
-                <Button variant="link" className="backButton" onClick={()=>history.goBack()}>
+            <Col md={2} className="p-0">
+                <Button variant="link" className="backButton px-0 d-flex justify-content-start" onClick={()=>history.goBack()}>
                     <Image src={backButton} alt="Back button" 
                            className="backButtonImg" />
-                    Volver                    
+                    Volver
                 </Button>
             </Col>
             <Col md={{ span: 4, offset: 6 }}>
-                <div className="camaraLogoBox ml-auto">
-                    <img className="camaraLogo align-self-center" src={innovaCamaraLogo} alt="logo icon" />
+                <div className="ml-auto">
+                    <img className="align-self-center" src={innovaCamaraLogo} alt="logo icon" />
                 </div>
             </Col>
         </Row> 

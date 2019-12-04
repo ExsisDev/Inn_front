@@ -8,12 +8,12 @@ import HumanResource from './HumanResource';
 
 const HumanResourceList = (props) => {
     return (
-        <CardDeck>
-            <Row className="align-sel-center">
+        <CardDeck className="m-0" >
+            <Row className="m-0 justify-content-between">
                 {
                     props.people.map(person => {
                         return (
-                            <Col md={5}>
+                            <Col lg={12/props.cols}>
                                 <HumanResource key={person.name} person={person} />
                             </Col>
                         );

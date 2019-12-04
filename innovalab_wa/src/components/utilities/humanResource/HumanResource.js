@@ -4,7 +4,7 @@ import './HumanResource.css';
 
 const HumanResource = (props) => {
     return (
-        <Card className="humanCard">
+        <Card className="cardBox mx-0 my-2 py-3">
             <Card.Img variant="top" src={props.person.img} className="cardImage rounded-circle align-self-center" />
             <Card.Body>
                 <Card.Title className="cardTitle text-left">{props.person.name}</Card.Title>
