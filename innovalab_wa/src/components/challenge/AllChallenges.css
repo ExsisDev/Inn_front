@@ -44,10 +44,29 @@
 }
 
 /* Solo se activa cuando el elemento tiene active y linkSelected (se hace click)*/
+
 .circle.active {
   opacity: unset;
 }
 
 .linkCreateChallenge {
   width: 101px !important;
+}
+
+.page-item.boxNumber.disabled .page-link.boxLink{
+  color: black !important;
+  background-color: white !important;
+  border-color: transparent;
+}
+
+.page-link.boxLink {
+  color: black !important;
+  background-color: white !important;
+  border: none !important;
+}
+
+.page-link.boxLink:hover, .page-link.boxLink:focus, .page-item.boxNumber.active .page-link.boxLink{
+  background-color: #313333 !important;
+  color: white !important;
+  box-shadow: none !important;
 }
