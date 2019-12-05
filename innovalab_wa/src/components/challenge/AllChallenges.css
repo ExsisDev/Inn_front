@@ -1,8 +1,53 @@
-.searchChallengeText{
-   height: 38px;
+.searchChallengeText {
+  height: 38px;
+  min-width: 250px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: url("../../images/find.png") no-repeat left;
+  background-position-x: 10px;
+  background-color: #e8e8e8 !important;
 }
 
-.camaraLogo{
-   height: 38px;
-   width: auto;
+.camaraLogo {
+  height: 38px;
+  width: auto;
+}
+
+/* Links de navegación */
+
+.navLink {
+  width: 215px;
+  opacity: 0.5;
+}
+
+.circle.red:after {
+  content: " \25CF";
+  font-size: 22px;
+  color: #d89393;
+}
+
+.circle.blue:after {
+  content: " \25CF";
+  font-size: 22px;
+  color: #6ae18e;
+}
+
+.circle.green:after {
+  content: " \25CF";
+  font-size: 22px;
+  color: #dce249;
+}
+
+.plusCreateChallenge {
+  height: 22px;
+  width: 26px;
+}
+
+/* Solo se activa cuando el elemento tiene active y linkSelected (se hace click)*/
+.circle.active {
+  opacity: unset;
+}
+
+.linkCreateChallenge {
+  width: 101px !important;
 }

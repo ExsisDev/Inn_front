@@ -32,3 +32,8 @@ code {
   margin-top: 1.5vh;
   border-radius: 20px !important;
 }
+
+.form-control:focus{
+  border-color: black !important;
+  box-shadow: none !important;
+}
