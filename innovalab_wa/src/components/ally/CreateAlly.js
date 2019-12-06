@@ -1,4 +1,6 @@
 import React from 'react';
+import _ from 'lodash';
+import axios from 'axios';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { IconContext } from "react-icons";
 import { IoIosCloseCircle } from 'react-icons/io';
@@ -9,29 +11,23 @@ import logoCrear from '../../images/RetosTerminados.png';
 import imgHumanResourse from '../../images/profileHumanResource.jpg';
 import "./CreateAlly.css"
 
-const possibleCategories = [
-    "Aplicación Móvil",
-    "iOS",
-    "Realidad Aumentada",
-    "Blockchain",
-    "Transformación Digital",
-    "Desarrollo Móvil",
-    "UX/UI"
-]
 const humanResources = [
     {
+        id: 1,
         name: "Simón Arias",
         profile: "Psicologo",
         experience: "Cuenta con X años dentro de la Industria tecnológica en el rol de Analysis de comportamientos de Usuarios",
         img: imgHumanResourse
     },
     {
+        id: 2,
         name: "Daniela Ossa",
         profile: "Arquitecta de Información",
         experience: "Cuenta con X años creando la basa para diversos proyectis tecnológicos, se asegura que las propuestas funcionen.",
         img: imgHumanResourse
     },
     {
+        id: 3,
         name: "Oscar Mahecha",
         profile: "Gerente de Proyectos",
         experience: "Cuenta con X años dirigiendo proyectos, ha trabajado en Proyectos como X,Y y Z en los últimos 3 años.",
@@ -43,26 +39,43 @@ class CreateAlly extends React.Component {
     constructor() {
         super();
         this.state = {
-            categoriesSelected: []
+            categories: [],
+            categoriesSelected: [],
+            token: this.getSession()
         }
     }
+
+    componentDidMount() {
+        if (this.state.token) {
+            this.getAllCategories();
+        }
+    }
+
     /**
     * Obtener todas las categorias para compañia
     * @return {Object} categories
     */
-    // getAllCategories() {
-    //     const url = `${process.env.REACT_APP_BACK_URL}/ally_categories`;
+    getAllCategories() {
+        const url = `${process.env.REACT_APP_BACK_URL}/ally_categories`;
 
-    //     axios.get(url, {
-    //         headers: { 'x-auth-token': `${this.state.token}` }
-    //     })
-    //         .then(res => {
-    //             this.setState({ categories: res.data });
-    //         })
-    //         .catch(error => {
-    //             console.log(error);
-    //         });
-    // }
+        axios.get(url, {
+            headers: { 'x-auth-token': `${this.state.token}` }
+        })
+            .then(res => {
+                this.setState({ categories: res.data });
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }
+
+    /**
+     * Obtener el token de sesion
+     * @return {String} token 
+     */
+    getSession() {
+        return sessionStorage.getItem('auth-token');
+    }
 
     /**
      * Agregar elemento seleccionado en la lista desplegable al
@@ -77,6 +90,15 @@ class CreateAlly extends React.Component {
             currentCategories.push(selectedElement);
             this.setState({ categoriesSelected: currentCategories })
         }
+    }
+
+    handleDeleteClick = e => {
+        const categoryToDelete = e.currentTarget.dataset.id;
+        let newArray = this.state.categoriesSelected;
+        newArray = _.remove(newArray, function (n) {
+            return n !== categoryToDelete;
+        });
+        this.setState({ categoriesSelected: newArray });
     }
 
     render() {
@@ -133,8 +155,8 @@ class CreateAlly extends React.Component {
                                             onChange={this.fillSelectedElement}
                                             className="formSelect backgndColor"
                                         >
-                                            {possibleCategories.map(category => {
-                                                return <option key={category}>{category}</option>
+                                            {this.state.categories.map(category => {
+                                                return <option key={category.id_category}>{category.category_name}</option>
                                             })}
                                         </Form.Control>
                                     </Col>
@@ -212,8 +234,6 @@ class CreateAlly extends React.Component {
                                         <Button size="sm" variant="success" className="formButton" >Crear</Button>
                                     </Col>
                                 </Form.Group>
-
-
                             </Col>
                         </Form.Row>
                     </Form>
