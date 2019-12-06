@@ -8,32 +8,7 @@ import BackNavigator from '../utilities/backNavigator/BackNavigator';
 import SectionTitle from '../utilities/sectionTitle/SectionTitle';
 import HumanResourceList from '../utilities/humanResource/HumanResourceList';
 import logoCrear from '../../images/RetosTerminados.png';
-import imgHumanResourse from '../../images/profileHumanResource.jpg';
 import "./CreateAlly.css"
-
-const humanResources = [
-    {
-        id: 1,
-        name: "Simón Arias",
-        profile: "Psicologo",
-        experience: "Cuenta con X años dentro de la Industria tecnológica en el rol de Analysis de comportamientos de Usuarios",
-        img: imgHumanResourse
-    },
-    {
-        id: 2,
-        name: "Daniela Ossa",
-        profile: "Arquitecta de Información",
-        experience: "Cuenta con X años creando la basa para diversos proyectis tecnológicos, se asegura que las propuestas funcionen.",
-        img: imgHumanResourse
-    },
-    {
-        id: 3,
-        name: "Oscar Mahecha",
-        profile: "Gerente de Proyectos",
-        experience: "Cuenta con X años dirigiendo proyectos, ha trabajado en Proyectos como X,Y y Z en los últimos 3 años.",
-        img: imgHumanResourse
-    }
-]
 
 class CreateAlly extends React.Component {
     constructor() {
@@ -42,6 +17,16 @@ class CreateAlly extends React.Component {
             categories: [],
             categoriesSelected: [],
             resources: [],
+            resourceName: "",
+            resourceProfile: "",
+            resourceExperience: "",
+            companyName: "",
+            nit: "",
+            companyEmail: "",
+            webSite: "",
+            companyPhone: "",
+            ideaHours: "",
+            expHours: "",
             token: this.getSession()
         }
     }
@@ -50,6 +35,14 @@ class CreateAlly extends React.Component {
         if (this.state.token) {
             this.getAllCategories();
         }
+    }
+
+    /**
+     * Obtener el token de sesion
+     * @return {String} token 
+     */
+    getSession() {
+        return sessionStorage.getItem('auth-token');
     }
 
     /**
@@ -69,13 +62,37 @@ class CreateAlly extends React.Component {
                 console.log(error);
             });
     }
-
     /**
-     * Obtener el token de sesion
-     * @return {String} token 
+     * Gestionar el envío del nuevo aliado al back para su creación.
+     * Toma los atributos necesarios del state y construye el aliado.
+     * @return {VoidFunction}
      */
-    getSession() {
-        return sessionStorage.getItem('auth-token');
+    handleSubmit = event => {
+        event.preventDefault();
+        const url = `${process.env.REACT_APP_BACK_URL}/allies`;
+        const newAlly = {
+            user_email: this.state.companyEmail,
+            user_password: "default",
+            ally_name: this.state.companyName,
+            ally_nit: this.state.nit,
+            ally_web_page: this.state.webSite,
+            ally_phone: this.state.companyPhone,
+            ally_month_ideation_hours: this.state.ideaHours,
+            ally_month_experimentation_hours: this.state.expHours,
+            fk_id_role: 2,
+            fk_user_state: 1,
+            ally_resources: this.state.resources
+        }
+        
+        axios.post(
+            url,
+            newAlly,
+            { headers: { 'x-auth-token': `${this.state.token}` } }
+        ).then(res => {                       
+            console.log(res);
+        }).catch(error => {
+            console.log(error);
+        })
     }
 
     /**
@@ -102,6 +119,36 @@ class CreateAlly extends React.Component {
         this.setState({ categoriesSelected: newArray });
     }
 
+    /**
+     * Añadir un nuevo recurso al estado del componente.
+     * Se toman del estado el nombre, perfil y experiencia del recurso.
+     * @returns {VoidFunction}
+     */
+    addResource = event => {
+        event.preventDefault();
+        let newResources = this.state.resources;
+        const resource = {
+            resource_name: this.state.resourceName,
+            resource_profile: this.state.resourceProfile,
+            resource_experience: this.state.resourceExperience
+        }
+        newResources.push(resource);
+        this.setState({
+            resources: newResources,
+            resourceName: "",
+            resourceProfile: "",
+            resourceExperience: ""
+        })
+    }
+
+    /**
+    * Cambiar estado de la entrada mientras se ingresa un valor
+    * @return {VoidFunction}
+    */
+    handleInputChange = (event) => {
+        this.setState({ [event.target.name]: event.target.value });
+    }
+
     render() {
         const titleProps = {
             text: "Crear Nuevo Aliado",
@@ -117,29 +164,40 @@ class CreateAlly extends React.Component {
                         <Form.Row className="mx-0">
                             <Col sm="12" md="5" className="textLeft pr-4">
                                 <h5 className="formAllyTitles mb-4">Datos de la empresa: </h5>
-                                <Form.Group controlId="companyName">
-                                    <Form.Control placeholder="Nombre de la Empresa"
-                                        className="formInput backgndColor"
+                                <Form.Group>
+
+                                    <Form.Control className="formInput backgndColor"
+                                        placeholder="Nombre de la Empresa"
+                                        name="companyName"
+                                        onChange={this.handleInputChange}
                                     />
                                 </Form.Group>
-                                <Form.Group controlId="nit">
-                                    <Form.Control placeholder="NIT"
-                                        className="formInput backgndColor"
+                                <Form.Group>
+                                    <Form.Control className="formInput backgndColor"
+                                        placeholder="NIT"
+                                        name="nit"
+                                        onChange={this.handleInputChange}
                                     />
                                 </Form.Group>
-                                <Form.Group controlId="companyEmail">
-                                    <Form.Control placeholder="Email"
-                                        className="formInput backgndColor"
+                                <Form.Group>
+                                    <Form.Control className="formInput backgndColor"
+                                        placeholder="Email"
+                                        name="companyEmail"
+                                        onChange={this.handleInputChange}
                                     />
                                 </Form.Group>
-                                <Form.Group controlId="webSite">
-                                    <Form.Control placeholder="Página Web"
-                                        className="formInput backgndColor"
+                                <Form.Group>
+                                    <Form.Control className="formInput backgndColor"
+                                        placeholder="Página Web"
+                                        name="webSite"
+                                        onChange={this.handleInputChange}
                                     />
                                 </Form.Group>
-                                <Form.Group controlId="companyPhone">
-                                    <Form.Control placeholder="Teléfono"
-                                        className="formInput backgndColor"
+                                <Form.Group>
+                                    <Form.Control className="formInput backgndColor"
+                                        placeholder="Teléfono"
+                                        name="companyPhone"
+                                        onChange={this.handleInputChange}
                                     />
                                 </Form.Group>
                             </Col>
@@ -155,7 +213,9 @@ class CreateAlly extends React.Component {
                                         <Form.Control as="select"
                                             onChange={this.fillSelectedElement}
                                             className="formSelect backgndColor"
+                                            defaultValue="default"
                                         >
+                                            <option disabled value="default">Seleccione las categorias</option>
                                             {this.state.categories.map(category => {
                                                 return <option key={category.id_category}>{category.category_name}</option>
                                             })}
@@ -185,8 +245,10 @@ class CreateAlly extends React.Component {
                                         Horas de ideación mensuales:
                                     </Form.Label>
                                     <Col md="3">
-                                        <Form.Control type="number"
-                                            className="formInput backgndColor"
+                                        <Form.Control className="formInput backgndColor"
+                                            type="number"
+                                            name="ideaHours"
+                                            onChange={this.handleInputChange}
                                         />
                                     </Col>
                                 </Form.Group>
@@ -195,8 +257,10 @@ class CreateAlly extends React.Component {
                                         Horas de experimentación mensuales:
                                     </Form.Label>
                                     <Col md="3">
-                                        <Form.Control type="number"
-                                            className="formInput backgndColor"
+                                        <Form.Control className="formInput backgndColor"
+                                            type="number"
+                                            name="expHours"
+                                            onChange={this.handleInputChange}
                                         />
                                     </Col>
                                 </Form.Group>
@@ -206,33 +270,56 @@ class CreateAlly extends React.Component {
                         <Form.Row className="mx-0 my-4">
                             <Col sm="12" md="5" className="textLeft pr-4">
                                 <h5 className="formAllyTitles mb-4"> Recursos humanos: </h5>
-                                <Form.Group controlId="resourceName">
+                                <Form.Group>
                                     <Form.Control placeholder="Nombre"
+                                        value={this.state.resourceName}
                                         className="formInput backgndColor"
+                                        name="resourceName"
+                                        onChange={this.handleInputChange}
                                     />
                                 </Form.Group>
-                                <Form.Group controlId="resourceProfile">
+                                <Form.Group>
                                     <Form.Control placeholder="Perfil"
+                                        value={this.state.resourceProfile}
                                         className="formInput backgndColor"
+                                        name="resourceProfile"
+                                        onChange={this.handleInputChange}
                                     />
                                 </Form.Group>
-                                <Form.Group controlId="companyEmail">
-                                    <Form.Control placeholder="Email"
+                                <Form.Group>
+                                    <Form.Control as="textarea" rows="3"
+                                        placeholder="Experiencia"
+                                        value={this.state.resourceExperience}
                                         className="formInput backgndColor"
+                                        name="resourceExperience"
+                                        style={{ resize: "none" }}
+                                        onChange={this.handleInputChange}
                                     />
                                 </Form.Group>
                                 <Form.Group className="d-flex justify-content-end">
                                     <Col sm="3" className="p-0">
-                                        <Button size="sm" variant="warning" className="formButton" >Añadir</Button>
+                                        <Button size="sm"
+                                            variant="warning"
+                                            className="formButton"
+                                            onClick={this.addResource}
+                                        >
+                                            Añadir
+                                        </Button>
                                     </Col>
                                 </Form.Group>
                             </Col>
 
                             <Col sm="12" md="7">
-                                <HumanResourceList cols="2" people={humanResources} />
+                                <HumanResourceList cols="2" people={this.state.resources} />
                                 <Form.Group className="d-flex justify-content-end">
                                     <Col sm="3" className="p-0">
-                                        <Button size="sm" variant="success" className="formButton" >Crear</Button>
+                                        <Button className="formButton"
+                                                size="sm"
+                                                variant="success"
+                                                onClick={this.handleSubmit}
+                                        >
+                                            Crear
+                                        </Button>
                                     </Col>
                                 </Form.Group>
                             </Col>
