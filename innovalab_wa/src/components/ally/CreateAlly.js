@@ -41,6 +41,7 @@ class CreateAlly extends React.Component {
         this.state = {
             categories: [],
             categoriesSelected: [],
+            resources: [],
             token: this.getSession()
         }
     }
