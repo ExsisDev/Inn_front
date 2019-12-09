@@ -1,6 +1,7 @@
 .lateralBar {
    max-width: 20%;
    background-color: #313333;
+   min-height: 100vh;
 }
 
 .logoAdminBox {
