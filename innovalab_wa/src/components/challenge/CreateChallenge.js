@@ -16,12 +16,14 @@ class CreateChallenge extends React.Component {
       this.state = {
          allCategories: [],
          categoriesSelected: [],
+         categoriesDisplayed: [],
          allCompanies: [],
          companySelected: "",
          closeDate: "",
          createButtonRedirection: false,
          token: this.getSession()
       }
+      this.OptionCategorySelected = React.createRef();
    }
 
 
@@ -38,7 +40,7 @@ class CreateChallenge extends React.Component {
      * @return {String} token 
      */
    getSession() {
-      let token = localStorage.getItem('auth-token');      
+      let token = localStorage.getItem('auth-token');
       // let tokenElements = jwt.verify(token, `${process.env.REACT_APP_PRIVATE_KEY}`);
       return token;
    }
@@ -76,7 +78,7 @@ class CreateChallenge extends React.Component {
     * @return {Object} categories
     */
    getAllCategories() {
-      const url = `${process.env.REACT_APP_BACK_URL}/ally_categories`;
+      const url = `${process.env.REACT_APP_BACK_URL}/al_categories`;
 
       axios.get(url, {
          headers: { 'x-auth-token': `${this.state.token}` }
@@ -96,12 +98,16 @@ class CreateChallenge extends React.Component {
     * @param {Array} array 
     * @param {String} element 
     */
-   fillSelectedElements(array, element) {
+   fillSelectedElements(element) {
+      let index = this.OptionCategorySelected.current.selectedIndex;
       element = parseInt(element);
-      if (!array.includes(element)) {
-         let newArray = array;
-         newArray = newArray.push(element);
-         this.setState({ array: newArray });
+
+      if (!this.state.categoriesSelected.includes(element)) {
+         let newArray = this.state.categoriesSelected;
+         let newArray2 = this.state.categoriesDisplayed;
+         newArray.push(element);
+         newArray2.push(this.state.allCategories[index-1]['category_name']);
+         this.setState({ categoriesSelected : newArray });
       }
    }
 
@@ -150,7 +156,7 @@ class CreateChallenge extends React.Component {
          headers: { 'x-auth-token': `${this.state.token}` }
       })
          .then((result) => {
-            this.setState({createButtonRedirection: true});
+            this.setState({ createButtonRedirection: true });
          })
          .catch((error) => {
             console.log(error);
@@ -185,7 +191,7 @@ class CreateChallenge extends React.Component {
                                  <Form.Row className="mt-2 d-flex justify-content-around">
                                     <Form.Group as={Col} xl={3} sm={12} controlId="formGridCategories" className="d-flex align-items-center flex-column " >
                                        <Form.Label className="w-auto">Categorias:</Form.Label>
-                                       <Form.Control className="formSelect selectCategoryCompany" as="select" ref="SelectCategory" onChange={() => { this.fillSelectedElements(this.state.categoriesSelected, this.refs.SelectCategory.value) }} required>
+                                       <Form.Control className="formSelect selectCategoryCompany" as="select" ref={this.OptionCategorySelected} onChange={() => { this.fillSelectedElements(this.OptionCategorySelected.current.value) }} required>
                                           <option disabled selected>Seleccione las categorias</option>
                                           {this.state.allCategories.map((item) => {
                                              return <option value={item.id_category} key={item.id_category}>{item.category_name}</option>
@@ -211,7 +217,7 @@ class CreateChallenge extends React.Component {
                                  <Row className="m-0 justify-content-center">
                                     <Col className="justify-content-center">
                                        <ul className="listRemovable p-0 d-flex flex-column align-items-center flex-wrap" >
-                                          {this.state.categoriesSelected.map((item) => {
+                                          {this.state.categoriesDisplayed.map((item) => {
                                              return (
                                                 <IconContext.Provider key={item} value={{ className: "logoutIcon" }}>
                                                    <li key={item} className="w-auto" ><span data-id={item} className="crossLink" onClick={this.handleDeleteClick}><IoIosCloseCircle /></span>{item}</li>

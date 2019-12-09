@@ -43,7 +43,7 @@
   width: 26px;
 }
 
-/* Solo se activa cuando el elemento tiene active y linkSelected (se hace click)*/
+/* Solo se activan cuando el elemento tiene active y linkSelected (se hace click)*/
 
 .circle.active {
   opacity: unset;
@@ -53,7 +53,9 @@
   width: 101px !important;
 }
 
-.page-item.boxNumber.disabled .page-link.boxLink{
+/* Paginación */
+
+.page-item.boxNumber.disabled .page-link.boxLink {
   color: black !important;
   background-color: white !important;
   border-color: transparent;
@@ -65,8 +67,17 @@
   border: none !important;
 }
 
-.page-link.boxLink:hover, .page-link.boxLink:focus, .page-item.boxNumber.active .page-link.boxLink{
+.page-link.boxLink:hover,
+.page-link.boxLink:focus,
+.page-item.boxNumber.active .page-link.boxLink {
   background-color: #313333 !important;
   color: white !important;
   box-shadow: none !important;
+}
+
+
+/* Elementos de carga */
+
+.bubbles {
+  height: auto !important;
 }
