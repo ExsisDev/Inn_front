@@ -50,7 +50,7 @@ class CreateAlly extends React.Component {
     * @return {Object} categories
     */
     getAllCategories() {
-        const url = `${process.env.REACT_APP_BACK_URL}/ally_categories`;
+        const url = `${process.env.REACT_APP_BACK_URL}/al_categories`;
 
         axios.get(url, {
             headers: { 'x-auth-token': `${this.state.token}` }
@@ -81,7 +81,8 @@ class CreateAlly extends React.Component {
             ally_month_experimentation_hours: this.state.expHours,
             fk_id_role: 2,
             fk_user_state: 1,
-            ally_resources: this.state.resources
+            ally_resources: this.state.resources,
+            ally_categories: this.state.categories,
         }
         
         axios.post(
@@ -96,27 +97,35 @@ class CreateAlly extends React.Component {
     }
 
     /**
-     * Agregar elemento seleccionado en la lista desplegable al
+     * Agregar la categoria seleccionado en la lista desplegable al
      * estado del componente
      * @return {VoidFunction}
      */
     fillSelectedElement = (event) => {
-        let selectedElement = event.target.value;
-        let currentCategories = this.state.categoriesSelected;
+        let currentCategories = [];
+        let index = event.nativeEvent.target.selectedIndex;                
+        let selectedCategory = { 
+            category_name: event.nativeEvent.target[index].text,
+            id_category: event.nativeEvent.target.value 
+        }        
+        _.assign(currentCategories, this.state.categoriesSelected);
 
-        if (!currentCategories.includes(selectedElement)) {
-            currentCategories.push(selectedElement);
+        if (!currentCategories.includes(selectedCategory)) {
+            currentCategories.push(selectedCategory);
             this.setState({ categoriesSelected: currentCategories })
         }
     }
 
     handleDeleteClick = e => {
-        const categoryToDelete = e.currentTarget.dataset.id;
-        let newArray = this.state.categoriesSelected;
-        newArray = _.remove(newArray, function (n) {
-            return n !== categoryToDelete;
+        const idCategoryToDelete = e.currentTarget.dataset.id;
+        console.log(idCategoryToDelete);        
+        let auxArray = [];
+        _.assign(auxArray, this.state.categoriesSelected);
+        auxArray = _.remove(auxArray, function (category) {
+            return category.id_category !== idCategoryToDelete;
         });
-        this.setState({ categoriesSelected: newArray });
+        console.log(auxArray);        
+        this.setState({ categoriesSelected: auxArray });
     }
 
     /**
@@ -217,7 +226,7 @@ class CreateAlly extends React.Component {
                                         >
                                             <option disabled value="default">Seleccione las categorias</option>
                                             {this.state.categories.map(category => {
-                                                return <option key={category.id_category}>{category.category_name}</option>
+                                                return <option key={category.id_category} value={category.id_category}>{category.category_name}</option>
                                             })}
                                         </Form.Control>
                                     </Col>
@@ -227,12 +236,12 @@ class CreateAlly extends React.Component {
                                         <ul className="listRemovable p-0 d-flex flex-column align-items-center flex-wrap" >
                                             {this.state.categoriesSelected.map((item) => {
                                                 return (
-                                                    <IconContext.Provider key={item} value={{ color: "gray", className: "logoutIcon" }}>
-                                                        <li key={item} className="w-auto" >
-                                                            <span data-id={item} className="crossLink" onClick={this.handleDeleteClick}>
+                                                    <IconContext.Provider key={item.id_category} value={{ color: "gray", className: "logoutIcon" }}>
+                                                        <li className="w-auto" >
+                                                            <span data-id={item.id_category} className="crossLink" onClick={this.handleDeleteClick}>
                                                                 <IoIosCloseCircle />
                                                             </span>
-                                                            {item}
+                                                            {item.category_name}
                                                         </li>
                                                     </IconContext.Provider>
                                                 )
