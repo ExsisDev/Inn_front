@@ -55,6 +55,14 @@ class CreateChallenge extends React.Component {
 
 
    /**
+    * Alamacenar fecha en el estado
+    */
+   saveDate = e => {
+      this.setState({ closeDate: e.target.value });
+   }
+
+
+   /**
     * Obtener todas las compañias
     * @return {Object} companies
     */
@@ -100,23 +108,19 @@ class CreateChallenge extends React.Component {
     */
    fillSelectedElements(element) {
       let index = this.OptionCategorySelected.current.selectedIndex;
+      let nameOfCategory = this.state.allCategories[index - 1].category_name;
       element = parseInt(element);
 
       if (!this.state.categoriesSelected.includes(element)) {
-         let newArray = this.state.categoriesSelected;
-         let newArray2 = this.state.categoriesDisplayed;
+         let newArray = [];
+         let newArray2 = [];
+         _.assign(newArray, this.state.categoriesSelected);
+         _.assign(newArray2, this.state.categoriesDisplayed);
          newArray.push(element);
-         newArray2.push(this.state.allCategories[index-1]['category_name']);
-         this.setState({ categoriesSelected : newArray });
+         newArray2.push(nameOfCategory);
+         this.setState({ categoriesSelected: newArray, categoriesDisplayed: newArray2 });
       }
-   }
 
-
-   /**
-    * Alamacenar fecha en el estado
-    */
-   saveDate = e => {
-      this.setState({ closeDate: e.target.value });
    }
 
 
@@ -124,35 +128,42 @@ class CreateChallenge extends React.Component {
     * Manejar el click de eliminación de elemento 
     */
    handleDeleteClick = e => {
-      const categoryToDelete = e.currentTarget.dataset.id;
-      let newArray = this.state.categoriesSelected;
-      newArray = _.remove(newArray, function (n) {
+      const categoryToDelete = e.currentTarget.dataset.name;
+      const indexToDelete = e.currentTarget.dataset.indexarray;
+      console.log(e.currentTarget.dataset.indexarray)
+      let newArray = [];
+      let newArray2 = [];
+      _.assign(newArray, this.state.categoriesSelected);
+      _.assign(newArray2, this.state.categoriesDisplayed);
+      newArray.splice(indexToDelete, 1);
+      newArray2 = _.remove(newArray2, function (n) {
          return n !== categoryToDelete;
       });
-      this.setState({ categoriesSelected: newArray });
+      this.setState({ categoriesSelected: newArray, categoriesDisplayed: newArray2 });
    }
 
 
    /**
     * Manejar el click de creación de un reto
     */
-   async handleChallengeCreation(e) {
+   handleChallengeCreation(e) {
       e.preventDefault();
 
       const url = `${process.env.REACT_APP_BACK_URL}/challenges`;
+      const CREATED = 3;
 
       let bodyChallenge = {
          fk_id_company: this.state.companySelected,
          challenge_name: this.refs.ChallengeName.value,
          challenge_description: this.refs.ChallengeDescription.value,
-         fk_id_challenge_state: 5,
+         fk_id_challenge_state: CREATED,
          close_date: this.state.closeDate,
          survey_date: DateTime.local().setZone('America/Bogota').toString(),
          user_id_creator: this.getElementsToken().id_user,
          categories_selected: this.state.categoriesSelected
       };
 
-      await axios.post(url, bodyChallenge, {
+      axios.post(url, bodyChallenge, {
          headers: { 'x-auth-token': `${this.state.token}` }
       })
          .then((result) => {
@@ -217,10 +228,10 @@ class CreateChallenge extends React.Component {
                                  <Row className="m-0 justify-content-center">
                                     <Col className="justify-content-center">
                                        <ul className="listRemovable p-0 d-flex flex-column align-items-center flex-wrap" >
-                                          {this.state.categoriesDisplayed.map((item) => {
+                                          {this.state.categoriesDisplayed.map((item, index) => {
                                              return (
                                                 <IconContext.Provider key={item} value={{ className: "logoutIcon" }}>
-                                                   <li key={item} className="w-auto" ><span data-id={item} className="crossLink" onClick={this.handleDeleteClick}><IoIosCloseCircle /></span>{item}</li>
+                                                   <li key={item} className="w-auto" ><span data-name={item} data-indexarray={index} className="crossLink" onClick={this.handleDeleteClick}><IoIosCloseCircle /></span>{item}</li>
                                                 </IconContext.Provider>
                                              )
                                           })}
