@@ -84,12 +84,12 @@ class CreateAlly extends React.Component {
             ally_resources: this.state.resources,
             ally_categories: this.state.categories,
         }
-        
+
         axios.post(
             url,
             newAlly,
             { headers: { 'x-auth-token': `${this.state.token}` } }
-        ).then(res => {                       
+        ).then(res => {
             console.log(res);
         }).catch(error => {
             console.log(error);
@@ -103,35 +103,40 @@ class CreateAlly extends React.Component {
      */
     fillSelectedElement = (event) => {
         let currentCategories = [];
-        let index = event.nativeEvent.target.selectedIndex;                
-        let selectedCategory = { 
+        let index = event.nativeEvent.target.selectedIndex;
+        let selectedCategory = {
             category_name: event.nativeEvent.target[index].text,
-            id_category: event.nativeEvent.target.value 
-        }        
-        _.assign(currentCategories, this.state.categoriesSelected);
-
-        if (!currentCategories.includes(selectedCategory)) {
-            currentCategories.push(selectedCategory);
-            this.setState({ categoriesSelected: currentCategories })
+            id_category: event.nativeEvent.target.value
         }
+        _.assign(currentCategories, this.state.categoriesSelected);
+        //se revisa que la categoria no haya sido seleccionada anteriormente
+        for(let category of currentCategories) {
+            if (category.id_category === selectedCategory.id_category) {
+                return;
+            }
+        }
+        currentCategories.push(selectedCategory);
+        this.setState({ categoriesSelected: currentCategories });
     }
 
-    handleDeleteClick = e => {
-        const idCategoryToDelete = e.currentTarget.dataset.id;
-        console.log(idCategoryToDelete);        
+    /**
+     * Eliminar categoria del arreglo categoriesSelected
+     * @return {VoidFunction}
+     */
+    handleDeleteClick = (event) => {
+        const idCategoryToDelete = event.currentTarget.dataset.id;
         let auxArray = [];
         _.assign(auxArray, this.state.categoriesSelected);
-        auxArray = _.remove(auxArray, function (category) {
-            return category.id_category !== idCategoryToDelete;
+        _.remove(auxArray, function (category) {
+            return category.id_category === idCategoryToDelete;
         });
-        console.log(auxArray);        
         this.setState({ categoriesSelected: auxArray });
     }
 
     /**
      * Añadir un nuevo recurso al estado del componente.
      * Se toman del estado el nombre, perfil y experiencia del recurso.
-     * @returns {VoidFunction}
+     * @return {VoidFunction}
      */
     addResource = event => {
         event.preventDefault();
@@ -323,9 +328,9 @@ class CreateAlly extends React.Component {
                                 <Form.Group className="d-flex justify-content-end">
                                     <Col sm="3" className="p-0">
                                         <Button className="formButton"
-                                                size="sm"
-                                                variant="success"
-                                                onClick={this.handleSubmit}
+                                            size="sm"
+                                            variant="success"
+                                            onClick={this.handleSubmit}
                                         >
                                             Crear
                                         </Button>
