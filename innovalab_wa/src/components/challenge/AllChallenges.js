@@ -114,7 +114,7 @@ class AllChallenges extends React.Component {
 
                   {this.state.loadingChallenges ?
                      (
-                        <div className="d-flex align-items-center flex-column">
+                        <div className="d-flex justify-content-center">
                            <ReactLoading className="svgContainer" type={"bubbles"} color={"#313333"} height={500} width={250} />
                         </div>
                      )
@@ -144,7 +144,6 @@ class AllChallenges extends React.Component {
                         </div>
                      )
                   }
-
                </Col>
             </Row>
          </Container>
