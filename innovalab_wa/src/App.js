@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import Landing from "./components/landing/Landing";
 import Home from "./components/home/Home";
+import EditAlly from './components/ally/EditAlly';
 import PageNotFound from './components/pageNotFound/PageNotFound';
 
 import './App.css';
@@ -17,6 +18,7 @@ class App extends React.Component {
                <Switch>
                   <Route path="/pageNotFound" component={PageNotFound} />
                   <Route path="/home" component={Home} />
+                  <Route path="/ally/edit" component={EditAlly} />
                   <Route path="/" component={Landing} />
                </Switch>
             </div>
