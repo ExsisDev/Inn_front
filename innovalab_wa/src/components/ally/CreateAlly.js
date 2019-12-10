@@ -1,9 +1,12 @@
 import React from 'react';
 import _ from 'lodash';
 import axios from 'axios';
+import { Redirect } from 'react-router-dom';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { IconContext } from "react-icons";
 import { IoIosCloseCircle } from 'react-icons/io';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import BackNavigator from '../utilities/backNavigator/BackNavigator';
 import SectionTitle from '../utilities/sectionTitle/SectionTitle';
 import HumanResourceList from '../utilities/humanResource/HumanResourceList';
@@ -27,9 +30,12 @@ class CreateAlly extends React.Component {
             companyPhone: "",
             ideaHours: "",
             expHours: "",
+            isCreated: false,            
             token: this.getSession()
         }
     }
+
+    toastId = null;
 
     componentDidMount() {
         if (this.state.token) {
@@ -69,6 +75,7 @@ class CreateAlly extends React.Component {
      */
     handleSubmit = event => {
         event.preventDefault();
+        let msg;
         const url = `${process.env.REACT_APP_BACK_URL}/allies`;
         const newAlly = {
             user_email: this.state.companyEmail,
@@ -82,19 +89,59 @@ class CreateAlly extends React.Component {
             fk_id_role: 2,
             fk_user_state: 1,
             ally_resources: this.state.resources,
-            ally_categories: this.state.categories,
+            ally_categories: this.getIdCategories(this.state.categoriesSelected)
         }
 
+        this.notify();
         axios.post(
             url,
             newAlly,
             { headers: { 'x-auth-token': `${this.state.token}` } }
         ).then(res => {
-            console.log(res);
+            msg = "Aliado creado con éxito."
+            this.update();
+            setTimeout(() => {
+                this.setState({ isCreated: true });                
+            }, 2000);
         }).catch(error => {
-            console.log(error);
+            msg = "Algo salio mal. Intentalo de nuevo."
+            this.notifyError(msg);
         })
     }
+
+    notify = () => this.toastId = toast("Hello", { autoClose: false });
+
+    update = () => toast.update(this.toastId, { type: toast.TYPE.SUCCESS, autoClose: 5000 });
+
+
+    getIdCategories(categoriesArray) {
+        let ids = categoriesArray.map(category => {
+            return category.id_category;
+        })
+        return ids;
+    }
+
+    notifySuccess = (msg) => toast.success(msg,
+        {
+            position: "top-right",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+        }
+    );
+
+    notifyError = (msg) => toast.error(msg,
+        {
+            position: "top-right",
+            autoClose: 4000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+        }
+    );
 
     /**
      * Agregar la categoria seleccionado en la lista desplegable al
@@ -110,7 +157,7 @@ class CreateAlly extends React.Component {
         }
         _.assign(currentCategories, this.state.categoriesSelected);
         //se revisa que la categoria no haya sido seleccionada anteriormente
-        for(let category of currentCategories) {
+        for (let category of currentCategories) {
             if (category.id_category === selectedCategory.id_category) {
                 return;
             }
@@ -171,6 +218,11 @@ class CreateAlly extends React.Component {
         }
         return (
             <Container className="d-flex flex-column align-items-center px-5">
+                {
+                    this.state.isCreated &&
+                    <Redirect to="/home" />
+                }
+                <ToastContainer />
                 <BackNavigator />
                 <SectionTitle titleProps={titleProps} />
                 <Row className="my-3 formBox paddingBox">
