@@ -99,20 +99,25 @@ class CreateAlly extends React.Component {
             { headers: { 'x-auth-token': `${this.state.token}` } }
         ).then(res => {
             msg = "Aliado creado con éxito."
-            this.update();
+            this.updateSuccess(msg);
             setTimeout(() => {
                 this.setState({ isCreated: true });                
             }, 2000);
         }).catch(error => {
             msg = "Algo salio mal. Intentalo de nuevo."
-            this.notifyError(msg);
+            this.updateError(msg);
         })
     }
 
-    notify = () => this.toastId = toast("Hello", { autoClose: false });
+    notify = () => this.toastId = toast.info("creando...", { autoClose: false });
 
-    update = () => toast.update(this.toastId, { type: toast.TYPE.SUCCESS, autoClose: 5000 });
-
+    updateSuccess = ( msg ) => {
+        toast.update(this.toastId, {render: msg, type: toast.TYPE.SUCCESS, autoClose: 2000 });
+    }
+    
+    updateError = ( msg ) => {
+        toast.update(this.toastId, {render: msg, type: toast.TYPE.ERROR, autoClose: 2000 });
+    }
 
     getIdCategories(categoriesArray) {
         let ids = categoriesArray.map(category => {
@@ -120,28 +125,6 @@ class CreateAlly extends React.Component {
         })
         return ids;
     }
-
-    notifySuccess = (msg) => toast.success(msg,
-        {
-            position: "top-right",
-            autoClose: 2000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-        }
-    );
-
-    notifyError = (msg) => toast.error(msg,
-        {
-            position: "top-right",
-            autoClose: 4000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-        }
-    );
 
     /**
      * Agregar la categoria seleccionado en la lista desplegable al
