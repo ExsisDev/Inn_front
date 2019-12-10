@@ -29,7 +29,7 @@ class CreateAlly extends React.Component {
             ideaHours: "",
             expHours: "",
             isCreated: false,            
-            token: this.getSession()
+            token: this.getToken()
         }
     }
 
@@ -42,10 +42,10 @@ class CreateAlly extends React.Component {
     }
 
     /**
-     * Obtener el token de sesion
+     * Obtener el token desde localStorage
      * @return {String} token 
      */
-    getSession() {
+    getToken() {
         return localStorage.getItem('auth-token');
     }
 
