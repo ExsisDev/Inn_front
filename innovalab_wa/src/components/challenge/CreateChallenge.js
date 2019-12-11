@@ -1,13 +1,15 @@
 import React from 'react';
 import axios from 'axios';
-import { Row, Form, Col, Button } from 'react-bootstrap';
+import { Row, Form, Col, Button, Container } from 'react-bootstrap';
 import { IconContext } from "react-icons";
 import { IoIosCloseCircle } from 'react-icons/io';
 import { DateTime } from 'luxon';
-import SectionTitle from ''
+import SectionTitle from '../utilities/sectionTitle/SectionTitle';
+import BackNavigator from '../utilities/backNavigator/BackNavigator';
 import jwt from 'jsonwebtoken';
 import _ from 'lodash';
 
+import plusIcon from '../../images/newChallenge.png';
 import './CreateChallenge.css';
 
 class CreateChallenge extends React.Component {
@@ -179,15 +181,17 @@ class CreateChallenge extends React.Component {
 
    render() {
       return (
-         <div>
-            <SectionTitle titleProps="Crear Nuevo Reto"></SectionTitle>
-            <Row className="m-0">
-               <Col className="p-0">
-                  <Row className="m-0">
-                     <Col>
+         <Container fluid className="d-flex justify-content-center">
+            <Row className="h-100 d-flex justify-content-center">
+               <Col sm={11} className="d-flex flex-column align-items-center">
+                  <BackNavigator />
+                  <SectionTitle titleProps={{ img: plusIcon, imgAlt: 'Plus sign', text: 'Crear Nuevo Reto' }} />
+                  <Row className="d-fex justify-content-center">
+                     <Col className="p-0">
+
                         <div className="formBox">
                            <Row className="m-0 d-flex justify-content-center">
-                              <Col sm={9} className="formCentering">
+                              <Col sm={10} className="formCentering">
                                  <Form className="d-flex flex-column" onSubmit={this.handleChallengeCreation.bind(this)}>
                                     <Form.Row className="m-0">
                                        <Form.Group as={Col}>
@@ -256,7 +260,7 @@ class CreateChallenge extends React.Component {
                   </Row>
                </Col>
             </Row>
-         </div>
+         </Container >
       );
    }
 }

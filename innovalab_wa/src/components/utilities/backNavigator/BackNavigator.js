@@ -7,22 +7,23 @@ import './BackNavigator.css';
 
 const BackNavigator = () => {
     let history = useHistory();
-    return ( 
+    return (
         <Row className="my-3 align-items-center">
-            <Col md={2} className="p-0">
-                <Button variant="link" className="backButton px-0 d-flex justify-content-start align-items-center" onClick={()=>history.goBack()}>
-                    <Image src={backButton} alt="Back button" 
-                           className="backButtonImg" />
+            <Col xs={12} sm={3} md={3} className="p-0 order-1 order-sm-0">
+                <Button variant="link" className="backButton px-0 d-flex justify-content-start align-items-center" onClick={() => history.goBack()}>
+                    <Image src={backButton} alt="Back button" className="backButtonImg" />
                     Volver
                 </Button>
             </Col>
-            <Col md={{ span: 4, offset: 6 }}>
-                <div className="ml-auto">
-                    <img className="align-self-center" src={innovaCamaraLogo} alt="logo icon" />
-                </div>
+            <Col xs={12} sm={9} md={{ span: 3, offset: 6 }} className="order-0 order-sm-1">
+                <Row>
+                    <div className="ml-auto d-flex justify-content-end">
+                        <img className="align-self-center camaraLogo" src={innovaCamaraLogo} alt="logo icon" />
+                    </div>
+                </Row>
             </Col>
-        </Row> 
+        </Row>
     );
 }
- 
+
 export default BackNavigator;

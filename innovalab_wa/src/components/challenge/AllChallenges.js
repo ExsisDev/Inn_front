@@ -95,7 +95,7 @@ class AllChallenges extends React.Component {
                               <img className="camaraLogo" src={innovaCamaraLogo} alt="innovaCamaralogo" />
                            </Col>
                         </Row>
-                        <Row className="mx-0">
+                        <Row className="mx-0 mb-3">
                            <Col sm={12} md={9} className="order-2 order-md-1">
                               <Navbar collapseOnSelect expand="lg">
                                  <Navbar.Toggle aria-controls="responsive-navbar-nav" />

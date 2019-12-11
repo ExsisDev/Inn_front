@@ -17,7 +17,7 @@ class ChallengeCard extends React.Component {
                <Card.Body className="px-lg-5">
                   <Row className="mx-0">
                      <Col className="offset-lg-2">
-                        <Card.Title className="challengeCardName text-md-center text-lg-left">{this.props.challengeName}</Card.Title>
+                        <Card.Title className="challengeCardName text-center text-md-center text-lg-left">{this.props.challengeName}</Card.Title>
                      </Col>
                   </Row>
                   <Row className="font-italic mx-0">
