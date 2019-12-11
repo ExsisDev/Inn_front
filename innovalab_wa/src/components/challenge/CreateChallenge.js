@@ -4,6 +4,7 @@ import { Row, Form, Col, Button } from 'react-bootstrap';
 import { IconContext } from "react-icons";
 import { IoIosCloseCircle } from 'react-icons/io';
 import { DateTime } from 'luxon';
+import SectionTitle from ''
 import jwt from 'jsonwebtoken';
 import _ from 'lodash';
 
@@ -178,81 +179,84 @@ class CreateChallenge extends React.Component {
 
    render() {
       return (
-         <Row className="m-0">
-            <Col className="p-0">
-               <Row className="m-0">
-                  <Col>
-                     <div className="formBox">
-                        <Row className="m-0 d-flex justify-content-center">
-                           <Col sm={9} className="formCentering">
-                              <Form className="d-flex flex-column" onSubmit={this.handleChallengeCreation.bind(this)}>
-                                 <Form.Row className="m-0">
-                                    <Form.Group as={Col}>
-                                       <Form.Control className="challengeName formInput" type="input" placeholder="Nombre del reto" ref="ChallengeName" required />
-                                    </Form.Group>
-                                 </Form.Row>
+         <div>
+            <SectionTitle titleProps="Crear Nuevo Reto"></SectionTitle>
+            <Row className="m-0">
+               <Col className="p-0">
+                  <Row className="m-0">
+                     <Col>
+                        <div className="formBox">
+                           <Row className="m-0 d-flex justify-content-center">
+                              <Col sm={9} className="formCentering">
+                                 <Form className="d-flex flex-column" onSubmit={this.handleChallengeCreation.bind(this)}>
+                                    <Form.Row className="m-0">
+                                       <Form.Group as={Col}>
+                                          <Form.Control className="challengeName formInput" type="input" placeholder="Nombre del reto" ref="ChallengeName" required />
+                                       </Form.Group>
+                                    </Form.Row>
 
-                                 <Form.Row className="m-0">
-                                    <Form.Group as={Col} className="d-flex align-items-start form-group flex-column mt-2">
-                                       <Form.Label className="w-auto ">Descripción: </Form.Label>
-                                       <Form.Control as="textarea" className="formInput textArea mt-0" ref="ChallengeDescription" required />
-                                    </Form.Group>
-                                 </Form.Row>
+                                    <Form.Row className="m-0">
+                                       <Form.Group as={Col} className="d-flex align-items-start form-group flex-column mt-2">
+                                          <Form.Label className="w-auto ">Descripción: </Form.Label>
+                                          <Form.Control as="textarea" className="formInput textArea mt-0" ref="ChallengeDescription" required />
+                                       </Form.Group>
+                                    </Form.Row>
 
-                                 <Form.Row className="mt-2 d-flex justify-content-around">
-                                    <Form.Group as={Col} xl={3} sm={12} controlId="formGridCategories" className="d-flex align-items-center flex-column " >
-                                       <Form.Label className="w-auto">Categorias:</Form.Label>
-                                       <Form.Control className="formSelect selectCategoryCompany" as="select" ref={this.OptionCategorySelected} onChange={() => { this.fillSelectedElements(this.OptionCategorySelected.current.value) }} required>
-                                          <option disabled selected>Seleccione las categorias</option>
-                                          {this.state.allCategories.map((item) => {
-                                             return <option value={item.id_category} key={item.id_category}>{item.category_name}</option>
-                                          })}
-                                       </Form.Control>
-                                    </Form.Group>
+                                    <Form.Row className="mt-2 d-flex justify-content-around">
+                                       <Form.Group as={Col} xl={3} sm={12} controlId="formGridCategories" className="d-flex align-items-center flex-column " >
+                                          <Form.Label className="w-auto">Categorias:</Form.Label>
+                                          <Form.Control className="formSelect selectCategoryCompany" as="select" ref={this.OptionCategorySelected} onChange={() => { this.fillSelectedElements(this.OptionCategorySelected.current.value) }} required>
+                                             <option disabled selected>Seleccione las categorias</option>
+                                             {this.state.allCategories.map((item) => {
+                                                return <option value={item.id_category} key={item.id_category}>{item.category_name}</option>
+                                             })}
+                                          </Form.Control>
+                                       </Form.Group>
 
-                                    <Form.Group as={Col} xl={3} sm={12} controlId="formGridCompanies" className="d-flex align-items-center flex-column " >
-                                       <Form.Label className="w-auto">Empresa proponente:</Form.Label>
-                                       <Form.Control className="formSelect selectCategoryCompany" as="select" ref="SelectCompany" onChange={() => { this.setState({ companySelected: this.refs.SelectCompany.value }) }} required>
-                                          <option disabled selected>Seleccione una empresa</option>
-                                          {this.state.allCompanies.map((item) => {
-                                             return <option value={item.id_company} key={item.id_company}>{item.company_name}</option>
-                                          })}
-                                       </Form.Control>
-                                    </Form.Group>
+                                       <Form.Group as={Col} xl={3} sm={12} controlId="formGridCompanies" className="d-flex align-items-center flex-column " >
+                                          <Form.Label className="w-auto">Empresa proponente:</Form.Label>
+                                          <Form.Control className="formSelect selectCategoryCompany" as="select" ref="SelectCompany" onChange={() => { this.setState({ companySelected: this.refs.SelectCompany.value }) }} required>
+                                             <option disabled selected>Seleccione una empresa</option>
+                                             {this.state.allCompanies.map((item) => {
+                                                return <option value={item.id_company} key={item.id_company}>{item.company_name}</option>
+                                             })}
+                                          </Form.Control>
+                                       </Form.Group>
 
-                                    <Form.Group as={Col} xl={3} sm={12} controlId="formGridCloseDate" className="d-flex align-items-center flex-column " >
-                                       <Form.Label className="w-auto"> Fecha de cierre:</Form.Label>
-                                       <Form.Control className="formDate dateWidth" type="date" onChange={this.saveDate} required />
-                                    </Form.Group>
-                                 </Form.Row>
-                                 <Row className="m-0 justify-content-center">
-                                    <Col className="justify-content-center">
-                                       <ul className="listRemovable p-0 d-flex flex-column align-items-center flex-wrap" >
-                                          {this.state.categoriesDisplayed.map((item, index) => {
-                                             return (
-                                                <IconContext.Provider key={item} value={{ className: "logoutIcon" }}>
-                                                   <li key={item} className="w-auto" ><span data-name={item} data-indexarray={index} className="crossLink" onClick={this.handleDeleteClick}><IoIosCloseCircle /></span>{item}</li>
-                                                </IconContext.Provider>
-                                             )
-                                          })}
-                                       </ul>
-                                    </Col>
-                                 </Row>
-                                 <Form.Row className="m-0">
-                                    <Form.Group as={Col} className="d-flex justify-content-end">
-                                       <Button className="createButton mt-0" variant="warning" type="submit">
-                                          Crear Reto
+                                       <Form.Group as={Col} xl={3} sm={12} controlId="formGridCloseDate" className="d-flex align-items-center flex-column " >
+                                          <Form.Label className="w-auto"> Fecha de cierre:</Form.Label>
+                                          <Form.Control className="formDate dateWidth" type="date" onChange={this.saveDate} required />
+                                       </Form.Group>
+                                    </Form.Row>
+                                    <Row className="m-0 justify-content-center">
+                                       <Col className="justify-content-center">
+                                          <ul className="listRemovable p-0 d-flex flex-column align-items-center flex-wrap" >
+                                             {this.state.categoriesDisplayed.map((item, index) => {
+                                                return (
+                                                   <IconContext.Provider key={item} value={{ className: "logoutIcon" }}>
+                                                      <li key={item} className="w-auto" ><span data-name={item} data-indexarray={index} className="crossLink" onClick={this.handleDeleteClick}><IoIosCloseCircle /></span>{item}</li>
+                                                   </IconContext.Provider>
+                                                )
+                                             })}
+                                          </ul>
+                                       </Col>
+                                    </Row>
+                                    <Form.Row className="m-0">
+                                       <Form.Group as={Col} className="d-flex justify-content-end">
+                                          <Button className="createButton mt-0" variant="warning" type="submit">
+                                             Crear Reto
                                        </Button>
-                                    </Form.Group>
-                                 </Form.Row>
-                              </Form>
-                           </Col>
-                        </Row>
-                     </div>
-                  </Col>
-               </Row>
-            </Col>
-         </Row>
+                                       </Form.Group>
+                                    </Form.Row>
+                                 </Form>
+                              </Col>
+                           </Row>
+                        </div>
+                     </Col>
+                  </Row>
+               </Col>
+            </Row>
+         </div>
       );
    }
 }
