@@ -3,6 +3,7 @@ import React from 'react';
 import logoAdmin from '../../images/logoAdmin.png';
 import { IconContext } from "react-icons";
 import { IoIosLogOut } from 'react-icons/io';
+import { Link } from 'react-router-dom';
 
 import './SideBarAdmin.css';
 
@@ -15,11 +16,11 @@ const SideBar = () => {
          <div className="adminText d-flex align-items-center">
             <h3>Administrador</h3>
          </div>
-         <a href="#">
+         <Link to="/home" >
             <div className="sideLinkBox d-flex align-items-center">
                <p>Retos</p>
             </div>
-         </a>
+         </Link>
          <a href="#">
             <div className="sideLinkBox d-flex align-items-center">
                <p>Administrar usuarios</p>

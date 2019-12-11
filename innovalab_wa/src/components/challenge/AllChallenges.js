@@ -1,6 +1,8 @@
 import React from 'react';
 import axios from "axios";
 import { Container, Row, Col, Form, Nav, Navbar } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+
 import Pagination from "react-js-pagination";
 import ReactLoading from 'react-loading';
 import ChallengeCard from './ChallengeCard';
@@ -109,7 +111,7 @@ class AllChallenges extends React.Component {
                               </Navbar>
                            </Col>
                            <Col sm={12} md={3} className="order-1 order-md-2 d-flex align-items-center justify-content-xl-end justify-content-center p-0">
-                              <a className="linkCreateChallenge" href="#"><img className="plusCreateChallenge w-auto mr-1" src={plusSign} alt="Plus"></img>Crear Reto</a>
+                              <Link to="home/challenge" className="linkCreateChallenge"><img className="plusCreateChallenge w-auto mr-1" src={plusSign} alt="Plus"></img>Crear Reto</Link>
                            </Col>
                         </Row>
                      </Col>
