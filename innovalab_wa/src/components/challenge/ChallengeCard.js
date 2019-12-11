@@ -6,9 +6,6 @@ import './ChallengeCard.css';
 class ChallengeCard extends React.Component {
    constructor(props) {
       super(props);
-      this.state = {
-         
-      }
 
    }
 
@@ -19,28 +16,27 @@ class ChallengeCard extends React.Component {
             <Card className="formBox challengeCardBox">
                <Card.Body className="px-lg-5">
                   <Row className="mx-0">
-                     <Col sm={9} md={10} className="offset-sm-3 offset-md-2">
-                        <Card.Title className="challengeCardName">Nombre</Card.Title>
+                     <Col className="offset-lg-2">
+                        <Card.Title className="challengeCardName text-md-center text-lg-left">{this.props.challengeName}</Card.Title>
                      </Col>
                   </Row>
                   <Row className="font-italic mx-0">
-                     <Col sm={9} md={10} className="offset-sm-3 offset-md-2">
+                     <Col className="mb-sm-3" lg={2}>
+                        <b><i>{this.props.companyName}:</i></b>
+                     </Col>
+                     <Col lg={10}>
                         <Card.Text className="companyCardDescription">
-                           La empresa B tiene 10 años en el mercado dedicada al sector alimenticio,
-                           Sus productos siempre se destacan por su sabor y disponibilidad a nivel
-                           Nacional.
+                           {this.props.companyDescription}
                         </Card.Text>
                      </Col>
                   </Row>
                   <Row className="mt-4 mx-0">
-                     <Col sm={3} md={2} className="">
+                     <Col sm={3} md={2} className="d-flex align-items-center">
                         <b><i>Reto:</i></b>
                      </Col>
                      <Col sm={9} md={10} >
                         <Card.Text className="challengeCardDescription">
-                           La empresa B tiene 10 años en el mercado dedicada al sector alimenticio,
-                           Sus productos siempre se destacan por su sabor y disponibilidad a nivel
-                           Nacional.
+                           {this.props.challengeDescription}
                         </Card.Text>
                      </Col>
                   </Row>
@@ -52,7 +48,7 @@ class ChallengeCard extends React.Component {
                         <i>Categorías:</i>
                      </Col>
                      <Col sm={9} md={10} className="d-flex justify-content-start">
-                        <i className="w-auto cardHashTags">#DesarrolloDeSoftwareEspecifico #AplicaciónMóvil</i>
+                        <i className="w-auto cardHashTags">{this.props.categories.map((item) => {return (`#${item} `)})}</i>
                      </Col>
                   </Row>
                </Card.Body>
