@@ -11,7 +11,7 @@ class LoginForm extends React.Component {
    constructor() {
       super();
       this.state = {
-         isLogged: false,
+         isLogged: this.getToken(),
          email: "",
          password: "",
          validated: false,
@@ -30,12 +30,18 @@ class LoginForm extends React.Component {
 
 
    /**
-    * Guardar el token de sesion
+    * Guardar el token en localStorage
     */
-   saveSession(token) {
+   saveToken(token) {
       localStorage.setItem('auth-token', token);
    }
 
+   /**
+    * obtener el token desde localStorage
+    */
+   getToken(token) {
+      return localStorage.getItem('auth-token') ? true : false ;
+   }
 
    /**
     * Enviar credenciales para autenticación
@@ -54,10 +60,10 @@ class LoginForm extends React.Component {
 
       axios.post(url, credentials)
          .then(res => {
-            this.setState({ isLogged: true }, () => { this.saveSession(res.headers['x-auth-token']) });
+            this.setState({ isLogged: true }, () => { this.saveToken(res.headers['x-auth-token']) });
          })
          .catch(error => {
-            const res = error.response;
+            const res = error.response;                        
             let msg = "";
             if (res.status === 429) {
                msg = `${res.data.msj}.`;

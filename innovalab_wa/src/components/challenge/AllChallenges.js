@@ -17,7 +17,8 @@ class AllChallenges extends React.Component {
          renderedChallenges: [],
          actualPage: 1,
          actualState: "CREATED",
-         loadingChallenges: true
+         loadingChallenges: true,
+         totalElements: 0
       }
       this.link1 = React.createRef();
       this.link2 = React.createRef();
@@ -26,16 +27,15 @@ class AllChallenges extends React.Component {
 
 
    componentDidMount() {
-      this.getChallengesByPageAndStatus(1, "CREATED");
-      // console.log(this.link1.current);
+      this.link1.current.click();
    }
 
 
    /**
-   * Obtener el token de sesion
+   * Obtener el token desde localStorage
    * @return {String} token 
    */
-   getSession() {
+   getToken() {
       let token = localStorage.getItem('auth-token');
       // let tokenElements = jwt.verify(token, `${process.env.REACT_APP_PRIVATE_KEY}`);
       return token;
@@ -47,15 +47,18 @@ class AllChallenges extends React.Component {
     */
    getChallengesByPageAndStatus(page, status) {
       const url = `${process.env.REACT_APP_BACK_URL}/challenges/${page}/${status}`;
-      const token = this.getSession();
+      const token = this.getToken();
 
       axios.get(url, {
          headers: { 'x-auth-token': `${token}` }
       }).then((result) => {
-         this.setState({ renderedChallenges: result.data, loadingChallenges: false });
-
+         if (result.data) {
+            this.setState({ renderedChallenges: result.data.result, totalElements: result.data.totalElements, loadingChallenges: false });
+         }
       }).catch((error) => {
+         this.setState({ renderedChallenges: [], totalElements: [], loadingChallenges: false });
          console.log(error);
+
       });
    }
 
@@ -64,7 +67,7 @@ class AllChallenges extends React.Component {
     * Cambiar el estado actual de los retos mostrados (barra de links) 
     */
    handleClickLink(e, state) {
-      this.setState({ actualState: state }, () => { this.getChallengesByPageAndStatus(this.state.actualPage, state) });
+      this.setState({ actualState: state, loadingChallenges: true }, () => { this.getChallengesByPageAndStatus(this.state.actualPage, state) });
    }
 
 
@@ -73,15 +76,15 @@ class AllChallenges extends React.Component {
     * @param {Number} pageNumber 
     */
    handlePageChange(pageNumber) {
-      this.setState({ actualPage: pageNumber }, () => { this.getChallengesByPageAndStatus(pageNumber, this.state.actualState) });
+      this.setState({ actualPage: pageNumber, loadingChallenges: true }, () => { this.getChallengesByPageAndStatus(pageNumber, this.state.actualState) });
    }
 
 
    render() {
       return (
          <Container fluid>
-            <Row className="mx-0 justify-content-center">
-               <Col xl={11}>
+            <Row className="mx-0 justify-content-center h-100">
+               <Col className="d-flex flex-column" xl={11}>
                   <Row className="mx-0 d-flex justify-content-center">
                      <Col>
                         <Row className="my-4 mx-0">
@@ -114,38 +117,52 @@ class AllChallenges extends React.Component {
 
                   {this.state.loadingChallenges ?
                      (
-                        <div className="d-flex align-items-center flex-column">
-                           <ReactLoading className type={"bubbles"} color={"#313333"} height={500} width={250} />
+                        <div className="d-flex justify-content-center flex-grow-1">
+                           <ReactLoading className="d-flex align-items-center svgContainer" type={"spokes"} color={"#313333"} />
                         </div>
                      )
                      :
-                     (
-                        <div>
-                           <Row className="mx-0 d-flex flex-column">
-                              <ChallengeCard />
-                              <ChallengeCard />
-                              <ChallengeCard />
-                           </Row>
+                     this.state.renderedChallenges.length > 0 ?
+                        (
+                           <div>
+                              <Row className="mx-0 d-flex flex-column">
+                                 {this.state.renderedChallenges.map((item) => {
+                                    return (
+                                       <ChallengeCard
+                                          challengeName={item.challenge_name}
+                                          companyName={item.company.company_name}
+                                          companyDescription={item.company.company_description}
+                                          challengeDescription={item.challenge_description}
+                                          categories={item.categories}
+                                       />
+                                    );
+                                 })
+                                 }
+                              </Row>
 
-                           <Row className="mx-0 d-flex justify-content-center">
-                              <Col xs={8} sm={6} md={4} xl={3} >
-                                 <Pagination
-                                    activePage={this.state.actualPage}
-                                    itemsCountPerPage={5}
-                                    totalItemsCount={15}
-                                    pageRangeDisplayed={3}
-                                    itemClass="page-item boxNumber"
-                                    linkClass="page-link boxLink px-0"
-                                    innerClass="pagination d-flex justify-content-center align-self-end"
-                                    onChange={this.handlePageChange.bind(this)}
-                                 />
-                              </Col>
-                           </Row>
-                        </div>
-                        
-                     )
+                              <Row className="mx-0 d-flex justify-content-center">
+                                 <Col xs={8} sm={6} md={4} xl={3} >
+                                    <Pagination
+                                       activePage={this.state.actualPage}
+                                       itemsCountPerPage={5}
+                                       totalItemsCount={this.state.totalElements}
+                                       pageRangeDisplayed={3}
+                                       itemClass="page-item boxNumber"
+                                       linkClass="page-link boxLink px-0"
+                                       innerClass="pagination d-flex justify-content-center align-self-end"
+                                       onChange={this.handlePageChange.bind(this)}
+                                    />
+                                 </Col>
+                              </Row>
+                           </div>
+                        )
+                        :
+                        (
+                           <div>
+                              <h3 className="mt-3">No se encontraron retos</h3>
+                           </div>
+                        )
                   }
-
                </Col>
             </Row>
          </Container>

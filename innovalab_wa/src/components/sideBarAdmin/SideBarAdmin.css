@@ -1,6 +1,7 @@
 .lateralBar {
    max-width: 20%;
    background-color: #313333;
+   min-height: 100vh;
 }
 
 .logoAdminBox {
@@ -45,8 +46,4 @@ a .sideLinkBox:hover {
 
 a:hover {
    text-decoration: none !important;
-}
-
-.logoutIcon {
-   width: 40px;
 }

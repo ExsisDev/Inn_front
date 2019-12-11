@@ -43,3 +43,12 @@ code {
   border-color: black !important;
   box-shadow: none !important;
 }
+.backgndColor{
+  background-color: #e8e8e8 !important;
+}
+.textLeft {
+  text-align: left;
+}
+.logoutIcon {
+  width: 40px;
+}
