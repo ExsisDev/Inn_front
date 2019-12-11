@@ -47,7 +47,3 @@ a .sideLinkBox:hover {
 a:hover {
    text-decoration: none !important;
 }
-
-.logoutIcon {
-   width: 40px;
-}

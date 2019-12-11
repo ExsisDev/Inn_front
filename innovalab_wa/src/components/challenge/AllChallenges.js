@@ -32,10 +32,10 @@ class AllChallenges extends React.Component {
 
 
    /**
-   * Obtener el token de sesion
+   * Obtener el token desde localStorage
    * @return {String} token 
    */
-   getSession() {
+   getToken() {
       let token = localStorage.getItem('auth-token');
       // let tokenElements = jwt.verify(token, `${process.env.REACT_APP_PRIVATE_KEY}`);
       return token;
@@ -47,7 +47,7 @@ class AllChallenges extends React.Component {
     */
    getChallengesByPageAndStatus(page, status) {
       const url = `${process.env.REACT_APP_BACK_URL}/challenges/${page}/${status}`;
-      const token = this.getSession();
+      const token = this.getToken();
 
       axios.get(url, {
          headers: { 'x-auth-token': `${token}` }

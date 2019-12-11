@@ -9,12 +9,23 @@ import RecoverNewPassword from '../recoverNewPassword/RecoverNewPassword';
 
 import Image from 'react-bootstrap/Image'
 import innovaCamarLogo from '../../images/innovaCamaraLogo.png';
- 
+
 import './Landing.css';
 
+/**
+* obtener el token desde localStorage
+*/
+function getToken(token) {
+    return localStorage.getItem('auth-token') ? true : false;
+}
+
 const Landing = () => {
+    const isThereToken = getToken();
     return (
         <Container className="landing d-flex flex-column align-items-center" fluid>
+            {
+                isThereToken && <Redirect to="/home" />
+            }
             <Row id="landingFirstRow" className="d-flex justify-content-center align-items-center">
                 <Col md={5} xl={4} lg={4} sm={6} className="landingMain">
                     <div className="landingBorder">

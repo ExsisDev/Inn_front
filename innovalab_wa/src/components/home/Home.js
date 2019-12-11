@@ -13,17 +13,17 @@ class Home extends React.Component {
     constructor() {
         super();
         this.state = {
-            token: this.getSession()
+            token: this.getToken()
         }
     }
 
     
     /**
-     * Obtener el token de sesion
+     * Obtener el token desde localStorage
      * 
      * @return {String} token 
      */
-    getSession() {
+    getToken() {
         return localStorage.getItem('auth-token');
     }
 

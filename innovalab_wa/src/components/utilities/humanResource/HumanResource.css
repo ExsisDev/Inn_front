@@ -1,0 +1,18 @@
+.cardBox {
+    border-radius: 20px !important;
+    box-shadow: 0px 5px 10px gray;
+    background-color: #f0f0f0 !important;
+}
+
+.cardImage {
+    width: 70px !important;
+    height: 70px;
+}
+
+.cardTitle {
+    font-size: .9rem !important;
+}
+
+.cardText {
+    font-size: .7rem;
+}
