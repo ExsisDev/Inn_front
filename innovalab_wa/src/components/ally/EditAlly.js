@@ -222,7 +222,7 @@ class EditAlly extends React.Component {
                                 />
                             </Col>
                         </Form.Group>
-                        <Form.Group as={Row} className="m-0">
+                        <Form.Group as={Row} className="mx-0 mb-5">
                             <Col md={{span: 2, offset: 9}} >
                                 <Button className="formButton"
                                     size="sm"
