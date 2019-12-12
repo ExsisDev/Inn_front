@@ -4,11 +4,6 @@ import './ChallengeCard.css';
 
 
 class ChallengeCard extends React.Component {
-   constructor(props) {
-      super(props);
-
-   }
-
 
    render() {
       return (
