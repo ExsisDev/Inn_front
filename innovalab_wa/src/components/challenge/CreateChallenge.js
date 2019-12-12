@@ -260,7 +260,7 @@ class CreateChallenge extends React.Component {
                   </Row>
                </Col>
             </Row>
-         </Container >
+         </Container>
       );
    }
 }

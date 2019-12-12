@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Landing from "./components/landing/Landing";
 import Home from "./components/home/Home";
 import AdminProfile from './components/adminProfile/AdminProfile';
+import EditAlly from './components/ally/EditAlly';
 import PageNotFound from './components/pageNotFound/PageNotFound';
 
 import './App.css';
@@ -19,6 +20,7 @@ class App extends React.Component {
                   <Route path="/pageNotFound" component={PageNotFound} />
                   <Route path="/home" component={Home} />
                   <Route path="/adminProfile" component={AdminProfile} />
+                  <Route path="/ally/edit" component={EditAlly} />
                   <Route path="/" component={Landing} />
                </Switch>
             </div>
