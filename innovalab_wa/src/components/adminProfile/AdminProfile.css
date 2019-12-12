@@ -1,4 +1,9 @@
-.adminProfile {}
+.adminProfile {
+}
+
+.headerColor{
+   color: #7b7b7b;
+}
 
 .passwordInputs {
    background-color: #e8e8e8 !important;

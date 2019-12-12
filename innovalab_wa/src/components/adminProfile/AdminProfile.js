@@ -14,18 +14,18 @@ class AdminProfile extends React.Component {
 					<Col className="px-0">
 						<Row className="mt-5 mx-0 d-flex justify-content-center">
 							<Col xs={11} sm={9} lg={6} className="d-flex flex-column align-items-center">
-								<h4 className="mb-5 mt-5 mt-sm-3">Administrador</h4>
+								<h4 className="mb-5 mt-5 mt-sm-3 headerColor"><b>Administrador</b></h4>
 								<div className="d-flex flex-column flex-sm-row">
-									<h5> Cambio de contraseña: </h5>
+									<h5 className="headerColor mt-3"><b>Cambio de Contraseña: </b></h5>
 									<Form className="d-flex flex-column">
 										<Form.Group controlId="changeActualPassword" className="w-auto d-flex justify-content-center">
-											<Form.Control className="formInput passwordInputs" type="input" placeholder="Contraseña Actual" />
+											<Form.Control className="formInput passwordInputs" type="password" placeholder="Contraseña Actual" autoComplete="new-password"/>
 										</Form.Group>
 										<Form.Group controlId="changeNewPassword" className="w-auto d-flex justify-content-center">
-											<Form.Control className="formInput passwordInputs" type="input" placeholder="Nueva Contraseña" />
+											<Form.Control className="formInput passwordInputs" type="password" placeholder="Nueva Contraseña" autoComplete="new-password"/>
 										</Form.Group>
 										<Form.Group controlId="changeConfirmPassword" className="w-auto d-flex justify-content-center">
-											<Form.Control className="formInput passwordInputs" type="input" placeholder="Confirmar Contraseña" />
+											<Form.Control className="formInput passwordInputs" type="password" placeholder="Confirmar Contraseña" autoComplete="new-password"/>
 										</Form.Group>
 										<Button className="acceptButtonChangePassword sendButton mt-3 mb-4 align-self-end" variant="warning" type="submit">
 											Aceptar
@@ -35,18 +35,6 @@ class AdminProfile extends React.Component {
 							</Col>
 						</Row>
 					</Col>
-					{/* <Form >
-						<Form.Label className="mb-4"> Recuperar Contraseña </Form.Label>
-						<Form.Group controlId="formBasicEmail">
-							<Form.Control className="formInput mb-4" type="password" placeholder="Nueva contraseña" />
-						</Form.Group>
-						<Form.Group controlId="formBasicEmail">
-							<Form.Control className="formInput" type="password" placeholder="Confirmar nueva contraseña" />
-						</Form.Group>
-						<Button className="sendButton mt-3 mb-4" variant="warning" type="submit">
-							Aceptar
-            		</Button>
-					</Form> */}
 				</Row>
 			</Container>
 
