@@ -1,49 +1,22 @@
-/* header */
-.bckgndEditAlly {
-    background-color: #343434;
-}
-
-.companyNameEditAlly {
-    color: white;
+.titleEditAlly {
     font-weight: bold;    
 }
 
-.logoutBox {
-    padding-top: 5rem;
-    padding-bottom: 2rem;
-}
-
-.logoutBtn {
-    display: flex !important;
-    align-items: center;
-    color: white !important;
-    font-size: 1.2rem !important;
-}
-
-.imgEditAlly {   
-    background-color: white; 
-    height: 22vw;
-    width: auto;
-    box-shadow: 0px 0px 8px gray;
-}
-
-@media only screen and (min-width: 768px) {
-    .companyImageCol {
-        position: absolute !important;    
-    }
-
-    .companyNameEditAlly {
-        color: #7b7b7b;        
-    }
-}
-
-/* Content */
 .contentDataEditAlly {
-    margin-top: 200px;
+    margin-top: 130px;
 }
 
 .labelInputEditAlly {
     text-align: end;
+}
+
+.textStyle {
+    font-size: 1.4rem !important;
+    color: #7b7b7b !important;
+}
+
+.hoursEditAlly {
+    width: 40% !important;    
 }
 
 @media only screen and (max-width: 768px){
@@ -52,5 +25,8 @@
     }
     .labelInputEditAlly {
         text-align: center;
+    }
+    .hoursEditAlly {
+        margin: auto;
     }
 }
