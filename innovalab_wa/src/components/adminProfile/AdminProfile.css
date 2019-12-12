@@ -1,3 +1,19 @@
-.adminProfile{
+.adminProfile {}
 
+.passwordInputs {
+   background-color: #e8e8e8 !important;
+   min-width: 200px;
+}
+
+.acceptButtonChangePassword {
+   min-width: 100px !important;
+}
+
+@media only screen and (max-width: 576px) {
+   .passwordInputs {
+      max-width: 200px !important;
+   }
+   .acceptButtonChangePassword {
+      width: 100px !important;
+   }
 }
