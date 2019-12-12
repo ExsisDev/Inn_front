@@ -18,7 +18,7 @@ class EditAlly extends React.Component {
                     <Col className="d-flex flex-column align-items-center pl-5">
                         <BackNavigator dark />
                     </Col>
-                    <Col md={{span: 4, offset: 4}} className="companyImageCol mt-5">
+                    <Col md={{ span: 4, offset: 4 }} className="companyImageCol mt-5">
                         <Image className="imgEditAlly" src={img}
                             alt="logo de la compañia"
                             roundedCircle
@@ -28,15 +28,13 @@ class EditAlly extends React.Component {
                 </Row>
                 <Row className="m-0 bckgndEditAlly">
                     <Col sm="2" className="pl-4 logoutBox" >
-                        <Button variant="link"
-                            className="logoutBtn d-flex align-items-center"
-                        >
+                        <Button variant="link" className="logoutBtn d-flex align-items-center">
                             <IconContext.Provider value={{ color: "white", size: "2rem", className: "logoutIcon" }}>
                                 <IoIosLogOut />
                             </IconContext.Provider>
                             Cerrar Sesión
                         </Button>
-                    </Col>                    
+                    </Col>
                 </Row>
             </Container>
         );

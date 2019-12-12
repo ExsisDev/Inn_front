@@ -2,13 +2,17 @@ import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import BackButton from '../backButton/BackButton';
 
-import backButtonImg from '../../../images/backButton.png';
 import innovaCamaraLogo from '../../../images/innovaCamaraLogo.png';
-import backButtonBlackImg from '../../../images/backButtonBlack.PNG';
 import innovaCamaraLogoBlack from '../../../images/innovaCamaraLogoBlack.PNG';
 import './BackNavigator.css';
 
 
+/**
+ * Recibe como propiedad: 
+ * - dark: para renderizar en fondo negro
+ * 
+ * @param {Object} props 
+ */
 const BackNavigator = (props) => {
 
     let black = "";
