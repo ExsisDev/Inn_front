@@ -1,39 +1,25 @@
 import React from 'react';
-import { Row, Col, Button, Image } from 'react-bootstrap';
-import { IconContext } from "react-icons";
-import { IoIosLogOut } from 'react-icons/io';
-import BackButton from '../backButton/BackButton';
+import { Row, Col } from 'react-bootstrap';
+import BackNavigator from '../backNavigator/BackNavigator';
 
-import innovaCamaraLogoBlack from '../../../images/innovaCamaraLogoBlack.PNG';
 import './HeaderWithUserLogo.css';
 
 
 const HeaderProfile = (props) => {
 
 	return (
-		<Row className="headerProfile">
-			<Col xs={4} className="d-flex align-items-center flex-column">
-				<Row className="mb-5">
-					<Col>
-						<BackButton dark className="mt-4" />
-					</Col>
-				</Row>
+		<Row className="headerProfile m-0">
+			<Col className="d-flex align-items-center flex-column">
 				<Row>
-					<Col className="d-flex justify-content-start">
-						<Button variant="link" className="headerLogOutButton w-auto d-flex align-items-center">
-							<IconContext.Provider value={{ color: "white", size: "1.5rem", className: " w-auto mr-2" }}>
-								<IoIosLogOut />
-							</IconContext.Provider>
-							Cerrar Sesión
-                  </Button>
+					<Col xs={12} className="d-flex align-items-center flex-column">
+						<BackNavigator dark logOut/>
 					</Col>
 				</Row>
-			</Col>
-			<Col xs={4} className="d-flex justify-content-center mt-4">
-				<div className="imageCenterRounded position-absolute rounded-circle border border-dark"></div>
-			</Col>
-			<Col xs={4} className="d-flex justify-content-end">
-				<img className="align-self-start logo mt-4" src={innovaCamaraLogoBlack} alt="logo icon" />
+				<Row className="d-flex order-1 order-sm-0">
+					<Col xs={12} className="imageCenterRoundedBox d-flex justify-content-center">
+						<div className="imageCenterRounded rounded-circle border border-dark" style={{backgroundImage: `url(${props.source})`}}></div>
+					</Col>
+				</Row>
 			</Col>
 		</Row>
 	);

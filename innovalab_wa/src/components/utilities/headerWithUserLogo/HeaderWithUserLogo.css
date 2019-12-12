@@ -1,15 +1,28 @@
 .headerProfile {
-  background-color: #333333;
+	background-color: #333333;
 }
 
 .headerLogOutButton {
-  color: white !important;
+	color: white !important;
+}
+
+.imageCenterRoundedBox {
+	height: 120px;
 }
 
 .imageCenterRounded {
-	height: 200px;
-	width: 200px;
-	background: white url('../../../images/innovaLogo.png') no-repeat center;
+	height: 250px;
+	width: 250px;
+	background: white no-repeat center;
 	background-size: contain;
 }
 
+@media only screen and (min-width: 576px) {
+	.imageCenterRounded {
+		margin-top: -130px;
+	}
+
+	.imageCenterRoundedBox {
+		height: 20px;
+	}
+}
