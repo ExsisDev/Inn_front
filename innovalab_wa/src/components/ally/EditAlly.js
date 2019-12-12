@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Row, Col, Button, Image } from 'react-bootstrap';
+import { Container, Row, Col, Button, Image, Form } from 'react-bootstrap';
 import { IconContext } from "react-icons";
 import { IoIosLogOut } from 'react-icons/io';
 import BackNavigator from '../utilities/backNavigator/BackNavigator';
@@ -18,7 +18,7 @@ class EditAlly extends React.Component {
                     <Col className="d-flex flex-column align-items-center pl-5">
                         <BackNavigator dark />
                     </Col>
-                    <Col md={{span: 4, offset: 4}} className="companyImageCol mt-5">
+                    <Col md={{ span: 4, offset: 4 }} className="companyImageCol mt-5">
                         <Image className="imgEditAlly" src={img}
                             alt="logo de la compañia"
                             roundedCircle
@@ -36,8 +36,66 @@ class EditAlly extends React.Component {
                             </IconContext.Provider>
                             Cerrar Sesión
                         </Button>
-                    </Col>                    
+                    </Col>
                 </Row>
+                <Form className="contentDataEditAlly">
+                    <Form.Group as={Row} className="">
+                        <Form.Label column sm="12" md="6"
+                            className="labelInputEditAlly"
+                        >
+                            Correo:
+                        </Form.Label>
+                        <Col>
+                            <Form.Control plaintext
+                                readOnly
+                                defaultValue="EmpresaA@EmpresaAsoluciones.com"
+                                className="inputReadOnlyEditAlly"
+                            />
+                        </Col>
+                    </Form.Group>
+                    <Form.Group as={Row}>
+                        <Form.Label column sm="12" md="6"
+                            className="labelInputEditAlly"
+                        >
+                            NIT:
+                        </Form.Label>
+                        <Col>
+                            <Form.Control plaintext
+                                readOnly
+                                defaultValue="123456789-0"
+                                className="inputReadOnlyEditAlly"
+                            />
+                        </Col>
+                    </Form.Group>
+                    <Form.Group as={Row}>
+                        <Form.Label column sm="12" md="6"
+                            className="labelInputEditAlly"
+                        >
+                            Página web:
+                        </Form.Label>
+                        <Col>
+                            <Form.Control plaintext
+                                readOnly
+                                defaultValue="Empresaasas.com"
+                                className="inputReadOnlyEditAlly"
+                            />
+                        </Col>
+                    </Form.Group>
+                    <Form.Group as={Row}>
+                        <Form.Label column sm="12" md="6"
+                            className="labelInputEditAlly"
+                        >
+                            Teléfono:
+                        </Form.Label>
+                        <Col>
+                            <Form.Control plaintext
+                                readOnly
+                                defaultValue="57(1)2738172"
+                                className="inputReadOnlyEditAlly"
+                            />
+                        </Col>
+                    </Form.Group>
+                </Form>
             </Container>
         );
     }
