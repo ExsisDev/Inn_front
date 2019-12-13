@@ -69,8 +69,10 @@ class LoginForm extends React.Component {
                msg = `${res.data.msj}.`;
                msg += `Intente ingresar de nuevo en ${this.getIntegerPart(res.data.minutes)} minutos.`
             }
-            else {
+            else if (res.status === 400){
                msg = res.data;
+            } else {
+               msg = "Error inesperado, intente más tarde."
             }
             this.notify(msg);
             this.deactivateButton(false);
@@ -98,6 +100,7 @@ class LoginForm extends React.Component {
          closeOnClick: true,
          pauseOnHover: true,
          draggable: true,
+         closeButton: false
       }
    );
 
@@ -115,8 +118,8 @@ class LoginForm extends React.Component {
             {
                isLogged && <Redirect to="/home" />
             }
+            <ToastContainer />
             <div className="centerContent">
-               <ToastContainer />
                <h6 className="mt-3 mb-3"> Iniciar Sesión </h6>
                <Form validated={this.state.validated} onSubmit={this.handleSubmit}>
                   <Form.Group controlId="email">

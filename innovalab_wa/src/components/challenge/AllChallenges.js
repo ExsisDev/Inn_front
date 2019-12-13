@@ -59,7 +59,6 @@ class AllChallenges extends React.Component {
          }
       }).catch((error) => {
          this.setState({ renderedChallenges: [], totalElements: [], loadingChallenges: false });
-         console.log(error);
 
       });
    }
@@ -128,9 +127,10 @@ class AllChallenges extends React.Component {
                         (
                            <div>
                               <Row className="mx-0 d-flex flex-column">
-                                 {this.state.renderedChallenges.map((item) => {
+                                 {this.state.renderedChallenges.map((item, index) => {
                                     return (
                                        <ChallengeCard
+                                          key={index}
                                           challengeName={item.challenge_name}
                                           companyName={item.company.company_name}
                                           companyDescription={item.company.company_description}
