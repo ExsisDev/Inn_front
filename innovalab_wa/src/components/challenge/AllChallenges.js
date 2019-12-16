@@ -83,7 +83,7 @@ class AllChallenges extends React.Component {
 
    render() {
       return (
-         <Container fluid>
+         <Container fluid className="">
             <Row className="mx-0 justify-content-center h-100">
                <Col className="d-flex flex-column" xl={11}>
                   <Row className="mx-0 d-flex justify-content-center">

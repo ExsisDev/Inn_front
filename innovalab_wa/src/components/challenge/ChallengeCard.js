@@ -39,8 +39,8 @@ class ChallengeCard extends React.Component {
                      <a href="#" className="seeMoreCardLink mr-4">Ver más</a>
                   </Row>
                   <Row className="challengeCardCategories mx-0 mt-2 mt-md-1">
-                     <Col sm={3} md={2} className="px-0">
-                        <i>Categorías:</i>
+                     <Col sm={3} md={2} className="d-flex justify-content-left justify-content-sm-center">
+                        <span className="w-auto"><i>Categorías:</i></span>
                      </Col>
                      <Col sm={9} md={10} className="d-flex justify-content-start">
                         <i className="w-auto cardHashTags">{this.props.categories.map((item) => {return (`#${item} `)})}</i>
