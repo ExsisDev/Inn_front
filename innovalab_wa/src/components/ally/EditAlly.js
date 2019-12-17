@@ -9,36 +9,38 @@ import img from '../../images/EmpresaA.png';
 import './EditAlly.css';
 
 const Ally = {
-    id_ally: 1,
+    id_ally: 42,
     ally_name: "Empresa A",
     ally_nit: "123456789-0",
     ally_web_page: "Empresaasas.com",
     ally_phone: "57(1)2738172",
-    user_email: "EmpresaA@EmpresaAsoluciones.com"
+    user_email: "EmpresaA@EmpresaAsoluciones.com",
+    ally_month_ideation_hours: 12,
+    ally_month_experimentation_hours: 20,
+    ally_categories: [
+        {
+            id_category: 2,
+            category_name: "Realidad aumentada"
+        },
+        {
+            id_category: 3,
+            category_name: "Realidad virtual"
+        },
+        {
+            id_category: 4,
+            category_name: "Realidad mixta"
+        }
+    ]
 }
-
-const allyCategories = [
-    {
-        id_category: 2,
-        category_name: "Realidad aumentada"
-    },
-    {
-        id_category: 3,
-        category_name: "Realidad virtual"
-    },
-    {
-        id_category: 4,
-        category_name: "Realidad mixta"
-    }
-]
 
 class EditAlly extends React.Component {
     constructor() {
         super();
         this.state = {
-            ally: Ally,
+            ally: {},
             categories: [],
-            categoriesSelected: [],
+            ideaHours: 0,
+            expeHours: 0,
             token: this.getToken()
         }
     }
@@ -46,7 +48,7 @@ class EditAlly extends React.Component {
     componentDidMount() {
         if (this.state.token) {
             this.getAllCategories();
-            this.setState({ categoriesSelected: allyCategories });
+            this.getAlly();
         }
     }
 
@@ -74,6 +76,16 @@ class EditAlly extends React.Component {
             .catch(error => {
                 console.log(error);
             });
+    }
+
+    getAlly(idAlly) {
+        setTimeout(() => {
+            this.setState({ 
+                ally: Ally, 
+                ideaHours: Ally.ally_month_ideation_hours,
+                expeHours: Ally.ally_month_experimentation_hours
+            });
+        }, 500);
     }
 
     /**
@@ -115,7 +127,42 @@ class EditAlly extends React.Component {
     }
 
     /**
-     * Agregar la categoria seleccionado en la lista desplegable al
+     * Enviar datos del aliado que van a ser actualizados.
+     * 1. Se extraen solo los ids de las nuevas categorias
+     * 2. Se construye el objeto a ser enviado
+     * 3. Se realiza la petición
+     */
+    handleSubmit = (event) => {
+        event.preventDefault();
+        let newCategories = [];
+        // Step 1
+        this.state.ally.ally_categories.map( category => {
+            newCategories.push(category.id_category);
+        });
+        // Step 2
+        const fieldsToUpdate = {
+            ally_month_experimentation_hours: this.state.expeHours,
+            ally_month_ideation_hours: this.state.ideaHours,
+            ally_categories: newCategories
+        }       
+        const apiEndPoint = `${process.env.REACT_APP_BACK_URL}/allies/${this.state.ally.id_ally}`;
+
+        // Step 3
+        axios.put(
+            apiEndPoint,
+            fieldsToUpdate,
+            { headers: { 'x-auth-token': `${this.state.token}` } }
+        ).then( res => {
+            console.log("----------------Respuesta------------");
+            console.log(res);            
+        }).catch( error => {
+            console.log("----------------Error---------------");
+            console.log(error);
+        });
+    }
+
+    /**
+     * Agregar la categoria seleccionada al aliado
      * estado del componente
      * @return {VoidFunction}
      */
@@ -126,7 +173,7 @@ class EditAlly extends React.Component {
             category_name: event.nativeEvent.target[index].text,
             id_category: parseInt(event.nativeEvent.target.value)
         }
-        _.assign(currentCategories, this.state.categoriesSelected);
+        _.assign(currentCategories, this.state.ally.ally_categories);
         //se revisa que la categoria no haya sido seleccionada anteriormente
         for (let category of currentCategories) {
             if (category.id_category === selectedCategory.id_category) {
@@ -134,22 +181,29 @@ class EditAlly extends React.Component {
             }
         }
         currentCategories.push(selectedCategory);
-        this.setState({ categoriesSelected: currentCategories });
+        // se hace una copia del alidado y se sobreescribe la propiedad ally_categories
+        const ally = { ...this.state.ally, ally_categories: currentCategories };
+        this.setState({ ally });
     }
 
     /**
-     * Eliminar categoria del arreglo categoriesSelected
+     * Eliminar categoria del aliado
      * @return {VoidFunction}
      */
     handleDeleteClick = (event) => {
         const idCategoryToDelete = parseInt(event.currentTarget.dataset.id);
-        let auxArray = [];
-        _.assign(auxArray, this.state.categoriesSelected);
-        _.remove(auxArray, function (category) {
+        let currentCategories = [];
+        _.assign(currentCategories, this.state.ally.ally_categories);
+        _.remove(currentCategories, function (category) {
             return category.id_category === idCategoryToDelete;
         });
-        this.setState({ categoriesSelected: auxArray });
+        const ally = { ...this.state.ally, ally_categories: currentCategories };
+        this.setState({ ally });
     }
+
+    handleHoursChange = (event) => {
+        this.setState({ [event.target.name]: event.target.value });
+    }   
 
     render() {
         let properties = _.pick(this.state.ally, ['user_email', 'ally_nit', 'ally_web_page', 'ally_phone']);
@@ -182,7 +236,7 @@ class EditAlly extends React.Component {
                                     </Col>
                                     <Col sm="12" md="6" >
                                         <ul className="listRemovable p-0 d-flex flex-column flex-wrap align-items-md-start" >
-                                            {this.state.categoriesSelected.map((item) => {
+                                            {this.state.ally.ally_categories && this.state.ally.ally_categories.map((item) => {
                                                 return (
                                                     <IconContext.Provider key={item.id_category} value={{ className: "logoutIcon" }}>
                                                         <li className="w-auto" >
@@ -208,6 +262,8 @@ class EditAlly extends React.Component {
                                 <Form.Control className="formInput backgndColor hoursEditAlly"
                                     type="number"
                                     name="ideaHours"
+                                    value={this.state.ideaHours}
+                                    onChange={this.handleHoursChange}
                                 />
                             </Col>
                         </Form.Group>
@@ -218,15 +274,18 @@ class EditAlly extends React.Component {
                             <Col>
                                 <Form.Control className="formInput backgndColor hoursEditAlly"
                                     type="number"
-                                    name="expHours"
+                                    name="expeHours"
+                                    value={this.state.expeHours}
+                                    onChange={this.handleHoursChange}
                                 />
                             </Col>
                         </Form.Group>
                         <Form.Group as={Row} className="mx-0 mb-5">
-                            <Col md={{span: 2, offset: 9}} >
+                            <Col md={{ span: 2, offset: 9 }} >
                                 <Button className="formButton"
                                     size="sm"
                                     variant="warning"
+                                    onClick={this.handleSubmit}
                                 >
                                     Guardar
                             </Button>
