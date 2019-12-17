@@ -71,10 +71,10 @@ const AllyForm = (props) => {
                     </Form.Group>
                     <Row className="mx-0">
                         <Col md="6">
-                            <ul className="listRemovable p-0 d-flex flex-column align-items-center flex-wrap" >
+                            <ul className="listRemovable p-0 d-flex flex-column align-items-start flex-wrap" >
                                 {props.categoriesSelected.map((item) => {
                                     return (
-                                        <IconContext.Provider key={item.id_category} value={{ color: "red", className: "logoutIcon" }}>
+                                        <IconContext.Provider key={item.id_category} value={{ className: "logoutIcon" }}>
                                             <li className="w-auto" >
                                                 <span data-id={item.id_category} className="crossLink" 
                                                       onClick={props.handleDeleteClick}>

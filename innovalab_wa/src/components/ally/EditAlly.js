@@ -184,7 +184,7 @@ class EditAlly extends React.Component {
                                         <ul className="listRemovable p-0 d-flex flex-column flex-wrap align-items-md-start" >
                                             {this.state.categoriesSelected.map((item) => {
                                                 return (
-                                                    <IconContext.Provider key={item.id_category} value={{ color: "red", className: "logoutIcon" }}>
+                                                    <IconContext.Provider key={item.id_category} value={{ className: "logoutIcon" }}>
                                                         <li className="w-auto" >
                                                             <span data-id={item.id_category} className="crossLink"
                                                                 onClick={this.handleDeleteClick}>
