@@ -30,3 +30,10 @@
         margin: auto;
     }
 }
+
+/* Elementos de carga */
+
+.svgContainerEditAlly {
+    margin-top: 200px;
+    height: auto !important;
+  }

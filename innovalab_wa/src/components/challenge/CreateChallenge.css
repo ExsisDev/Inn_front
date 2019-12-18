@@ -53,10 +53,6 @@
    min-height: 60px;
 }
 
-.crossLink:hover {
-   color: red !important;
-}
-
 .createButton{
    width: 120px;
    height: 35px;

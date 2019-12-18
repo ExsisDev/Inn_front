@@ -66,3 +66,7 @@ code {
 .logoutIcon {
   width: 40px;
 }
+
+.crossLink:hover {
+  color: red !important;
+}
