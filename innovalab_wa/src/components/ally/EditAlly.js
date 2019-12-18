@@ -1,6 +1,10 @@
 import React from 'react';
 import _ from 'lodash';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { Redirect } from 'react-router-dom';
+import ReactLoading from 'react-loading';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { IconContext } from "react-icons";
 import { IoIosCloseCircle } from 'react-icons/io';
@@ -8,39 +12,16 @@ import HeaderWithUserLogo from '../utilities/headerWithUserLogo/HeaderWithUserLo
 import img from '../../images/EmpresaA.png';
 import './EditAlly.css';
 
-const Ally = {
-    id_ally: 42,
-    ally_name: "Empresa A",
-    ally_nit: "123456789-0",
-    ally_web_page: "Empresaasas.com",
-    ally_phone: "57(1)2738172",
-    user_email: "EmpresaA@EmpresaAsoluciones.com",
-    ally_month_ideation_hours: 12,
-    ally_month_experimentation_hours: 20,
-    ally_categories: [
-        {
-            id_category: 2,
-            category_name: "Realidad aumentada"
-        },
-        {
-            id_category: 3,
-            category_name: "Realidad virtual"
-        },
-        {
-            id_category: 4,
-            category_name: "Realidad mixta"
-        }
-    ]
-}
-
 class EditAlly extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             ally: {},
             categories: [],
             ideaHours: 0,
             expeHours: 0,
+            isCreated: false,
+            isLoading: true,
             token: this.getToken()
         }
     }
@@ -78,14 +59,24 @@ class EditAlly extends React.Component {
             });
     }
 
-    getAlly(idAlly) {
-        setTimeout(() => {
-            this.setState({ 
-                ally: Ally, 
-                ideaHours: Ally.ally_month_ideation_hours,
-                expeHours: Ally.ally_month_experimentation_hours
+    getAlly() {
+        const idAlly = this.props.match.params.idAlly;
+        const url = `${process.env.REACT_APP_BACK_URL}/allies/${idAlly}`;
+
+        axios.get(url, {
+            headers: { 'x-auth-token': `${this.state.token}` }
+        })
+            .then(res => {
+                this.setState({
+                    ally: res.data,
+                    ideaHours: res.data.ally_month_ideation_hours,
+                    expeHours: res.data.ally_month_experimentation_hours,
+                    isLoading: false
+                });
+            })
+            .catch(error => {
+                console.log(error);
             });
-        }, 500);
     }
 
     /**
@@ -131,12 +122,14 @@ class EditAlly extends React.Component {
      * 1. Se extraen solo los ids de las nuevas categorias
      * 2. Se construye el objeto a ser enviado
      * 3. Se realiza la petición
+     * 4. Se redirige a Home
      */
     handleSubmit = (event) => {
         event.preventDefault();
+        let msg;
         let newCategories = [];
         // Step 1
-        this.state.ally.ally_categories.map( category => {
+        this.state.ally.ally_categories.map(category => {
             newCategories.push(category.id_category);
         });
         // Step 2
@@ -144,21 +137,36 @@ class EditAlly extends React.Component {
             ally_month_experimentation_hours: this.state.expeHours,
             ally_month_ideation_hours: this.state.ideaHours,
             ally_categories: newCategories
-        }       
+        }
         const apiEndPoint = `${process.env.REACT_APP_BACK_URL}/allies/${this.state.ally.id_ally}`;
 
         // Step 3
+        this.notify();
         axios.put(
             apiEndPoint,
             fieldsToUpdate,
             { headers: { 'x-auth-token': `${this.state.token}` } }
-        ).then( res => {
-            console.log("----------------Respuesta------------");
-            console.log(res);            
-        }).catch( error => {
-            console.log("----------------Error---------------");
-            console.log(error);
+        ).then(res => {
+            msg = "Aliado creado con éxito."
+            this.updateSuccess(msg);
+            setTimeout(() => {
+                // redirección a Home
+                this.setState({ isCreated: true });
+            }, 2000);
+        }).catch(error => {
+            msg = "Algo salio mal. Intentalo de nuevo."
+            this.updateError(msg);
         });
+    }
+
+    notify = () => this.toastId = toast.info("Actualizando...", { autoClose: false });
+
+    updateSuccess = (msg) => {
+        toast.update(this.toastId, { render: msg, type: toast.TYPE.SUCCESS, autoClose: 2000 });
+    }
+
+    updateError = (msg) => {
+        toast.update(this.toastId, { render: msg, type: toast.TYPE.ERROR, autoClose: 2000 });
     }
 
     /**
@@ -203,97 +211,112 @@ class EditAlly extends React.Component {
 
     handleHoursChange = (event) => {
         this.setState({ [event.target.name]: event.target.value });
-    }   
+    }
 
     render() {
         let properties = _.pick(this.state.ally, ['user_email', 'ally_nit', 'ally_web_page', 'ally_phone']);
         return (
             <Container className="p-0" fluid>
+                {
+                    this.state.isCreated &&
+                    <Redirect to="/home" />
+                }
+                <ToastContainer />
                 <HeaderWithUserLogo source={img} />
-                <Row className="contentDataEditAlly mx-0">
-                    <h3 className="titleEditAlly textStyle">Empresa A</h3>
-                    <Form >
-                        {
-                            this.renderReadOnlyProperties(properties)
-                        }
-                        <Form.Group as={Row} className="mx-0 align-items-baseline ">
-                            <Form.Label column sm="12" md="6" className="labelInputEditAlly titleEditAlly textStyle">
-                                Categorías de especialidad:
+                {this.state.isLoading ?
+                    (
+                        <div className="d-flex justify-content-center flex-grow-1">
+                            <ReactLoading className="d-flex align-items-center svgContainerEditAlly" type={"spokes"} color={"#313333"} />
+                        </div>
+                    )
+                    :
+                    (
+                        <Row className="contentDataEditAlly mx-0">
+                            <h3 className="titleEditAlly textStyle">{this.state.ally.ally_name}</h3>
+                            <Form >
+                                {
+                                    this.renderReadOnlyProperties(properties)
+                                }
+                                <Form.Group as={Row} className="mx-0 align-items-baseline ">
+                                    <Form.Label column sm="12" md="6" className="labelInputEditAlly titleEditAlly textStyle">
+                                        Categorías de especialidad:
                             </Form.Label>
-                            <Col>
-                                <Row>
                                     <Col>
-                                        <Form.Control as="select"
-                                            onChange={this.fillSelectedElement}
-                                            className="formSelect backgndColor"
-                                            defaultValue="default"
-                                        >
-                                            <option disabled value="default">Seleccione las categorias</option>
-                                            {this.state.categories.map(category => {
-                                                return <option key={category.id_category} value={category.id_category}>{category.category_name}</option>
-                                            })}
-                                        </Form.Control>
+                                        <Row>
+                                            <Col>
+                                                <Form.Control as="select"
+                                                    onChange={this.fillSelectedElement}
+                                                    className="formSelect backgndColor"
+                                                    defaultValue="default"
+                                                >
+                                                    <option disabled value="default">Seleccione las categorias</option>
+                                                    {this.state.categories.map(category => {
+                                                        return <option key={category.id_category} value={category.id_category}>{category.category_name}</option>
+                                                    })}
+                                                </Form.Control>
+                                            </Col>
+                                            <Col sm="12" md="6" >
+                                                <ul className="listRemovable p-0 d-flex flex-column flex-wrap align-items-md-start" >
+                                                    {this.state.ally.ally_categories && this.state.ally.ally_categories.map((item) => {
+                                                        return (
+                                                            <IconContext.Provider key={item.id_category} value={{ className: "logoutIcon" }}>
+                                                                <li className="w-auto" >
+                                                                    <span data-id={item.id_category} className="crossLink"
+                                                                        onClick={this.handleDeleteClick}>
+                                                                        <IoIosCloseCircle />
+                                                                    </span>
+                                                                    {item.category_name}
+                                                                </li>
+                                                            </IconContext.Provider>
+                                                        )
+                                                    })}
+                                                </ul>
+                                            </Col>
+                                        </Row>
                                     </Col>
-                                    <Col sm="12" md="6" >
-                                        <ul className="listRemovable p-0 d-flex flex-column flex-wrap align-items-md-start" >
-                                            {this.state.ally.ally_categories && this.state.ally.ally_categories.map((item) => {
-                                                return (
-                                                    <IconContext.Provider key={item.id_category} value={{ className: "logoutIcon" }}>
-                                                        <li className="w-auto" >
-                                                            <span data-id={item.id_category} className="crossLink"
-                                                                onClick={this.handleDeleteClick}>
-                                                                <IoIosCloseCircle />
-                                                            </span>
-                                                            {item.category_name}
-                                                        </li>
-                                                    </IconContext.Provider>
-                                                )
-                                            })}
-                                        </ul>
-                                    </Col>
-                                </Row>
-                            </Col>
-                        </Form.Group>
-                        <Form.Group as={Row} className="mx-0 align-items-baseline" controlId="ideHours">
-                            <Form.Label column sm="12" md="6" className="labelInputEditAlly titleEditAlly textStyle">
-                                Horas de ideación mensuales:
+                                </Form.Group>
+                                <Form.Group as={Row} className="mx-0 align-items-baseline" controlId="ideHours">
+                                    <Form.Label column sm="12" md="6" className="labelInputEditAlly titleEditAlly textStyle">
+                                        Horas de ideación mensuales:
                             </Form.Label>
-                            <Col>
-                                <Form.Control className="formInput backgndColor hoursEditAlly"
-                                    type="number"
-                                    name="ideaHours"
-                                    value={this.state.ideaHours}
-                                    onChange={this.handleHoursChange}
-                                />
-                            </Col>
-                        </Form.Group>
-                        <Form.Group as={Row} className=" mx-0 align-items-baseline" controlId="expHours">
-                            <Form.Label column sm="12" md="6" className="labelInputEditAlly titleEditAlly textStyle">
-                                Horas de experimentación mensuales:
+                                    <Col>
+                                        <Form.Control className="formInput backgndColor hoursEditAlly"
+                                            type="number"
+                                            name="ideaHours"
+                                            value={this.state.ideaHours}
+                                            onChange={this.handleHoursChange}
+                                        />
+                                    </Col>
+                                </Form.Group>
+                                <Form.Group as={Row} className=" mx-0 align-items-baseline" controlId="expHours">
+                                    <Form.Label column sm="12" md="6" className="labelInputEditAlly titleEditAlly textStyle">
+                                        Horas de experimentación mensuales:
                                     </Form.Label>
-                            <Col>
-                                <Form.Control className="formInput backgndColor hoursEditAlly"
-                                    type="number"
-                                    name="expeHours"
-                                    value={this.state.expeHours}
-                                    onChange={this.handleHoursChange}
-                                />
-                            </Col>
-                        </Form.Group>
-                        <Form.Group as={Row} className="mx-0 mb-5">
-                            <Col md={{ span: 2, offset: 9 }} >
-                                <Button className="formButton"
-                                    size="sm"
-                                    variant="warning"
-                                    onClick={this.handleSubmit}
-                                >
-                                    Guardar
+                                    <Col>
+                                        <Form.Control className="formInput backgndColor hoursEditAlly"
+                                            type="number"
+                                            name="expeHours"
+                                            value={this.state.expeHours}
+                                            onChange={this.handleHoursChange}
+                                        />
+                                    </Col>
+                                </Form.Group>
+                                <Form.Group as={Row} className="mx-0 mb-5">
+                                    <Col md={{ span: 2, offset: 9 }} >
+                                        <Button className="formButton"
+                                            size="sm"
+                                            variant="warning"
+                                            onClick={this.handleSubmit}
+                                        >
+                                            Guardar
                             </Button>
-                            </Col>
-                        </Form.Group>
+                                    </Col>
+                                </Form.Group>
 
-                    </Form>
-                </Row>
+                            </Form>
+                        </Row>
+                    )
+                }
             </Container>
         );
     }

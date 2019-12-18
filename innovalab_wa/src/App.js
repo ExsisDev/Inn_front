@@ -20,7 +20,7 @@ class App extends React.Component {
                   <Route path="/pageNotFound" component={PageNotFound} />
                   <Route path="/home" component={Home} />
                   <Route path="/adminProfile" component={AdminProfile} />
-                  <Route path="/ally/edit" component={EditAlly} />
+                  <Route path="/ally/edit/:idAlly" component={EditAlly} />
                   <Route path="/" component={Landing} />
                </Switch>
             </div>
