@@ -23,8 +23,20 @@ class EditAlly extends React.Component {
             isCreated: false,
             isLoading: true,
             token: this.getToken()
-        }
+        }       
+
+        this.toastConfiguration = {
+			position: "top-right",
+			autoClose: 2000,
+			hideProgressBar: true,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true,
+			closeButton: false
+		}
     }
+
+    toastId = null;
 
     componentDidMount() {
         if (this.state.token) {
@@ -147,7 +159,7 @@ class EditAlly extends React.Component {
             fieldsToUpdate,
             { headers: { 'x-auth-token': `${this.state.token}` } }
         ).then(res => {
-            msg = "Aliado creado con éxito."
+            msg = "Aliado actualizado con éxito."
             this.updateSuccess(msg);
             setTimeout(() => {
                 // redirección a Home
@@ -159,7 +171,7 @@ class EditAlly extends React.Component {
         });
     }
 
-    notify = () => this.toastId = toast.info("Actualizando...", { autoClose: false });
+    notify = () => this.toastId = toast.info("Actualizando...", this.toastConfiguration);
 
     updateSuccess = (msg) => {
         toast.update(this.toastId, { render: msg, type: toast.TYPE.SUCCESS, autoClose: 2000 });
