@@ -9,7 +9,7 @@ class ChallengeCard extends React.Component {
       return (
          <Col className="mb-5">
             <Card className="formBox challengeCardBox">
-               <Card.Body className="px-lg-5">
+               <Card.Body className="px-lg-3">
                   <Row className="mx-0">
                      <Col className="offset-lg-2">
                         <Card.Title className="challengeCardName text-center text-md-center text-lg-left">{this.props.challengeName}</Card.Title>

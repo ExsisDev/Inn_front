@@ -1,12 +1,33 @@
 .searchChallengeText {
-  height: 38px;
-  min-width: 250px;
   -webkit-appearance: none;
   -moz-appearance: none;
-  background: url("../../images/find.png") no-repeat left;
+  background-color: #e8e8e8 !important;
+  border-color: #e8e8e8 !important;
+  border-top-right-radius: 20px !important;
+  border-bottom-right-radius: 20px !important;
+}
+
+
+.searchChallengeText:focus {
+  border-color: #e8e8e8 !important;
+}
+
+
+.iconButton {
+  width: 30px;
+  background: url('../../images/find.png') no-repeat left;
   background-position-x: 10px;
   background-color: #e8e8e8 !important;
+  border-color: #e8e8e8 !important;
+  border-top-left-radius: 20px !important;
+  border-bottom-left-radius: 20px !important;
 }
+
+
+.iconButton:focus {
+  box-shadow: none !important;
+}
+
 
 .camaraLogo {
   height: 38px;

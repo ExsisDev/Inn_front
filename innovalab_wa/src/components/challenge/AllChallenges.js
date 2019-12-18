@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from "axios";
-import { Container, Row, Col, Form, Nav, Navbar } from 'react-bootstrap';
+import { Container, Row, Col, Nav, Navbar, InputGroup, Button, FormControl, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 import Pagination from "react-js-pagination";
@@ -20,11 +20,14 @@ class AllChallenges extends React.Component {
          actualPage: 1,
          actualState: "CREATED",
          loadingChallenges: true,
-         totalElements: 0
+         totalElements: 0,
+         searchElement: "",
+         searchPaginationActive: false
       }
       this.link1 = React.createRef();
       this.link2 = React.createRef();
       this.link3 = React.createRef();
+      this.begginingPage = React.createRef();
    }
 
 
@@ -45,14 +48,17 @@ class AllChallenges extends React.Component {
 
 
    /**
-    * Obtener todos los retos según la página y el estado
+    * Obtener todos los retos según la página, el estado y opcionalmente una palabra clave
     */
-   getChallengesByPageAndStatus(page, status) {
-      const url = `${process.env.REACT_APP_BACK_URL}/challenges/${page}/${status}`;
+   async getChallengesByPageAndStatus(page, state, isASearch) {
+
+      let url = `${process.env.REACT_APP_BACK_URL}/challenges/${page}/${state}`;
+      url = isASearch ? url + `/search/?value=${this.state.searchElement}` : url;
       const token = this.getToken();
 
-      axios.get(url, {
+      await axios.get(url, {
          headers: { 'x-auth-token': `${token}` }
+
       }).then((result) => {
          if (result.data) {
             this.setState({ renderedChallenges: result.data.result, totalElements: result.data.totalElements, loadingChallenges: false });
@@ -61,14 +67,17 @@ class AllChallenges extends React.Component {
          this.setState({ renderedChallenges: [], totalElements: [], loadingChallenges: false });
 
       });
+
+      await this.begginingPage.current.scrollIntoView();
    }
 
 
    /**
     * Cambiar el estado actual de los retos mostrados (barra de links) 
     */
-   handleClickLink(e, state) {
-      this.setState({ actualState: state, loadingChallenges: true }, () => { this.getChallengesByPageAndStatus(this.state.actualPage, state) });
+   async handleClickLink(e, state) {
+      await this.setState({ actualState: state, loadingChallenges: true, searchPaginationActive: false, actualPage: 1 });
+      await this.getChallengesByPageAndStatus(this.state.actualPage, state, false);
    }
 
 
@@ -76,21 +85,48 @@ class AllChallenges extends React.Component {
     * Cambiar el indice de la página actual
     * @param {Number} pageNumber 
     */
-   handlePageChange(pageNumber) {
-      this.setState({ actualPage: pageNumber, loadingChallenges: true }, () => { this.getChallengesByPageAndStatus(pageNumber, this.state.actualState) });
+   async handlePageChange(pageNumber) {
+      await this.setState({ actualPage: pageNumber, loadingChallenges: true });
+      await this.getChallengesByPageAndStatus(pageNumber, this.state.actualState, this.state.searchPaginationActive);
+   }
+
+
+	/**
+    * Cambiar estado de la entrada mientras se ingresa un valor
+    * @return {VoidFunction}
+    */
+   handleChange = (e) => {
+      this.setState({ [e.target.name]: e.target.value });
+   }
+
+
+   /**
+    * Manejar el submit de la búsqueda 
+   */
+   handleSearchButton = async (e) => {
+      e.preventDefault();
+      await this.setState({ loadingChallenges: true, searchPaginationActive: true, actualPage: 1 });
+      await this.getChallengesByPageAndStatus(this.state.actualPage, this.state.actualState, true);
    }
 
 
    render() {
       return (
-         <Container fluid className="">
-            <Row className="mx-0 justify-content-center h-100">
+         <Container fluid ref={this.begginingPage}>
+            <Row className="mx-0 justify-content-center h-100" >
                <Col className="d-flex flex-column" xl={11}>
                   <Row className="mx-0 d-flex justify-content-center">
                      <Col>
                         <Row className="my-4 mx-0">
                            <Col md={4} className="d-flex align-items-center order-2 order-sm-2 order-md-1 mt-4 mt-sm-4 mt-md-0">
-                              <Form.Control className="searchChallengeText formInput m-0 pl-5" type="input" placeholder="Buscar reto" />
+                              <Form onSubmit={this.handleSearchButton}>
+                                 <InputGroup className="mb-3 groupButtonText">
+                                    <InputGroup.Prepend className="w-auto">
+                                       <Button className="iconButton" variant="outline-secondary" type="submit"></Button>
+                                    </InputGroup.Prepend>
+                                    <FormControl className="searchChallengeText" aria-describedby="basic-addon1" type="input" placeholder="Buscar reto" name="searchElement" onChange={this.handleChange} />
+                                 </InputGroup>
+                              </Form>
                            </Col>
                            <Col md={{ span: 4, offset: 4 }} className="order-sm-1 order-1 order-md-2 camaraLogoBox d-flex justify-content-md-end justify-content-center">
                               <img className="camaraLogo" src={innovaCamaraLogo} alt="innovaCamaralogo" />
