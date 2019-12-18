@@ -20,14 +20,14 @@ class EditAlly extends React.Component {
             categories: [],
             ideaHours: 0,
             expeHours: 0,
-            isCreated: false,
+            isUpdated: false,
             isLoading: true,
             token: this.getToken()
         }       
 
         this.toastConfiguration = {
 			position: "top-right",
-			autoClose: 2000,
+			autoClose: 3000,
 			hideProgressBar: true,
 			closeOnClick: true,
 			pauseOnHover: true,
@@ -163,7 +163,7 @@ class EditAlly extends React.Component {
             this.updateSuccess(msg);
             setTimeout(() => {
                 // redirección a Home
-                this.setState({ isCreated: true });
+                this.setState({ isUpdated: true });
             }, 2000);
         }).catch(error => {
             msg = "Algo salio mal. Intentalo de nuevo."
@@ -174,11 +174,11 @@ class EditAlly extends React.Component {
     notify = () => this.toastId = toast.info("Actualizando...", this.toastConfiguration);
 
     updateSuccess = (msg) => {
-        toast.update(this.toastId, { render: msg, type: toast.TYPE.SUCCESS, autoClose: 2000 });
+        toast.update(this.toastId, { render: msg, type: toast.TYPE.SUCCESS, autoClose: 3000 });
     }
 
     updateError = (msg) => {
-        toast.update(this.toastId, { render: msg, type: toast.TYPE.ERROR, autoClose: 2000 });
+        toast.update(this.toastId, { render: msg, type: toast.TYPE.ERROR, autoClose: 3000 });
     }
 
     /**
@@ -230,7 +230,7 @@ class EditAlly extends React.Component {
         return (
             <Container className="p-0" fluid>
                 {
-                    this.state.isCreated &&
+                    this.state.isUpdated &&
                     <Redirect to="/home" />
                 }
                 <ToastContainer />
