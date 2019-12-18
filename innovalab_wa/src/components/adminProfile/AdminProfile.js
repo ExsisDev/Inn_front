@@ -72,7 +72,7 @@ class AdminProfile extends React.Component {
 				this.notifySuccess("Contraseña cambiada.");
 				setTimeout(() => {
 					this.setState({createButtonRedirection: true});
-				}, 5000)
+				}, 3000)
 			})
 			.catch((error) => {
 				const res = error.response;

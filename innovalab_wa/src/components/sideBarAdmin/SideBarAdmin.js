@@ -11,7 +11,11 @@ const SideBar = () => {
    return (
       <div className="lateralBar d-flex flex-column">
          <div className="logoAdminBox d-flex justify-content-center">
-            <img className="logoAdmin align-self-center" src={logoAdmin} alt="Admin logo" />
+            <span>
+               <Link to="/adminProfile" className="w-auto">
+                  <img className="logoAdmin align-self-center" src={logoAdmin} alt="Admin logo" />
+               </Link>
+            </span>
          </div>
          <div className="adminText d-flex align-items-center">
             <h3>Administrador</h3>
