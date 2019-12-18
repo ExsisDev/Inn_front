@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import { Container, Form, Button, Row, Col } from 'react-bootstrap';
+import { Redirect } from 'react-router-dom';
 import HeaderWithUserLogo from '../utilities/headerWithUserLogo/HeaderWithUserLogo';
 import AdminImage from '../../images/innovaLogo.png';
 
@@ -18,7 +19,8 @@ class AdminProfile extends React.Component {
 			actualPassword: "",
 			newPassword: "",
 			confirmNewPassword: "",
-			createButtonRedirection: false
+			createButtonRedirection: false,
+			isLoading: false
 		}
 
 		this.toastConfiguration = {
@@ -50,7 +52,7 @@ class AdminProfile extends React.Component {
 	 * Enviar la petición para cambio de contraseña
 	 * @param {Event} e 
 	 */
-	handlePasswordChange(e) {
+	async handlePasswordChange(e) {
 		e.preventDefault();
 
 		const url = `${process.env.REACT_APP_BACK_URL}/login/changePassword`;
@@ -61,12 +63,16 @@ class AdminProfile extends React.Component {
 			confirm_new_password: this.state.confirmNewPassword
 		}
 
-		axios.post(url, bodyPasswordChange, {
+		await this.setState({ isLoading: true });
+
+		await axios.post(url, bodyPasswordChange, {
 			headers: { 'x-auth-token': `${this.state.token}` }
 		})
 			.then((result) => {
-				this.setState({ createButtonRedirection: true });
 				this.notifySuccess("Contraseña cambiada.");
+				setTimeout(() => {
+					this.setState({createButtonRedirection: true});
+				}, 3000)
 			})
 			.catch((error) => {
 				const res = error.response;
@@ -74,10 +80,13 @@ class AdminProfile extends React.Component {
 				if (res.status === 400) {
 					msg = `${res.data}.`;
 				} else {
-					msg = "No se pudo actualizar la contraseña"
+					msg = "No se pudo actualizar la contraseña";
 				}
 				this.notifyError(msg);
 			});
+
+		await this.setState({ isLoading: false });
+
 	}
 
 
@@ -115,6 +124,9 @@ class AdminProfile extends React.Component {
 	render() {
 		return (
 			<Container fluid className="adminProfile p-0">
+				{
+					this.state.createButtonRedirection &&	<Redirect to="/home" />
+				}
 				<ToastContainer />
 				<HeaderWithUserLogo source={AdminImage} />
 				<Row className="mt-5 mx-0">
@@ -134,7 +146,7 @@ class AdminProfile extends React.Component {
 										<Form.Group controlId="changeConfirmPassword" className="w-auto d-flex justify-content-center">
 											<Form.Control name="confirmNewPassword" className="formInput passwordInputs" type="password" placeholder="Confirmar Contraseña" autoComplete="new-password" ref={this.NewPassword} required onChange={(e) => this.handleChangeConfirmPassword(e, this.NewPassword)} />
 										</Form.Group>
-										<Button className="acceptButtonChangePassword sendButton mt-3 mb-4 align-self-end" variant="warning" type="submit">
+										<Button className="acceptButtonChangePassword sendButton mt-3 mb-4 align-self-end" variant="warning" type="submit" disabled={this.state.isLoading}>
 											Aceptar
             						</Button>
 									</Form>

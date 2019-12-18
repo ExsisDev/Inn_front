@@ -36,6 +36,7 @@ class LoginForm extends React.Component {
       localStorage.setItem('auth-token', token);
    }
 
+   
    /**
     * obtener el token desde localStorage
     */
