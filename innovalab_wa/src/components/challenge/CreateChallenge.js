@@ -27,6 +27,9 @@ class CreateChallenge extends React.Component {
          token: this.getToken()
       }
       this.OptionCategorySelected = React.createRef();
+      this.ChallengeName = React.createRef();
+      this.ChallengeDescription = React.createRef();
+      this.SelectCompany = React.createRef();
    }
 
 
@@ -157,8 +160,8 @@ class CreateChallenge extends React.Component {
 
       let bodyChallenge = {
          fk_id_company: this.state.companySelected,
-         challenge_name: this.refs.ChallengeName.value,
-         challenge_description: this.refs.ChallengeDescription.value,
+         challenge_name: this.ChallengeName.current.value,
+         challenge_description: this.ChallengeDescription.current.value,
          fk_id_challenge_state: CREATED,
          close_date: this.state.closeDate,
          survey_date: DateTime.local().setZone('America/Bogota').toString(),
@@ -195,14 +198,14 @@ class CreateChallenge extends React.Component {
                                  <Form className="d-flex flex-column" onSubmit={this.handleChallengeCreation.bind(this)}>
                                     <Form.Row className="m-0">
                                        <Form.Group as={Col}>
-                                          <Form.Control className="challengeName formInput" type="input" placeholder="Nombre del reto" ref="ChallengeName" required />
+                                          <Form.Control className="challengeName formInput" type="input" placeholder="Nombre del reto" ref={this.ChallengeName} required />
                                        </Form.Group>
                                     </Form.Row>
 
                                     <Form.Row className="m-0">
                                        <Form.Group as={Col} className="d-flex align-items-start form-group flex-column mt-2">
                                           <Form.Label className="w-auto ">Descripción: </Form.Label>
-                                          <Form.Control as="textarea" className="formInput textArea mt-0" ref="ChallengeDescription" required />
+                                          <Form.Control as="textarea" className="formInput textArea mt-0" ref={this.ChallengeDescription} required />
                                        </Form.Group>
                                     </Form.Row>
 
@@ -219,7 +222,7 @@ class CreateChallenge extends React.Component {
 
                                        <Form.Group as={Col} xl={3} sm={12} controlId="formGridCompanies" className="d-flex align-items-center flex-column " >
                                           <Form.Label className="w-auto">Empresa proponente:</Form.Label>
-                                          <Form.Control className="formSelect selectCategoryCompany" as="select" ref="SelectCompany" onChange={() => { this.setState({ companySelected: this.refs.SelectCompany.value }) }} required>
+                                          <Form.Control className="formSelect selectCategoryCompany" as="select" ref={this.SelectCompany} onChange={() => { this.setState({ companySelected: this.SelectCompany.current.value }) }} required>
                                              <option disabled selected>Seleccione una empresa</option>
                                              {this.state.allCompanies.map((item) => {
                                                 return <option value={item.id_company} key={item.id_company}>{item.company_name}</option>

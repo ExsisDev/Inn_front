@@ -9,7 +9,7 @@ class ChallengeCard extends React.Component {
       return (
          <Col className="mb-5">
             <Card className="formBox challengeCardBox">
-               <Card.Body className="px-lg-5">
+               <Card.Body className="px-lg-3">
                   <Row className="mx-0">
                      <Col className="offset-lg-2">
                         <Card.Title className="challengeCardName text-center text-md-center text-lg-left">{this.props.challengeName}</Card.Title>
@@ -39,8 +39,8 @@ class ChallengeCard extends React.Component {
                      <a href="#" className="seeMoreCardLink mr-4">Ver más</a>
                   </Row>
                   <Row className="challengeCardCategories mx-0 mt-2 mt-md-1">
-                     <Col sm={3} md={2} className="px-0">
-                        <i>Categorías:</i>
+                     <Col sm={3} md={2} className="d-flex justify-content-left justify-content-sm-center">
+                        <span className="w-auto"><i>Categorías:</i></span>
                      </Col>
                      <Col sm={9} md={10} className="d-flex justify-content-start">
                         <i className="w-auto cardHashTags">{this.props.categories.map((item) => {return (`#${item} `)})}</i>
