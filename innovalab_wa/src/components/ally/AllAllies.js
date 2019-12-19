@@ -79,7 +79,11 @@ class AllAlies extends React.Component {
                         <td className="textStyleTableCompany">
                             <div>
                                 <Image src={logoCompany} style={imageStyle} roundedCircle />
-                                <p>{ally.ally_name}</p>
+                                <Link to={`/ally/edit/${ally.id_ally}`}
+                                      style={{display: "block"}}
+                                >
+                                    {ally.ally_name}
+                                </Link>
                             </div>
                         </td>
                         <td>{ally.ally_month_ideation_hours}</td>

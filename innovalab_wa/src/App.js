@@ -18,9 +18,9 @@ class App extends React.Component {
             <div className="App">
                <Switch>
                   <Route path="/pageNotFound" component={PageNotFound} />
+                  <Route path="/ally/edit/:idAlly" component={EditAlly} />
                   <Route path="/home" component={Home} />
                   <Route path="/adminProfile" component={AdminProfile} />
-                  <Route path="/ally/edit/:idAlly" component={EditAlly} />
                   <Route path="/" component={Landing} />
                </Switch>
             </div>
