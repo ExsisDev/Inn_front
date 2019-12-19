@@ -1,9 +1,11 @@
 import React from 'react';
 import axios from 'axios';
-import { Container, Row, Col, Table } from 'react-bootstrap';
+import Pagination from "react-js-pagination";
+import { Container, Row, Col, Table, Image, Button } from 'react-bootstrap';
 import BackNavigator from '../utilities/backNavigator/BackNavigator';
 import SectionTitle from '../utilities/sectionTitle/SectionTitle';
 import logoExc from '../../images/exclamación.png';
+import logoCompany from '../../images/EmpresaA.png';
 import './AllAllies.css';
 
 class AllAlies extends React.Component {
@@ -11,6 +13,9 @@ class AllAlies extends React.Component {
         super();
         this.state = {
             allies: [],
+            totalAllies: 0,
+            currentPage: 1,
+            isLoading: true,
             token: this.getToken()
         }
     }
@@ -40,26 +45,48 @@ class AllAlies extends React.Component {
             headers: { 'x-auth-token': `${this.state.token}` }
         })
             .then(res => {
-                this.setState({ allies: res.data });
+                this.setState({ 
+                    allies: res.data.data, 
+                    totalAllies: res.data.totalElements,
+                    isLoading: false
+                });
             })
             .catch(error => {
                 console.log(error);
             });
     }
 
+    /**
+    * Cambiar el indice de la página actual
+    * @param {Number} pageNumber 
+    */
+    async handlePageChange(pageNumber) {
+        await this.setState({ currentPage: pageNumber, isLoading: true });
+        await this.getAlliesByPage(pageNumber);
+    }
+
     renderAllies = (allies) => {
+        const imageStyle = {
+            height: "70px",
+            width: "auto"
+        }
         return (
             allies.map(ally => {
                 return (
-                    <tr key={ally.id_ally}>
-                        <td>{ally.ally_name}</td>
+                    <tr key={ally.id_ally} className="d-flex align-items-center textStyleTable">
+                        <td className="textStyleTableCompany">
+                            <div>
+                                <Image src={logoCompany} style={imageStyle} roundedCircle />
+                                <p>{ally.ally_name}</p>
+                            </div>
+                        </td>
                         <td>{ally.ally_month_ideation_hours}</td>
                         <td>{ally.ally_month_experimentation_hours}</td>
                         <td>2</td>
                         <td>2</td>
                     </tr>
                 );
-            })           
+            })
         );
     }
 
@@ -75,10 +102,15 @@ class AllAlies extends React.Component {
 
                 <BackNavigator />
                 <SectionTitle titleProps={titleProps} />
+                <Row className="justify-content-end">
+                    <Button className="btnCreateAlly">
+                        Crear Aliado
+                    </Button>
+                </Row>
                 <Row className="my-3 formBox paddingBox"    >
-                    <Table borderless hover>
+                    <Table responsive borderless hover>
                         <thead>
-                            <tr>
+                            <tr className="d-flex align-items-center textStyleTable">
                                 <th>Empresa</th>
                                 <th>Horas ideación por mes</th>
                                 <th>Horas experimentación por mes</th>
@@ -90,6 +122,20 @@ class AllAlies extends React.Component {
                             {this.renderAllies(allies)}
                         </tbody>
                     </Table>
+                </Row>
+                <Row className="mx-0 d-flex justify-content-center">
+                    <Col xs={8} sm={6} md={4} xl={3} >
+                        <Pagination
+                            activePage={this.state.currentPage}
+                            itemsCountPerPage={4}
+                            totalItemsCount={this.state.totalAllies}
+                            pageRangeDisplayed={3}
+                            itemClass="page-item boxNumber"
+                            linkClass="page-link boxLink px-0"
+                            innerClass="pagination d-flex justify-content-center align-self-end"
+                            onChange={this.handlePageChange.bind(this)}
+                        />
+                    </Col>
                 </Row>
             </Container>
         );
