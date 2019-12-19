@@ -1,6 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 import Pagination from "react-js-pagination";
+import ReactLoading from 'react-loading';
+import { Link } from 'react-router-dom';
 import { Container, Row, Col, Table, Image, Button } from 'react-bootstrap';
 import BackNavigator from '../utilities/backNavigator/BackNavigator';
 import SectionTitle from '../utilities/sectionTitle/SectionTitle';
@@ -45,8 +47,8 @@ class AllAlies extends React.Component {
             headers: { 'x-auth-token': `${this.state.token}` }
         })
             .then(res => {
-                this.setState({ 
-                    allies: res.data.data, 
+                this.setState({
+                    allies: res.data.data,
                     totalAllies: res.data.totalElements,
                     isLoading: false
                 });
@@ -103,26 +105,36 @@ class AllAlies extends React.Component {
                 <BackNavigator />
                 <SectionTitle titleProps={titleProps} />
                 <Row className="justify-content-end">
-                    <Button className="btnCreateAlly">
+                    <Button as={Link} to="/home/ally/create" className="btnCreateAlly">
                         Crear Aliado
                     </Button>
                 </Row>
-                <Row className="my-3 formBox paddingBox"    >
-                    <Table responsive borderless hover>
-                        <thead>
-                            <tr className="d-flex align-items-center textStyleTable">
-                                <th>Empresa</th>
-                                <th>Horas ideación por mes</th>
-                                <th>Horas experimentación por mes</th>
-                                <th>Ideación por reto</th>
-                                <th>Experimentación por reto</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {this.renderAllies(allies)}
-                        </tbody>
-                    </Table>
-                </Row>
+                {this.state.isLoading ?
+                    (
+                        <div className="d-flex justify-content-center flex-grow-1">
+                            <ReactLoading className="d-flex align-items-center svgContainerEditAlly" type={"spokes"} color={"#313333"} />
+                        </div>
+                    ) :
+                    (
+
+                        <Row className="my-3 formBox paddingBox"    >
+                            <Table responsive borderless hover>
+                                <thead>
+                                    <tr className="d-flex align-items-center textStyleTable">
+                                        <th>Empresa</th>
+                                        <th>Horas ideación por mes</th>
+                                        <th>Horas experimentación por mes</th>
+                                        <th>Ideación por reto</th>
+                                        <th>Experimentación por reto</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {this.renderAllies(allies)}
+                                </tbody>
+                            </Table>
+                        </Row>
+                    )
+                }
                 <Row className="mx-0 d-flex justify-content-center">
                     <Col xs={8} sm={6} md={4} xl={3} >
                         <Pagination

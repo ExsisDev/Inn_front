@@ -3,8 +3,10 @@
 .btnCreateAlly {
     width: 50%;
     background-color: orange !important;
+    color: white !important;
     border-radius: 50px !important;
     border: none !important;
+    font-size: 1.17rem !important;
 }
 
 @media only screen and (min-width: 768px) {

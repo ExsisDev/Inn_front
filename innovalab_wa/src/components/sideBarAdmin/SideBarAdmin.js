@@ -25,11 +25,11 @@ const SideBar = () => {
                <p>Retos</p>
             </div>
          </Link>
-         <a href="#">
+         <Link to="/home/ally" >         
             <div className="sideLinkBox d-flex align-items-center">
                <p>Administrar usuarios</p>
             </div>
-         </a>
+         </Link>
          <a className="mt-auto" href="#">
             <div className="sideLinkBox d-flex align-items-center">
                <IconContext.Provider value={{ color: "white", className: "logoutIcon" }}>
