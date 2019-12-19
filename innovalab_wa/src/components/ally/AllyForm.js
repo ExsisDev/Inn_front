@@ -95,7 +95,7 @@ const AllyForm = (props) => {
                         <Col md="3">
                             <Form.Control className="formInput backgndColor"
                                 type="number"
-                                name="ideaHours"
+                                name="monthIdeaHours"
                                 onChange={props.handleInputChange}
                             />
                         </Col>
@@ -107,7 +107,31 @@ const AllyForm = (props) => {
                         <Col md="3">
                             <Form.Control className="formInput backgndColor"
                                 type="number"
-                                name="expHours"
+                                name="monthExpHours"
+                                onChange={props.handleInputChange}
+                            />
+                        </Col>
+                    </Form.Group>
+                    <Form.Group as={Row} className="mx-0 align-items-baseline" controlId="ideHours">
+                        <Form.Label column className="formAllyTitles">
+                            Horas de ideación por reto:
+                        </Form.Label>
+                        <Col md="3">
+                            <Form.Control className="formInput backgndColor"
+                                type="number"
+                                name="challengeIdeaHours"
+                                onChange={props.handleInputChange}
+                            />
+                        </Col>
+                    </Form.Group>
+                    <Form.Group as={Row} className="mx-0 align-items-baseline" controlId="expHours">
+                        <Form.Label column className="formAllyTitles">
+                            Horas de experimentación por reto:
+                        </Form.Label>
+                        <Col md="3">
+                            <Form.Control className="formInput backgndColor"
+                                type="number"
+                                name="challengeExpHours"
                                 onChange={props.handleInputChange}
                             />
                         </Col>

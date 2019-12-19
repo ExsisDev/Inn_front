@@ -20,6 +20,8 @@ class EditAlly extends React.Component {
             categories: [],
             ideaHours: 0,
             expeHours: 0,
+            challengeIdeaHours: 0,
+            challengeExpeHours: 0,
             isUpdated: false,
             isLoading: true,
             token: this.getToken()
@@ -83,6 +85,8 @@ class EditAlly extends React.Component {
                     ally: res.data,
                     ideaHours: res.data.ally_month_ideation_hours,
                     expeHours: res.data.ally_month_experimentation_hours,
+                    challengeIdeaHours: res.data.ally_challenge_ideation_hours,
+                    challengeExpeHours: res.data.ally_challenge_experimentation_hours,
                     isLoading: false
                 });
             })
@@ -148,6 +152,8 @@ class EditAlly extends React.Component {
         const fieldsToUpdate = {
             ally_month_experimentation_hours: this.state.expeHours,
             ally_month_ideation_hours: this.state.ideaHours,
+            ally_challenge_ideation_hours: this.state.challengeIdeaHours,
+            ally_challenge_experimentation_hours: this.state.challengeExpeHours,
             ally_categories: newCategories
         }
         const apiEndPoint = `${process.env.REACT_APP_BACK_URL}/allies/${this.state.ally.id_ally}`;
@@ -290,7 +296,7 @@ class EditAlly extends React.Component {
                                 <Form.Group as={Row} className="mx-0 align-items-baseline" controlId="ideHours">
                                     <Form.Label column sm="12" md="6" className="labelInputEditAlly titleEditAlly textStyle">
                                         Horas de ideación mensuales:
-                            </Form.Label>
+                                    </Form.Label>
                                     <Col>
                                         <Form.Control className="formInput backgndColor hoursEditAlly"
                                             type="number"
@@ -309,6 +315,32 @@ class EditAlly extends React.Component {
                                             type="number"
                                             name="expeHours"
                                             value={this.state.expeHours}
+                                            onChange={this.handleHoursChange}
+                                        />
+                                    </Col>
+                                </Form.Group>
+                                <Form.Group as={Row} className="mx-0 align-items-baseline" controlId="ideHours">
+                                    <Form.Label column sm="12" md="6" className="labelInputEditAlly titleEditAlly textStyle">
+                                        Horas de ideación por reto:
+                                    </Form.Label>
+                                    <Col>
+                                        <Form.Control className="formInput backgndColor hoursEditAlly"
+                                            type="number"
+                                            name="challengeIdeaHours"
+                                            value={this.state.challengeIdeaHours}
+                                            onChange={this.handleHoursChange}
+                                        />
+                                    </Col>
+                                </Form.Group>
+                                <Form.Group as={Row} className=" mx-0 align-items-baseline" controlId="expHours">
+                                    <Form.Label column sm="12" md="6" className="labelInputEditAlly titleEditAlly textStyle">
+                                        Horas de experimentación por reto:
+                                    </Form.Label>
+                                    <Col>
+                                        <Form.Control className="formInput backgndColor hoursEditAlly"
+                                            type="number"
+                                            name="challengeExpeHours"
+                                            value={this.state.challengeExpeHours}
                                             onChange={this.handleHoursChange}
                                         />
                                     </Col>

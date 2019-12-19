@@ -88,8 +88,8 @@ class AllAlies extends React.Component {
                         </td>
                         <td>{ally.ally_month_ideation_hours}</td>
                         <td>{ally.ally_month_experimentation_hours}</td>
-                        <td>2</td>
-                        <td>2</td>
+                        <td>{ally.ally_challenge_ideation_hours}</td>
+                        <td>{ally.ally_challenge_experimentation_hours}</td>
                     </tr>
                 );
             })
