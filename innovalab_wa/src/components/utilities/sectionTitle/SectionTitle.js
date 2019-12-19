@@ -2,6 +2,12 @@ import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import './SectionTitle.css';
 
+// Se le debe pasar un objeto como el que se encuentra abajo
+// const titleProps = {
+//     text: "Crear Nuevo Aliado",
+//     img: logoCrear,
+//     imgAlt: "logo crear nuevo aliado"
+// }
 const SectionTitle = (props) => {
     return ( 
         <Row className="my-3 d-flex justify-content-center">

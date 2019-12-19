@@ -7,6 +7,7 @@ import CreateChallenge from '../challenge/CreateChallenge';
 import SideBarAdmin from '../sideBarAdmin/SideBarAdmin';
 import './Home.css';
 import AllChallenges from '../challenge/AllChallenges';
+import AllAllies from '../ally/AllAllies';
 
 class Home extends React.Component {
 
@@ -41,7 +42,8 @@ class Home extends React.Component {
                         <Col className="d-flex">
                             <SideBarAdmin />
                             <Switch>
-                                <Route path="/home/ally" component={CreateAlly} />
+                                <Route path="/home/ally/create" component={CreateAlly} />
+                                <Route path="/home/ally" component={AllAllies} />
                                 <Route path="/home/challenge" component={CreateChallenge} />
                                 <Route path="/home" component={AllChallenges}/>
                             </Switch>
