@@ -83,7 +83,7 @@ class AllChallenges extends React.Component {
 
       });
 
-      await this.begginingPage.current.scrollIntoView();
+      // await this.begginingPage.current.scrollIntoView();
    }
 
 
@@ -173,15 +173,19 @@ class AllChallenges extends React.Component {
       });
    }
 
+
    notify = () => this.toastId = toast.info("Eliminando...", this.toastConfiguration);
+
 
    updateSuccess = (msg) => {
       toast.update(this.toastId, { render: msg, type: toast.TYPE.SUCCESS });
    }
 
+
    updateError = (msg) => {
       toast.update(this.toastId, { render: msg, type: toast.TYPE.ERROR });
    }
+
    render() {
       return (
          <Container fluid ref={this.begginingPage}>
