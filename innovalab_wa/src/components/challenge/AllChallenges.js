@@ -1,7 +1,9 @@
 import React from 'react';
 import axios from "axios";
-import { Container, Row, Col, Nav, Navbar, InputGroup, Button, FormControl, Form } from 'react-bootstrap';
+import { Container, Row, Col, Nav, Navbar, InputGroup, Button, FormControl, Form, Modal } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import _ from 'lodash';
+import { ToastContainer, toast } from 'react-toastify';
 
 import Pagination from "react-js-pagination";
 import ReactLoading from 'react-loading';
@@ -22,12 +24,25 @@ class AllChallenges extends React.Component {
          loadingChallenges: true,
          totalElements: 0,
          searchElement: "",
-         searchPaginationActive: false
+         searchPaginationActive: false,
+         showModal: false,
+         challengeToDelete: null
       }
       this.link1 = React.createRef();
       this.link2 = React.createRef();
       this.link3 = React.createRef();
       this.begginingPage = React.createRef();
+
+   }
+   toastId = null;
+   toastConfiguration = {
+      position: "top-right",
+      autoClose: 4000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      closeButton: false
    }
 
 
@@ -109,10 +124,68 @@ class AllChallenges extends React.Component {
       await this.getChallengesByPageAndStatus(this.state.actualPage, this.state.actualState, true);
    }
 
+   showDeleteModal = (idChallenge) => {
+      this.setState({ showModal: true, challengeToDelete: idChallenge });
+   }
 
+   handleClose = (event) => {
+      this.setState({ showModal: false });
+   }
+
+   /**
+    * Realizar eliminación de un reto tanto del back
+    * como del estado del componente.
+    */
+   deleteChallenge = () => {
+      const idChallenge = this.state.challengeToDelete;
+      const token = this.getToken();
+      let url = `${process.env.REACT_APP_BACK_URL}/challenges/${idChallenge}`;
+      let msg="";
+      
+      this.notify();
+
+      axios.delete(url, {
+         headers: { 'x-auth-token': `${token}` }
+      }).then((result) => {
+         if (result.status === 200) {
+            const totalElements = this.state.totalElements - 1;
+            let newChallenges = [];
+
+            _.assign(newChallenges, this.state.renderedChallenges);
+            _.remove(newChallenges, function (challenge) {
+               return challenge.id_challenge === idChallenge;
+            });
+            this.setState({
+               renderedChallenges: newChallenges,
+               showModal: false,
+               totalElements
+            });
+            msg = "Reto eliminado."
+            this.updateSuccess(msg);
+            setTimeout(() => {
+               this.setState({ isCreated: true });
+            }, 2000);
+         }
+      }).catch((error) => {
+         msg = "Algo salio mal. Intentalo de nuevo."
+         this.updateError(msg);
+         this.setState({ showModal: false });
+      });
+   }
+
+   notify = () => this.toastId = toast.info("Eliminando...", this.toastConfiguration);
+
+   updateSuccess = (msg) => {
+      toast.update(this.toastId, { render: msg, type: toast.TYPE.SUCCESS });
+   }
+
+   updateError = (msg) => {
+      toast.update(this.toastId, { render: msg, type: toast.TYPE.ERROR });
+   }
    render() {
       return (
          <Container fluid ref={this.begginingPage}>
+            <ToastContainer />
             <Row className="mx-0 justify-content-center h-100" >
                <Col className="d-flex flex-column" xl={11}>
                   <Row className="mx-0 d-flex justify-content-center">
@@ -172,6 +245,7 @@ class AllChallenges extends React.Component {
                                           companyDescription={item.company.company_description}
                                           challengeDescription={item.challenge_description}
                                           categories={item.categories}
+                                          deleteChallenge={() => this.showDeleteModal(item.id_challenge)}
                                        />
                                     );
                                  })
@@ -203,6 +277,20 @@ class AllChallenges extends React.Component {
                   }
                </Col>
             </Row>
+            <Modal show={this.state.showModal} onHide={this.handleClose}>
+               <Modal.Header>
+                  <Modal.Title>Eliminar Reto</Modal.Title>
+               </Modal.Header>
+               <Modal.Body>¿Realmente desea eliminar el reto? Esta acción no se puede deshacer</Modal.Body>
+               <Modal.Footer>
+                  <Button variant="secondary" onClick={this.handleClose}>
+                     Cerrar
+                  </Button>
+                  <Button variant="danger " onClick={this.deleteChallenge}>
+                     Eliminar
+                  </Button>
+               </Modal.Footer>
+            </Modal>
          </Container>
       );
    }

@@ -1,10 +1,11 @@
 import React from 'react';
 import { Col, Card, Row } from 'react-bootstrap';
 import './ChallengeCard.css';
-
+import { IconContext } from "react-icons";
+import { IoIosCloseCircle } from 'react-icons/io';
 
 class ChallengeCard extends React.Component {
-
+   
    render() {
       return (
          <Col className="mb-5">
@@ -13,6 +14,13 @@ class ChallengeCard extends React.Component {
                   <Row className="mx-0">
                      <Col className="offset-lg-2">
                         <Card.Title className="challengeCardName text-center text-md-center text-lg-left">{this.props.challengeName}</Card.Title>
+                     </Col>
+                     <Col xs="1">
+                        <IconContext.Provider value={{ className: "logoutIcon" }}>
+                           <span className="crossLink" onClick={this.props.deleteChallenge}>
+                              <IoIosCloseCircle />
+                           </span>
+                        </IconContext.Provider>
                      </Col>
                   </Row>
                   <Row className="font-italic mx-0">
@@ -43,7 +51,7 @@ class ChallengeCard extends React.Component {
                         <span className="w-auto"><i>Categorías:</i></span>
                      </Col>
                      <Col sm={9} md={10} className="d-flex justify-content-start">
-                        <i className="w-auto cardHashTags">{this.props.categories.map((item) => {return (`#${item} `)})}</i>
+                        <i className="w-auto cardHashTags">{this.props.categories.map((item) => { return (`#${item} `) })}</i>
                      </Col>
                   </Row>
                </Card.Body>
