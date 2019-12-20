@@ -258,7 +258,7 @@ class CreateAlly extends React.Component {
             <Container className="d-flex flex-column align-items-center px-5">
                 {
                     this.state.isCreated &&
-                    <Redirect to="/home" />
+                    <Redirect to="/home/ally" />
                 }
                 <ToastContainer />
                 <BackNavigator />
