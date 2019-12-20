@@ -7,16 +7,16 @@ import './AllyForm.css';
 
 const AllyForm = (props) => {
     return (
-        <Form>
+        <Form validated={props.validated} onSubmit={props.handleSubmit}>
             <Form.Row className="mx-0">
                 <Col sm="12" md="5" className="textLeft pr-4">
                     <h5 className="formAllyTitles mb-4">Datos de la empresa: </h5>
                     <Form.Group>
-
                         <Form.Control className="formInput backgndColor"
                             placeholder="Nombre de la Empresa"
                             name="companyName"
                             onChange={props.handleInputChange}
+                            required
                         />
                     </Form.Group>
                     <Form.Group>
@@ -24,6 +24,8 @@ const AllyForm = (props) => {
                             placeholder="NIT"
                             name="nit"
                             onChange={props.handleInputChange}
+                            maxLength={11}
+                            required
                         />
                     </Form.Group>
                     <Form.Group>
@@ -31,6 +33,8 @@ const AllyForm = (props) => {
                             placeholder="Email"
                             name="companyEmail"
                             onChange={props.handleInputChange}
+                            type="email"
+                            required
                         />
                     </Form.Group>
                     <Form.Group>
@@ -38,6 +42,7 @@ const AllyForm = (props) => {
                             placeholder="Página Web"
                             name="webSite"
                             onChange={props.handleInputChange}
+                            required
                         />
                     </Form.Group>
                     <Form.Group>
@@ -45,6 +50,7 @@ const AllyForm = (props) => {
                             placeholder="Teléfono"
                             name="companyPhone"
                             onChange={props.handleInputChange}
+                            required
                         />
                     </Form.Group>
                 </Col>
@@ -96,7 +102,10 @@ const AllyForm = (props) => {
                             <Form.Control className="formInput backgndColor"
                                 type="number"
                                 name="monthIdeaHours"
+                                value={props.monthIdeaHours}
                                 onChange={props.handleInputChange}
+                                min="1"
+                                required
                             />
                         </Col>
                     </Form.Group>
@@ -107,8 +116,11 @@ const AllyForm = (props) => {
                         <Col md="3">
                             <Form.Control className="formInput backgndColor"
                                 type="number"
-                                name="monthExpHours"
-                                onChange={props.handleInputChange}
+                                name="monthExpHours"                                
+                                value={props.monthExpHours}
+                                onChange={props.handleInputChange}                                
+                                min="1"
+                                required
                             />
                         </Col>
                     </Form.Group>
@@ -120,9 +132,13 @@ const AllyForm = (props) => {
                             <Form.Control className="formInput backgndColor"
                                 type="number"
                                 name="challengeIdeaHours"
-                                onChange={props.handleInputChange}
+                                value={props.challengeIdeaHours}
+                                onChange={props.handleInputChange}                                
+                                min="1"
+                                required
                             />
                         </Col>
+                        <p className="errorHoursMessage">{props.errorIdea}</p>                        
                     </Form.Group>
                     <Form.Group as={Row} className="mx-0 align-items-baseline" controlId="expHours">
                         <Form.Label column className="formAllyTitles">
@@ -132,9 +148,13 @@ const AllyForm = (props) => {
                             <Form.Control className="formInput backgndColor"
                                 type="number"
                                 name="challengeExpHours"
-                                onChange={props.handleInputChange}
+                                value={props.challengeExpHours}
+                                onChange={props.handleInputChange}                               
+                                min="1"
+                                required
                             />
                         </Col>
+                        <p className="errorHoursMessage">{props.errorExp}</p>
                     </Form.Group>
                 </Col>
             </Form.Row>
@@ -188,7 +208,7 @@ const AllyForm = (props) => {
                             <Button className="formButton"
                                 size="sm"
                                 variant="success"
-                                onClick={props.handleSubmit}
+                                type="submit"                                
                             >
                                 Crear
                             </Button>

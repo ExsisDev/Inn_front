@@ -9,7 +9,7 @@ import AllyForm from './AllyForm';
 import BackNavigator from '../utilities/backNavigator/BackNavigator';
 import SectionTitle from '../utilities/sectionTitle/SectionTitle';
 import logoCrear from '../../images/RetosTerminados.png';
-import "./CreateAlly.css"
+import "./CreateAlly.css";
 
 class CreateAlly extends React.Component {
     constructor() {
@@ -26,16 +26,28 @@ class CreateAlly extends React.Component {
             companyEmail: "",
             webSite: "",
             companyPhone: "",
-            monthIdeaHours: "",
-            monthExpHours: "",
-            challengeIdeaHours: "",
-            challengeExpHours: "",
-            isCreated: false,            
+            monthIdeaHours: 1,
+            monthExpHours: 1,
+            challengeIdeaHours: 1,
+            challengeExpHours: 1,
+            errorIdea: null,
+            errorExp: null,
+            isCreated: false,
+            isFormValid: false,
             token: this.getToken()
         }
     }
 
     toastId = null;
+    toastConfiguration = {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        closeButton: false
+    }
 
     componentDidMount() {
         if (this.state.token) {
@@ -68,6 +80,7 @@ class CreateAlly extends React.Component {
                 console.log(error);
             });
     }
+
     /**
      * Gestionar el envío del nuevo aliado al back para su creación.
      * Toma los atributos necesarios del state y construye el aliado.
@@ -75,6 +88,11 @@ class CreateAlly extends React.Component {
      */
     handleSubmit = event => {
         event.preventDefault();
+
+        if (!this.validateChallengeHours()) {
+            return;
+        }
+
         let msg;
         const url = `${process.env.REACT_APP_BACK_URL}/allies`;
         const newAlly = {
@@ -103,22 +121,43 @@ class CreateAlly extends React.Component {
             msg = "Aliado creado con éxito."
             this.updateSuccess(msg);
             setTimeout(() => {
-                this.setState({ isCreated: true });                
-            }, 2000);
+                this.setState({ isCreated: true });
+            }, 3500);
         }).catch(error => {
-            msg = "Algo salio mal. Intentalo de nuevo."
+            msg = "Algo salio mal. Intentalo de nuevo más tarde.";
             this.updateError(msg);
         })
     }
 
-    notify = () => this.toastId = toast.info("creando...", { autoClose: false });
-
-    updateSuccess = ( msg ) => {
-        toast.update(this.toastId, {render: msg, type: toast.TYPE.SUCCESS, autoClose: 2000 });
+    /**
+     * Valida que las horas por reto no sean mayores a las hora mensuales
+     * @returns {Boolean} - Booleano que indica si los campos son validos.
+     */
+    validateChallengeHours = () => {
+        let isValid = true;
+        this.setState({ errorIdea: null, errorExp: null });
+        if (parseInt(this.state.monthIdeaHours) < parseInt(this.state.challengeIdeaHours)) {
+            let message = "Las horas de ideación por reto no pueden ser mayores a las horas de ideación mensuales.";
+            this.setState({ errorIdea: message });
+            isValid = false;
+        }
+        if (this.state.monthExpHours < this.state.challengeExpHours) {
+            let message = "Las horas de experimentación por reto no pueden ser mayores a las horas de experimentación mensuales.";
+            this.setState({ errorExp: message });
+            isValid = false;
+        }
+        return isValid;
     }
-    
-    updateError = ( msg ) => {
-        toast.update(this.toastId, {render: msg, type: toast.TYPE.ERROR, autoClose: 2000 });
+
+
+    notify = () => this.toastId = toast.info("creando...", this.toastConfiguration);
+
+    updateSuccess = (msg) => {
+        toast.update(this.toastId, { render: msg, type: toast.TYPE.SUCCESS });
+    }
+
+    updateError = (msg) => {
+        toast.update(this.toastId, { render: msg, type: toast.TYPE.ERROR });
     }
 
     getIdCategories(categoriesArray) {
@@ -192,7 +231,21 @@ class CreateAlly extends React.Component {
     * @return {VoidFunction}
     */
     handleInputChange = (event) => {
-        this.setState({ [event.target.name]: event.target.value });
+        let name = event.target.name;
+        let value = event.target.value;
+        let isValueValid = true;
+
+        if (_.includes(name, "Hours") && value < 0) {
+            let regex = /^[1-9]\d*$/;
+            isValueValid = regex.test(value);
+        }
+        if (isValueValid) {
+            this.setState({ [name]: value }, () => {
+                if (name === "challengeIdeaHours" || name === "challengeExpHours") {
+                    this.validateChallengeHours();
+                }
+            });
+        }
     }
 
     render() {
@@ -217,6 +270,13 @@ class CreateAlly extends React.Component {
                         resourceName={this.state.resourceName}
                         resourceProfile={this.state.resourceProfile}
                         resourceExperience={this.state.resourceExperience}
+                        monthIdeaHours={this.state.monthIdeaHours}
+                        monthExpHours={this.state.monthExpHours}
+                        challengeIdeaHours={this.state.challengeIdeaHours}
+                        challengeExpHours={this.state.challengeExpHours}
+                        validated={this.state.isFormValid}
+                        errorIdea={this.state.errorIdea}
+                        errorExp={this.state.errorExp}
                         handleInputChange={this.handleInputChange}
                         fillSelectedElement={this.fillSelectedElement}
                         handleDeleteClick={this.handleDeleteClick}
