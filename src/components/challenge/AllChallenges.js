@@ -26,7 +26,8 @@ class AllChallenges extends React.Component {
          searchElement: "",
          searchPaginationActive: false,
          showModal: false,
-         challengeToDelete: null
+         challengeToDelete: null,
+         elementsDisplayed: 5
       }
       this.link1 = React.createRef();
       this.link2 = React.createRef();
@@ -140,8 +141,8 @@ class AllChallenges extends React.Component {
       const idChallenge = this.state.challengeToDelete;
       const token = this.getToken();
       let url = `${process.env.REACT_APP_BACK_URL}/challenges/${idChallenge}`;
-      let msg="";
-      
+      let msg = "";
+
       this.notify();
 
       axios.delete(url, {
@@ -255,21 +256,24 @@ class AllChallenges extends React.Component {
                                  })
                                  }
                               </Row>
+                              {
+                                 this.state.totalElements > this.state.elementsDisplayed && 
 
-                              <Row className="mx-0 d-flex justify-content-center">
-                                 <Col xs={8} sm={6} md={4} xl={3} >
-                                    <Pagination
-                                       activePage={this.state.actualPage}
-                                       itemsCountPerPage={5}
-                                       totalItemsCount={this.state.totalElements}
-                                       pageRangeDisplayed={3}
-                                       itemClass="page-item boxNumber"
-                                       linkClass="page-link boxLink px-0"
-                                       innerClass="pagination d-flex justify-content-center align-self-end"
-                                       onChange={this.handlePageChange.bind(this)}
-                                    />
-                                 </Col>
-                              </Row>
+                                    <Row className="mx-0 d-flex justify-content-center">
+                                       <Col xs={8} sm={6} md={4} xl={3} >
+                                          <Pagination
+                                             activePage={this.state.actualPage}
+                                             itemsCountPerPage={this.state.elementsDisplayed}
+                                             totalItemsCount={this.state.totalElements}
+                                             pageRangeDisplayed={3}
+                                             itemClass="page-item boxNumber"
+                                             linkClass="page-link boxLink px-0"
+                                             innerClass="pagination d-flex justify-content-center align-self-end"
+                                             onChange={this.handlePageChange.bind(this)}
+                                          />
+                                       </Col>
+                                    </Row>
+                              }
                            </div>
                         )
                         :

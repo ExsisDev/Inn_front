@@ -82,8 +82,8 @@ const AllyForm = (props) => {
                                     return (
                                         <IconContext.Provider key={item.id_category} value={{ className: "logoutIcon" }}>
                                             <li className="w-auto" >
-                                                <span data-id={item.id_category} className="crossLink" 
-                                                      onClick={props.handleDeleteClick}>
+                                                <span data-id={item.id_category} className="crossLink"
+                                                    onClick={props.handleDeleteClick}>
                                                     <IoIosCloseCircle />
                                                 </span>
                                                 {item.category_name}
@@ -116,9 +116,9 @@ const AllyForm = (props) => {
                         <Col md="3">
                             <Form.Control className="formInput backgndColor"
                                 type="number"
-                                name="monthExpHours"                                
+                                name="monthExpHours"
                                 value={props.monthExpHours}
-                                onChange={props.handleInputChange}                                
+                                onChange={props.handleInputChange}
                                 min="1"
                                 required
                             />
@@ -133,12 +133,12 @@ const AllyForm = (props) => {
                                 type="number"
                                 name="challengeIdeaHours"
                                 value={props.challengeIdeaHours}
-                                onChange={props.handleInputChange}                                
+                                onChange={props.handleInputChange}
                                 min="1"
                                 required
                             />
                         </Col>
-                        <p className="errorHoursMessage">{props.errorIdea}</p>                        
+                        <p className="errorMessage">{props.errorIdea}</p>
                     </Form.Group>
                     <Form.Group as={Row} className="mx-0 align-items-baseline" controlId="expHours">
                         <Form.Label column className="formAllyTitles">
@@ -149,12 +149,12 @@ const AllyForm = (props) => {
                                 type="number"
                                 name="challengeExpHours"
                                 value={props.challengeExpHours}
-                                onChange={props.handleInputChange}                               
+                                onChange={props.handleInputChange}
                                 min="1"
                                 required
                             />
                         </Col>
-                        <p className="errorHoursMessage">{props.errorExp}</p>
+                        <p className="errorMessage">{props.errorExp}</p>
                     </Form.Group>
                 </Col>
             </Form.Row>
@@ -208,7 +208,7 @@ const AllyForm = (props) => {
                             <Button className="formButton"
                                 size="sm"
                                 variant="success"
-                                type="submit"                                
+                                type="submit"
                             >
                                 Crear
                             </Button>
