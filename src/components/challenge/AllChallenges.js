@@ -10,6 +10,7 @@ import ReactLoading from 'react-loading';
 import ChallengeCard from './ChallengeCard';
 import innovaCamaraLogo from '../../images/innovaCamaraLogo.png';
 import plusSign from '../../images/newChallenge.png';
+import getToken from '../../commons/tokenManagement';
 import './AllChallenges.css'
 
 
@@ -27,7 +28,8 @@ class AllChallenges extends React.Component {
          searchPaginationActive: false,
          showModal: false,
          challengeToDelete: null,
-         elementsDisplayed: 5
+         elementsDisplayed: 5,
+         token: getToken()
       }
       this.link1 = React.createRef();
       this.link2 = React.createRef();
@@ -53,24 +55,13 @@ class AllChallenges extends React.Component {
 
 
    /**
-   * Obtener el token desde localStorage
-   * @return {String} token 
-   */
-   getToken() {
-      let token = localStorage.getItem('auth-token');
-      // let tokenElements = jwt.verify(token, `${process.env.REACT_APP_PRIVATE_KEY}`);
-      return token;
-   }
-
-
-   /**
     * Obtener todos los retos según la página, el estado y opcionalmente una palabra clave
     */
    async getChallengesByPageAndStatus(page, state, isASearch) {
 
       let url = `${process.env.REACT_APP_BACK_URL}/challenges/${page}/${state}`;
       url = isASearch ? url + `/search/?value=${this.state.searchElement}` : url;
-      const token = this.getToken();
+      const token = this.state.token;
 
       await axios.get(url, {
          headers: { 'x-auth-token': `${token}` }
@@ -125,13 +116,22 @@ class AllChallenges extends React.Component {
       await this.getChallengesByPageAndStatus(this.state.actualPage, this.state.actualState, true);
    }
 
+
+   /**
+    * Desplegar el modal de elimacion de reto
+    */
    showDeleteModal = (idChallenge) => {
       this.setState({ showModal: true, challengeToDelete: idChallenge });
    }
 
+
+   /**
+    * Manejar el cierre del modal
+    */
    handleClose = (event) => {
       this.setState({ showModal: false });
    }
+
 
    /**
     * Realizar eliminación de un reto tanto del back
@@ -139,7 +139,7 @@ class AllChallenges extends React.Component {
     */
    deleteChallenge = () => {
       const idChallenge = this.state.challengeToDelete;
-      const token = this.getToken();
+      const token = this.state.token;
       let url = `${process.env.REACT_APP_BACK_URL}/challenges/${idChallenge}`;
       let msg = "";
 
@@ -257,22 +257,22 @@ class AllChallenges extends React.Component {
                                  }
                               </Row>
                               {
-                                 this.state.totalElements > this.state.elementsDisplayed && 
+                                 this.state.totalElements > this.state.elementsDisplayed &&
 
-                                    <Row className="mx-0 d-flex justify-content-center">
-                                       <Col xs={8} sm={6} md={4} xl={3} >
-                                          <Pagination
-                                             activePage={this.state.actualPage}
-                                             itemsCountPerPage={this.state.elementsDisplayed}
-                                             totalItemsCount={this.state.totalElements}
-                                             pageRangeDisplayed={3}
-                                             itemClass="page-item boxNumber"
-                                             linkClass="page-link boxLink px-0"
-                                             innerClass="pagination d-flex justify-content-center align-self-end"
-                                             onChange={this.handlePageChange.bind(this)}
-                                          />
-                                       </Col>
-                                    </Row>
+                                 <Row className="mx-0 d-flex justify-content-center">
+                                    <Col xs={8} sm={6} md={4} xl={3} >
+                                       <Pagination
+                                          activePage={this.state.actualPage}
+                                          itemsCountPerPage={this.state.elementsDisplayed}
+                                          totalItemsCount={this.state.totalElements}
+                                          pageRangeDisplayed={3}
+                                          itemClass="page-item boxNumber"
+                                          linkClass="page-link boxLink px-0"
+                                          innerClass="pagination d-flex justify-content-center align-self-end"
+                                          onChange={this.handlePageChange.bind(this)}
+                                       />
+                                    </Col>
+                                 </Row>
                               }
                            </div>
                         )

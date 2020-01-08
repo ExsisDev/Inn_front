@@ -9,6 +9,7 @@ import BackNavigator from '../utilities/backNavigator/BackNavigator';
 import jwt from 'jsonwebtoken';
 import _ from 'lodash';
 
+import getToken from '../../commons/tokenManagement';
 import plusIcon from '../../images/newChallenge.png';
 import './CreateChallenge.css';
 
@@ -25,7 +26,7 @@ class CreateChallenge extends React.Component {
          companySelected: "",
          closeDate: new Date().toJSON().slice(0, 10).replace(/-/g, '-'),
          createButtonRedirection: false,
-         token: this.getToken()
+         token: getToken()
       }
       this.OptionCategorySelected = React.createRef();
       this.ChallengeDescription = React.createRef();
@@ -38,17 +39,6 @@ class CreateChallenge extends React.Component {
          this.getAllCategories();
          this.getAllCompanies();
       }
-   }
-
-
-   /**
-     * Obtener el token desde localStorage
-     * @return {String} token 
-     */
-   getToken() {
-      let token = localStorage.getItem('auth-token');
-      // let tokenElements = jwt.verify(token, `${process.env.REACT_APP_PRIVATE_KEY}`);
-      return token;
    }
 
 

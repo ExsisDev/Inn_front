@@ -5,7 +5,7 @@ import { Container, Form, Button, Row, Col } from 'react-bootstrap';
 import HeaderWithUserLogo from '../utilities/headerWithUserLogo/HeaderWithUserLogo';
 import AdminImage from '../../images/innovaLogo.png';
 
-
+import getToken from '../../commons/tokenManagement';
 import './AdminProfile.css';
 
 class AdminProfile extends React.Component {
@@ -14,7 +14,7 @@ class AdminProfile extends React.Component {
 		super(props);
 
 		this.state = {
-			token: this.getToken(),
+			token: getToken(),
 			actualPassword: "",
 			newPassword: "",
 			confirmNewPassword: "",
@@ -32,17 +32,6 @@ class AdminProfile extends React.Component {
 		}
 
 		this.NewPassword = React.createRef();
-	}
-
-
-	/**
-  * Obtener el token desde localStorage
-  * @return {String} token 
-  */
-	getToken() {
-		let token = localStorage.getItem('auth-token');
-		// let tokenElements = jwt.verify(token, `${process.env.REACT_APP_PRIVATE_KEY}`);
-		return token;
 	}
 
 

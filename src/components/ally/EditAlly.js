@@ -8,6 +8,8 @@ import ReactLoading from 'react-loading';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { IconContext } from "react-icons";
 import { IoIosCloseCircle } from 'react-icons/io';
+
+import getToken from '../../commons/tokenManagement';
 import HeaderWithUserLogo from '../utilities/headerWithUserLogo/HeaderWithUserLogo';
 import img from '../../images/EmpresaA.png';
 import './EditAlly.css';
@@ -24,7 +26,7 @@ class EditAlly extends React.Component {
             challengeExpeHours: 0,
             isUpdated: false,
             isLoading: true,
-            token: this.getToken()
+            token: getToken()
         }       
 
         this.toastConfiguration = {
@@ -47,13 +49,6 @@ class EditAlly extends React.Component {
         }
     }
 
-    /**
-     * Obtener el token desde localStorage
-     * @return {String} token 
-     */
-    getToken() {
-        return localStorage.getItem('auth-token');
-    }
 
     /**
     * Obtener todas las categorias para compañia
@@ -73,6 +68,10 @@ class EditAlly extends React.Component {
             });
     }
 
+
+    /**
+     * Obtener un aliado por su id
+     */
     getAlly() {
         const idAlly = this.props.match.params.idAlly;
         const url = `${process.env.REACT_APP_BACK_URL}/allies/${idAlly}`;
@@ -117,6 +116,8 @@ class EditAlly extends React.Component {
             );
         })
     }
+
+
     /**
      * Convertir el nombre de un atributo a la palabra
      * que corresponde en el form de renderizado.
@@ -132,6 +133,7 @@ class EditAlly extends React.Component {
             default: throw `No se reconoce ${key} como una llave válida.`;
         }
     }
+
 
     /**
      * Enviar datos del aliado que van a ser actualizados.
@@ -177,15 +179,28 @@ class EditAlly extends React.Component {
         });
     }
 
+
+    /**
+     * Notificación de actualización
+     */
     notify = () => this.toastId = toast.info("Actualizando...", this.toastConfiguration);
 
+
+    /**
+     * Notificación de éxito
+     */
     updateSuccess = (msg) => {
         toast.update(this.toastId, { render: msg, type: toast.TYPE.SUCCESS, autoClose: 3000 });
     }
 
+
+    /**
+     * Notificación de error
+     */
     updateError = (msg) => {
         toast.update(this.toastId, { render: msg, type: toast.TYPE.ERROR, autoClose: 3000 });
     }
+
 
     /**
      * Agregar la categoria seleccionada al aliado
@@ -212,6 +227,7 @@ class EditAlly extends React.Component {
         this.setState({ ally });
     }
 
+
     /**
      * Eliminar categoria del aliado
      * @return {VoidFunction}
@@ -227,10 +243,15 @@ class EditAlly extends React.Component {
         this.setState({ ally });
     }
 
+
+    /**
+     * Manejar el cambio de horas
+     */
     handleHoursChange = (event) => {
         this.setState({ [event.target.name]: event.target.value });
     }
 
+    
     render() {
         let properties = _.pick(this.state.ally, ['user_email', 'ally_nit', 'ally_web_page', 'ally_phone']);
         return (
