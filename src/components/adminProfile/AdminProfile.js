@@ -2,7 +2,6 @@ import React from 'react';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import { Container, Form, Button, Row, Col } from 'react-bootstrap';
-import { Redirect } from 'react-router-dom';
 import HeaderWithUserLogo from '../utilities/headerWithUserLogo/HeaderWithUserLogo';
 import AdminImage from '../../images/innovaLogo.png';
 
@@ -19,7 +18,6 @@ class AdminProfile extends React.Component {
 			actualPassword: "",
 			newPassword: "",
 			confirmNewPassword: "",
-			createButtonRedirection: false,
 			isLoading: false
 		}
 
@@ -70,9 +68,6 @@ class AdminProfile extends React.Component {
 		})
 			.then((result) => {
 				this.notifySuccess("Contraseña cambiada.");
-				setTimeout(() => {
-					this.setState({createButtonRedirection: true});
-				}, 3000)
 			})
 			.catch((error) => {
 				const res = error.response;
@@ -124,9 +119,6 @@ class AdminProfile extends React.Component {
 	render() {
 		return (
 			<Container fluid className="adminProfile p-0">
-				{
-					this.state.createButtonRedirection &&	<Redirect to="/home" />
-				}
 				<ToastContainer />
 				<HeaderWithUserLogo source={AdminImage} />
 				<Row className="mt-5 mx-0">

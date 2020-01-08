@@ -70,3 +70,9 @@ code {
 .crossLink:hover {
   color: red !important;
 }
+
+.errorMessage {
+  color: red;
+  margin: 0;
+  padding: 0 15px;
+}
