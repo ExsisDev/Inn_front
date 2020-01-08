@@ -1,10 +1,10 @@
 import React from 'react';
 import { Row, Col, Button } from 'react-bootstrap';
-import BackButton from '../backButton/BackButton';
-import logOut from '../../../commons/logOut';
 import { IconContext } from "react-icons";
 import { IoIosLogOut } from 'react-icons/io';
 
+import BackButton from '../backButton/BackButton';
+import { logOut } from '../../../commons/tokenManagement';
 import innovaCamaraLogo from '../../../images/innovaCamaraLogo.png';
 import innovaCamaraLogoBlack from '../../../images/innovaCamaraLogoBlack.PNG';
 import './BackNavigator.css';

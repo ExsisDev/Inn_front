@@ -4,13 +4,13 @@ import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 import { Container, Row } from 'react-bootstrap';
 import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import AllyForm from './AllyForm';
 
-import getToken from '../../commons/tokenManagement';
+import { getToken } from '../../commons/tokenManagement';
+import AllyForm from './AllyForm';
 import BackNavigator from '../utilities/backNavigator/BackNavigator';
 import SectionTitle from '../utilities/sectionTitle/SectionTitle';
 import logoCrear from '../../images/RetosTerminados.png';
+import 'react-toastify/dist/ReactToastify.css';
 import "./CreateAlly.css";
 
 class CreateAlly extends React.Component {

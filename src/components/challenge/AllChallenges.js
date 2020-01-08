@@ -4,13 +4,13 @@ import { Container, Row, Col, Nav, Navbar, InputGroup, Button, FormControl, Form
 import { Link } from 'react-router-dom';
 import _ from 'lodash';
 import { ToastContainer, toast } from 'react-toastify';
-
 import Pagination from "react-js-pagination";
 import ReactLoading from 'react-loading';
 import ChallengeCard from './ChallengeCard';
+
 import innovaCamaraLogo from '../../images/innovaCamaraLogo.png';
 import plusSign from '../../images/newChallenge.png';
-import getToken from '../../commons/tokenManagement';
+import { getToken } from '../../commons/tokenManagement';
 import './AllChallenges.css'
 
 

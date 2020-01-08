@@ -4,12 +4,12 @@ import { Row, Form, Col, Button, Container } from 'react-bootstrap';
 import { IconContext } from "react-icons";
 import { IoIosCloseCircle } from 'react-icons/io';
 import { DateTime } from 'luxon';
-import SectionTitle from '../utilities/sectionTitle/SectionTitle';
-import BackNavigator from '../utilities/backNavigator/BackNavigator';
 import jwt from 'jsonwebtoken';
 import _ from 'lodash';
 
-import getToken from '../../commons/tokenManagement';
+import { getToken } from '../../commons/tokenManagement';
+import SectionTitle from '../utilities/sectionTitle/SectionTitle';
+import BackNavigator from '../utilities/backNavigator/BackNavigator';
 import plusIcon from '../../images/newChallenge.png';
 import './CreateChallenge.css';
 

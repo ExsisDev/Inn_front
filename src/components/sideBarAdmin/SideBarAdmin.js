@@ -1,11 +1,10 @@
 import React from 'react';
-import logOut from '../../commons/logOut';
-
-import logoAdmin from '../../images/logoAdmin.png';
+import { Link } from 'react-router-dom';
 import { IconContext } from "react-icons";
 import { IoIosLogOut } from 'react-icons/io';
-import { Link } from 'react-router-dom';
 
+import { logOut } from '../../commons/tokenManagement';
+import logoAdmin from '../../images/logoAdmin.png';
 import './SideBarAdmin.css';
 
 class SideBar extends React.Component {

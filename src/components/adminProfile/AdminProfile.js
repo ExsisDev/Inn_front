@@ -2,10 +2,10 @@ import React from 'react';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import { Container, Form, Button, Row, Col } from 'react-bootstrap';
+
+import { getToken } from '../../commons/tokenManagement';
 import HeaderWithUserLogo from '../utilities/headerWithUserLogo/HeaderWithUserLogo';
 import AdminImage from '../../images/innovaLogo.png';
-
-import getToken from '../../commons/tokenManagement';
 import './AdminProfile.css';
 
 class AdminProfile extends React.Component {

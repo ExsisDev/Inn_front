@@ -4,10 +4,10 @@ import Pagination from "react-js-pagination";
 import ReactLoading from 'react-loading';
 import { Link } from 'react-router-dom';
 import { Container, Row, Col, Table, Image, Button } from 'react-bootstrap';
+
+import { getToken } from '../../commons/tokenManagement';
 import BackNavigator from '../utilities/backNavigator/BackNavigator';
 import SectionTitle from '../utilities/sectionTitle/SectionTitle';
-import getToken from '../../commons/tokenManagement';
-
 import logoExc from '../../images/exclamación.png';
 import logoCompany from '../../images/EmpresaA.png';
 import './AllAllies.css';

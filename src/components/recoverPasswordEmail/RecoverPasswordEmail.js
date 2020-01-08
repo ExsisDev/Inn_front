@@ -1,5 +1,6 @@
 import React from 'react';
 import { Form, Button } from 'react-bootstrap';
+
 import './RecoverPasswordEmail.css';
 
 const RecoverPasswordEmail = () => {

@@ -2,16 +2,16 @@ import React from 'react';
 import _ from 'lodash';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { Redirect } from 'react-router-dom';
 import ReactLoading from 'react-loading';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { IconContext } from "react-icons";
 import { IoIosCloseCircle } from 'react-icons/io';
 
-import getToken from '../../commons/tokenManagement';
+import { getToken } from '../../commons/tokenManagement';
 import HeaderWithUserLogo from '../utilities/headerWithUserLogo/HeaderWithUserLogo';
 import img from '../../images/EmpresaA.png';
+import 'react-toastify/dist/ReactToastify.css';
 import './EditAlly.css';
 
 class EditAlly extends React.Component {

@@ -2,6 +2,7 @@ import React from 'react';
 import { IconContext } from "react-icons";
 import { IoIosCloseCircle } from 'react-icons/io';
 import { Row, Col, Form, Button } from 'react-bootstrap';
+
 import HumanResourceList from '../utilities/humanResource/HumanResourceList';
 import './AllyForm.css';
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Row, Col, CardDeck } from 'react-bootstrap';
-import './HumanResourceList.css';
 
+import './HumanResourceList.css';
 import HumanResource from './HumanResource';
 
 
