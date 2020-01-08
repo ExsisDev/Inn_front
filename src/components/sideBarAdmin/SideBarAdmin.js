@@ -1,5 +1,5 @@
 import React from 'react';
-import logOut from '../logOut/logOut';
+import logOut from '../../commons/logOut';
 
 import logoAdmin from '../../images/logoAdmin.png';
 import { IconContext } from "react-icons";

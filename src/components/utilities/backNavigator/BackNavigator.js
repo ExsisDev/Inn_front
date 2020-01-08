@@ -1,7 +1,7 @@
 import React from 'react';
 import { Row, Col, Button } from 'react-bootstrap';
 import BackButton from '../backButton/BackButton';
-import logOut from '../../logOut/logOut';
+import logOut from '../../../commons/logOut';
 import { IconContext } from "react-icons";
 import { IoIosLogOut } from 'react-icons/io';
 
