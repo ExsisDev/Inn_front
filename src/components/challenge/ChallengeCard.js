@@ -1,8 +1,9 @@
 import React from 'react';
 import { Col, Card, Row } from 'react-bootstrap';
-import './ChallengeCard.css';
 import { IconContext } from "react-icons";
 import { IoIosCloseCircle } from 'react-icons/io';
+
+import './ChallengeCard.css';
 
 class ChallengeCard extends React.Component {
    

@@ -6,10 +6,8 @@ import WelcomeText from '../welcomeText/WelcomeText';
 import LoginForm from '../loginForm/LoginForm';
 import RecoverPasswordEmail from '../recoverPasswordEmail/RecoverPasswordEmail'
 import RecoverNewPassword from '../recoverNewPassword/RecoverNewPassword';
-
 import Image from 'react-bootstrap/Image'
 import innovaCamarLogo from '../../images/innovaCamaraLogo.png';
-
 import './Landing.css';
 
 /**

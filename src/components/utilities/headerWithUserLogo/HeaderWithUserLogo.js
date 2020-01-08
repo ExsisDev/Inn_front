@@ -1,7 +1,7 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
-import BackNavigator from '../backNavigator/BackNavigator';
 
+import BackNavigator from '../backNavigator/BackNavigator';
 import './HeaderWithUserLogo.css';
 
 

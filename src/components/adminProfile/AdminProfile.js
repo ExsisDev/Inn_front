@@ -2,11 +2,10 @@ import React from 'react';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import { Container, Form, Button, Row, Col } from 'react-bootstrap';
-import { Redirect } from 'react-router-dom';
+
+import { getToken } from '../../commons/tokenManagement';
 import HeaderWithUserLogo from '../utilities/headerWithUserLogo/HeaderWithUserLogo';
 import AdminImage from '../../images/innovaLogo.png';
-
-
 import './AdminProfile.css';
 
 class AdminProfile extends React.Component {
@@ -15,11 +14,10 @@ class AdminProfile extends React.Component {
 		super(props);
 
 		this.state = {
-			token: this.getToken(),
+			token: getToken(),
 			actualPassword: "",
 			newPassword: "",
 			confirmNewPassword: "",
-			createButtonRedirection: false,
 			isLoading: false
 		}
 
@@ -34,17 +32,6 @@ class AdminProfile extends React.Component {
 		}
 
 		this.NewPassword = React.createRef();
-	}
-
-
-	/**
-  * Obtener el token desde localStorage
-  * @return {String} token 
-  */
-	getToken() {
-		let token = localStorage.getItem('auth-token');
-		// let tokenElements = jwt.verify(token, `${process.env.REACT_APP_PRIVATE_KEY}`);
-		return token;
 	}
 
 
@@ -70,9 +57,6 @@ class AdminProfile extends React.Component {
 		})
 			.then((result) => {
 				this.notifySuccess("Contraseña cambiada.");
-				setTimeout(() => {
-					this.setState({createButtonRedirection: true});
-				}, 3000)
 			})
 			.catch((error) => {
 				const res = error.response;
@@ -124,9 +108,6 @@ class AdminProfile extends React.Component {
 	render() {
 		return (
 			<Container fluid className="adminProfile p-0">
-				{
-					this.state.createButtonRedirection &&	<Redirect to="/home" />
-				}
 				<ToastContainer />
 				<HeaderWithUserLogo source={AdminImage} />
 				<Row className="mt-5 mx-0">

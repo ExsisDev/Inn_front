@@ -1,5 +1,6 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
+
 import './SectionTitle.css';
 
 // Se le debe pasar un objeto como el que se encuentra abajo

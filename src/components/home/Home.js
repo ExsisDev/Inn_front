@@ -2,30 +2,21 @@ import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
 
+import { getToken } from '../../commons/tokenManagement';
 import CreateAlly from "../ally/CreateAlly";
 import CreateChallenge from '../challenge/CreateChallenge';
 import SideBarAdmin from '../sideBarAdmin/SideBarAdmin';
-import './Home.css';
 import AllChallenges from '../challenge/AllChallenges';
 import AllAllies from '../ally/AllAllies';
+import './Home.css';
 
 class Home extends React.Component {
 
     constructor() {
         super();
         this.state = {
-            token: this.getToken()
+            token: getToken()
         }
-    }
-
-    
-    /**
-     * Obtener el token desde localStorage
-     * 
-     * @return {String} token 
-     */
-    getToken() {
-        return localStorage.getItem('auth-token');
     }
 
 

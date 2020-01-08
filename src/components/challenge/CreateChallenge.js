@@ -4,11 +4,12 @@ import { Row, Form, Col, Button, Container } from 'react-bootstrap';
 import { IconContext } from "react-icons";
 import { IoIosCloseCircle } from 'react-icons/io';
 import { DateTime } from 'luxon';
-import SectionTitle from '../utilities/sectionTitle/SectionTitle';
-import BackNavigator from '../utilities/backNavigator/BackNavigator';
 import jwt from 'jsonwebtoken';
 import _ from 'lodash';
 
+import { getToken } from '../../commons/tokenManagement';
+import SectionTitle from '../utilities/sectionTitle/SectionTitle';
+import BackNavigator from '../utilities/backNavigator/BackNavigator';
 import plusIcon from '../../images/newChallenge.png';
 import './CreateChallenge.css';
 
@@ -21,13 +22,13 @@ class CreateChallenge extends React.Component {
          categoriesSelected: [],
          categoriesDisplayed: [],
          allCompanies: [],
+         challengeName: "",
          companySelected: "",
-         closeDate: "",
+         closeDate: new Date().toJSON().slice(0, 10).replace(/-/g, '-'),
          createButtonRedirection: false,
-         token: this.getToken()
+         token: getToken()
       }
       this.OptionCategorySelected = React.createRef();
-      this.ChallengeName = React.createRef();
       this.ChallengeDescription = React.createRef();
       this.SelectCompany = React.createRef();
    }
@@ -38,17 +39,6 @@ class CreateChallenge extends React.Component {
          this.getAllCategories();
          this.getAllCompanies();
       }
-   }
-
-
-   /**
-     * Obtener el token desde localStorage
-     * @return {String} token 
-     */
-   getToken() {
-      let token = localStorage.getItem('auth-token');
-      // let tokenElements = jwt.verify(token, `${process.env.REACT_APP_PRIVATE_KEY}`);
-      return token;
    }
 
 
@@ -160,7 +150,7 @@ class CreateChallenge extends React.Component {
 
       let bodyChallenge = {
          fk_id_company: this.state.companySelected,
-         challenge_name: this.ChallengeName.current.value,
+         challenge_name: this.state.challengeName,
          challenge_description: this.ChallengeDescription.current.value,
          fk_id_challenge_state: CREATED,
          close_date: this.state.closeDate,
@@ -169,16 +159,27 @@ class CreateChallenge extends React.Component {
          categories_selected: this.state.categoriesSelected
       };
 
-      axios.post(url, bodyChallenge, {
-         headers: { 'x-auth-token': `${this.state.token}` }
-      })
-         .then((result) => {
-            this.setState({ createButtonRedirection: true });
+      if (this.state.challengeName !== "") {
+         axios.post(url, bodyChallenge, {
+            headers: { 'x-auth-token': `${this.state.token}` }
          })
-         .catch((error) => {
-            console.log(error);
-         });
+            .then((result) => {
+               this.setState({ createButtonRedirection: true });
+            })
+            .catch((error) => {
+               console.log(error);
+            });
+      }
 
+   }
+
+
+   /**
+    * Cambiar estado de la entrada mientras se ingresa un valor
+    * @return {VoidFunction}
+   */
+   handleChange = (e) => {
+      this.setState({ [e.target.name]: e.target.value });
    }
 
 
@@ -198,21 +199,46 @@ class CreateChallenge extends React.Component {
                                  <Form className="d-flex flex-column" onSubmit={this.handleChallengeCreation.bind(this)}>
                                     <Form.Row className="m-0">
                                        <Form.Group as={Col}>
-                                          <Form.Control className="challengeName formInput" type="input" placeholder="Nombre del reto" ref={this.ChallengeName} required />
+                                          <Form.Control className="challengeName formInput"
+                                             name="challengeName"
+                                             type="input"
+                                             placeholder="Nombre del reto"
+                                             onChange={this.handleChange}
+                                             maxlength="200"
+                                             required
+                                          />
+                                          {
+                                             this.state.challengeName.length > 200 &&
+                                             <p className="errorMessage">
+                                                El nombre no puede contener más de 200 caracteres
+                                                {
+                                                   this.setState({ challengeName: "" })
+                                                }
+                                             </p>
+                                          }
                                        </Form.Group>
                                     </Form.Row>
 
                                     <Form.Row className="m-0">
                                        <Form.Group as={Col} className="d-flex align-items-start form-group flex-column mt-2">
                                           <Form.Label className="w-auto ">Descripción: </Form.Label>
-                                          <Form.Control as="textarea" className="formInput textArea mt-0" ref={this.ChallengeDescription} required />
+                                          <Form.Control as="textarea"
+                                             className="formInput textArea mt-0"
+                                             ref={this.ChallengeDescription}
+                                             required
+                                          />
                                        </Form.Group>
                                     </Form.Row>
 
                                     <Form.Row className="mt-2 d-flex justify-content-around">
                                        <Form.Group as={Col} xl={3} sm={12} controlId="formGridCategories" className="d-flex align-items-center flex-column " >
                                           <Form.Label className="w-auto">Categorias:</Form.Label>
-                                          <Form.Control className="formSelect selectCategoryCompany" as="select" ref={this.OptionCategorySelected} onChange={() => { this.fillSelectedElements(this.OptionCategorySelected.current.value) }} required>
+                                          <Form.Control className="formSelect selectCategoryCompany"
+                                             as="select"
+                                             ref={this.OptionCategorySelected}
+                                             onChange={() => { this.fillSelectedElements(this.OptionCategorySelected.current.value) }}
+                                             required
+                                          >
                                              <option disabled selected>Seleccione las categorias</option>
                                              {this.state.allCategories.map((item) => {
                                                 return <option value={item.id_category} key={item.id_category}>{item.category_name}</option>
@@ -222,7 +248,12 @@ class CreateChallenge extends React.Component {
 
                                        <Form.Group as={Col} xl={3} sm={12} controlId="formGridCompanies" className="d-flex align-items-center flex-column " >
                                           <Form.Label className="w-auto">Empresa proponente:</Form.Label>
-                                          <Form.Control className="formSelect selectCategoryCompany" as="select" ref={this.SelectCompany} onChange={() => { this.setState({ companySelected: this.SelectCompany.current.value }) }} required>
+                                          <Form.Control className="formSelect selectCategoryCompany"
+                                             as="select"
+                                             ref={this.SelectCompany}
+                                             onChange={() => { this.setState({ companySelected: this.SelectCompany.current.value }) }}
+                                             required
+                                          >
                                              <option disabled selected>Seleccione una empresa</option>
                                              {this.state.allCompanies.map((item) => {
                                                 return <option value={item.id_company} key={item.id_company}>{item.company_name}</option>
@@ -232,7 +263,16 @@ class CreateChallenge extends React.Component {
 
                                        <Form.Group as={Col} xl={3} sm={12} controlId="formGridCloseDate" className="d-flex align-items-center flex-column " >
                                           <Form.Label className="w-auto"> Fecha de cierre:</Form.Label>
-                                          <Form.Control className="formDate dateWidth" type="date" onChange={this.saveDate} required />
+                                          <Form.Control className="formDate dateWidth"
+                                             type="date"
+                                             min={new Date().toJSON().slice(0, 10).replace(/-/g, '-')}
+                                             onChange={this.saveDate}
+                                             required
+                                          />
+                                          {
+                                             this.state.closeDate < new Date().toJSON().slice(0, 10).replace(/-/g, '-') &&
+                                                <p className="errorMessage">Seleccione una fecha válida </p>
+                                          }
                                        </Form.Group>
                                     </Form.Row>
                                     <Row className="m-0 justify-content-center">
@@ -252,7 +292,7 @@ class CreateChallenge extends React.Component {
                                        <Form.Group as={Col} className="d-flex justify-content-end">
                                           <Button className="createButton mt-0" variant="warning" type="submit">
                                              Crear Reto
-                                       </Button>
+                                          </Button>
                                        </Form.Group>
                                     </Form.Row>
                                  </Form>
@@ -267,4 +307,5 @@ class CreateChallenge extends React.Component {
       );
    }
 }
+
 export default CreateChallenge;

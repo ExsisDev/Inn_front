@@ -4,6 +4,8 @@ import Pagination from "react-js-pagination";
 import ReactLoading from 'react-loading';
 import { Link } from 'react-router-dom';
 import { Container, Row, Col, Table, Image, Button } from 'react-bootstrap';
+
+import { getToken } from '../../commons/tokenManagement';
 import BackNavigator from '../utilities/backNavigator/BackNavigator';
 import SectionTitle from '../utilities/sectionTitle/SectionTitle';
 import logoExc from '../../images/exclamación.png';
@@ -18,7 +20,7 @@ class AllAlies extends React.Component {
             totalAllies: 0,
             currentPage: 1,
             isLoading: true,
-            token: this.getToken()
+            token: getToken()
         }
     }
 
@@ -28,13 +30,6 @@ class AllAlies extends React.Component {
         }
     }
 
-    /**
-     * Obtener el token desde localStorage
-     * @return {String} token 
-     */
-    getToken() {
-        return localStorage.getItem('auth-token');
-    }
 
     /**
     * Obtener todos los aliados por página
