@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
+import AdminRoute from './components/utilities/routes/AdminRoute';
 import Landing from "./components/landing/Landing";
 import Home from "./components/home/Home";
 import AdminProfile from './components/adminProfile/AdminProfile';
@@ -18,9 +19,9 @@ class App extends React.Component {
             <div className="App">
                <Switch>
                   <Route path="/pageNotFound" component={PageNotFound} />
-                  <Route path="/ally/edit/:idAlly" component={EditAlly} />
-                  <Route path="/home" component={Home} />
-                  <Route path="/adminProfile" component={AdminProfile} />
+                  <AdminRoute path="/ally/edit/:idAlly" component={EditAlly} />
+                  <AdminRoute path="/home" component={Home} />
+                  <AdminRoute path="/adminProfile" component={AdminProfile} />
                   <Route path="/" component={Landing} />
                </Switch>
             </div>

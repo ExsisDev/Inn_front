@@ -30,13 +30,8 @@ class Home extends React.Component {
 
 
     render() {
-        let { token } = this.state;
-
         return (
-            <div>
-                {
-                    !token && <Redirect to="/login" />
-                }
+            <div>                
                 <Container fluid className="p-0">
                     <Row noGutters>
                         <Col className="d-flex">
