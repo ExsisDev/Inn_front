@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import AdminRoute from './components/utilities/routes/AdminRoute';
+import SharedRoute from './components/utilities/routes/SharedRoute';
 import Landing from "./components/landing/Landing";
 import Home from "./components/home/Home";
 import AdminProfile from './components/adminProfile/AdminProfile';
@@ -20,7 +21,7 @@ class App extends React.Component {
                <Switch>
                   <Route path="/pageNotFound" component={PageNotFound} />
                   <AdminRoute path="/ally/edit/:idAlly" component={EditAlly} />
-                  <AdminRoute path="/home" component={Home} />
+                  <SharedRoute path="/home" component={Home} />
                   <AdminRoute path="/adminProfile" component={AdminProfile} />
                   <Route path="/" component={Landing} />
                </Switch>

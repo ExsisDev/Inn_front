@@ -1,37 +1,24 @@
 import jwt from 'jsonwebtoken';
-import { USER_ROLES } from './enums';
-
-export function isAuthenticated() {
+ 
+/**
+ * Validar que el usuario esté autenticado y obtener el rol del usuario.
+ * @returns {Object} Objeto con dos atributos: isAuthenticated indica si el token es válido, userRole rol del usuario 
+ */
+function validateToken() {
     let token = localStorage.getItem('auth-token');
     if (!token) {
-        return false;
+        return { isAuthenticated: false, userRole: undefined };
     }
     try {
         let decode = jwt.verify(token, `${process.env.REACT_APP_PRIVATE_KEY}`);
-        return true;
+        return { isAuthenticated: true, userRole: decode.fk_id_role };
     } catch (error) {
-        return false;
+        return { isAuthenticated: false, userRole: undefined };        
     }
 }
 
-export function isAdmin() {
-    console.log("-------------Middleware----------------------");
-    
-    let token = localStorage.getItem('auth-token');    
-    if (!token) {
-        return false;
-    }
-    try {
-        let decode = jwt.verify(token, `${process.env.REACT_APP_PRIVATE_KEY}`);
-        if (decode.fk_id_role === USER_ROLES.ADMINISTRATOR){
-            console.log("-------------Enter------------");
-            console.log(decode.fk_id_role);
-            console.log(USER_ROLES.ADMINISTRATOR);            
-            
-            return true;
-        }
-        return false;
-    } catch (error) {
-        return false;
-    }
+const authentication = {
+    validateToken
 }
+
+export default authentication;

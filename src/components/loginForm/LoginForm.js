@@ -20,7 +20,6 @@ class LoginForm extends React.Component {
       };
    }
 
-
    /**
     * Cambiar estado de la entrada mientras se ingresa un valor
     * @return {VoidFunction}
@@ -28,7 +27,6 @@ class LoginForm extends React.Component {
    handleChange = (e) => {
       this.setState({ [e.target.name]: e.target.value });
    }
-
 
    /**
     * Guardar el token en localStorage
@@ -62,9 +60,15 @@ class LoginForm extends React.Component {
 
       axios.post(url, credentials)
          .then(res => {
-            this.setState({ isLogged: true }, () => { this.saveToken(res.headers['x-auth-token']) });
+            this.saveToken(res.headers['x-auth-token']);
+            this.setState({isLogged: true});
          })
          .catch(error => {
+            if (!error.response){
+               this.notify("Algo salió mal.");
+               return;
+            }
+
             const res = error.response;                        
             let msg = "";
             if (res.status === 429) {
@@ -81,7 +85,6 @@ class LoginForm extends React.Component {
          })
    }
 
-
    /**
     * Habilita o desabilita el botón dependiendo del argumento.
     * Si bool es true el boton se desactiva.
@@ -92,7 +95,6 @@ class LoginForm extends React.Component {
    deactivateButton = (bool) => {
       this.setState({ isLoading: bool })
    }
-
 
    notify = (error) => toast.error(error,
       {
@@ -106,20 +108,19 @@ class LoginForm extends React.Component {
       }
    );
 
-
    getIntegerPart(decimal) {
       return Math.ceil(decimal)
    }
 
-
    render() {
       let { isLoading, isLogged } = this.state;
+      
+      if ( isLogged ) {
+         return <Redirect to="/home" />
+      }
 
       return (
-         <div>
-            {
-               isLogged && <Redirect to="/home" />
-            }
+         <div>            
             <ToastContainer />
             <div className="centerContent">
                <h6 className="mt-3 mb-3"> Iniciar Sesión </h6>

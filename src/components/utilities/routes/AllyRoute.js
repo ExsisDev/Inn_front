@@ -4,12 +4,12 @@ import { USER_ROLES } from '../../../commons/enums';
 import authentication from '../../../commons/authentication';
 
 
-const AdminRoute = ({ component: Component, ...rest }) => {
+const AllyRoute = ({ component: Component, ...rest }) => {
     const { isAuthenticated, userRole } = authentication.validateToken();
     return (
         <Route {...rest}
             render={(props) => (
-                isAuthenticated && userRole === USER_ROLES.ADMINISTRATOR
+                isAuthenticated && userRole === USER_ROLES.ALLY
                     ? <Component {...props} />
                     : <Redirect to='/login' />
             )}
@@ -17,4 +17,5 @@ const AdminRoute = ({ component: Component, ...rest }) => {
     );
 };
 
-export default AdminRoute;
+
+export default AllyRoute;
