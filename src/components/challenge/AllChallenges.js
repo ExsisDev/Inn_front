@@ -11,6 +11,7 @@ import ChallengeCard from './ChallengeCard';
 import innovaCamaraLogo from '../../images/innovaCamaraLogo.png';
 import plusSign from '../../images/newChallenge.png';
 import { getToken } from '../../commons/tokenManagement';
+import 'react-toastify/dist/ReactToastify.css';
 import './AllChallenges.css'
 
 
@@ -137,7 +138,7 @@ class AllChallenges extends React.Component {
     * Realizar eliminación de un reto tanto del back
     * como del estado del componente.
     */
-   deleteChallenge = () => {
+   deleteChallenge = async () => {
       const idChallenge = this.state.challengeToDelete;
       const token = this.state.token;
       let url = `${process.env.REACT_APP_BACK_URL}/challenges/${idChallenge}`;
@@ -145,7 +146,7 @@ class AllChallenges extends React.Component {
 
       this.notify();
 
-      axios.delete(url, {
+      await axios.delete(url, {
          headers: { 'x-auth-token': `${token}` }
       }).then((result) => {
          if (result.status === 200) {
@@ -163,15 +164,15 @@ class AllChallenges extends React.Component {
             });
             msg = "Reto eliminado."
             this.updateSuccess(msg);
-            setTimeout(() => {
-               this.setState({ isCreated: true });
-            }, 2000);
+
          }
       }).catch((error) => {
          msg = "Algo salio mal. Intentalo de nuevo."
          this.updateError(msg);
          this.setState({ showModal: false });
       });
+
+      await this.getChallengesByPageAndStatus(this.state.actualPage, this.state.actualState, false);
    }
 
 
@@ -187,6 +188,7 @@ class AllChallenges extends React.Component {
       toast.update(this.toastId, { render: msg, type: toast.TYPE.ERROR });
    }
 
+   
    render() {
       return (
          <Container fluid ref={this.begginingPage}>

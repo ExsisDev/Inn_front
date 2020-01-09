@@ -87,7 +87,7 @@ class AdminProfile extends React.Component {
 		 * Cambiar estado de la entrada mientras se ingresa un valor
 		 * @return {VoidFunction}
 		 */
-	handleChangeConfirmPassword(e, that) {
+	handleChangeConfirmPassword(e) {
 		this.setState({ [e.target.name]: e.target.value });
 
 	}
