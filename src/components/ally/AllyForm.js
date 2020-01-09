@@ -98,7 +98,7 @@ const AllyForm = (props) => {
                     <Form.Group as={Row} className="mx-0 align-items-baseline" controlId="ideHours">
                         <Form.Label column className="formAllyTitles">
                             Horas de ideación mensuales:
-                                    </Form.Label>
+                        </Form.Label>
                         <Col md="3">
                             <Form.Control className="formInput backgndColor"
                                 type="number"

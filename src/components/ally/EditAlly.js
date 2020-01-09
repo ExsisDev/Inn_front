@@ -26,6 +26,8 @@ class EditAlly extends React.Component {
             challengeExpeHours: 0,
             isUpdated: false,
             isLoading: true,
+            errorIdea: "",
+            errorExp: "",
             token: getToken()
         }       
 
@@ -248,7 +250,42 @@ class EditAlly extends React.Component {
      * Manejar el cambio de horas
      */
     handleHoursChange = (event) => {
-        this.setState({ [event.target.name]: event.target.value });
+        let name = event.target.name;
+        let value = event.target.value;
+        let isValueValid = true;
+
+        if (_.includes(name, "Hours") && value < 0) {
+            let regex = /^[1-9]\d*$/;
+            isValueValid = regex.test(value);
+        }
+        if (isValueValid) {
+            this.setState({ [name]: value }, () => {
+                if (name === "challengeIdeaHours" || name === "challengeExpeHours") {
+                    this.validateChallengeHours();
+                }
+            });
+        }
+    }
+
+
+    /**
+     * Valida que las horas por reto no sean mayores a las hora mensuales
+     * @returns {Boolean} - Booleano que indica si los campos son validos.
+     */
+    validateChallengeHours = () => {
+        let isValid = true;
+        this.setState({ errorIdea: null, errorExp: null });
+        if (parseInt(this.state.ideaHours) < parseInt(this.state.challengeIdeaHours)) {
+            let message = "Las horas de ideación por reto no pueden ser mayores a las horas de ideación mensuales.";
+            this.setState({ errorIdea: message });
+            isValid = false;
+        }
+        if (this.state.expeHours < this.state.challengeExpeHours) {
+            let message = "Las horas de experimentación por reto no pueden ser mayores a las horas de experimentación mensuales.";
+            this.setState({ errorExp: message });
+            isValid = false;
+        }
+        return isValid;
     }
 
     
@@ -279,7 +316,7 @@ class EditAlly extends React.Component {
                                 <Form.Group as={Row} className="mx-0 align-items-baseline ">
                                     <Form.Label column sm="12" md="6" className="labelInputEditAlly titleEditAlly textStyle">
                                         Categorías de especialidad:
-                            </Form.Label>
+                                    </Form.Label>
                                     <Col>
                                         <Row>
                                             <Col>
@@ -324,6 +361,7 @@ class EditAlly extends React.Component {
                                             name="ideaHours"
                                             value={this.state.ideaHours}
                                             onChange={this.handleHoursChange}
+                                            min="1"
                                         />
                                     </Col>
                                 </Form.Group>
@@ -337,6 +375,7 @@ class EditAlly extends React.Component {
                                             name="expeHours"
                                             value={this.state.expeHours}
                                             onChange={this.handleHoursChange}
+                                            min="1"
                                         />
                                     </Col>
                                 </Form.Group>
@@ -350,8 +389,10 @@ class EditAlly extends React.Component {
                                             name="challengeIdeaHours"
                                             value={this.state.challengeIdeaHours}
                                             onChange={this.handleHoursChange}
+                                            min="1"
                                         />
                                     </Col>
+                                    <p className="errorMessage">{this.state.errorIdea}</p>
                                 </Form.Group>
                                 <Form.Group as={Row} className=" mx-0 align-items-baseline" controlId="expHours">
                                     <Form.Label column sm="12" md="6" className="labelInputEditAlly titleEditAlly textStyle">
@@ -363,8 +404,10 @@ class EditAlly extends React.Component {
                                             name="challengeExpeHours"
                                             value={this.state.challengeExpeHours}
                                             onChange={this.handleHoursChange}
+                                            min="1"
                                         />
                                     </Col>
+                                    <p className="errorMessage">{this.state.errorExp}</p>
                                 </Form.Group>
                                 <Form.Group as={Row} className="mx-0 mb-5">
                                     <Col md={{ span: 2, offset: 9 }} >
@@ -374,10 +417,9 @@ class EditAlly extends React.Component {
                                             onClick={this.handleSubmit}
                                         >
                                             Guardar
-                            </Button>
+                                        </Button>
                                     </Col>
                                 </Form.Group>
-
                             </Form>
                         </Row>
                     )
