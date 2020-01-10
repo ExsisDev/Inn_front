@@ -13,11 +13,11 @@ import './Landing.css';
 
 const Landing = () => {
     const { isAuthenticated } = authentication.validateToken();
+    if (isAuthenticated) {
+        return <Redirect to="/home" />
+    }
     return (
         <Container className="landing d-flex flex-column align-items-center" fluid>
-            {
-                isAuthenticated && <Redirect to="/home" />
-            }
             <Row id="landingFirstRow" className="d-flex justify-content-center align-items-center">
                 <Col md={5} xl={4} lg={4} sm={6} className="landingMain">
                     <div className="landingBorder">

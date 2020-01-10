@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken';
+import logOut from './logOut';
  
 /**
  * Validar que el usuario esté autenticado y obtener el rol del usuario.
@@ -13,6 +14,7 @@ function validateToken() {
         let decode = jwt.verify(token, `${process.env.REACT_APP_PRIVATE_KEY}`);
         return { isAuthenticated: true, userRole: decode.fk_id_role };
     } catch (error) {
+        logOut();
         return { isAuthenticated: false, userRole: undefined };        
     }
 }
