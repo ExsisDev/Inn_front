@@ -3,7 +3,7 @@ import axios from "axios";
 import { Container, Row, Col, Nav, Navbar, InputGroup, Button, FormControl, Form, Modal } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import _ from 'lodash';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import Pagination from "react-js-pagination";
 import ReactLoading from 'react-loading';
 import ChallengeCard from './ChallengeCard';
@@ -192,7 +192,7 @@ class AllChallenges extends React.Component {
    render() {
       return (
          <Container fluid ref={this.begginingPage}>
-            <ToastContainer />
+            {/* <ToastContainer /> */}
             <Row className="mx-0 justify-content-center h-100" >
                <Col className="d-flex flex-column" xl={11}>
                   <Row className="mx-0 d-flex justify-content-center">

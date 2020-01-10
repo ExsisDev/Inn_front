@@ -40,7 +40,6 @@ class CreateAlly extends React.Component {
         }
     }
 
-    toastId = null;
     toastConfiguration = {
         position: "top-right",
         autoClose: 3000,
@@ -48,8 +47,12 @@ class CreateAlly extends React.Component {
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
-        closeButton: false
+        closeButton: false,
+        containerId: 'C'
     }
+
+    toastId = null;
+
 
     componentDidMount() {
         if (this.state.token) {
@@ -75,6 +78,7 @@ class CreateAlly extends React.Component {
                 console.log(error);
             });
     }
+
 
     /**
      * Gestionar el envío del nuevo aliado al back para su creación.
@@ -119,10 +123,11 @@ class CreateAlly extends React.Component {
                 this.setState({ isCreated: true });
             }, 3500);
         }).catch(error => {
-            msg = "Algo salio mal. Intentalo de nuevo más tarde.";
+            msg = "Algo salio mal. " + error.response.data;
             this.updateError(msg);
         })
     }
+
 
     /**
      * Valida que las horas por reto no sean mayores a las hora mensuales
@@ -147,13 +152,12 @@ class CreateAlly extends React.Component {
 
     notify = () => this.toastId = toast.info("creando...", this.toastConfiguration);
 
-    updateSuccess = (msg) => {
-        toast.update(this.toastId, { render: msg, type: toast.TYPE.SUCCESS });
-    }
 
-    updateError = (msg) => {
-        toast.update(this.toastId, { render: msg, type: toast.TYPE.ERROR });
-    }
+    updateSuccess = (msg) => toast.update(this.toastId, { render: msg, type: toast.TYPE.SUCCESS, toastId: 'C' });
+
+
+    updateError = (msg) => toast.update(this.toastId, { render: msg, type: toast.TYPE.ERROR, toastId: 'C' });
+
 
     getIdCategories(categoriesArray) {
         let ids = categoriesArray.map(category => {
@@ -251,11 +255,11 @@ class CreateAlly extends React.Component {
         }
         return (
             <Container className="d-flex flex-column align-items-center px-5">
+                <ToastContainer enableMultiContainer containerId={'C'} />
                 {
                     this.state.isCreated &&
                     <Redirect to="/home/ally" />
                 }
-                <ToastContainer />
                 <BackNavigator />
                 <SectionTitle titleProps={titleProps} />
                 <Row className="my-3 formBox paddingBox">

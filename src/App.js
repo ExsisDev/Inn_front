@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 
 import Landing from "./components/landing/Landing";
 import Home from "./components/home/Home";
@@ -16,6 +17,7 @@ class App extends React.Component {
       return (
          <Router >
             <div className="App">
+               {/* <ToastContainer/> */}
                <Switch>
                   <Route path="/pageNotFound" component={PageNotFound} />
                   <Route path="/ally/edit/:idAlly" component={EditAlly} />

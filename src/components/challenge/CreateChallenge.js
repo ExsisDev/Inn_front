@@ -45,7 +45,8 @@ class CreateChallenge extends React.Component {
       closeOnClick: true,
       pauseOnHover: true,
       draggable: true,
-      closeButton: false
+      closeButton: false,
+      containerId: 'B'
    }
 
 
@@ -163,7 +164,7 @@ class CreateChallenge extends React.Component {
       const url = `${process.env.REACT_APP_BACK_URL}/challenges`;
       const CREATED = 3;
 
-      await this.setState({isCreating: true});
+      await this.setState({ isCreating: true });
 
       let bodyChallenge = {
          fk_id_company: this.state.companySelected,
@@ -228,7 +229,7 @@ class CreateChallenge extends React.Component {
       } else {
          return (
             <Container fluid className="d-flex justify-content-center">
-               <ToastContainer />
+               <ToastContainer enableMultiContainer containerId={'B'} />
                <Row className="h-100 d-flex justify-content-center">
                   <Col sm={11} className="d-flex flex-column align-items-center">
                      <BackNavigator />
@@ -247,7 +248,7 @@ class CreateChallenge extends React.Component {
                                                 type="input"
                                                 placeholder="Nombre del reto"
                                                 onChange={this.handleChange}
-                                                maxlength="200"
+                                                maxLength="200"
                                                 required
                                              />
                                              {

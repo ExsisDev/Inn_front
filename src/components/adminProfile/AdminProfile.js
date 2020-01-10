@@ -1,12 +1,14 @@
 import React from 'react';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
+import toastr from 'toastr';
 import { Container, Form, Button, Row, Col } from 'react-bootstrap';
 
 import { getToken } from '../../commons/tokenManagement';
 import HeaderWithUserLogo from '../utilities/headerWithUserLogo/HeaderWithUserLogo';
 import AdminImage from '../../images/innovaLogo.png';
 import './AdminProfile.css';
+import 'toastr/build/toastr.min.css'
 
 class AdminProfile extends React.Component {
 
@@ -28,10 +30,12 @@ class AdminProfile extends React.Component {
 			closeOnClick: true,
 			pauseOnHover: true,
 			draggable: true,
-			closeButton: false
+			closeButton: false,
+			containerId: 'A' 
 		}
 
 		this.NewPassword = React.createRef();
+		toastr.options.timeOut = 1000000;
 	}
 
 
@@ -108,7 +112,7 @@ class AdminProfile extends React.Component {
 	render() {
 		return (
 			<Container fluid className="adminProfile p-0">
-				<ToastContainer />
+				<ToastContainer enableMultiContainer containerId={'A'} />
 				<HeaderWithUserLogo source={AdminImage} />
 				<Row className="mt-5 mx-0">
 					<Col className="px-0">

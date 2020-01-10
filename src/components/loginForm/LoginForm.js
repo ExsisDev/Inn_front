@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { Form, Button } from 'react-bootstrap';
 import { Link, withRouter, Redirect } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.css';
 import "./LoginForm.css"
@@ -120,7 +120,7 @@ class LoginForm extends React.Component {
             {
                isLogged && <Redirect to="/home" />
             }
-            <ToastContainer />
+            {/* <ToastContainer /> */}
             <div className="centerContent">
                <h6 className="mt-3 mb-3"> Iniciar Sesión </h6>
                <Form validated={this.state.validated} onSubmit={this.handleSubmit}>

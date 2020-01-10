@@ -38,7 +38,8 @@ class EditAlly extends React.Component {
 			closeOnClick: true,
 			pauseOnHover: true,
 			draggable: true,
-			closeButton: false
+            closeButton: false,
+            containerId: 'D'
 		}
     }
 
@@ -192,7 +193,7 @@ class EditAlly extends React.Component {
      * Notificación de éxito
      */
     updateSuccess = (msg) => {
-        toast.update(this.toastId, { render: msg, type: toast.TYPE.SUCCESS, autoClose: 3000 });
+        toast.update(this.toastId, { render: msg, type: toast.TYPE.SUCCESS, autoClose: 3000, toastId: 'D'});
     }
 
 
@@ -200,7 +201,7 @@ class EditAlly extends React.Component {
      * Notificación de error
      */
     updateError = (msg) => {
-        toast.update(this.toastId, { render: msg, type: toast.TYPE.ERROR, autoClose: 3000 });
+        toast.update(this.toastId, { render: msg, type: toast.TYPE.ERROR, autoClose: 3000, toastId: 'D' });
     }
 
 
@@ -297,7 +298,7 @@ class EditAlly extends React.Component {
                     this.state.isUpdated &&
                     <Redirect to="/home" />
                 }
-                <ToastContainer />
+                <ToastContainer enableMultiContainer containerId={'D'}/>
                 <HeaderWithUserLogo source={img} />
                 {this.state.isLoading ?
                     (
