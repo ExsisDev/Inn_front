@@ -4,7 +4,6 @@ import { Row, Col, CardDeck } from 'react-bootstrap';
 import './HumanResourceList.css';
 import HumanResource from './HumanResource';
 
-
 const HumanResourceList = (props) => {
     return (
         <CardDeck className="m-0" >
@@ -13,7 +12,7 @@ const HumanResourceList = (props) => {
                     props.people.map(person => {
                         return (
                             <Col key={person.resource_name} lg={12/props.cols}>
-                                <HumanResource  person={person} />
+                                <HumanResource person={person} edit={props.edit}/>
                             </Col>
                         );
                     })
