@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { Container, Row, Col } from 'react-bootstrap';
 import { ToastContainer } from 'react-toastify';
+import _ from 'lodash';
 
 import HeaderWithUserLogo from '../utilities/headerWithUserLogo/HeaderWithUserLogo';
 import HumanResourceList from '../utilities/humanResource/HumanResourceList';
@@ -11,7 +12,7 @@ import img from '../../images/EmpresaA.png';
 class EditResources extends React.Component {
     constructor() {
         super();
-        this.state = {             
+        this.state = {
             resources: []
         }
     }
@@ -29,7 +30,6 @@ class EditResources extends React.Component {
         const url = `${process.env.REACT_APP_BACK_URL}/resources/${idAlly}`;
         axios.get(url, { headers: { 'x-auth-token': `${token}` } })
             .then(res => {
-                console.log(res);
                 this.setState({ resources: res.data });
             })
             .catch(error => {
@@ -38,7 +38,26 @@ class EditResources extends React.Component {
             });
     }
 
-    render() {        
+    /**
+     * Actualiza el campo del recurso identificado por idResource
+     * @param {Event} target 
+     * @param {Number} idResource 
+     */
+    handleChange = (target, idResource) => {
+        this.setState(state => {
+            const resources = state.resources.map((resource) => {
+                if (resource.id_resource === idResource) {
+                    resource[target.name] = target.value;
+                    return resource;
+                }
+                return resource;
+            });
+            return { resources };
+        })
+        
+    }
+
+    render() {
         return (
             <Container className="p-0" fluid>
                 <ToastContainer />
@@ -47,9 +66,13 @@ class EditResources extends React.Component {
                     <Col>
                         <h1>Editar Recursos</h1>
                         <div className="px-5">
-                            <HumanResourceList cols="3" people={this.state.resources} edit/>
+                            <HumanResourceList cols="3" 
+                                               people={this.state.resources} 
+                                               handleChange={this.handleChange}
+                                               edit 
+                            />
                         </div>
-                    </Col>                    
+                    </Col>
                 </Row>
             </Container>
         );

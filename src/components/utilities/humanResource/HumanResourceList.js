@@ -12,7 +12,10 @@ const HumanResourceList = (props) => {
                     props.people.map(person => {
                         return (
                             <Col key={person.resource_name} lg={12/props.cols}>
-                                <HumanResource person={person} edit={props.edit}/>
+                                <HumanResource person={person} 
+                                               handleChange={props.handleChange}
+                                               edit={props.edit}
+                                />
                             </Col>
                         );
                     })

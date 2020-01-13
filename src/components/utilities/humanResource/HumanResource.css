@@ -9,10 +9,20 @@
     height: 70px;
 }
 
-.cardTitle {
-    font-size: .9rem !important;
+.cardResourceName {
+    text-align: center;
+    font-size: 1.1rem !important;
+    font-weight: 500;
+}
+
+.cardTitle {    
+    font-weight: 500;
 }
 
 .cardText {
-    font-size: .7rem;    
+    font-size: .9rem;    
+}
+
+.cardTextArea {
+    resize: none !important;
 }
