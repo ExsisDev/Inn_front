@@ -1,7 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { ToastContainer, toast } from 'react-toastify';
-import toastr from 'toastr';
+import { toast } from 'react-toastify';
 import { Container, Form, Button, Row, Col } from 'react-bootstrap';
 
 import { getToken } from '../../commons/tokenManagement';
@@ -35,7 +34,6 @@ class AdminProfile extends React.Component {
 		}
 
 		this.NewPassword = React.createRef();
-		toastr.options.timeOut = 1000000;
 	}
 
 
@@ -112,7 +110,6 @@ class AdminProfile extends React.Component {
 	render() {
 		return (
 			<Container fluid className="adminProfile p-0">
-				<ToastContainer enableMultiContainer containerId={'A'} />
 				<HeaderWithUserLogo source={AdminImage} />
 				<Row className="mt-5 mx-0">
 					<Col className="px-0">

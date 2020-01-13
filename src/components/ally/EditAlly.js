@@ -1,7 +1,7 @@
 import React from 'react';
 import _ from 'lodash';
 import axios from 'axios';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { Redirect } from 'react-router-dom';
 import ReactLoading from 'react-loading';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
@@ -39,7 +39,7 @@ class EditAlly extends React.Component {
 			pauseOnHover: true,
 			draggable: true,
             closeButton: false,
-            containerId: 'D'
+            containerId: 'A'
 		}
     }
 
@@ -193,7 +193,7 @@ class EditAlly extends React.Component {
      * Notificación de éxito
      */
     updateSuccess = (msg) => {
-        toast.update(this.toastId, { render: msg, type: toast.TYPE.SUCCESS, autoClose: 3000, toastId: 'D'});
+        toast.update(this.toastId, { render: msg, type: toast.TYPE.SUCCESS, autoClose: 3000});
     }
 
 
@@ -201,7 +201,7 @@ class EditAlly extends React.Component {
      * Notificación de error
      */
     updateError = (msg) => {
-        toast.update(this.toastId, { render: msg, type: toast.TYPE.ERROR, autoClose: 3000, toastId: 'D' });
+        toast.update(this.toastId, { render: msg, type: toast.TYPE.ERROR, autoClose: 3000 });
     }
 
 
@@ -296,9 +296,8 @@ class EditAlly extends React.Component {
             <Container className="p-0" fluid>
                 {
                     this.state.isUpdated &&
-                    <Redirect to="/home" />
+                    <Redirect to="/home/ally" />
                 }
-                <ToastContainer enableMultiContainer containerId={'D'}/>
                 <HeaderWithUserLogo source={img} />
                 {this.state.isLoading ?
                     (

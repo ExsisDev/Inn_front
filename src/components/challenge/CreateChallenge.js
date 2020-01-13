@@ -4,7 +4,7 @@ import { Row, Form, Col, Button, Container } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
 import { IconContext } from "react-icons";
 import { IoIosCloseCircle } from 'react-icons/io';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { DateTime } from 'luxon';
 import jwt from 'jsonwebtoken';
 import _ from 'lodash';
@@ -46,7 +46,7 @@ class CreateChallenge extends React.Component {
       pauseOnHover: true,
       draggable: true,
       closeButton: false,
-      containerId: 'B'
+      containerId: 'A'
    }
 
 
@@ -229,7 +229,6 @@ class CreateChallenge extends React.Component {
       } else {
          return (
             <Container fluid className="d-flex justify-content-center">
-               <ToastContainer enableMultiContainer containerId={'B'} />
                <Row className="h-100 d-flex justify-content-center">
                   <Col sm={11} className="d-flex flex-column align-items-center">
                      <BackNavigator />

@@ -38,7 +38,9 @@ class AllChallenges extends React.Component {
       this.begginingPage = React.createRef();
 
    }
+
    toastId = null;
+
    toastConfiguration = {
       position: "top-right",
       autoClose: 4000,
@@ -46,7 +48,8 @@ class AllChallenges extends React.Component {
       closeOnClick: true,
       pauseOnHover: true,
       draggable: true,
-      closeButton: false
+      closeButton: false,
+      containerId: 'A'
    }
 
 
@@ -180,19 +183,18 @@ class AllChallenges extends React.Component {
 
 
    updateSuccess = (msg) => {
-      toast.update(this.toastId, { render: msg, type: toast.TYPE.SUCCESS });
+      toast.update(this.toastId, { render: msg, type: toast.TYPE.SUCCESS, toastId: 'C' });
    }
 
 
    updateError = (msg) => {
-      toast.update(this.toastId, { render: msg, type: toast.TYPE.ERROR });
+      toast.update(this.toastId, { render: msg, type: toast.TYPE.ERROR, toastId: 'C' });
    }
 
-   
+
    render() {
       return (
          <Container fluid ref={this.begginingPage}>
-            {/* <ToastContainer /> */}
             <Row className="mx-0 justify-content-center h-100" >
                <Col className="d-flex flex-column" xl={11}>
                   <Row className="mx-0 d-flex justify-content-center">

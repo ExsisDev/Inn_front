@@ -3,7 +3,7 @@ import _ from 'lodash';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 import { Container, Row } from 'react-bootstrap';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 import { getToken } from '../../commons/tokenManagement';
 import AllyForm from './AllyForm';
@@ -48,7 +48,7 @@ class CreateAlly extends React.Component {
         pauseOnHover: true,
         draggable: true,
         closeButton: false,
-        containerId: 'C'
+        containerId: 'A'
     }
 
     toastId = null;
@@ -153,10 +153,10 @@ class CreateAlly extends React.Component {
     notify = () => this.toastId = toast.info("creando...", this.toastConfiguration);
 
 
-    updateSuccess = (msg) => toast.update(this.toastId, { render: msg, type: toast.TYPE.SUCCESS, toastId: 'C' });
+    updateSuccess = (msg) => toast.update(this.toastId, { render: msg, type: toast.TYPE.SUCCESS });
 
 
-    updateError = (msg) => toast.update(this.toastId, { render: msg, type: toast.TYPE.ERROR, toastId: 'C' });
+    updateError = (msg) => toast.update(this.toastId, { render: msg, type: toast.TYPE.ERROR });
 
 
     getIdCategories(categoriesArray) {
@@ -165,6 +165,7 @@ class CreateAlly extends React.Component {
         })
         return ids;
     }
+
 
     /**
      * Agregar la categoria seleccionado en la lista desplegable al
@@ -189,6 +190,7 @@ class CreateAlly extends React.Component {
         this.setState({ categoriesSelected: currentCategories });
     }
 
+
     /**
      * Eliminar categoria del arreglo categoriesSelected
      * @return {VoidFunction}
@@ -202,6 +204,7 @@ class CreateAlly extends React.Component {
         });
         this.setState({ categoriesSelected: auxArray });
     }
+
 
     /**
      * Añadir un nuevo recurso al estado del componente.
@@ -225,6 +228,7 @@ class CreateAlly extends React.Component {
         })
     }
 
+
     /**
     * Cambiar estado de la entrada mientras se ingresa un valor
     * @return {VoidFunction}
@@ -247,6 +251,7 @@ class CreateAlly extends React.Component {
         }
     }
 
+
     render() {
         const titleProps = {
             text: "Crear Nuevo Aliado",
@@ -255,7 +260,6 @@ class CreateAlly extends React.Component {
         }
         return (
             <Container className="d-flex flex-column align-items-center px-5">
-                <ToastContainer enableMultiContainer containerId={'C'} />
                 {
                     this.state.isCreated &&
                     <Redirect to="/home/ally" />

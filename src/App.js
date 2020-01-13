@@ -17,7 +17,7 @@ class App extends React.Component {
       return (
          <Router >
             <div className="App">
-               {/* <ToastContainer/> */}
+               <ToastContainer enableMultiContainer containerId={'A'} />
                <Switch>
                   <Route path="/pageNotFound" component={PageNotFound} />
                   <Route path="/ally/edit/:idAlly" component={EditAlly} />

@@ -20,6 +20,16 @@ class LoginForm extends React.Component {
       };
    }
 
+   toastConfiguration = {
+      position: "top-right",
+      autoClose: 4000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      closeButton: false,
+      containerId: 'A'
+   }
 
    /**
     * Cambiar estado de la entrada mientras se ingresa un valor
@@ -120,7 +130,6 @@ class LoginForm extends React.Component {
             {
                isLogged && <Redirect to="/home" />
             }
-            {/* <ToastContainer /> */}
             <div className="centerContent">
                <h6 className="mt-3 mb-3"> Iniciar Sesión </h6>
                <Form validated={this.state.validated} onSubmit={this.handleSubmit}>
