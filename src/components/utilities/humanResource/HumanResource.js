@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, ButtonGroup, Button, Form } from 'react-bootstrap';
-import { MdDelete, MdEdit } from 'react-icons/md';
+import { MdDelete, MdEdit, MdSave } from 'react-icons/md';
 
 import imgHumanResourse from '../../../images/profileHumanResource.jpg';
 import './HumanResource.css';
@@ -10,7 +10,7 @@ class HumanResource extends React.Component {
         super(props);
         this.state = {
             readOnly: true,
-            idResource: props.person.id_resource
+            resource: props.person
         }
     }
 
@@ -20,15 +20,41 @@ class HumanResource extends React.Component {
         }
         return (
             <ButtonGroup className="w-25">
+                {this.state.readOnly ?
+                    <Button variant="Link"
+                        className="p-0"
+                        onClick={this.activateOrDesactivateEdition}
+                    >
+                        <MdEdit />
+                    </Button>
+                    :
+                    <Button variant="Link"
+                        className="p-0"
+                        onClick={() => {
+                            this.props.save(this.state.resource);
+                            this.activateOrDesactivateEdition();
+                        }}
+                    >
+                        <MdSave />
+                    </Button>
+                }
                 <Button variant="Link"
                     className="p-0"
-                    onClick={this.activateOrDesactivateEdition}
                 >
-                    <MdEdit />
+                    <MdDelete />
                 </Button>
-                <Button variant="Link" className="p-0"><MdDelete /></Button>
             </ButtonGroup>
         );
+    }
+
+    handleChange = (event) => {
+        const { name, value } = event.target;
+        this.setState((prevState) => ({
+            resource: {
+                ...prevState.resource,
+                [name]: value
+            }
+        }));
     }
 
     activateOrDesactivateEdition = () => {
@@ -46,18 +72,18 @@ class HumanResource extends React.Component {
                         <Form.Group className="m-0">
                             <Form.Control plaintext
                                 readOnly={this.state.readOnly}
-                                value={this.props.person.resource_name}
+                                value={this.state.resource.resource_name}
                                 className="cardResourceName"
                                 name="resource_name"
-                                onChange={(event) => this.props.handleChange(event.target, this.state.idResource)}
-                                // onChange={(event) => console.log(event.target)}
-                            />                                                        
-                        </Form.Group>                        
+                                onChange={(event) => this.handleChange(event)}
+                            // onChange={(event) => console.log(event.target)}
+                            />
+                        </Form.Group>
                         <Form.Group className="m-0">
                             <Form.Label className="cardTitle text-left mb-0">Perfil: </Form.Label>
                             <Form.Control plaintext
                                 readOnly={this.state.readOnly}
-                                value={this.props.person.resource_profile}
+                                value={this.state.resource.resource_profile}
                                 className="pt-0 cardText cardTextArea text-left"
                                 name="resource_profile"
                             />
@@ -68,7 +94,7 @@ class HumanResource extends React.Component {
                                 rows="3"
                                 plaintext
                                 readOnly={this.state.readOnly}
-                                value={this.props.person.resource_experience}
+                                value={this.state.resource.resource_experience}
                                 className="pt-0 cardText cardTextArea text-left"
                                 name="resource_experience"
                             />

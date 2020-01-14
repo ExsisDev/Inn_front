@@ -13,10 +13,12 @@ class EditResources extends React.Component {
     constructor() {
         super();
         this.state = {
-            resources: []
+            allyResources: []
         }
+        this.resourcesToSend = [];
     }
 
+    
     componentDidMount() {
         this.chargeResourcesToState();
     }
@@ -30,31 +32,24 @@ class EditResources extends React.Component {
         const url = `${process.env.REACT_APP_BACK_URL}/resources/${idAlly}`;
         axios.get(url, { headers: { 'x-auth-token': `${token}` } })
             .then(res => {
-                this.setState({ resources: res.data });
+                this.setState({ allyResources: res.data });
+                this.resourcesToSend = res.data;
             })
             .catch(error => {
                 console.log(error);
                 console.log("Algo salió mal");
             });
     }
-
     /**
-     * Actualiza el campo del recurso identificado por idResource
-     * @param {Event} target 
-     * @param {Number} idResource 
+     * Guardar los cambios ocurridos en los recursos, en la variable de clase
+     * resourcesToSend.
+     * @param {Object} Recurso editado
      */
-    handleChange = (target, idResource) => {
-        this.setState(state => {
-            const resources = state.resources.map((resource) => {
-                if (resource.id_resource === idResource) {
-                    resource[target.name] = target.value;
-                    return resource;
-                }
-                return resource;
-            });
-            return { resources };
-        })
-        
+    save = (data) => {
+        let index = this.resourcesToSend.findIndex((resource) => {
+            return resource.id_resource === data.id_resource;
+        });        
+        this.resourcesToSend[index] = data;        
     }
 
     render() {
@@ -63,12 +58,12 @@ class EditResources extends React.Component {
                 <ToastContainer />
                 <HeaderWithUserLogo source={img} />
                 <Row>
-                    <Col>
+                    <Col>                        
                         <h1>Editar Recursos</h1>
                         <div className="px-5">
                             <HumanResourceList cols="3" 
-                                               people={this.state.resources} 
-                                               handleChange={this.handleChange}
+                                               people={this.state.allyResources} 
+                                               save={this.save}
                                                edit 
                             />
                         </div>
