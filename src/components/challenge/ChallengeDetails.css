@@ -1,0 +1,41 @@
+.challengeCardBox {
+   width: 100% !important;
+}
+
+.challengeCardName {
+   text-align: left !important;
+   background-color: inherit;
+}
+
+.companyCardDescription {
+   text-align: start;
+   font-size: 1em;
+   text-align: start;
+   overflow: hidden;
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   -webkit-box-orient: vertical;
+   -webkit-line-clamp: 3;
+}
+
+.challengeCardDescription {
+   text-align: start;
+   overflow: hidden;
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   -webkit-box-orient: vertical;
+   -webkit-line-clamp: 3;
+}
+
+.seeMoreCardLink {
+   width: auto;
+   color: #4976f2 !important;
+}
+
+.challengeCardCategories {
+   font-size: 13px;
+}
+
+.cardHashTags {
+   text-align: left;
+}

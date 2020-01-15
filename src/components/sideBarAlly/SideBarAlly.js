@@ -19,7 +19,7 @@ class SideBar extends React.Component {
    render() {
       return (
          <div className="lateralBar d-flex flex-column">
-            <div className="logoAdminBox d-flex justify-content-center">
+            <div className="logoAdminBox d-flex justify-content-center mt-2">
                <span>
                   <Link to="/adminProfile" className="w-auto">
                      <img className="logoAlly align-self-center rounded-circle" src={logoAlly} alt="Admin logo" />
