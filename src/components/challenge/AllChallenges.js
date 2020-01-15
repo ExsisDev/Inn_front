@@ -220,14 +220,14 @@ class AllChallenges extends React.Component {
                               <Form onSubmit={this.handleSearchButton}>
                                  <InputGroup className="mb-3 groupButtonText">
                                     <InputGroup.Prepend className="w-auto">
-                                       <Button className="iconButton" variant="outline-secondary" type="submit"></Button>
+                                       <Button className="allChallengesIconButton" variant="outline-secondary" type="submit"></Button>
                                     </InputGroup.Prepend>
-                                    <FormControl className="searchChallengeText" aria-describedby="basic-addon1" type="input" placeholder="Buscar reto" name="searchElement" onChange={this.handleChange} />
+                                    <FormControl className="allChallengesSearchChallengeText" aria-describedby="basic-addon1" type="input" placeholder="Buscar reto" name="searchElement" onChange={this.handleChange} />
                                  </InputGroup>
                               </Form>
                            </Col>
                            <Col md={{ span: 4, offset: 4 }} className="order-sm-1 order-1 order-md-2 camaraLogoBox d-flex justify-content-md-end justify-content-center">
-                              <img className="camaraLogo" src={innovaCamaraLogo} alt="innovaCamaralogo" />
+                              <img className="allChallengesCamaraLogo" src={innovaCamaraLogo} alt="innovaCamaralogo" />
                            </Col>
                         </Row>
                         {
@@ -239,15 +239,15 @@ class AllChallenges extends React.Component {
                                        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                                        <Navbar.Collapse id="responsive-navbar-nav">
                                           <Nav className="align-items-center">
-                                             <Nav.Link ref={this.link1} className="circle red navLink mx-4 mx-lg-2 px-0" href="#Unassigned" onClick={(e) => this.handleClickLink(e, "CREATED")}><span>Retos Sin Asignar</span></Nav.Link>
-                                             <Nav.Link ref={this.link2} className="circle blue navLink mx-4 mx-lg-2 px-0" href="#Assigned" onClick={(e) => this.handleClickLink(e, "ASSIGNED")}><span>Retos Asignados</span></Nav.Link>
-                                             <Nav.Link ref={this.link3} className="circle green navLink mx-4 mx-lg-2 px-0" href="#Finished" onClick={(e) => this.handleClickLink(e, "FINISHED")}><span>Retos Finalizados</span></Nav.Link>
+                                             <Nav.Link ref={this.link1} className="allChallengesCircle allChallengesRed allChallengesNavLink mx-4 mx-lg-2 px-0" href="#Unassigned" onClick={(e) => this.handleClickLink(e, "CREATED")}><span>Retos Sin Asignar</span></Nav.Link>
+                                             <Nav.Link ref={this.link2} className="allChallengesCircle allChallengesBlue allChallengesNavLink mx-4 mx-lg-2 px-0" href="#Assigned" onClick={(e) => this.handleClickLink(e, "ASSIGNED")}><span>Retos Asignados</span></Nav.Link>
+                                             <Nav.Link ref={this.link3} className="allChallengesCircle allChallengesGreen allChallengesNavLink mx-4 mx-lg-2 px-0" href="#Finished" onClick={(e) => this.handleClickLink(e, "FINISHED")}><span>Retos Finalizados</span></Nav.Link>
                                           </Nav>
                                        </Navbar.Collapse>
                                     </Navbar>
                                  </Col>
                                  <Col sm={12} md={3} className="order-1 order-md-2 d-flex align-items-center justify-content-xl-end justify-content-center p-0">
-                                    <Link to="home/challenge" className="linkCreateChallenge"><img className="plusCreateChallenge w-auto mr-1" src={plusSign} alt="Plus"></img>Crear Reto</Link>
+                                    <Link to="home/challenge" className="allChallengesLinkCreateChallenge"><img className="allChallengesPlusCreateChallenge w-auto mr-1" src={plusSign} alt="Plus"></img>Crear Reto</Link>
                                  </Col>
                               </Row>
                            )
@@ -258,7 +258,7 @@ class AllChallenges extends React.Component {
                   {this.state.loadingChallenges ?
                      (
                         <div className="d-flex justify-content-center flex-grow-1">
-                           <ReactLoading className="d-flex align-items-center svgContainer" type={"spokes"} color={"#313333"} />
+                           <ReactLoading className="d-flex align-items-center allChallengesSvgContainer" type={"spokes"} color={"#313333"} />
                         </div>
                      )
                      :

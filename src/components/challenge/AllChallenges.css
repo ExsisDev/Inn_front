@@ -1,4 +1,4 @@
-.searchChallengeText {
+.allChallengesSearchChallengeText {
   -webkit-appearance: none;
   -moz-appearance: none;
   background-color: #e8e8e8 !important;
@@ -8,12 +8,12 @@
 }
 
 
-.searchChallengeText:focus {
+.allChallengesSearchChallengeText:focus {
   border-color: #e8e8e8 !important;
 }
 
 
-.iconButton {
+.allChallengesIconButton {
   width: 30px;
   background: url('../../images/find.png') no-repeat left;
   background-position-x: 10px;
@@ -24,78 +24,58 @@
 }
 
 
-.iconButton:focus {
+.allChallengesIconButton:focus {
   box-shadow: none !important;
 }
 
 
-.camaraLogo {
+.allChallengesCamaraLogo {
   height: 38px;
   width: auto;
 }
 
 /* Links de navegación */
 
-.navLink {
+.allChallengesNavLink {
   width: 215px;
   opacity: 0.5;
 }
 
-.circle.red:after {
+.allChallengesCircle.allChallengesRed:after {
   content: " \25CF";
   font-size: 22px;
   color: #d89393;
 }
 
-.circle.blue:after {
+.allChallengesCircle.allChallengesBlue:after {
   content: " \25CF";
   font-size: 22px;
   color: #6ae18e;
 }
 
-.circle.green:after {
+.allChallengesCircle.allChallengesGreen:after {
   content: " \25CF";
   font-size: 22px;
   color: #dce249;
 }
 
-.plusCreateChallenge {
+.allChallengesPlusCreateChallenge {
   height: 22px;
   width: 26px;
 }
 
 /* Solo se activan cuando el elemento tiene active y linkSelected (se hace click)*/
 
-.circle.active {
+.allChallengesCircle.active {
   opacity: unset;
 }
 
-.linkCreateChallenge {
+.allChallengesLinkCreateChallenge {
   width: 101px !important;
-}
-
-/* Paginación */
-
-.page-item.boxNumber.disabled .page-link.boxLink {
-  color: black !important;
-  background-color: white !important;
-  border-color: transparent;
-}
-
-.page-link.boxLink {
-  color: black !important;
-  background-color: white !important;
-  border: none !important;
-}
-
-.page-link.boxLink:hover, .page-link.boxLink:focus, .page-item.boxNumber.active .page-link.boxLink {
-  background-color: #313333 !important;
-  color: white !important;
-  box-shadow: none !important;
 }
 
 /* Elementos de carga */
 
-.svgContainer {
+.allChallengesSvgContainer {
   height: auto !important;
 }

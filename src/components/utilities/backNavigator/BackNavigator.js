@@ -23,7 +23,7 @@ const BackNavigator = (props) => {
     let logo = innovaCamaraLogo;
 
     if (props.dark) {
-        black = "black";
+        black = "backNavigatorBlack";
         logo = innovaCamaraLogoBlack;
     }
 
@@ -34,14 +34,14 @@ const BackNavigator = (props) => {
             </Col>
             <Col xs={12} sm={{ span: 3, offset: 7 }} md={{ span: 3, offset: 7 }} className="order-0 order-sm-1 p-0">
                 <div className="ml-auto d-flex justify-content-center justify-content-sm-end">
-                    <img className="align-self-center logo" src={logo} alt="logo icon" />
+                    <img className="align-self-center backNavigatorLogo" src={logo} alt="logo icon" />
                 </div>
             </Col>
             {
                 props.logOut &&
                 (
                     <Col xs={6} className="d-flex justify-content-end justify-content-sm-start p-0 order-2 order-sm-2 mt-3 mt-sm-5">
-                        <Button variant="link" className="headerLogOutButton w-auto d-flex align-items-center" href="/" onClick={logOut}>
+                        <Button variant="link" className="headerWithUserLogoLogOutButton w-auto d-flex align-items-center" href="/" onClick={logOut}>
                             <IconContext.Provider value={{ color: "white", size: "1.5rem", className: " w-auto mr-2" }}>
                                 <IoIosLogOut />
                             </IconContext.Provider>

@@ -1,6 +1,6 @@
 /* Create button */
 
-.btnCreateAlly {
+.allyBtnCreateAlly {
     width: 50%;
     background-color: orange !important;
     color: white !important;
@@ -10,40 +10,20 @@
 }
 
 @media only screen and (min-width: 768px) {
-    .btnCreateAlly {
+    .allyBtnCreateAlly {
         width: 20%;
     }
 }
 
 /* Table */
 
-.textStyleTable {
+.allyTextStyleTable {
     font-weight: bold;
     font-size: 1.18rem !important;
     color: #7b7b7b !important;
 }
 
-.textStyleTableCompany {
+.allyTextStyleTableCompany {
     font-weight: bold;
     color: #7b7b7b !important;
-}
-
-/* Paginación */
-
-.page-item.boxNumber.disabled .page-link.boxLink {
-    color: black !important;
-    background-color: white !important;
-    border-color: transparent;
-}
-
-.page-link.boxLink {
-    color: black !important;
-    background-color: white !important;
-    border: none !important;
-}
-
-.page-link.boxLink:hover, .page-link.boxLink:focus, .page-item.boxNumber.active .page-link.boxLink {
-    background-color: #313333 !important;
-    color: white !important;
-    box-shadow: none !important;
 }

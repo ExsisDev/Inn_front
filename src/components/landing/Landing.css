@@ -28,11 +28,7 @@
     padding: 20px 10px;
 }
 
-#landingLogoRow {
-    position: relative;
-}
-
-.imgLogoLanding {    
+.landingImgLogo {    
     padding: 0 !important;
     margin-bottom: 50px; 
 }

@@ -18,29 +18,29 @@ class SideBar extends React.Component {
 
    render() {
       return (
-         <div className="lateralBar d-flex flex-column">
-            <div className="logoAdminBox d-flex justify-content-center">
+         <div className="sideBarAdminLateralBar d-flex flex-column">
+            <div className="sideBarAdminLogoBox d-flex justify-content-center">
                <span>
                   <Link to="/adminProfile" className="w-auto">
-                     <img className="logoAdmin align-self-center" src={logoAdmin} alt="Admin logo" />
+                     <img className="sideBarAdminLogo align-self-center" src={logoAdmin} alt="Admin logo" />
                   </Link>
                </span>
             </div>
-            <div className="adminText d-flex align-items-center">
+            <div className="sideBarAdminText d-flex align-items-center">
                <h3>Administrador</h3>
             </div>
             <Link to="/home" >
-               <div className="sideLinkBox d-flex align-items-center">
+               <div className="sideBarAdminLinkBox d-flex align-items-center">
                   <p>Retos</p>
                </div>
             </Link>
             <Link to="/home/ally" >
-               <div className="sideLinkBox d-flex align-items-center">
+               <div className="sideBarAdminLinkBox d-flex align-items-center">
                   <p>Administrar usuarios</p>
                </div>
             </Link>
             <a className="mt-auto" onClick={logOut} href="/">
-               <div className="sideLinkBox d-flex align-items-center">
+               <div className="sideBarAdminLinkBox d-flex align-items-center">
                   <IconContext.Provider value={{ color: "white", className: "logoutIcon" }}>
                      <p><IoIosLogOut /><span>Cerrar sesión</span></p>
                   </IconContext.Provider>

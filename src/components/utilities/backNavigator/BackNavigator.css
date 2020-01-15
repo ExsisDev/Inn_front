@@ -1,9 +1,9 @@
-.logo {
+.backNavigatorLogo {
     height: 38px;
     width: auto;
 }
 
-.black {
+.backNavigatorBlack {
     background-color: #343434;
     color: white !important;
 }

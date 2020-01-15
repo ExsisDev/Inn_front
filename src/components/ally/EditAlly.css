@@ -1,39 +1,33 @@
-.titleEditAlly {
+.editAllyTitle {
     font-weight: bold;    
 }
 
-.contentDataEditAlly {
+.editAllyContentData {
     margin-top: 130px;
 }
 
-.labelInputEditAlly {
+.editAllyLabelInput {
     text-align: end;
 }
 
-.textStyle {
+.editAllyTextStyle {
     font-size: 1.4rem !important;
     color: #7b7b7b !important;
 }
 
-.hoursEditAlly {
+.editAllyHoursEdit {
     width: 40% !important;    
 }
 
 @media only screen and (max-width: 768px){
-    .inputReadOnlyEditAlly {
+    .editAllyInputReadOnly {
         text-align: center;
     }
-    .labelInputEditAlly {
+    .editAllyLabelInput {
         text-align: center;
     }
-    .hoursEditAlly {
+    .editAllyHoursEdit {
         margin: auto;
     }
 }
 
-/* Elementos de carga */
-
-.svgContainerEditAlly {
-    margin-top: 200px;
-    height: auto !important;
-  }

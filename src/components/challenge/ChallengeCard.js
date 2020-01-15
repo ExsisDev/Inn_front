@@ -14,7 +14,7 @@ class ChallengeCard extends React.Component {
                <Card.Body className="px-lg-3">
                   <Row className="mx-0">
                      <Col className="offset-lg-2">
-                        <Card.Title className="challengeCardName text-center text-md-center text-lg-left">{this.props.challengeName}</Card.Title>
+                        <Card.Title className="challengeCardName text-center text-md-center text-lg-left ">{this.props.challengeName}</Card.Title>
                      </Col>
                      <Col xs="1">
                         <IconContext.Provider value={{ className: "logoutIcon" }}>
@@ -29,7 +29,7 @@ class ChallengeCard extends React.Component {
                         <b><i>{this.props.companyName}:</i></b>
                      </Col>
                      <Col lg={10}>
-                        <Card.Text className="companyCardDescription">
+                        <Card.Text className="challengeCardCompanyDescription">
                            {this.props.companyDescription}
                         </Card.Text>
                      </Col>
@@ -45,14 +45,14 @@ class ChallengeCard extends React.Component {
                      </Col>
                   </Row>
                   <Row className="d-flex justify-content-end mt-2 mt-md-1">
-                     <a href="#" className="seeMoreCardLink mr-4">Ver más</a>
+                     <a href="#" className="challengeCardSeeMoreCardLink mr-4">Ver más</a>
                   </Row>
                   <Row className="challengeCardCategories mx-0 mt-2 mt-md-1">
                      <Col sm={3} md={2} className="d-flex justify-content-left justify-content-sm-center">
                         <span className="w-auto"><i>Categorías:</i></span>
                      </Col>
                      <Col sm={9} md={10} className="d-flex justify-content-start">
-                        <i className="w-auto cardHashTags">{this.props.categories.map((item) => { return (`#${item} `) })}</i>
+                        <i className="w-auto challengeCardHashTags">{this.props.categories.map((item) => { return (`#${item} `) })}</i>
                      </Col>
                   </Row>
                </Card.Body>

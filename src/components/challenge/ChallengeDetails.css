@@ -1,13 +1,13 @@
-.challengeCardBox {
+.challengeDetailsCardBox {
    width: 100% !important;
 }
 
-.challengeCardName {
+.challengeDetailsName {
    text-align: left !important;
    background-color: inherit;
 }
 
-.companyCardDescription {
+.challengeDetailsCompanyDescription {
    text-align: start;
    font-size: 1em;
    text-align: start;
@@ -18,7 +18,7 @@
    -webkit-line-clamp: 3;
 }
 
-.challengeCardDescription {
+.challengeDetailsDescription {
    text-align: start;
    overflow: hidden;
    text-overflow: ellipsis;
@@ -27,15 +27,15 @@
    -webkit-line-clamp: 3;
 }
 
-.seeMoreCardLink {
+.challengeDetailsAply {
    width: auto;
    color: #4976f2 !important;
 }
 
-.challengeCardCategories {
+.challengeDetailsCategories {
    font-size: 13px;
 }
 
-.cardHashTags {
+.challengeDetailsHashTags {
    text-align: left;
 }

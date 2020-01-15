@@ -115,20 +115,20 @@ class AdminProfile extends React.Component {
 					<Col className="px-0">
 						<Row className="mt-5 mx-0 d-flex justify-content-center">
 							<Col xs={11} sm={9} lg={6} className="d-flex flex-column align-items-center">
-								<h4 className="mb-5 mt-5 mt-sm-3 headerColor"><b>Administrador</b></h4>
+								<h4 className="mb-5 mt-5 mt-sm-3 adminProfileHeaderColor"><b>Administrador</b></h4>
 								<div className="d-flex flex-column flex-sm-row">
-									<h5 className="headerColor mt-3"><b>Cambio de Contraseña: </b></h5>
+									<h5 className="adminProfileHeaderColor mt-3"><b>Cambio de Contraseña: </b></h5>
 									<Form className="d-flex flex-column" onSubmit={this.handlePasswordChange.bind(this)}>
 										<Form.Group controlId="changeActualPassword" className="w-auto d-flex justify-content-center">
-											<Form.Control name="actualPassword" className="formInput passwordInputs" type="password" placeholder="Contraseña Actual" autoComplete="new-password" required onChange={this.handleChange} />
+											<Form.Control name="actualPassword" className="formInput adminProfilePasswordInputs" type="password" placeholder="Contraseña Actual" autoComplete="new-password" required onChange={this.handleChange} />
 										</Form.Group>
 										<Form.Group controlId="changeNewPassword" className="w-auto d-flex justify-content-center">
-											<Form.Control name="newPassword" className="formInput passwordInputs" type="password" placeholder="Nueva Contraseña" autoComplete="new-password" required onChange={this.handleChange} />
+											<Form.Control name="newPassword" className="formInput adminProfilePasswordInputs" type="password" placeholder="Nueva Contraseña" autoComplete="new-password" required onChange={this.handleChange} />
 										</Form.Group>
 										<Form.Group controlId="changeConfirmPassword" className="w-auto d-flex justify-content-center">
-											<Form.Control name="confirmNewPassword" className="formInput passwordInputs" type="password" placeholder="Confirmar Contraseña" autoComplete="new-password" ref={this.NewPassword} required onChange={(e) => this.handleChangeConfirmPassword(e, this.NewPassword)} />
+											<Form.Control name="confirmNewPassword" className="formInput adminProfilePasswordInputs" type="password" placeholder="Confirmar Contraseña" autoComplete="new-password" ref={this.NewPassword} required onChange={(e) => this.handleChangeConfirmPassword(e, this.NewPassword)} />
 										</Form.Group>
-										<Button className="acceptButtonChangePassword sendButton mt-3 mb-4 align-self-end" variant="warning" type="submit" disabled={this.state.isLoading}>
+										<Button className="adminProfileAcceptButtonChangePassword sendButton mt-3 mb-4 align-self-end" variant="warning" type="submit" disabled={this.state.isLoading}>
 											Aceptar
             						</Button>
 									</Form>

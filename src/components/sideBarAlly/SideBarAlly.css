@@ -1,46 +1,46 @@
-.lateralBar {
+.sideBarAllyLateralBar {
    max-width: 20%;
    background-color: #313333;
    min-height: 100vh;
 }
 
-.logoAdminBox {
+.sideBarAllyBox {
    height: 200px;
    width: 100%;
    padding: 10px 0;
 }
 
-.logoAlly {
+.sideBarAllyLogo {
    height: 80%;
    width: auto;
    border: 1px white solid;
    background-color: azure;
 }
 
-.adminText {
+.sideBarAllyText {
    height: 60px;
    margin-bottom: 20px;
 }
 
-.adminText h3 {
+.sideBarAllyText h3 {
    color: white;
    font-weight: bold;
 }
 
-.sideLinkBox {
+.sideBarAllyLinkBox {
    height: 80px;
 }
 
-.sideLinkBox:hover {
+.sideBarAllyLinkBox:hover {
    background-color: #333333;
 }
 
-a .sideLinkBox p {
+a .sideBarAllyLinkBox p {
    color: white;
    margin: 0;
 }
 
-a .sideLinkBox:hover {
+a .sideBarAllyLinkBox:hover {
    background-color: #272626 !important;
 }
 
@@ -49,14 +49,14 @@ a .sideLinkBox:hover {
 @media only screen and (max-width: 768px) {}
 
 @media only screen and (max-width: 1050px) {
-   .lateralBar {
+   .sideBarAllyLateralBar {
       max-width: 200px !important;
       visibility: collapse;
    }
 }
 
 @media only screen and (max-width: 1200px) {
-   .adminText h3 {
+   .sideBarAllyText h3 {
       font-size: 25px !important;
    }
 }

@@ -238,11 +238,11 @@ class CreateChallenge extends React.Component {
 
                            <div className="formBox">
                               <Row className="m-0 d-flex justify-content-center">
-                                 <Col sm={10} className="formCentering">
+                                 <Col sm={10} className="createChallengeFormCentering">
                                     <Form className="d-flex flex-column" onSubmit={this.handleChallengeCreation.bind(this)}>
                                        <Form.Row className="m-0">
                                           <Form.Group as={Col}>
-                                             <Form.Control className="challengeName formInput"
+                                             <Form.Control className="createChallengeName formInput"
                                                 name="challengeName"
                                                 type="input"
                                                 placeholder="Nombre del reto"
@@ -266,7 +266,7 @@ class CreateChallenge extends React.Component {
                                           <Form.Group as={Col} className="d-flex align-items-start form-group flex-column mt-2">
                                              <Form.Label className="w-auto ">Descripción: </Form.Label>
                                              <Form.Control as="textarea"
-                                                className="formInput textArea mt-0"
+                                                className="formInput createChallengeTextArea mt-0"
                                                 ref={this.ChallengeDescription}
                                                 required
                                              />
@@ -276,7 +276,7 @@ class CreateChallenge extends React.Component {
                                        <Form.Row className="mt-2 d-flex justify-content-around">
                                           <Form.Group as={Col} xl={3} sm={12} controlId="formGridCategories" className="d-flex align-items-center flex-column " >
                                              <Form.Label className="w-auto">Categorias:</Form.Label>
-                                             <Form.Control className="formSelect selectCategoryCompany"
+                                             <Form.Control className="formSelect createChallengeSelectCategoryCompany"
                                                 as="select"
                                                 ref={this.OptionCategorySelected}
                                                 onChange={() => { this.fillSelectedElements(this.OptionCategorySelected.current.value) }}
@@ -291,7 +291,7 @@ class CreateChallenge extends React.Component {
 
                                           <Form.Group as={Col} xl={3} sm={12} controlId="formGridCompanies" className="d-flex align-items-center flex-column " >
                                              <Form.Label className="w-auto">Empresa proponente:</Form.Label>
-                                             <Form.Control className="formSelect selectCategoryCompany"
+                                             <Form.Control className="formSelect createChallengeSelectCategoryCompany"
                                                 as="select"
                                                 ref={this.SelectCompany}
                                                 onChange={() => { this.setState({ companySelected: this.SelectCompany.current.value }) }}
@@ -306,7 +306,7 @@ class CreateChallenge extends React.Component {
 
                                           <Form.Group as={Col} xl={3} sm={12} controlId="formGridCloseDate" className="d-flex align-items-center flex-column " >
                                              <Form.Label className="w-auto"> Fecha de cierre:</Form.Label>
-                                             <Form.Control className="formDate dateWidth"
+                                             <Form.Control className="formDate createChallengeDateWidth"
                                                 type="date"
                                                 min={new Date().toJSON().slice(0, 10).replace(/-/g, '-')}
                                                 onChange={this.saveDate}
@@ -333,7 +333,7 @@ class CreateChallenge extends React.Component {
                                        </Row>
                                        <Form.Row className="m-0">
                                           <Form.Group as={Col} className="d-flex justify-content-end">
-                                             <Button className="createButton mt-0" variant="warning" type="submit" disabled={this.state.isCreating}>
+                                             <Button className="createChallengeCreateButton mt-0" variant="warning" type="submit" disabled={this.state.isCreating}>
                                                 {this.state.isCreating ? 'Creando Reto...' : 'Crear Reto'}
                                              </Button>
                                           </Form.Group>

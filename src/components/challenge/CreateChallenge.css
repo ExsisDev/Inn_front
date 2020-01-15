@@ -1,37 +1,19 @@
-/* title  */
-
-.createNewChallengeBox {
-   height: 50px;
-   margin: 20px 0;
-}
-
-.plusSign {
-   height: 100%;
-   width: auto;
-}
-
-.newChallengeText {
-   width: auto;
-   margin-left: 20px;
-   color: #a5a5a5;
-}
-
 /* form  */
 
-.formCentering{
+.createChallengeFormCentering{
    margin: 40px 0 5px 0;
 }
 
-.challengeName{
+.createChallengeName{
    background-color: #e8e8e8 !important;
 }
 
-.textArea {
+.createChallengeTextArea {
    resize: none;
    background-color: #e8e8e8 !important;
 }
 
-.selectCategoryCompany {
+.createChallengeSelectCategoryCompany {
    padding: 5px;
    -webkit-appearance: none;
    -moz-appearance: none;
@@ -41,19 +23,12 @@
    background-color: #e8e8e8 !important;
 }
 
-.dateWidth {
+.createChallengeDateWidth {
    width: 230px !important;
    background-color: #e8e8e8 !important;
 }
 
-/* removable list */
-
-.listRemovable {
-   list-style-type: none;
-   min-height: 60px;
-}
-
-.createButton{
+.createChallengeCreateButton{
    width: 120px;
    height: 35px;
    padding-top: 0 !important;

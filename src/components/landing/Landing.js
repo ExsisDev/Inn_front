@@ -38,7 +38,7 @@ const Landing = () => {
                     </Col>
                 </Row>
                 <Row className="justify-content-center">
-                    <Col xs={6} md={4} lg={4} className="imgLogoLanding">
+                    <Col xs={6} md={4} lg={4} className="landingImgLogo">
                         <Image src={innovaCamarLogo} alt="logo innovalab" fluid />
                     </Col >
                 </Row>

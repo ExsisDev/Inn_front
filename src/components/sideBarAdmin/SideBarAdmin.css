@@ -1,44 +1,44 @@
-.lateralBar {
+.sideBarAdminLateralBar {
    max-width: 20%;
    background-color: #313333;
    min-height: 100vh;
 }
 
-.logoAdminBox {
+.sideBarAdminLogoBox {
    height: 200px;
    width: 100%;
    padding: 10px 0;
 }
 
-.logoAdmin {
+.sideBarAdminLogo {
    height: 80%;
    width: auto;
 }
 
-.adminText {
+.sideBarAdminText {
    height: 60px;
    margin-bottom: 20px;
 }
 
-.adminText h3 {
+.sideBarAdminText h3 {
    color: white;
    font-weight: bold;
 }
 
-.sideLinkBox {
+.sideBarAdminLinkBox {
    height: 80px;
 }
 
-.sideLinkBox:hover {
+.sideBarAdminLinkBox:hover {
    background-color: #333333;
 }
 
-a .sideLinkBox p {
+a .sideBarAdminLinkBox p {
    color: white;
    margin: 0;
 }
 
-a .sideLinkBox:hover {
+a .sideBarAdminLinkBox:hover {
    background-color: #272626 !important;
 }
 
@@ -51,14 +51,14 @@ a .sideLinkBox:hover {
 }
 
 @media only screen and (max-width: 1050px) {
-   .lateralBar {
+   .sideBarAdminLateralBar {
       max-width: 200px !important;
       visibility: collapse;
    }
 }
 
 @media only screen and (max-width: 1200px) {
-   .adminText h3 {
+   .sideBarAdminText h3 {
       font-size: 25px !important;
    }
 }

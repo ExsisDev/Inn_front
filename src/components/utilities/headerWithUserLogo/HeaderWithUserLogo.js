@@ -8,7 +8,7 @@ import './HeaderWithUserLogo.css';
 const HeaderProfile = (props) => {
 
 	return (
-		<Row className="headerProfile m-0">
+		<Row className="headerWithUserLogoProfile m-0">
 			<Col className="d-flex align-items-center flex-column">
 				<Row>
 					<Col xs={12} className="d-flex align-items-center flex-column">
@@ -16,8 +16,8 @@ const HeaderProfile = (props) => {
 					</Col>
 				</Row>
 				<Row className="d-flex order-1 order-sm-0">
-					<Col xs={12} className="imageCenterRoundedBox d-flex justify-content-center">
-						<div className="imageCenterRounded rounded-circle border border-dark" style={{backgroundImage: `url(${props.source})`}}></div>
+					<Col xs={12} className="headerWithUserLogoImageCenterRoundedBox d-flex justify-content-center">
+						<div className="headerWithUserLogoImageCenterRounded rounded-circle border border-dark" style={{backgroundImage: `url(${props.source})`}}></div>
 					</Col>
 				</Row>
 			</Col>

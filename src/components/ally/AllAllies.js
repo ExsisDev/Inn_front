@@ -70,8 +70,8 @@ class AllAlies extends React.Component {
         return (
             allies.map(ally => {
                 return (
-                    <tr key={ally.id_ally} className="d-flex align-items-center textStyleTable">
-                        <td className="textStyleTableCompany">
+                    <tr key={ally.id_ally} className="d-flex align-items-center allyTextStyleTable">
+                        <td className="allyTextStyleTableCompany">
                             <div>
                                 <Image src={logoCompany} style={imageStyle} roundedCircle />
                                 <Link to={`/ally/edit/${ally.id_ally}`}
@@ -104,14 +104,14 @@ class AllAlies extends React.Component {
                 <BackNavigator />
                 <SectionTitle titleProps={titleProps} />
                 <Row className="justify-content-end">
-                    <Button as={Link} to="/home/ally/create" className="btnCreateAlly">
+                    <Button as={Link} to="/home/ally/create" className="allyBtnCreateAlly">
                         Crear Aliado
                     </Button>
                 </Row>
                 {this.state.isLoading ?
                     (
                         <div className="d-flex justify-content-center flex-grow-1">
-                            <ReactLoading className="d-flex align-items-center svgContainerEditAlly" type={"spokes"} color={"#313333"} />
+                            <ReactLoading className="d-flex align-items-center loadingSvgContainer" type={"spokes"} color={"#313333"} />
                         </div>
                     ) :
                     (
@@ -119,7 +119,7 @@ class AllAlies extends React.Component {
                         <Row className="my-3 formBox paddingBox"    >
                             <Table responsive borderless hover>
                                 <thead>
-                                    <tr className="d-flex align-items-center textStyleTable">
+                                    <tr className="d-flex align-items-center allyTextStyleTable">
                                         <th>Empresa</th>
                                         <th>Horas ideación por mes</th>
                                         <th>Horas experimentación por mes</th>

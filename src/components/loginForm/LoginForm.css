@@ -2,27 +2,14 @@
     width: 100%;
 }
 
-.centerContent {
+.loginFormCenterContent {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-button.sendButton {
-    width: 60%;
-    max-height: 5vh;
-    color: white;
-    border-radius: 18px;    
-    padding-top: 0;
-}
-
-#linkForgetPassword {
+#loginFormLinkForgetPassword {
     color: white;
     font-size: 0.7rem;
     margin-top: 1vh;
-}
-
-.Toastify__toast-body {
-    margin: auto 0;
-    flex: 1 1 ;
 }

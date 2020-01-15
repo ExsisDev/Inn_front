@@ -135,7 +135,7 @@ class LoginForm extends React.Component {
             {
                isLogged && <Redirect to="/home" />
             }
-            <div className="centerContent">
+            <div className="loginFormCenterContent">
                <h6 className="mt-3 mb-3"> Iniciar Sesión </h6>
                <Form validated={this.state.validated} onSubmit={this.handleSubmit}>
                   <Form.Group controlId="email">
@@ -168,7 +168,7 @@ class LoginForm extends React.Component {
                      {isLoading ? 'Iniciando Sesión...' : 'Iniciar Sesión'}
                   </Button>
                </Form>
-               <Link to="/recover-password/email" id="linkForgetPassword" >Olvidé mi contraseña</Link>
+               <Link to="/recover-password/email" id="loginFormLinkForgetPassword" >Olvidé mi contraseña</Link>
             </div>
          </div>
       );

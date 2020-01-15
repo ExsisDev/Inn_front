@@ -11,7 +11,7 @@ const AllyForm = (props) => {
         <Form validated={props.validated} onSubmit={props.handleSubmit}>
             <Form.Row className="mx-0">
                 <Col sm="12" md="5" className="textLeft pr-4">
-                    <h5 className="formAllyTitles mb-4">Datos de la empresa: </h5>
+                    <h5 className="allyFormTitles mb-4">Datos de la empresa: </h5>
                     <Form.Group>
                         <Form.Control className="formInput backgndColor"
                             placeholder="Nombre de la Empresa"
@@ -59,7 +59,7 @@ const AllyForm = (props) => {
                 <Col sm="12" md="7" className="textLeft">
                     <Form.Group as={Row} className="mx-0 align-items-baseline" controlId="categories">
                         <Col>
-                            <Form.Label className="formAllyTitles">
+                            <Form.Label className="allyFormTitles">
                                 Categorías de especialidad:
                             </Form.Label>
                         </Col>
@@ -96,7 +96,7 @@ const AllyForm = (props) => {
                         </Col>
                     </Row>
                     <Form.Group as={Row} className="mx-0 align-items-baseline" controlId="ideHours">
-                        <Form.Label column className="formAllyTitles">
+                        <Form.Label column className="allyFormTitles">
                             Horas de ideación mensuales:
                         </Form.Label>
                         <Col md="3">
@@ -111,7 +111,7 @@ const AllyForm = (props) => {
                         </Col>
                     </Form.Group>
                     <Form.Group as={Row} className="mx-0 align-items-baseline" controlId="expHours">
-                        <Form.Label column className="formAllyTitles">
+                        <Form.Label column className="allyFormTitles">
                             Horas de experimentación mensuales:
                                     </Form.Label>
                         <Col md="3">
@@ -126,7 +126,7 @@ const AllyForm = (props) => {
                         </Col>
                     </Form.Group>
                     <Form.Group as={Row} className="mx-0 align-items-baseline" controlId="ideHours">
-                        <Form.Label column className="formAllyTitles">
+                        <Form.Label column className="allyFormTitles">
                             Horas de ideación por reto:
                         </Form.Label>
                         <Col md="3">
@@ -142,7 +142,7 @@ const AllyForm = (props) => {
                         <p className="errorMessage">{props.errorIdea}</p>
                     </Form.Group>
                     <Form.Group as={Row} className="mx-0 align-items-baseline" controlId="expHours">
-                        <Form.Label column className="formAllyTitles">
+                        <Form.Label column className="allyFormTitles">
                             Horas de experimentación por reto:
                         </Form.Label>
                         <Col md="3">
@@ -162,7 +162,7 @@ const AllyForm = (props) => {
 
             <Form.Row className="mx-0 my-4">
                 <Col sm="12" md="5" className="textLeft pr-4">
-                    <h5 className="formAllyTitles mb-4"> Recursos humanos: </h5>
+                    <h5 className="allyFormTitles mb-4"> Recursos humanos: </h5>
                     <Form.Group>
                         <Form.Control placeholder="Nombre"
                             value={props.resourceName}

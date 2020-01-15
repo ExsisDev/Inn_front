@@ -107,11 +107,11 @@ class EditAlly extends React.Component {
         return Object.keys(properties).map(key => {
             return (
                 <Form.Group as={Row} className="mx-0 align-items-center" key={key}>
-                    <Form.Label column sm="12" md="6" className="labelInputEditAlly titleEditAlly textStyle">
+                    <Form.Label column sm="12" md="6" className="editAllyLabelInput editAllyTitle editAllyTextStyle">
                         {`${this.fromKeyToName(key)}:`}
                     </Form.Label>
                     <Col>
-                        <Form.Control plaintext readOnly className="inputReadOnlyEditAlly textStyle"
+                        <Form.Control plaintext readOnly className="editAllyInputReadOnly editAllyTextStyle"
                             defaultValue={properties[key]}
                         />
                     </Col>
@@ -302,19 +302,19 @@ class EditAlly extends React.Component {
                 {this.state.isLoading ?
                     (
                         <div className="d-flex justify-content-center flex-grow-1">
-                            <ReactLoading className="d-flex align-items-center svgContainerEditAlly" type={"spokes"} color={"#313333"} />
+                            <ReactLoading className="d-flex align-items-center loadingSvgContainer" type={"spokes"} color={"#313333"} />
                         </div>
                     )
                     :
                     (
-                        <Row className="contentDataEditAlly mx-0">
-                            <h3 className="titleEditAlly textStyle">{this.state.ally.ally_name}</h3>
+                        <Row className="editAllyContentData mx-0">
+                            <h3 className="editAllyTitle editAllyTextStyle">{this.state.ally.ally_name}</h3>
                             <Form >
                                 {
                                     this.renderReadOnlyProperties(properties)
                                 }
                                 <Form.Group as={Row} className="mx-0 align-items-baseline ">
-                                    <Form.Label column sm="12" md="6" className="labelInputEditAlly titleEditAlly textStyle">
+                                    <Form.Label column sm="12" md="6" className="editAllyLabelInput editAllyTitle editAllyTextStyle">
                                         Categorías de especialidad:
                                     </Form.Label>
                                     <Col>
@@ -352,11 +352,11 @@ class EditAlly extends React.Component {
                                     </Col>
                                 </Form.Group>
                                 <Form.Group as={Row} className="mx-0 align-items-baseline" controlId="ideHours">
-                                    <Form.Label column sm="12" md="6" className="labelInputEditAlly titleEditAlly textStyle">
+                                    <Form.Label column sm="12" md="6" className="editAllyLabelInput editAllyTitle editAllyTextStyle">
                                         Horas de ideación mensuales:
                                     </Form.Label>
                                     <Col>
-                                        <Form.Control className="formInput backgndColor hoursEditAlly"
+                                        <Form.Control className="formInput backgndColor editAllyHoursEdit"
                                             type="number"
                                             name="ideaHours"
                                             value={this.state.ideaHours}
@@ -366,11 +366,11 @@ class EditAlly extends React.Component {
                                     </Col>
                                 </Form.Group>
                                 <Form.Group as={Row} className=" mx-0 align-items-baseline" controlId="expHours">
-                                    <Form.Label column sm="12" md="6" className="labelInputEditAlly titleEditAlly textStyle">
+                                    <Form.Label column sm="12" md="6" className="editAllyLabelInput editAllyTitle editAllyTextStyle">
                                         Horas de experimentación mensuales:
                                     </Form.Label>
                                     <Col>
-                                        <Form.Control className="formInput backgndColor hoursEditAlly"
+                                        <Form.Control className="formInput backgndColor editAllyHoursEdit"
                                             type="number"
                                             name="expeHours"
                                             value={this.state.expeHours}
@@ -380,11 +380,11 @@ class EditAlly extends React.Component {
                                     </Col>
                                 </Form.Group>
                                 <Form.Group as={Row} className="mx-0 align-items-baseline" controlId="ideHours">
-                                    <Form.Label column sm="12" md="6" className="labelInputEditAlly titleEditAlly textStyle">
+                                    <Form.Label column sm="12" md="6" className="editAllyLabelInput editAllyTitle editAllyTextStyle">
                                         Horas de ideación por reto:
                                     </Form.Label>
                                     <Col>
-                                        <Form.Control className="formInput backgndColor hoursEditAlly"
+                                        <Form.Control className="formInput backgndColor editAllyHoursEdit"
                                             type="number"
                                             name="challengeIdeaHours"
                                             value={this.state.challengeIdeaHours}
@@ -395,11 +395,11 @@ class EditAlly extends React.Component {
                                     <p className="errorMessage">{this.state.errorIdea}</p>
                                 </Form.Group>
                                 <Form.Group as={Row} className=" mx-0 align-items-baseline" controlId="expHours">
-                                    <Form.Label column sm="12" md="6" className="labelInputEditAlly titleEditAlly textStyle">
+                                    <Form.Label column sm="12" md="6" className="editAllyLabelInput editAllyTitle editAllyTextStyle">
                                         Horas de experimentación por reto:
                                     </Form.Label>
                                     <Col>
-                                        <Form.Control className="formInput backgndColor hoursEditAlly"
+                                        <Form.Control className="formInput backgndColor editAllyHoursEdit"
                                             type="number"
                                             name="challengeExpeHours"
                                             value={this.state.challengeExpeHours}

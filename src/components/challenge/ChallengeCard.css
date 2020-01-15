@@ -7,7 +7,7 @@
    background-color: inherit;
 }
 
-.companyCardDescription {
+.challengeCardCompanyDescription {
    text-align: start;
    font-size: 1em;
    text-align: start;
@@ -27,7 +27,7 @@
    -webkit-line-clamp: 3;
 }
 
-.seeMoreCardLink {
+.challengeCardSeeMoreCardLink {
    width: auto;
    color: #4976f2 !important;
 }
@@ -36,6 +36,6 @@
    font-size: 13px;
 }
 
-.cardHashTags {
+.challengeCardHashTags {
    text-align: left;
 }
