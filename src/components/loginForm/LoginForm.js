@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { Form, Button } from 'react-bootstrap';
 import { Link, withRouter, Redirect } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.css';
 import "./LoginForm.css"
@@ -20,6 +20,17 @@ class LoginForm extends React.Component {
       };
    }
 
+   toastConfiguration = {
+      position: "top-right",
+      autoClose: 4000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      closeButton: false,
+      containerId: 'A'
+   }
+
    /**
     * Cambiar estado de la entrada mientras se ingresa un valor
     * @return {VoidFunction}
@@ -35,12 +46,12 @@ class LoginForm extends React.Component {
       localStorage.setItem('auth-token', token);
    }
 
-   
+
    /**
     * obtener el token desde localStorage
     */
    getToken(token) {
-      return localStorage.getItem('auth-token') ? true : false ;
+      return localStorage.getItem('auth-token') ? true : false;
    }
 
    /**
@@ -61,21 +72,21 @@ class LoginForm extends React.Component {
       axios.post(url, credentials)
          .then(res => {
             this.saveToken(res.headers['x-auth-token']);
-            this.setState({isLogged: true});
+            this.setState({ isLogged: true });
          })
          .catch(error => {
-            if (!error.response){
+            if (!error.response) {
                this.notify("Algo salió mal.");
                return;
             }
 
-            const res = error.response;                        
+            const res = error.response;
             let msg = "";
             if (res.status === 429) {
                msg = `${res.data.msj}.`;
                msg += `Intente ingresar de nuevo en ${this.getIntegerPart(res.data.minutes)} minutos.`
             }
-            else if (res.status === 400){
+            else if (res.status === 400) {
                msg = res.data;
             } else {
                msg = "Error inesperado, intente más tarde."
@@ -114,14 +125,16 @@ class LoginForm extends React.Component {
 
    render() {
       let { isLoading, isLogged } = this.state;
-      
-      if ( isLogged ) {
+
+      if (isLogged) {
          return <Redirect to="/home" />
       }
 
       return (
-         <div>            
-            <ToastContainer />
+         <div>
+            {
+               isLogged && <Redirect to="/home" />
+            }
             <div className="centerContent">
                <h6 className="mt-3 mb-3"> Iniciar Sesión </h6>
                <Form validated={this.state.validated} onSubmit={this.handleSubmit}>

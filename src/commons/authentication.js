@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import logOut from './logOut';
+import {logOut} from './tokenManagement';
  
 /**
  * Validar que el usuario esté autenticado y obtener el rol del usuario.

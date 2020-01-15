@@ -10,10 +10,11 @@ import { getToken } from '../../commons/tokenManagement';
 import img from '../../images/EmpresaA.png';
 
 class EditAllyResources extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
-            allyResources: []
+            allyResources: [],
+            idAlly: props.match.params.idAlly
         }
     }
 
@@ -25,10 +26,9 @@ class EditAllyResources extends React.Component {
     /**
      * Obtener recursos asociados al aliado y guardarlos en el estado
      */
-    chargeResourcesToState() {
-        const idAlly = this.props.match.params.idAlly
+    chargeResourcesToState() {        
         const token = getToken();
-        const url = `${process.env.REACT_APP_BACK_URL}/resources/${idAlly}`;
+        const url = `${process.env.REACT_APP_BACK_URL}/resources/${this.state.idAlly}`;
         axios.get(url, { headers: { 'x-auth-token': `${token}` } })
             .then(res => {
                 this.setState({ allyResources: res.data });
@@ -37,6 +37,23 @@ class EditAllyResources extends React.Component {
                 console.log(error);
                 console.log("Algo salió mal");
             });
+    }
+
+    /**
+     * Eliminar un recurso asociado al aliado.
+     * @param {Number} identificador del recurso a ser eliminado
+     */
+    deleteAllyResource = (resourceId) => {
+        const token = getToken();
+        const url = `${process.env.REACT_APP_BACK_URL}/resources/ally/${this.state.idAlly}/resource/${resourceId}`;
+        axios.delete( 
+                url,                
+                { headers: { 'x-auth-token': `${this.state.token}` } }
+            ).then( res => {
+                console.log(res);                
+            }).catch( error => {
+                console.log(error);                
+            })
     }
 
     render() {

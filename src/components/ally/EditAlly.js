@@ -1,7 +1,7 @@
 import React from 'react';
 import _ from 'lodash';
 import axios from 'axios';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { Redirect, Link } from 'react-router-dom';
 import ReactLoading from 'react-loading';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
@@ -26,6 +26,8 @@ class EditAlly extends React.Component {
             challengeExpeHours: 0,
             isUpdated: false,
             isLoading: true,
+            errorIdea: "",
+            errorExp: "",
             token: getToken()
         }       
 
@@ -36,7 +38,8 @@ class EditAlly extends React.Component {
 			closeOnClick: true,
 			pauseOnHover: true,
 			draggable: true,
-			closeButton: false
+            closeButton: false,
+            containerId: 'A'
 		}
     }
 
@@ -184,7 +187,7 @@ class EditAlly extends React.Component {
      * Notificación de éxito
      */
     updateSuccess = (msg) => {
-        toast.update(this.toastId, { render: msg, type: toast.TYPE.SUCCESS, autoClose: 3000 });
+        toast.update(this.toastId, { render: msg, type: toast.TYPE.SUCCESS, autoClose: 3000});
     }
 
     /**
@@ -238,18 +241,52 @@ class EditAlly extends React.Component {
      * Manejar el cambio de horas
      */
     handleHoursChange = (event) => {
-        this.setState({ [event.target.name]: event.target.value });
+        let name = event.target.name;
+        let value = event.target.value;
+        let isValueValid = true;
+
+        if (_.includes(name, "Hours") && value < 0) {
+            let regex = /^[1-9]\d*$/;
+            isValueValid = regex.test(value);
+        }
+        if (isValueValid) {
+            this.setState({ [name]: value }, () => {
+                if (name === "challengeIdeaHours" || name === "challengeExpeHours") {
+                    this.validateChallengeHours();
+                }
+            });
+        }
+    }
+
+
+    /**
+     * Valida que las horas por reto no sean mayores a las hora mensuales
+     * @returns {Boolean} - Booleano que indica si los campos son validos.
+     */
+    validateChallengeHours = () => {
+        let isValid = true;
+        this.setState({ errorIdea: null, errorExp: null });
+        if (parseInt(this.state.ideaHours) < parseInt(this.state.challengeIdeaHours)) {
+            let message = "Las horas de ideación por reto no pueden ser mayores a las horas de ideación mensuales.";
+            this.setState({ errorIdea: message });
+            isValid = false;
+        }
+        if (this.state.expeHours < this.state.challengeExpeHours) {
+            let message = "Las horas de experimentación por reto no pueden ser mayores a las horas de experimentación mensuales.";
+            this.setState({ errorExp: message });
+            isValid = false;
+        }
+        return isValid;
     }
     
     render() {
         let properties = _.pick(this.state.ally, ['user_email', 'ally_nit', 'ally_web_page', 'ally_phone']);
         const idAlly = this.props.match.params.idAlly;
         if ( this.state.isUpdated ) {
-            return <Redirect to="/home" />;
+            return <Redirect to="/home/ally" />;
         }
         return (
-            <Container className="p-0" fluid>                
-                <ToastContainer />
+            <Container className="p-0" fluid>
                 <HeaderWithUserLogo source={img} />
                 {this.state.isLoading ?
                     (
@@ -313,6 +350,7 @@ class EditAlly extends React.Component {
                                             name="ideaHours"
                                             value={this.state.ideaHours}
                                             onChange={this.handleHoursChange}
+                                            min="1"
                                         />
                                     </Col>
                                 </Form.Group>
@@ -326,6 +364,7 @@ class EditAlly extends React.Component {
                                             name="expeHours"
                                             value={this.state.expeHours}
                                             onChange={this.handleHoursChange}
+                                            min="1"
                                         />
                                     </Col>
                                 </Form.Group>
@@ -339,8 +378,10 @@ class EditAlly extends React.Component {
                                             name="challengeIdeaHours"
                                             value={this.state.challengeIdeaHours}
                                             onChange={this.handleHoursChange}
+                                            min="1"
                                         />
                                     </Col>
+                                    <p className="errorMessage">{this.state.errorIdea}</p>
                                 </Form.Group>
                                 <Form.Group as={Row} className=" mx-0 align-items-baseline" controlId="expHours">
                                     <Form.Label column sm="12" md="6" className="labelInputEditAlly titleEditAlly textStyle">
@@ -352,8 +393,10 @@ class EditAlly extends React.Component {
                                             name="challengeExpeHours"
                                             value={this.state.challengeExpeHours}
                                             onChange={this.handleHoursChange}
+                                            min="1"
                                         />
                                     </Col>
+                                    <p className="errorMessage">{this.state.errorExp}</p>
                                 </Form.Group>
                                 <Form.Group as={Row} className="mx-0 mb-5">
                                     <Col md={{ span: 2, offset: 5, order: 2 }} >

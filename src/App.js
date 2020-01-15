@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 
 import AdminRoute from './components/utilities/routes/AdminRoute';
 import SharedRoute from './components/utilities/routes/SharedRoute';
@@ -19,6 +20,7 @@ class App extends React.Component {
       return (
          <Router >
             <div className="App">
+               <ToastContainer enableMultiContainer containerId={'A'} />
                <Switch>
                   <Route path="/pageNotFound" component={PageNotFound} />
                   <AdminRoute path="/ally/edit/:idAlly/resources" component={EditAllyResources} />

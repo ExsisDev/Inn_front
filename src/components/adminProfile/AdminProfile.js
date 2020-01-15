@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { Container, Form, Button, Row, Col } from 'react-bootstrap';
 
 import { getToken } from '../../commons/tokenManagement';
@@ -28,7 +28,8 @@ class AdminProfile extends React.Component {
 			closeOnClick: true,
 			pauseOnHover: true,
 			draggable: true,
-			closeButton: false
+			closeButton: false,
+			containerId: 'A' 
 		}
 
 		this.NewPassword = React.createRef();
@@ -87,7 +88,7 @@ class AdminProfile extends React.Component {
 		 * Cambiar estado de la entrada mientras se ingresa un valor
 		 * @return {VoidFunction}
 		 */
-	handleChangeConfirmPassword(e, that) {
+	handleChangeConfirmPassword(e) {
 		this.setState({ [e.target.name]: e.target.value });
 
 	}
@@ -108,7 +109,6 @@ class AdminProfile extends React.Component {
 	render() {
 		return (
 			<Container fluid className="adminProfile p-0">
-				<ToastContainer />
 				<HeaderWithUserLogo source={AdminImage} />
 				<Row className="mt-5 mx-0">
 					<Col className="px-0">

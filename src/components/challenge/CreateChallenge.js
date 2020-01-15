@@ -1,8 +1,10 @@
 import React from 'react';
 import axios from 'axios';
 import { Row, Form, Col, Button, Container } from 'react-bootstrap';
+import { Redirect } from 'react-router-dom';
 import { IconContext } from "react-icons";
 import { IoIosCloseCircle } from 'react-icons/io';
+import { toast } from 'react-toastify';
 import { DateTime } from 'luxon';
 import jwt from 'jsonwebtoken';
 import _ from 'lodash';
@@ -25,12 +27,26 @@ class CreateChallenge extends React.Component {
          challengeName: "",
          companySelected: "",
          closeDate: new Date().toJSON().slice(0, 10).replace(/-/g, '-'),
-         createButtonRedirection: false,
+         homeRedirection: false,
+         isCreating: false,
          token: getToken()
       }
+
       this.OptionCategorySelected = React.createRef();
       this.ChallengeDescription = React.createRef();
       this.SelectCompany = React.createRef();
+
+   }
+
+   toastConfiguration = {
+      position: "top-right",
+      autoClose: 4000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      closeButton: false,
+      containerId: 'A'
    }
 
 
@@ -142,11 +158,13 @@ class CreateChallenge extends React.Component {
    /**
     * Manejar el click de creación de un reto
     */
-   handleChallengeCreation(e) {
+   async handleChallengeCreation(e) {
       e.preventDefault();
 
       const url = `${process.env.REACT_APP_BACK_URL}/challenges`;
       const CREATED = 3;
+
+      await this.setState({ isCreating: true });
 
       let bodyChallenge = {
          fk_id_company: this.state.companySelected,
@@ -160,16 +178,23 @@ class CreateChallenge extends React.Component {
       };
 
       if (this.state.challengeName !== "") {
-         axios.post(url, bodyChallenge, {
+         await axios.post(url, bodyChallenge, {
             headers: { 'x-auth-token': `${this.state.token}` }
          })
             .then((result) => {
-               this.setState({ createButtonRedirection: true });
+               this.setState({ isCreating: false });
+               this.notifySuccess("Reto creado");
             })
             .catch((error) => {
+               this.setState({ isCreating: false });
+               this.notifyError("Hubo un problema al crear el reto");
                console.log(error);
             });
       }
+
+      await setTimeout(() => {
+         this.setState({ homeRedirection: true });
+      }, 3000);
 
    }
 
@@ -183,128 +208,147 @@ class CreateChallenge extends React.Component {
    }
 
 
+   /**
+	 * Toast de error
+	 */
+   notifyError = (errorMessage) => toast.error(errorMessage, this.toastConfiguration);
+
+
+	/**
+	 * Toast de exito
+	 */
+   notifySuccess = (successMessage) => toast.success(successMessage, this.toastConfiguration);
+
+
    render() {
-      return (
-         <Container fluid className="d-flex justify-content-center">
-            <Row className="h-100 d-flex justify-content-center">
-               <Col sm={11} className="d-flex flex-column align-items-center">
-                  <BackNavigator />
-                  <SectionTitle titleProps={{ img: plusIcon, imgAlt: 'Plus sign', text: 'Crear Nuevo Reto' }} />
-                  <Row className="d-fex justify-content-center">
-                     <Col className="p-0">
 
-                        <div className="formBox">
-                           <Row className="m-0 d-flex justify-content-center">
-                              <Col sm={10} className="formCentering">
-                                 <Form className="d-flex flex-column" onSubmit={this.handleChallengeCreation.bind(this)}>
-                                    <Form.Row className="m-0">
-                                       <Form.Group as={Col}>
-                                          <Form.Control className="challengeName formInput"
-                                             name="challengeName"
-                                             type="input"
-                                             placeholder="Nombre del reto"
-                                             onChange={this.handleChange}
-                                             maxlength="200"
-                                             required
-                                          />
-                                          {
-                                             this.state.challengeName.length > 200 &&
-                                             <p className="errorMessage">
-                                                El nombre no puede contener más de 200 caracteres
+      if (this.state.homeRedirection) {
+         return (
+            <Redirect to="/home" />
+         )
+      } else {
+         return (
+            <Container fluid className="d-flex justify-content-center">
+               <Row className="h-100 d-flex justify-content-center">
+                  <Col sm={11} className="d-flex flex-column align-items-center">
+                     <BackNavigator />
+                     <SectionTitle titleProps={{ img: plusIcon, imgAlt: 'Plus sign', text: 'Crear Nuevo Reto' }} />
+                     <Row className="d-fex justify-content-center">
+                        <Col className="p-0">
+
+                           <div className="formBox">
+                              <Row className="m-0 d-flex justify-content-center">
+                                 <Col sm={10} className="formCentering">
+                                    <Form className="d-flex flex-column" onSubmit={this.handleChallengeCreation.bind(this)}>
+                                       <Form.Row className="m-0">
+                                          <Form.Group as={Col}>
+                                             <Form.Control className="challengeName formInput"
+                                                name="challengeName"
+                                                type="input"
+                                                placeholder="Nombre del reto"
+                                                onChange={this.handleChange}
+                                                maxLength="200"
+                                                required
+                                             />
+                                             {
+                                                this.state.challengeName.length > 200 &&
+                                                <p className="errorMessage">
+                                                   El nombre no puede contener más de 200 caracteres
                                                 {
-                                                   this.setState({ challengeName: "" })
-                                                }
-                                             </p>
-                                          }
-                                       </Form.Group>
-                                    </Form.Row>
+                                                      this.setState({ challengeName: "" })
+                                                   }
+                                                </p>
+                                             }
+                                          </Form.Group>
+                                       </Form.Row>
 
-                                    <Form.Row className="m-0">
-                                       <Form.Group as={Col} className="d-flex align-items-start form-group flex-column mt-2">
-                                          <Form.Label className="w-auto ">Descripción: </Form.Label>
-                                          <Form.Control as="textarea"
-                                             className="formInput textArea mt-0"
-                                             ref={this.ChallengeDescription}
-                                             required
-                                          />
-                                       </Form.Group>
-                                    </Form.Row>
+                                       <Form.Row className="m-0">
+                                          <Form.Group as={Col} className="d-flex align-items-start form-group flex-column mt-2">
+                                             <Form.Label className="w-auto ">Descripción: </Form.Label>
+                                             <Form.Control as="textarea"
+                                                className="formInput textArea mt-0"
+                                                ref={this.ChallengeDescription}
+                                                required
+                                             />
+                                          </Form.Group>
+                                       </Form.Row>
 
-                                    <Form.Row className="mt-2 d-flex justify-content-around">
-                                       <Form.Group as={Col} xl={3} sm={12} controlId="formGridCategories" className="d-flex align-items-center flex-column " >
-                                          <Form.Label className="w-auto">Categorias:</Form.Label>
-                                          <Form.Control className="formSelect selectCategoryCompany"
-                                             as="select"
-                                             ref={this.OptionCategorySelected}
-                                             onChange={() => { this.fillSelectedElements(this.OptionCategorySelected.current.value) }}
-                                             required
-                                          >
-                                             <option disabled selected>Seleccione las categorias</option>
-                                             {this.state.allCategories.map((item) => {
-                                                return <option value={item.id_category} key={item.id_category}>{item.category_name}</option>
-                                             })}
-                                          </Form.Control>
-                                       </Form.Group>
+                                       <Form.Row className="mt-2 d-flex justify-content-around">
+                                          <Form.Group as={Col} xl={3} sm={12} controlId="formGridCategories" className="d-flex align-items-center flex-column " >
+                                             <Form.Label className="w-auto">Categorias:</Form.Label>
+                                             <Form.Control className="formSelect selectCategoryCompany"
+                                                as="select"
+                                                ref={this.OptionCategorySelected}
+                                                onChange={() => { this.fillSelectedElements(this.OptionCategorySelected.current.value) }}
+                                                required
+                                             >
+                                                <option disabled selected>Seleccione las categorias</option>
+                                                {this.state.allCategories.map((item) => {
+                                                   return <option value={item.id_category} key={item.id_category}>{item.category_name}</option>
+                                                })}
+                                             </Form.Control>
+                                          </Form.Group>
 
-                                       <Form.Group as={Col} xl={3} sm={12} controlId="formGridCompanies" className="d-flex align-items-center flex-column " >
-                                          <Form.Label className="w-auto">Empresa proponente:</Form.Label>
-                                          <Form.Control className="formSelect selectCategoryCompany"
-                                             as="select"
-                                             ref={this.SelectCompany}
-                                             onChange={() => { this.setState({ companySelected: this.SelectCompany.current.value }) }}
-                                             required
-                                          >
-                                             <option disabled selected>Seleccione una empresa</option>
-                                             {this.state.allCompanies.map((item) => {
-                                                return <option value={item.id_company} key={item.id_company}>{item.company_name}</option>
-                                             })}
-                                          </Form.Control>
-                                       </Form.Group>
+                                          <Form.Group as={Col} xl={3} sm={12} controlId="formGridCompanies" className="d-flex align-items-center flex-column " >
+                                             <Form.Label className="w-auto">Empresa proponente:</Form.Label>
+                                             <Form.Control className="formSelect selectCategoryCompany"
+                                                as="select"
+                                                ref={this.SelectCompany}
+                                                onChange={() => { this.setState({ companySelected: this.SelectCompany.current.value }) }}
+                                                required
+                                             >
+                                                <option disabled selected>Seleccione una empresa</option>
+                                                {this.state.allCompanies.map((item) => {
+                                                   return <option value={item.id_company} key={item.id_company}>{item.company_name}</option>
+                                                })}
+                                             </Form.Control>
+                                          </Form.Group>
 
-                                       <Form.Group as={Col} xl={3} sm={12} controlId="formGridCloseDate" className="d-flex align-items-center flex-column " >
-                                          <Form.Label className="w-auto"> Fecha de cierre:</Form.Label>
-                                          <Form.Control className="formDate dateWidth"
-                                             type="date"
-                                             min={new Date().toJSON().slice(0, 10).replace(/-/g, '-')}
-                                             onChange={this.saveDate}
-                                             required
-                                          />
-                                          {
-                                             this.state.closeDate < new Date().toJSON().slice(0, 10).replace(/-/g, '-') &&
+                                          <Form.Group as={Col} xl={3} sm={12} controlId="formGridCloseDate" className="d-flex align-items-center flex-column " >
+                                             <Form.Label className="w-auto"> Fecha de cierre:</Form.Label>
+                                             <Form.Control className="formDate dateWidth"
+                                                type="date"
+                                                min={new Date().toJSON().slice(0, 10).replace(/-/g, '-')}
+                                                onChange={this.saveDate}
+                                                required
+                                             />
+                                             {
+                                                this.state.closeDate < new Date().toJSON().slice(0, 10).replace(/-/g, '-') &&
                                                 <p className="errorMessage">Seleccione una fecha válida </p>
-                                          }
-                                       </Form.Group>
-                                    </Form.Row>
-                                    <Row className="m-0 justify-content-center">
-                                       <Col className="justify-content-center">
-                                          <ul className="listRemovable p-0 d-flex flex-column align-items-center flex-wrap" >
-                                             {this.state.categoriesDisplayed.map((item, index) => {
-                                                return (
-                                                   <IconContext.Provider key={item} value={{ className: "logoutIcon" }}>
-                                                      <li key={item} className="w-auto" ><span data-name={item} data-indexarray={index} className="crossLink" onClick={this.handleDeleteClick}><IoIosCloseCircle /></span>{item}</li>
-                                                   </IconContext.Provider>
-                                                )
-                                             })}
-                                          </ul>
-                                       </Col>
-                                    </Row>
-                                    <Form.Row className="m-0">
-                                       <Form.Group as={Col} className="d-flex justify-content-end">
-                                          <Button className="createButton mt-0" variant="warning" type="submit">
-                                             Crear Reto
-                                          </Button>
-                                       </Form.Group>
-                                    </Form.Row>
-                                 </Form>
-                              </Col>
-                           </Row>
-                        </div>
-                     </Col>
-                  </Row>
-               </Col>
-            </Row>
-         </Container>
-      );
+                                             }
+                                          </Form.Group>
+                                       </Form.Row>
+                                       <Row className="m-0 justify-content-center">
+                                          <Col className="justify-content-center">
+                                             <ul className="listRemovable p-0 d-flex flex-column align-items-center flex-wrap" >
+                                                {this.state.categoriesDisplayed.map((item, index) => {
+                                                   return (
+                                                      <IconContext.Provider key={item} value={{ className: "logoutIcon" }}>
+                                                         <li key={item} className="w-auto" ><span data-name={item} data-indexarray={index} className="crossLink" onClick={this.handleDeleteClick}><IoIosCloseCircle /></span>{item}</li>
+                                                      </IconContext.Provider>
+                                                   )
+                                                })}
+                                             </ul>
+                                          </Col>
+                                       </Row>
+                                       <Form.Row className="m-0">
+                                          <Form.Group as={Col} className="d-flex justify-content-end">
+                                             <Button className="createButton mt-0" variant="warning" type="submit" disabled={this.state.isCreating}>
+                                                {this.state.isCreating ? 'Creando Reto...' : 'Crear Reto'}
+                                             </Button>
+                                          </Form.Group>
+                                       </Form.Row>
+                                    </Form>
+                                 </Col>
+                              </Row>
+                           </div>
+                        </Col>
+                     </Row>
+                  </Col>
+               </Row>
+            </Container>
+         );
+      }
    }
 }
 
