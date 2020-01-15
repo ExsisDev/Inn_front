@@ -7,7 +7,6 @@ import { getToken } from '../../commons/tokenManagement';
 import HeaderWithUserLogo from '../utilities/headerWithUserLogo/HeaderWithUserLogo';
 import AdminImage from '../../images/innovaLogo.png';
 import './AdminProfile.css';
-import 'toastr/build/toastr.min.css'
 
 class AdminProfile extends React.Component {
 

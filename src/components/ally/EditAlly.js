@@ -2,7 +2,7 @@ import React from 'react';
 import _ from 'lodash';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import ReactLoading from 'react-loading';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { IconContext } from "react-icons";
@@ -52,7 +52,6 @@ class EditAlly extends React.Component {
         }
     }
 
-
     /**
     * Obtener todas las categorias para compañia
     * @return {Object} categories
@@ -70,7 +69,6 @@ class EditAlly extends React.Component {
                 console.log(error);
             });
     }
-
 
     /**
      * Obtener un aliado por su id
@@ -120,7 +118,6 @@ class EditAlly extends React.Component {
         })
     }
 
-
     /**
      * Convertir el nombre de un atributo a la palabra
      * que corresponde en el form de renderizado.
@@ -136,7 +133,6 @@ class EditAlly extends React.Component {
             default: return `No se reconoce ${key} como una llave válida.`;
         }
     }
-
 
     /**
      * Enviar datos del aliado que van a ser actualizados.
@@ -182,12 +178,10 @@ class EditAlly extends React.Component {
         });
     }
 
-
     /**
      * Notificación de actualización
      */
     notify = () => this.toastId = toast.info("Actualizando...", this.toastConfiguration);
-
 
     /**
      * Notificación de éxito
@@ -196,14 +190,12 @@ class EditAlly extends React.Component {
         toast.update(this.toastId, { render: msg, type: toast.TYPE.SUCCESS, autoClose: 3000});
     }
 
-
     /**
      * Notificación de error
      */
     updateError = (msg) => {
         toast.update(this.toastId, { render: msg, type: toast.TYPE.ERROR, autoClose: 3000 });
     }
-
 
     /**
      * Agregar la categoria seleccionada al aliado
@@ -230,7 +222,6 @@ class EditAlly extends React.Component {
         this.setState({ ally });
     }
 
-
     /**
      * Eliminar categoria del aliado
      * @return {VoidFunction}
@@ -245,7 +236,6 @@ class EditAlly extends React.Component {
         const ally = { ...this.state.ally, ally_categories: currentCategories };
         this.setState({ ally });
     }
-
 
     /**
      * Manejar el cambio de horas
@@ -288,16 +278,15 @@ class EditAlly extends React.Component {
         }
         return isValid;
     }
-
     
     render() {
         let properties = _.pick(this.state.ally, ['user_email', 'ally_nit', 'ally_web_page', 'ally_phone']);
+        const idAlly = this.props.match.params.idAlly;
+        if ( this.state.isUpdated ) {
+            return <Redirect to="/home/ally" />;
+        }
         return (
             <Container className="p-0" fluid>
-                {
-                    this.state.isUpdated &&
-                    <Redirect to="/home/ally" />
-                }
                 <HeaderWithUserLogo source={img} />
                 {this.state.isLoading ?
                     (
@@ -308,7 +297,7 @@ class EditAlly extends React.Component {
                     :
                     (
                         <Row className="contentDataEditAlly mx-0">
-                            <h3 className="titleEditAlly textStyle">{this.state.ally.ally_name}</h3>
+                            <h3 className="mb-4 titleEditAlly textStyle">{this.state.ally.ally_name}</h3>
                             <Form >
                                 {
                                     this.renderReadOnlyProperties(properties)
@@ -410,13 +399,25 @@ class EditAlly extends React.Component {
                                     <p className="errorMessage">{this.state.errorExp}</p>
                                 </Form.Group>
                                 <Form.Group as={Row} className="mx-0 mb-5">
-                                    <Col md={{ span: 2, offset: 9 }} >
+                                    <Col md={{ span: 2, offset: 5, order: 2 }} >
                                         <Button className="formButton"
                                             size="sm"
                                             variant="warning"
                                             onClick={this.handleSubmit}
                                         >
                                             Guardar
+                                        </Button>
+                                    </Col>
+                                    <Col md={{ span: 3, offset: 1, order: 1 }}
+                                         lg={{ span: 2, offset: 1, order: 1 }}
+                                    >
+                                        <Button className="formButton"
+                                            size="sm"
+                                            variant="info"
+                                            as={Link}
+                                            to={`/ally/edit/${idAlly}/resources`}
+                                        >
+                                            Administrar recursos
                                         </Button>
                                     </Col>
                                 </Form.Group>
