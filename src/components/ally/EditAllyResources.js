@@ -106,6 +106,10 @@ class EditAllyResources extends React.Component {
     notifySuccess = () => this.toastId = toast.success("Recurso eliminado con exito", this.toastConfiguration);
     notifyError = () => this.toastId = toast.error("Algo salió mal. Intenta nuevamente más tarde.", this.toastConfiguration);
 
+    renderNoResources() {
+        return (<h3 className="text-left softText">No se encontraron recursos</h3>);
+    }
+
     render() {
         return (
             <Container className="p-0" fluid>
@@ -120,6 +124,7 @@ class EditAllyResources extends React.Component {
                         <Row className="contentDataEditAllyResources mx-0">
                             <Col>
                                 <h1>Administrar Recursos</h1>
+                                { _.isEmpty(this.state.allyResources) && this.renderNoResources()}
                                 <div className="px-5">
                                     <HumanResourceList cols="3"
                                         people={this.state.allyResources}
