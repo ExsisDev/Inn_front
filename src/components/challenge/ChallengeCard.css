@@ -7,24 +7,35 @@
    background-color: inherit;
 }
 
-.companyCardDescription{
+.companyCardDescription {
    text-align: start;
    font-size: 1em;
-}
-
-.challengeCardDescription{
    text-align: start;
+   overflow: hidden;
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   -webkit-box-orient: vertical;
+   -webkit-line-clamp: 3;
 }
 
-.seeMoreCardLink{
+.challengeCardDescription {
+   text-align: start;
+   overflow: hidden;
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   -webkit-box-orient: vertical;
+   -webkit-line-clamp: 3;
+}
+
+.seeMoreCardLink {
    width: auto;
    color: #4976f2 !important;
 }
 
-.challengeCardCategories{
+.challengeCardCategories {
    font-size: 13px;
 }
 
-.cardHashTags{
+.cardHashTags {
    text-align: left;
 }

@@ -133,7 +133,7 @@ class EditAlly extends React.Component {
             case "ally_nit": return "NIT";
             case "ally_web_page": return "Página web";
             case "ally_phone": return "Teléfono";
-            default: throw `No se reconoce ${key} como una llave válida.`;
+            default: return `No se reconoce ${key} como una llave válida.`;
         }
     }
 

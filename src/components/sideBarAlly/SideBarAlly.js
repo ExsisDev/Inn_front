@@ -4,8 +4,8 @@ import { IconContext } from "react-icons";
 import { IoIosLogOut } from 'react-icons/io';
 
 import { logOut } from '../../commons/tokenManagement';
-import logoAdmin from '../../images/logoAdmin.png';
-import './SideBarAdmin.css';
+import logoAlly from '../../images/EmpresaA.png';
+import './SideBarAlly.css';
 
 class SideBar extends React.Component {
 
@@ -22,7 +22,7 @@ class SideBar extends React.Component {
             <div className="logoAdminBox d-flex justify-content-center">
                <span>
                   <Link to="/adminProfile" className="w-auto">
-                     <img className="logoAdmin align-self-center" src={logoAdmin} alt="Admin logo" />
+                     <img className="logoAlly align-self-center rounded-circle" src={logoAlly} alt="Admin logo" />
                   </Link>
                </span>
             </div>
