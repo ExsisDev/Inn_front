@@ -92,8 +92,8 @@ class EditAllyResources extends React.Component {
     * Desplegar el modal de elimacion de reto configurando el id
     * del reto que se desa borrar en el estado
     */
-    showDeleteModal = (idResource) => {
-        this.setState({ showModal: true, idResourceToDelete: idResource });
+    showDeleteModal = (resourceToDelete) => {
+        this.setState({ showModal: true, idResourceToDelete: resourceToDelete.id_resource });
     }
     /**
     * Manejar el cierre del modal

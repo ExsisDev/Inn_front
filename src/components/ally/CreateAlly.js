@@ -151,11 +151,7 @@ class CreateAlly extends React.Component {
 
 
     notify = () => this.toastId = toast.info("creando...", this.toastConfiguration);
-
-
     updateSuccess = (msg) => toast.update(this.toastId, { render: msg, type: toast.TYPE.SUCCESS });
-
-
     updateError = (msg) => toast.update(this.toastId, { render: msg, type: toast.TYPE.ERROR });
 
 
@@ -228,6 +224,17 @@ class CreateAlly extends React.Component {
         })
     }
 
+    /**
+     * Remover recurso del estado
+     * @param {Object} Recurso que va a ser eliminado
+     */
+    removeResource = (resourceToDelete) => {
+        let { resources } = this.state;
+        _.remove(resources, function(resource) {
+            return resource.resource_name === resourceToDelete.resource_name;
+        });
+        this.setState({ resources });
+    }
 
     /**
     * Cambiar estado de la entrada mientras se ingresa un valor
@@ -250,7 +257,6 @@ class CreateAlly extends React.Component {
             });
         }
     }
-
 
     render() {
         const titleProps = {
@@ -284,6 +290,7 @@ class CreateAlly extends React.Component {
                         fillSelectedElement={this.fillSelectedElement}
                         handleDeleteClick={this.handleDeleteClick}
                         addResource={this.addResource}
+                        removeResource={this.removeResource}
                         handleSubmit={this.handleSubmit}
                     />
                 </Row>

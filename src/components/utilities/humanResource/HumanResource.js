@@ -9,7 +9,7 @@ const HumanResource = (props) => {
     return (
         <Card className="cardBox mx-0 my-2 py-3 align-items-end">
             <Button variant="Link" className="w-25 p-0" 
-                    onClick={() => props.handleDelete(props.person.id_resource) } 
+                    onClick={() => props.handleDelete(props.person) } 
             >
                 <MdDelete />
             </Button>
