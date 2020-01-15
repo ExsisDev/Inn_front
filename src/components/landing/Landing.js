@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
 
+import authentication from '../../commons/authentication';
 import WelcomeText from '../welcomeText/WelcomeText';
 import LoginForm from '../loginForm/LoginForm';
 import RecoverPasswordEmail from '../recoverPasswordEmail/RecoverPasswordEmail'
@@ -10,13 +11,6 @@ import Image from 'react-bootstrap/Image'
 import innovaCamarLogo from '../../images/innovaCamaraLogo.png';
 import { getTokenData } from '../../commons/tokenManagement';
 import './Landing.css';
-
-/**
-* obtener el token desde localStorage
-*/
-function getToken(token) {
-    return localStorage.getItem('auth-token') ? true : false;
-}
 
 const Landing = () => {
     const isThereToken = getToken();
