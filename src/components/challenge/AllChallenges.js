@@ -10,7 +10,7 @@ import ChallengeCard from './ChallengeCard';
 
 import innovaCamaraLogo from '../../images/innovaCamaraLogo.png';
 import plusSign from '../../images/newChallenge.png';
-import { getToken } from '../../commons/tokenManagement';
+import { getToken, getTokenData } from '../../commons/tokenManagement';
 import 'react-toastify/dist/ReactToastify.css';
 import './AllChallenges.css'
 
@@ -30,7 +30,9 @@ class AllChallenges extends React.Component {
          showModal: false,
          challengeToDelete: null,
          elementsDisplayed: 5,
-         token: getToken()
+         isAdminFunctionality: false,
+         token: getToken(),
+         role: 0
       }
       this.link1 = React.createRef();
       this.link2 = React.createRef();
@@ -52,9 +54,23 @@ class AllChallenges extends React.Component {
       containerId: 'A'
    }
 
+   ALLY = 1;
+   ADMIN = 2;
+
 
    componentDidMount() {
-      this.link1.current.click();
+      const tokenData = getTokenData(this.state.token);
+      this.setState({ role: tokenData.fk_id_role }, () => {
+         if (this.state.role === this.ADMIN) {
+            this.setState({ isAdminFunctionality: true });
+         }
+      });
+
+      if (this.state.isAdminFunctionality) {
+         this.link1.current.click();
+      } else {
+         this.handleClickLink(null, this.state.actualState);
+      }
    }
 
 
@@ -214,23 +230,28 @@ class AllChallenges extends React.Component {
                               <img className="camaraLogo" src={innovaCamaraLogo} alt="innovaCamaralogo" />
                            </Col>
                         </Row>
-                        <Row className="mx-0 mb-3">
-                           <Col sm={12} md={9} className="order-2 order-md-1">
-                              <Navbar collapseOnSelect expand="lg">
-                                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-                                 <Navbar.Collapse id="responsive-navbar-nav">
-                                    <Nav className="align-items-center">
-                                       <Nav.Link ref={this.link1} className="circle red navLink mx-4 mx-lg-2 px-0" href="#Unassigned" onClick={(e) => this.handleClickLink(e, "CREATED")}><span>Retos Sin Asignar</span></Nav.Link>
-                                       <Nav.Link ref={this.link2} className="circle blue navLink mx-4 mx-lg-2 px-0" href="#Assigned" onClick={(e) => this.handleClickLink(e, "ASSIGNED")}><span>Retos Asignados</span></Nav.Link>
-                                       <Nav.Link ref={this.link3} className="circle green navLink mx-4 mx-lg-2 px-0" href="#Finished" onClick={(e) => this.handleClickLink(e, "FINISHED")}><span>Retos Finalizados</span></Nav.Link>
-                                    </Nav>
-                                 </Navbar.Collapse>
-                              </Navbar>
-                           </Col>
-                           <Col sm={12} md={3} className="order-1 order-md-2 d-flex align-items-center justify-content-xl-end justify-content-center p-0">
-                              <Link to="home/challenge" className="linkCreateChallenge"><img className="plusCreateChallenge w-auto mr-1" src={plusSign} alt="Plus"></img>Crear Reto</Link>
-                           </Col>
-                        </Row>
+                        {
+                           this.state.isAdminFunctionality &&
+                           (
+                              <Row className="mx-0 mb-3">
+                                 <Col sm={12} md={9} className="order-2 order-md-1">
+                                    <Navbar collapseOnSelect expand="lg">
+                                       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                                       <Navbar.Collapse id="responsive-navbar-nav">
+                                          <Nav className="align-items-center">
+                                             <Nav.Link ref={this.link1} className="circle red navLink mx-4 mx-lg-2 px-0" href="#Unassigned" onClick={(e) => this.handleClickLink(e, "CREATED")}><span>Retos Sin Asignar</span></Nav.Link>
+                                             <Nav.Link ref={this.link2} className="circle blue navLink mx-4 mx-lg-2 px-0" href="#Assigned" onClick={(e) => this.handleClickLink(e, "ASSIGNED")}><span>Retos Asignados</span></Nav.Link>
+                                             <Nav.Link ref={this.link3} className="circle green navLink mx-4 mx-lg-2 px-0" href="#Finished" onClick={(e) => this.handleClickLink(e, "FINISHED")}><span>Retos Finalizados</span></Nav.Link>
+                                          </Nav>
+                                       </Navbar.Collapse>
+                                    </Navbar>
+                                 </Col>
+                                 <Col sm={12} md={3} className="order-1 order-md-2 d-flex align-items-center justify-content-xl-end justify-content-center p-0">
+                                    <Link to="home/challenge" className="linkCreateChallenge"><img className="plusCreateChallenge w-auto mr-1" src={plusSign} alt="Plus"></img>Crear Reto</Link>
+                                 </Col>
+                              </Row>
+                           )
+                        }
                      </Col>
                   </Row>
 
