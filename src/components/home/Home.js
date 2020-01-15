@@ -19,7 +19,6 @@ class Home extends React.Component {
         }
     }
 
-
     render() {
         let { token } = this.state;
 

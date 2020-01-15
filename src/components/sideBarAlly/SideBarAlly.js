@@ -27,16 +27,16 @@ class SideBar extends React.Component {
                </span>
             </div>
             <div className="adminText d-flex align-items-center">
-               <h3>Administrador</h3>
+               <h3>Empresa</h3>
             </div>
             <Link to="/home" >
                <div className="sideLinkBox d-flex align-items-center">
-                  <p>Retos</p>
+                  <p>Todos los retos</p>
                </div>
             </Link>
             <Link to="/home/ally" >
                <div className="sideLinkBox d-flex align-items-center">
-                  <p>Administrar usuarios</p>
+                  <p>Retos en curso</p>
                </div>
             </Link>
             <a className="mt-auto" onClick={logOut} href="/">
