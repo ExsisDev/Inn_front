@@ -13,7 +13,6 @@ const HumanResourceList = (props) => {
                         return (
                             <Col key={person.resource_name} lg={12/props.cols}>
                                 <HumanResource person={person} 
-                                               save={props.save}
                                                edit={props.edit}
                                 />
                             </Col>

@@ -9,13 +9,12 @@ import HumanResourceList from '../utilities/humanResource/HumanResourceList';
 import { getToken } from '../../commons/tokenManagement';
 import img from '../../images/EmpresaA.png';
 
-class EditResources extends React.Component {
+class EditAllyResources extends React.Component {
     constructor() {
         super();
         this.state = {
             allyResources: []
         }
-        this.resourcesToSend = [];
     }
 
     
@@ -33,23 +32,11 @@ class EditResources extends React.Component {
         axios.get(url, { headers: { 'x-auth-token': `${token}` } })
             .then(res => {
                 this.setState({ allyResources: res.data });
-                this.resourcesToSend = res.data;
             })
             .catch(error => {
                 console.log(error);
                 console.log("Algo salió mal");
             });
-    }
-    /**
-     * Guardar los cambios ocurridos en los recursos, en la variable de clase
-     * resourcesToSend.
-     * @param {Object} Recurso editado
-     */
-    save = (data) => {
-        let index = this.resourcesToSend.findIndex((resource) => {
-            return resource.id_resource === data.id_resource;
-        });        
-        this.resourcesToSend[index] = data;        
     }
 
     render() {
@@ -59,11 +46,10 @@ class EditResources extends React.Component {
                 <HeaderWithUserLogo source={img} />
                 <Row>
                     <Col>                        
-                        <h1>Editar Recursos</h1>
+                        <h1>Eliminar Recursos</h1>
                         <div className="px-5">
                             <HumanResourceList cols="3" 
-                                               people={this.state.allyResources} 
-                                               save={this.save}
+                                               people={this.state.allyResources}
                                                edit 
                             />
                         </div>
@@ -74,4 +60,4 @@ class EditResources extends React.Component {
     }
 }
 
-export default EditResources;
+export default EditAllyResources;

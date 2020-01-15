@@ -2,6 +2,7 @@
     border-radius: 20px !important;
     box-shadow: 0px 5px 10px gray;
     background-color: #f0f0f0 !important;
+    height: 22rem;
 }
 
 .cardImage {
@@ -9,20 +10,11 @@
     height: 70px;
 }
 
-.cardResourceName {
-    text-align: center;
-    font-size: 1.1rem !important;
-    font-weight: 500;
-}
-
 .cardTitle {    
     font-weight: 500;
+    font-size: .94rem;
 }
 
 .cardText {
-    font-size: .9rem;    
-}
-
-.cardTextArea {
-    resize: none !important;
+    font-size: .8rem;
 }
