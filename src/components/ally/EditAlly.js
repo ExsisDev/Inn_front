@@ -417,7 +417,7 @@ class EditAlly extends React.Component {
                                             as={Link}
                                             to={`/ally/edit/${idAlly}/resources`}
                                         >
-                                            Editar recursos
+                                            Administrar recursos
                                         </Button>
                                     </Col>
                                 </Form.Group>
