@@ -60,14 +60,12 @@ class AllChallenges extends React.Component {
 
    componentDidMount() {
       const tokenData = getTokenData(this.state.token);
-      this.setState({ role: tokenData.fk_id_role }, () => {
-         if (this.state.role === this.ADMIN) {
-            this.setState({ isAdminFunctionality: true });
-         }
-      });
+      this.setState({ role: tokenData.fk_id_role });
 
-      if (this.state.isAdminFunctionality) {
-         this.link1.current.click();
+      if (tokenData.fk_id_role === this.ADMIN) {
+         this.setState({ isAdminFunctionality: true }, ()=>{
+            this.link1.current.click();
+         });
       } else {
          this.handleClickLink(null, this.state.actualState);
       }
@@ -227,7 +225,7 @@ class AllChallenges extends React.Component {
                               </Form>
                            </Col>
                            <Col md={{ span: 4, offset: 4 }} className="order-sm-1 order-1 order-md-2 camaraLogoBox d-flex justify-content-md-end justify-content-center">
-                              <img className="allChallengesCamaraLogo" src={innovaCamaraLogo} alt="innovaCamaralogo" />
+                              <img className="camaraLogo" src={innovaCamaraLogo} alt="innovaCamaralogo" />
                            </Col>
                         </Row>
                         {
@@ -239,9 +237,9 @@ class AllChallenges extends React.Component {
                                        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                                        <Navbar.Collapse id="responsive-navbar-nav">
                                           <Nav className="align-items-center">
-                                             <Nav.Link ref={this.link1} className="allChallengesCircle allChallengesRed allChallengesNavLink mx-4 mx-lg-2 px-0" href="#Unassigned" onClick={(e) => this.handleClickLink(e, "CREATED")}><span>Retos Sin Asignar</span></Nav.Link>
-                                             <Nav.Link ref={this.link2} className="allChallengesCircle allChallengesBlue allChallengesNavLink mx-4 mx-lg-2 px-0" href="#Assigned" onClick={(e) => this.handleClickLink(e, "ASSIGNED")}><span>Retos Asignados</span></Nav.Link>
-                                             <Nav.Link ref={this.link3} className="allChallengesCircle allChallengesGreen allChallengesNavLink mx-4 mx-lg-2 px-0" href="#Finished" onClick={(e) => this.handleClickLink(e, "FINISHED")}><span>Retos Finalizados</span></Nav.Link>
+                                             <Nav.Link ref={this.link1} className="allChallengesCircle allChallengesRed allChallengesnavLink mx-4 mx-lg-2 px-0" href="#Unassigned" onClick={(e) => this.handleClickLink(e, "CREATED")}><span>Retos Sin Asignar</span></Nav.Link>
+                                             <Nav.Link ref={this.link2} className="allChallengesCircle allChallengesBlue allChallengesnavLink mx-4 mx-lg-2 px-0" href="#Assigned" onClick={(e) => this.handleClickLink(e, "ASSIGNED")}><span>Retos Asignados</span></Nav.Link>
+                                             <Nav.Link ref={this.link3} className="allChallengesCircle allChallengesGreen allChallengesnavLink mx-4 mx-lg-2 px-0" href="#Finished" onClick={(e) => this.handleClickLink(e, "FINISHED")}><span>Retos Finalizados</span></Nav.Link>
                                           </Nav>
                                        </Navbar.Collapse>
                                     </Navbar>
@@ -258,7 +256,7 @@ class AllChallenges extends React.Component {
                   {this.state.loadingChallenges ?
                      (
                         <div className="d-flex justify-content-center flex-grow-1">
-                           <ReactLoading className="d-flex align-items-center allChallengesSvgContainer" type={"spokes"} color={"#313333"} />
+                           <ReactLoading className="d-flex align-items-center svgContainer" type={"spokes"} color={"#313333"} />
                         </div>
                      )
                      :
