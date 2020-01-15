@@ -2,6 +2,8 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 
+import AdminRoute from './components/utilities/routes/AdminRoute';
+import SharedRoute from './components/utilities/routes/SharedRoute';
 import Landing from "./components/landing/Landing";
 import Home from "./components/home/Home";
 import AdminProfile from './components/adminProfile/AdminProfile';
@@ -20,9 +22,9 @@ class App extends React.Component {
                <ToastContainer enableMultiContainer containerId={'A'} />
                <Switch>
                   <Route path="/pageNotFound" component={PageNotFound} />
-                  <Route path="/ally/edit/:idAlly" component={EditAlly} />
-                  <Route path="/home" component={Home} />
-                  <Route path="/adminProfile" component={AdminProfile} />
+                  <AdminRoute path="/ally/edit/:idAlly" component={EditAlly} />
+                  <SharedRoute path="/home" component={Home} />
+                  <AdminRoute path="/adminProfile" component={AdminProfile} />
                   <Route path="/" component={Landing} />
                </Switch>
             </div>

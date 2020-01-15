@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
 
+import authentication from '../../commons/authentication';
 import WelcomeText from '../welcomeText/WelcomeText';
 import LoginForm from '../loginForm/LoginForm';
 import RecoverPasswordEmail from '../recoverPasswordEmail/RecoverPasswordEmail'
@@ -10,20 +11,13 @@ import Image from 'react-bootstrap/Image'
 import innovaCamarLogo from '../../images/innovaCamaraLogo.png';
 import './Landing.css';
 
-/**
-* obtener el token desde localStorage
-*/
-function getToken(token) {
-    return localStorage.getItem('auth-token') ? true : false;
-}
-
 const Landing = () => {
-    const isThereToken = getToken();
+    const { isAuthenticated } = authentication.validateToken();
+    if (isAuthenticated) {
+        return <Redirect to="/home" />
+    }
     return (
         <Container className="landing d-flex flex-column align-items-center" fluid>
-            {
-                isThereToken && <Redirect to="/home" />
-            }
             <Row id="landingFirstRow" className="d-flex justify-content-center align-items-center">
                 <Col md={5} xl={4} lg={4} sm={6} className="landingMain">
                     <div className="landingBorder">

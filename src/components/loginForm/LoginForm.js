@@ -39,7 +39,6 @@ class LoginForm extends React.Component {
       this.setState({ [e.target.name]: e.target.value });
    }
 
-
    /**
     * Guardar el token en localStorage
     */
@@ -47,12 +46,12 @@ class LoginForm extends React.Component {
       localStorage.setItem('auth-token', token);
    }
 
-   
+
    /**
     * obtener el token desde localStorage
     */
    getToken(token) {
-      return localStorage.getItem('auth-token') ? true : false ;
+      return localStorage.getItem('auth-token') ? true : false;
    }
 
    /**
@@ -72,16 +71,22 @@ class LoginForm extends React.Component {
 
       axios.post(url, credentials)
          .then(res => {
-            this.setState({ isLogged: true }, () => { this.saveToken(res.headers['x-auth-token']) });
+            this.saveToken(res.headers['x-auth-token']);
+            this.setState({ isLogged: true });
          })
          .catch(error => {
-            const res = error.response;                        
+            if (!error.response) {
+               this.notify("Algo salió mal.");
+               return;
+            }
+
+            const res = error.response;
             let msg = "";
             if (res.status === 429) {
                msg = `${res.data.msj}.`;
                msg += `Intente ingresar de nuevo en ${this.getIntegerPart(res.data.minutes)} minutos.`
             }
-            else if (res.status === 400){
+            else if (res.status === 400) {
                msg = res.data;
             } else {
                msg = "Error inesperado, intente más tarde."
@@ -90,7 +95,6 @@ class LoginForm extends React.Component {
             this.deactivateButton(false);
          })
    }
-
 
    /**
     * Habilita o desabilita el botón dependiendo del argumento.
@@ -102,7 +106,6 @@ class LoginForm extends React.Component {
    deactivateButton = (bool) => {
       this.setState({ isLoading: bool })
    }
-
 
    notify = (error) => toast.error(error,
       {
@@ -116,14 +119,16 @@ class LoginForm extends React.Component {
       }
    );
 
-
    getIntegerPart(decimal) {
       return Math.ceil(decimal)
    }
 
-
    render() {
       let { isLoading, isLogged } = this.state;
+
+      if (isLogged) {
+         return <Redirect to="/home" />
+      }
 
       return (
          <div>
