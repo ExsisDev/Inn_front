@@ -178,10 +178,12 @@ class EditAlly extends React.Component {
         });
     }
 
+    
     /**
      * Notificación de actualización
      */
     notify = () => this.toastId = toast.info("Actualizando...", this.toastConfiguration);
+
 
     /**
      * Notificación de éxito
@@ -190,12 +192,14 @@ class EditAlly extends React.Component {
         toast.update(this.toastId, { render: msg, type: toast.TYPE.SUCCESS, autoClose: 3000});
     }
 
+
     /**
      * Notificación de error
      */
     updateError = (msg) => {
         toast.update(this.toastId, { render: msg, type: toast.TYPE.ERROR, autoClose: 3000 });
     }
+
 
     /**
      * Agregar la categoria seleccionada al aliado

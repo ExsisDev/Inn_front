@@ -62,6 +62,9 @@ class AllAlies extends React.Component {
         await this.getAlliesByPage(pageNumber);
     }
 
+    /**
+     * Renderizar todos los aliados
+     */
     renderAllies = (allies) => {
         const imageStyle = {
             height: "70px",

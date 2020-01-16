@@ -1,12 +1,13 @@
 import React from 'react';
 import { Col, Card, Row } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import { IconContext } from "react-icons";
 import { IoIosCloseCircle } from 'react-icons/io';
 
 import './ChallengeCard.css';
 
 class ChallengeCard extends React.Component {
-   
+
    render() {
       return (
          <Col className="mb-5">
@@ -45,14 +46,34 @@ class ChallengeCard extends React.Component {
                      </Col>
                   </Row>
                   <Row className="d-flex justify-content-end mt-2 mt-md-1">
-                     <a href="#" className="challengeCardSeeMoreCardLink mr-4">Ver más</a>
+                     {
+                        !this.props.isUserAnAdmin &&
+                        (
+                           <Link to={{
+                              pathname: "/home/challengeDescription",
+                              state: {
+                                 idChallenge: this.props.challengeId,
+                                 challengeName: this.props.challengeName,
+                                 companyName: this.props.companyName,
+                                 companyDescription: this.props.companyDescription,
+                                 challengeDescription: this.props.challengeDescription,
+                                 categories: this.props.categories,
+                                 challengeDate: this.props.challengeDate
+                              }
+                           }}
+                              className="challengeCardSeeMoreCardLink mr-4"
+                           >
+                              Ver más
+                           </Link>
+                        )
+                     }
                   </Row>
                   <Row className="challengeCardCategories mx-0 mt-2 mt-md-1">
                      <Col sm={3} md={2} className="d-flex justify-content-left justify-content-sm-center">
                         <span className="w-auto"><i>Categorías:</i></span>
                      </Col>
                      <Col sm={9} md={10} className="d-flex justify-content-start">
-                        <i className="w-auto challengeCardHashTags">{this.props.categories.map((item) => { return (`#${item} `) })}</i>
+                        <i className="w-auto challengeCardHashTags">{this.props.categories.map((item) => { return (`#${item.split(' ').map(a => a.trim()).map(a => a[0].toUpperCase() + a.substring(1)).join("")} `) })}</i>
                      </Col>
                   </Row>
                </Card.Body>

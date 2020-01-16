@@ -256,7 +256,7 @@ class AllChallenges extends React.Component {
                   {this.state.loadingChallenges ?
                      (
                         <div className="d-flex justify-content-center flex-grow-1">
-                           <ReactLoading className="d-flex align-items-center svgContainer" type={"spokes"} color={"#313333"} />
+                           <ReactLoading className="d-flex align-items-center allChallengesSvgContainer" type={"spokes"} color={"#313333"} />
                         </div>
                      )
                      :
@@ -268,12 +268,15 @@ class AllChallenges extends React.Component {
                                     return (
                                        <ChallengeCard
                                           key={index}
+                                          challengeId={item.id_challenge}
                                           challengeName={item.challenge_name}
                                           companyName={item.company.company_name}
                                           companyDescription={item.company.company_description}
                                           challengeDescription={item.challenge_description}
                                           categories={item.categories}
                                           deleteChallenge={() => this.showDeleteModal(item.id_challenge)}
+                                          isUserAnAdmin={this.state.isAdminFunctionality}
+                                          challengeDate={new Date(item.close_date).getDate() + "/" + (new Date(item.close_date).getMonth() + 1) + "/" + new Date(item.close_date).getFullYear()}
                                        />
                                     );
                                  })

@@ -1,5 +1,6 @@
 .challengeDetailsCardBox {
    width: 100% !important;
+   min-height: 50vh;
 }
 
 .challengeDetailsName {
@@ -18,16 +19,7 @@
    -webkit-line-clamp: 3;
 }
 
-.challengeDetailsDescription {
-   text-align: start;
-   overflow: hidden;
-   text-overflow: ellipsis;
-   display: -webkit-box;
-   -webkit-box-orient: vertical;
-   -webkit-line-clamp: 3;
-}
-
-.challengeDetailsAply {
+.challengeDetailsApply {
    width: auto;
    color: #4976f2 !important;
 }
