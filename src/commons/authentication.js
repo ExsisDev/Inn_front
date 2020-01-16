@@ -3,6 +3,7 @@ import {logOut} from './tokenManagement';
  
 /**
  * Validar que el usuario esté autenticado y obtener el rol del usuario.
+ * Si el token no es valido se borra del localStorage.
  * @returns {Object} Objeto con dos atributos: isAuthenticated indica si el token es válido, userRole rol del usuario 
  */
 function validateToken() {

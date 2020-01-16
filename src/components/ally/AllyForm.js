@@ -203,7 +203,7 @@ const AllyForm = (props) => {
                 </Col>
 
                 <Col sm="12" md="7">
-                    <HumanResourceList cols="2" people={props.resources} />
+                    <HumanResourceList cols="2" people={props.resources} handleDelete={props.removeResource} />
                     <Form.Group className="d-flex justify-content-end">
                         <Col sm="3" className="p-0">
                             <Button className="formButton"

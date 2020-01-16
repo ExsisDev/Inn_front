@@ -1,0 +1,13 @@
+.contentDataEditAllyResources {
+    margin-top: 19vh;
+}
+
+.softText {
+    color: gray;
+}
+
+@media only screen and (min-width: 600px){
+    .contentDataEditAllyResources {
+        margin-top: 14vh;
+    }   
+}
