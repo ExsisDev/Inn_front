@@ -237,9 +237,9 @@ class AllChallenges extends React.Component {
                                        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                                        <Navbar.Collapse id="responsive-navbar-nav">
                                           <Nav className="align-items-center">
-                                             <Nav.Link ref={this.link1} className="allChallengesCircle allChallengesRed allChallengesnavLink mx-4 mx-lg-2 px-0" href="#Unassigned" onClick={(e) => this.handleClickLink(e, "CREATED")}><span>Retos Sin Asignar</span></Nav.Link>
-                                             <Nav.Link ref={this.link2} className="allChallengesCircle allChallengesBlue allChallengesnavLink mx-4 mx-lg-2 px-0" href="#Assigned" onClick={(e) => this.handleClickLink(e, "ASSIGNED")}><span>Retos Asignados</span></Nav.Link>
-                                             <Nav.Link ref={this.link3} className="allChallengesCircle allChallengesGreen allChallengesnavLink mx-4 mx-lg-2 px-0" href="#Finished" onClick={(e) => this.handleClickLink(e, "FINISHED")}><span>Retos Finalizados</span></Nav.Link>
+                                             <Nav.Link ref={this.link1} className="allChallengesCircle allChallengesRed allChallengesNavLink mx-4 mx-lg-2 px-0" href="#Unassigned" onClick={(e) => this.handleClickLink(e, "CREATED")}><span>Retos Sin Asignar</span></Nav.Link>
+                                             <Nav.Link ref={this.link2} className="allChallengesCircle allChallengesBlue allChallengesNavLink mx-4 mx-lg-2 px-0" href="#Assigned" onClick={(e) => this.handleClickLink(e, "ASSIGNED")}><span>Retos Asignados</span></Nav.Link>
+                                             <Nav.Link ref={this.link3} className="allChallengesCircle allChallengesGreen allChallengesNavLink mx-4 mx-lg-2 px-0" href="#Finished" onClick={(e) => this.handleClickLink(e, "FINISHED")}><span>Retos Finalizados</span></Nav.Link>
                                           </Nav>
                                        </Navbar.Collapse>
                                     </Navbar>
