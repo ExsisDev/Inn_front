@@ -83,7 +83,6 @@ class EditAllyResources extends React.Component {
 
                 this.notifyError("Algo salió mal");
             })
-        
     }
 
     /**
