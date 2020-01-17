@@ -29,9 +29,9 @@ class Home extends React.Component {
 
     componentDidMount() {
         let tokenData = getTokenData(this.state.token);
-        this.setState({role: tokenData.fk_id_role});
+        this.setState({ role: tokenData.fk_id_role });
     }
-    
+
 
     render() {
 
@@ -41,14 +41,9 @@ class Home extends React.Component {
                     <Row noGutters>
                         <Col className="d-flex">
                             {
-                                this.state.role === this.ALLY ?
-                                (
-                                    <SideBarAlly />
-                                )
-                                :
-                                (
-                                    <SideBarAdmin />
-                                )
+                                this.state.role === this.ALLY
+                                    ? <SideBarAlly />
+                                    : <SideBarAdmin />
                             }
                             <Switch>
                                 <AdminRoute path="/home/ally/create" component={CreateAlly} />
