@@ -28,14 +28,13 @@ class ProposalForm extends React.Component {
 
 
    componentDidMount() {
-      let idAlly = getTokenData(this.state.token).id_user;
-      this.getHoursOfAlly(idAlly);
+      this.getHoursOfAlly();
    }
 
 
    handleUpIdeationArrow(e) {
       this.setState((state, props) => (
-         state.ideationHours < 10 &&
+         state.ideationHours < state.maxIdeationHours &&
          { ideationHours: state.ideationHours + 1 }
       ));
    }
@@ -51,7 +50,7 @@ class ProposalForm extends React.Component {
 
    handleUpExperimentationArrow(e) {
       this.setState((state, props) => (
-         state.experimentationHours < 10 &&
+         state.experimentationHours < state.maxExperimentationHours &&
          { experimentationHours: state.experimentationHours + 1 }
       ));
    }
@@ -65,8 +64,8 @@ class ProposalForm extends React.Component {
    }
 
 
-   async getHoursOfAlly(idAlly) {
-      let url = `${process.env.REACT_APP_BACK_URL}/allies/${idAlly}`;
+   async getHoursOfAlly() {
+      let url = `${process.env.REACT_APP_BACK_URL}/allies/me`;
 
       await axios.get(url, {
          headers: { 'x-auth-token': `${this.state.token}` }
