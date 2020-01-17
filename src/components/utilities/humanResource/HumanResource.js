@@ -19,7 +19,7 @@ const HumanResource = (props) => {
                 <h5 className="humanResourceCardTitle text-left mb-0">Perfil:</h5>
                 <Card.Text className="humanResourceCardText text-left">{props.person.resource_profile}</Card.Text>
                 <h5 className="humanResourceCardTitle text-left mb-0">Experiencia:</h5>
-                <Card.Text className="humanResourceCardText text-left">{props.person.resource_experience}</Card.Text>
+                <Card.Text className="humanResourceCardText humanResourceExperienceText text-left">{props.person.resource_experience}</Card.Text>
             </Card.Body>
         </Card>
     );

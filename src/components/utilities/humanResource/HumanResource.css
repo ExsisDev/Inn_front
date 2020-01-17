@@ -2,7 +2,7 @@
     border-radius: 20px !important;
     box-shadow: 0px 5px 10px gray;
     background-color: #f0f0f0 !important;
-    height: 22rem;
+    height: 20rem;
 }
 
 .humanResourceCardImage {
@@ -17,4 +17,9 @@
 
 .humanResourceCardText {
     font-size: .7rem;
+}
+
+.humanResourceExperienceText {
+    height: 4rem;
+    overflow-y: auto;
 }
