@@ -15,7 +15,7 @@ class ChallengeCard extends React.Component {
                <Card.Body className="px-lg-3">
                   <Row className="mx-0">
                      <Col className="offset-lg-2">
-                        <Card.Title className="challengeCardName text-center text-md-center text-lg-left ">{this.props.challengeName}</Card.Title>
+                        <Card.Title className="challengeCardName text-center text-md-center text-lg-left "><b>{this.props.challengeName}</b></Card.Title>
                      </Col>
                      <Col xs="1">
                         <IconContext.Provider value={{ className: "logoutIcon" }}>
@@ -61,7 +61,7 @@ class ChallengeCard extends React.Component {
                                  challengeDate: this.props.challengeDate
                               }
                            }}
-                              className="challengeCardSeeMoreCardLink mr-4"
+                              className="blueLink mr-4 mt-2"
                            >
                               Ver más
                            </Link>

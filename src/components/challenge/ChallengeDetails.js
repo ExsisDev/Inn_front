@@ -15,11 +15,11 @@ const ChallengeDetails = (props) => {
                <BackNavigator />
                <Row className="h-100 d-flex justify-content-center align-items-center my-3">
                   <Col className="">
-                     <Card className="formBox challengeDetailsCardBox">
+                     <Card className="formBox challengeDetailsCardBox pr-4">
                         <Card.Body className="px-lg-3 d-flex flex-column justify-content-center">
                            <Row className="mx-0">
                               <Col className="offset-lg-2">
-                                 <Card.Title className="challengeDetailsName text-center text-md-center text-lg-left">{props.location.state.challengeName}</Card.Title>
+                                 <Card.Title className="challengeDetailsName text-center text-md-center text-lg-left"><b>{props.location.state.challengeName}</b></Card.Title>
                               </Col>
                            </Row>
                            <Row className="font-italic mx-0">
@@ -52,17 +52,17 @@ const ChallengeDetails = (props) => {
                            </Row>
                            <Row className="d-flex justify-content-center mt-4 mt-md-5 mx-0 mb-3">
                               <Col md={10} className="d-flex justify-content-md-start justify-content-center">
-                                 <b className="w-auto"><i>{"Fecha de cierre: "}</i>&nbsp;&nbsp;&nbsp;&nbsp;<i>{props.location.state.challengeDate}</i></b>
+                                 <b className="w-auto ml-4"><i>{"Fecha de cierre: "}</i>&nbsp;&nbsp;&nbsp;&nbsp;<i>{props.location.state.challengeDate}</i></b>
                               </Col>
                               <Col md={2} className="mt-3 mt-md-0">
                                  <Link
                                     to={{
-                                       pathname: "/home/challengeDescription",
+                                       pathname: "/home/newProposal",
                                        state: {
-
+                                          challengeName: props.location.state.challengeName,
                                        }
                                     }}
-                                    className="challengeCardSeeMoreCardLink mr-4"
+                                    className="blueLink mr-4"
                                  >
                                     Aplicar
                               </Link>
