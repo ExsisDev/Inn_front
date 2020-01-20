@@ -1,7 +1,9 @@
 import React from 'react';
 import { Col, Card, Row, Container, Form, Button } from 'react-bootstrap';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
+import { PROPOSAL_STATE } from '../../commons/enums';
 import BackNavigator from '../utilities/backNavigator/BackNavigator';
 import NumberArrowUpDown from '../utilities/numberArrowUpDown/NumberArrowUpDown';
 import { getToken, getTokenData } from '../../commons/tokenManagement';
@@ -17,13 +19,23 @@ class ProposalForm extends React.Component {
          maxExperimentationHours: 1,
          ideationHours: 1,
          maxIdeationHours: 1,
+         description: "",
+         resources: "",
+         isLoading: false,
          token: getToken()
       }
 
-      this.handleUpIdeationArrow = this.handleUpIdeationArrow.bind(this);
-      this.handleDownIdeationArrow = this.handleDownIdeationArrow.bind(this);
-      this.handleUpExperimentationArrow = this.handleUpExperimentationArrow.bind(this);
-      this.handleDownExperimentationArrow = this.handleDownExperimentationArrow.bind(this);
+      this.toastConfiguration = {
+         position: "top-right",
+         autoClose: 5000,
+         hideProgressBar: true,
+         closeOnClick: true,
+         pauseOnHover: true,
+         draggable: true,
+         closeButton: false,
+         containerId: 'A'
+      }
+
    }
 
 
@@ -32,7 +44,11 @@ class ProposalForm extends React.Component {
    }
 
 
-   handleUpIdeationArrow(e) {
+   /**
+    * Controla la flecha arriba de las horas de ideación
+    * @param {Event} e 
+    */
+   handleUpIdeationArrow = (e) => {
       this.setState((state, props) => (
          state.ideationHours < state.maxIdeationHours &&
          { ideationHours: state.ideationHours + 1 }
@@ -40,15 +56,23 @@ class ProposalForm extends React.Component {
    }
 
 
-   handleDownIdeationArrow(e) {
+   /**
+    * Controla la flecha abajo de las horas de ideación
+    * @param {Event} e 
+    */
+   handleDownIdeationArrow = (e) => {
       this.setState((state, props) => (
-         state.ideationHours > 0 &&
+         state.ideationHours > 1 &&
          { ideationHours: state.ideationHours - 1 }
       ));
    }
 
 
-   handleUpExperimentationArrow(e) {
+   /**
+    * Controla la flecha arriba de las horas de experimentación
+    * @param {Event} e 
+    */
+   handleUpExperimentationArrow = (e) => {
       this.setState((state, props) => (
          state.experimentationHours < state.maxExperimentationHours &&
          { experimentationHours: state.experimentationHours + 1 }
@@ -56,14 +80,65 @@ class ProposalForm extends React.Component {
    }
 
 
-   handleDownExperimentationArrow(e) {
+   /**
+    * Controla la flecha abajo de las horas de experimentación
+    * @param {Event} e 
+    */
+   handleDownExperimentationArrow = (e) => {
       this.setState((state, props) => (
-         state.experimentationHours > 0 &&
+         state.experimentationHours > 1 &&
          { experimentationHours: state.experimentationHours - 1 }
       ));
    }
 
+   /**
+    * Crear un nueva propuesta para el reto
+    * @param {Object} newProposal 
+    */
+   handleSubmition = async (e) => {
+      e.preventDefault();
 
+      if (!this.state.description || !this.state.resources) {
+         this.notifyError("Por favor completa los campos");
+         return;
+      }
+
+      await this.setState({ isLoading: true });
+
+      let newProposal = {
+         fk_id_challenge: this.props.location.state.idChallenge,
+         fk_id_ally: getTokenData(this.state.token).id_user,
+         fk_id_proposal_state: PROPOSAL_STATE.SEND,
+         ideation_hours: this.state.ideationHours,
+         experimentation_hours: this.state.experimentationHours,
+         solution_description: this.state.description,
+         proposal_is_assigned: false
+      }
+
+      let url = `${process.env.REACT_APP_BACK_URL}/proposals`;
+
+      await axios.post(url, newProposal, {
+         headers: { 'x-auth-token': `${this.state.token}` }
+      }).then((result) => {
+         this.notifySuccess("Propuesta creada");
+
+      }).catch((error) => {
+         this.notifyError(error.response.data);
+
+      });
+
+      await this.setState({ isLoading: false });
+   }
+
+
+   handleChange = (e) => {
+      this.setState({ [e.target.name]: e.target.value });
+   }
+
+
+   /**
+    * Obtener las horas de ideación y de experimentación del aliado dado el token actual
+    */
    async getHoursOfAlly() {
       let url = `${process.env.REACT_APP_BACK_URL}/allies/me`;
 
@@ -80,6 +155,18 @@ class ProposalForm extends React.Component {
             console.log(error);
          });
    }
+
+
+   /**
+   * Toast de error
+   */
+   notifyError = (errorMessage) => toast.error(errorMessage, this.toastConfiguration);
+
+
+   /**
+   * Toast de exito
+   */
+   notifySuccess = (successMessage) => toast.success(successMessage, this.toastConfiguration);
 
 
    render() {
@@ -106,13 +193,13 @@ class ProposalForm extends React.Component {
                                     </Card.Text>
                                  </Col>
                               </Row>
-                              <Form className="mt-4">
+                              <Form className="mt-4" onSubmit={this.handleSubmition}>
                                  <Form.Row>
                                     <Form.Group as={Col} style={{ paddingLeft: '15px' }} controlId="proposalFormInput1" className="offset-lg-2">
                                        <Form.Label className="proposalFormInputLabels text-left">
                                           Descripción de la solución:
                                        </Form.Label>
-                                       <Form.Control as="textarea" className="formInput proposalFormTextArea">
+                                       <Form.Control as="textarea" className="formInput proposalFormTextArea" name="description" onChange={this.handleChange}>
                                        </Form.Control>
                                     </Form.Group>
                                  </Form.Row>
@@ -121,7 +208,7 @@ class ProposalForm extends React.Component {
                                        <Form.Label className="proposalFormInputLabels text-left">
                                           Recursos adicionales requeridos:
                                        </Form.Label>
-                                       <Form.Control as="textarea" className="formInput proposalFormTextArea">
+                                       <Form.Control as="textarea" className="formInput proposalFormTextArea" name="resources" onChange={this.handleChange}>
                                        </Form.Control>
                                     </Form.Group>
                                  </Form.Row>
@@ -143,7 +230,9 @@ class ProposalForm extends React.Component {
                                        </Form.Label>
                                     </Form.Group>
                                     <Form.Group as={Col} lg="3" className="d-flex align-items-end justify-content-end">
-                                       <Button variant="link" type="submit" className="w-auto blueLink">Siguiente</Button>
+                                       <Button variant="link" type="submit" className="w-auto blueLink" disabled={this.state.isLoading}>
+                                          {this.state.isLoading ? "Enviando..." : "Siguiente"}
+                                       </Button>
                                     </Form.Group>
                                  </Form.Row>
                               </Form>

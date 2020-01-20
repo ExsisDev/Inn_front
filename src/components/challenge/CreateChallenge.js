@@ -9,6 +9,7 @@ import { DateTime } from 'luxon';
 import jwt from 'jsonwebtoken';
 import _ from 'lodash';
 
+import {CHALLENGE_STATE} from '../../commons/enums';
 import { getToken } from '../../commons/tokenManagement';
 import SectionTitle from '../utilities/sectionTitle/SectionTitle';
 import BackNavigator from '../utilities/backNavigator/BackNavigator';
@@ -162,7 +163,7 @@ class CreateChallenge extends React.Component {
       e.preventDefault();
 
       const url = `${process.env.REACT_APP_BACK_URL}/challenges`;
-      const CREATED = 3;
+      const CREATED = CHALLENGE_STATE.CREATED;
 
       await this.setState({ isCreating: true });
 

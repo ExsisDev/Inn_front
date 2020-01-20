@@ -59,6 +59,7 @@ const ChallengeDetails = (props) => {
                                     to={{
                                        pathname: "/home/newProposal",
                                        state: {
+                                          idChallenge: props.location.state.idChallenge,
                                           challengeName: props.location.state.challengeName,
                                        }
                                     }}
