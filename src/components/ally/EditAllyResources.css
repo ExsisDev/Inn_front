@@ -1,13 +1,21 @@
 .contentDataEditAllyResources {
-    margin-top: 19vh;
+    margin-top: 2vh;
 }
 
 .softText {
     color: gray;
 }
 
+.allyBtnCreateAllyResources {
+    width: 50%;
+    margin-top: 22vh;
+    background-color: orange !important;
+    color: white !important;
+    border-radius: 50px !important;
+    border: none !important;
+    font-size: 1.17rem !important;
+}
+
 @media only screen and (min-width: 600px){
-    .contentDataEditAllyResources {
-        margin-top: 14vh;
-    }   
+    .allyBtnCreateAllyResources { margin-top: 6vh; }
 }
