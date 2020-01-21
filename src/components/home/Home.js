@@ -15,6 +15,7 @@ import ChallengeDetais from '../challenge/ChallengeDetails';
 import { getToken, getTokenData } from '../../commons/tokenManagement';
 import './Home.css';
 import ProposalForm from '../proposal/ProposalForm';
+import ProposalsMenu from '../proposalsMenu/ProposalsMenu';
 
 class Home extends React.Component {
 
@@ -59,6 +60,7 @@ class Home extends React.Component {
                                 <AdminRoute path="/home/challenge" component={CreateChallenge} />
                                 <AllyRoute path="/home/challengeDescription" component={ChallengeDetais} />
                                 <AllyRoute path="/home/newProposal" component={ProposalForm} />
+                                <AllyRoute path="/home/ongoingChallenges" component={ProposalsMenu} />
                                 <SharedRoute path="/home" component={AllChallenges} />
                             </Switch>
                         </Col>

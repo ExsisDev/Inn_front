@@ -63,7 +63,7 @@ class AllChallenges extends React.Component {
       this.setState({ role: tokenData.fk_id_role });
 
       if (tokenData.fk_id_role === this.ADMIN) {
-         this.setState({ isAdminFunctionality: true }, ()=>{
+         this.setState({ isAdminFunctionality: true }, () => {
             this.link1.current.click();
          });
       } else {
@@ -216,7 +216,7 @@ class AllChallenges extends React.Component {
                         <Row className="my-4 mx-0">
                            <Col md={4} className="d-flex align-items-center order-2 order-sm-2 order-md-1 mt-4 mt-sm-4 mt-md-0">
                               <Form onSubmit={this.handleSearchButton}>
-                                 <InputGroup className="mb-3 groupButtonText">
+                                 <InputGroup className="groupButtonText">
                                     <InputGroup.Prepend className="w-auto">
                                        <Button className="allChallengesIconButton" variant="outline-secondary" type="submit"></Button>
                                     </InputGroup.Prepend>
