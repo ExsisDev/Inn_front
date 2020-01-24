@@ -16,6 +16,7 @@ import { getToken, getTokenData } from '../../commons/tokenManagement';
 import './Home.css';
 import ProposalForm from '../proposal/ProposalForm';
 import ProposalsMenu from '../proposalsMenu/ProposalsMenu';
+import TrackAssignment from '../TrackAssignment/TrackAssignment';
 
 class Home extends React.Component {
 
@@ -56,6 +57,7 @@ class Home extends React.Component {
                                 <AllyRoute path="/home/challengeDescription" component={ChallengeDetais} />
                                 <AllyRoute path="/home/newProposal" component={ProposalForm} />
                                 <AllyRoute path="/home/ongoingChallenges" component={ProposalsMenu} />
+                                <SharedRoute path="/home/assigment/" component={TrackAssignment} />
                                 <SharedRoute path="/home" component={AllChallenges} />
                             </Switch>
                         </Col>
