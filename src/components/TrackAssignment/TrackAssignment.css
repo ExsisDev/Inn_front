@@ -1,0 +1,30 @@
+/*Logo and Title of Companies*/
+
+.trackAssigmentCompanyTitle {
+    font-weight: 700;
+}
+
+.trackAssignmentImageCenterRounded {
+	height: 110px;
+	width: 110px;
+	background: white no-repeat center;
+	background-size: contain;
+}
+
+.trackAssignmentImage {
+    height: 74%;
+    width: auto;
+    margin: 0 auto;
+}
+
+/* Description */
+.trackAssigmentSubTitle {
+    font-weight: 600;
+}
+
+/* Card */
+
+.trackAssignmentCard {
+    background-color: #f0f0f0 !important;
+    border-radius: 1rem !important;
+}

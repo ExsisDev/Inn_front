@@ -57,7 +57,7 @@ class Home extends React.Component {
                                 <AllyRoute path="/home/challengeDescription" component={ChallengeDetais} />
                                 <AllyRoute path="/home/newProposal" component={ProposalForm} />
                                 <AllyRoute path="/home/ongoingChallenges" component={ProposalsMenu} />
-                                <SharedRoute path="/home/assigment/" component={TrackAssignment} />
+                                <SharedRoute path="/home/assignment/" component={TrackAssignment} />
                                 <SharedRoute path="/home" component={AllChallenges} />
                             </Switch>
                         </Col>
