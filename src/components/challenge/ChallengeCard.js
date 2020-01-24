@@ -7,11 +7,35 @@ import { IoIosCloseCircle } from 'react-icons/io';
 import './ChallengeCard.css';
 
 class ChallengeCard extends React.Component {
+   constructor(props) {
+      super(props)
+
+      this.state = {
+         color: this.props.color
+      }
+   }
 
    render() {
+      let classNameBackgroundColor = "";
+      switch (this.state.color) {
+         case "blue":
+            classNameBackgroundColor = "challengeCardNewAssignedColor"
+            break;
+         case "green":
+            classNameBackgroundColor = "challengeCardNewSendedColor"
+            break;
+         case "yellow":
+            classNameBackgroundColor = "challengeCardNewFinishedColor" 
+            break;
+         case "red":
+            classNameBackgroundColor = "challengeCardNewRejectedColor" 
+            break;
+         default:
+            break;
+      }
       return (
          <Col className="mb-5">
-            <Card className="formBox challengeCardBox">
+            <Card className={`formBox challengeCardBox ${classNameBackgroundColor}`}>
                <Card.Body className="px-lg-3">
                   <Row className="mx-0">
                      <Col className="offset-lg-2">

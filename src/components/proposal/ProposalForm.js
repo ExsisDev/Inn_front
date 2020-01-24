@@ -112,7 +112,7 @@ class ProposalForm extends React.Component {
          ideation_hours: this.state.ideationHours,
          experimentation_hours: this.state.experimentationHours,
          solution_description: this.state.description,
-         proposal_is_assigned: false
+         proposal_resources: this.state.resources
       }
 
       let url = `${process.env.REACT_APP_BACK_URL}/proposals`;

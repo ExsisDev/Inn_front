@@ -22,7 +22,7 @@ class AllChallenges extends React.Component {
       this.state = {
          renderedChallenges: [],
          actualPage: 1,
-         actualState: "CREATED",
+         actualStatus: "CREATED",
          loadingChallenges: true,
          totalElements: 0,
          searchElement: "",
@@ -67,7 +67,7 @@ class AllChallenges extends React.Component {
             this.link1.current.click();
          });
       } else {
-         this.handleClickLink(null, this.state.actualState);
+         this.handleClickLink(null, this.state.actualStatus);
       }
    }
 
@@ -101,7 +101,7 @@ class AllChallenges extends React.Component {
     * Cambiar el estado actual de los retos mostrados (barra de links) 
     */
    async handleClickLink(e, state) {
-      await this.setState({ actualState: state, loadingChallenges: true, searchPaginationActive: false, actualPage: 1 });
+      await this.setState({ actualStatus: state, loadingChallenges: true, searchPaginationActive: false, actualPage: 1 });
       await this.getChallengesByPageAndStatus(this.state.actualPage, state, false);
    }
 
@@ -112,7 +112,7 @@ class AllChallenges extends React.Component {
     */
    async handlePageChange(pageNumber) {
       await this.setState({ actualPage: pageNumber, loadingChallenges: true });
-      await this.getChallengesByPageAndStatus(pageNumber, this.state.actualState, this.state.searchPaginationActive);
+      await this.getChallengesByPageAndStatus(pageNumber, this.state.actualStatus, this.state.searchPaginationActive);
    }
 
 
@@ -131,7 +131,7 @@ class AllChallenges extends React.Component {
    handleSearchButton = async (e) => {
       e.preventDefault();
       await this.setState({ loadingChallenges: true, searchPaginationActive: true, actualPage: 1 });
-      await this.getChallengesByPageAndStatus(this.state.actualPage, this.state.actualState, true);
+      await this.getChallengesByPageAndStatus(this.state.actualPage, this.state.actualStatus, true);
    }
 
 
@@ -189,7 +189,7 @@ class AllChallenges extends React.Component {
          this.setState({ showModal: false });
       });
 
-      await this.getChallengesByPageAndStatus(this.state.actualPage, this.state.actualState, false);
+      await this.getChallengesByPageAndStatus(this.state.actualPage, this.state.actualStatus, false);
    }
 
 

@@ -2,6 +2,22 @@
    width: 100% !important;
 }
 
+.challengeCardNewSendedColor {
+   background-color: #cbf2d7 !important;
+}
+
+.challengeCardNewRejectedColor {
+   background-color: #ecc9c9 !important;
+}
+
+.challengeCardNewAssignedColor {
+   background-color: #bbebfc !important;
+}
+
+.challengeCardNewFinishedColor {
+   background-color: #fdffd6 !important;
+}
+
 .challengeCardName {
    text-align: left !important;
    background-color: inherit;
