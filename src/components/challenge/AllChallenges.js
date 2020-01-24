@@ -63,7 +63,7 @@ class AllChallenges extends React.Component {
       this.setState({ role: tokenData.fk_id_role });
 
       if (tokenData.fk_id_role === this.ADMIN) {
-         this.setState({ isAdminFunctionality: true }, ()=>{
+         this.setState({ isAdminFunctionality: true }, () => {
             this.link1.current.click();
          });
       } else {
@@ -216,7 +216,7 @@ class AllChallenges extends React.Component {
                         <Row className="my-4 mx-0">
                            <Col md={4} className="d-flex align-items-center order-2 order-sm-2 order-md-1 mt-4 mt-sm-4 mt-md-0">
                               <Form onSubmit={this.handleSearchButton}>
-                                 <InputGroup className="mb-3 groupButtonText">
+                                 <InputGroup className="groupButtonText">
                                     <InputGroup.Prepend className="w-auto">
                                        <Button className="allChallengesIconButton" variant="outline-secondary" type="submit"></Button>
                                     </InputGroup.Prepend>
@@ -256,7 +256,7 @@ class AllChallenges extends React.Component {
                   {this.state.loadingChallenges ?
                      (
                         <div className="d-flex justify-content-center flex-grow-1">
-                           <ReactLoading className="d-flex align-items-center svgContainer" type={"spokes"} color={"#313333"} />
+                           <ReactLoading className="d-flex align-items-center allChallengesSvgContainer" type={"spokes"} color={"#313333"} />
                         </div>
                      )
                      :
@@ -268,12 +268,15 @@ class AllChallenges extends React.Component {
                                     return (
                                        <ChallengeCard
                                           key={index}
+                                          challengeId={item.id_challenge}
                                           challengeName={item.challenge_name}
                                           companyName={item.company.company_name}
                                           companyDescription={item.company.company_description}
                                           challengeDescription={item.challenge_description}
                                           categories={item.categories}
                                           deleteChallenge={() => this.showDeleteModal(item.id_challenge)}
+                                          isUserAnAdmin={this.state.isAdminFunctionality}
+                                          challengeDate={new Date(item.close_date).getDate() + "/" + (new Date(item.close_date).getMonth() + 1) + "/" + new Date(item.close_date).getFullYear()}
                                        />
                                     );
                                  })

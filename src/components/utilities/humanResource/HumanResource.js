@@ -8,8 +8,8 @@ import './HumanResource.css';
 const HumanResource = (props) => {
     return (
         <Card className="humanResourceCardBox mx-0 my-2 py-3 align-items-end">
-            <Button variant="Link" className="w-25 p-0" 
-                    onClick={() => props.handleDelete(props.person) } 
+            <Button variant="Link" className="w-25 p-0"
+                onClick={() => props.handleDelete(props.person)}
             >
                 <MdDelete />
             </Button>
