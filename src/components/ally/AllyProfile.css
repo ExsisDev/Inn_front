@@ -1,0 +1,12 @@
+.allyProfileTextStyle {
+    font-size: 1.4rem !important;
+    color: #7b7b7b !important;
+}
+
+.allyProfileTitle {
+    font-weight: bold;    
+}
+
+.allyProfileContentData {
+    margin-top: 130px;
+}
