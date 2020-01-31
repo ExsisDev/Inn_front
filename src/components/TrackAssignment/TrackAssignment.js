@@ -6,8 +6,8 @@ import SectionTitle from '../utilities/sectionTitle/SectionTitle';
 import LogoTitle from '../../images/PropuestasAsignadas.png';
 import LogoProposing from '../../images/EmpresaB.png';
 import LogoAlly from '../../images/EmpresaA.png';
-import './trackAssignment.css'
 import { Image } from 'react-bootstrap';
+import './TrackAssignment.css'
 
 class TrackAssignment extends React.Component {
     constructor(props) {

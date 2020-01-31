@@ -16,7 +16,7 @@ import ChallengeDetais from '../challenge/ChallengeDetails';
 import ProposalForm from '../proposal/ProposalForm';
 import ProposalsMenu from '../proposalsMenu/ProposalsMenu';
 import ProposalList from '../proposalList/ProposalList';
-import TrackAssignment from '../TrackAssignment/TrackAssignment';
+import TrackAssignment from '../trackAssignment/TrackAssignment';
 import './Home.css';
 
 class Home extends React.Component {
