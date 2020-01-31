@@ -14,8 +14,8 @@ import AllChallenges from '../challenge/AllChallenges';
 import AllAllies from '../ally/AllAllies';
 import ChallengeDetais from '../challenge/ChallengeDetails';
 import ProposalForm from '../proposal/ProposalForm';
-import ProposalsMenu from '../proposalsMenu/ProposalsMenu';
-import ProposalList from '../proposalList/ProposalList';
+import ProposalsMenu from '../proposal/ProposalsMenu';
+import ProposalList from '../proposal/ProposalList';
 import TrackAssignment from '../trackAssignment/TrackAssignment';
 import './Home.css';
 
