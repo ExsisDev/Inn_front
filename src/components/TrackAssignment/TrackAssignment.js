@@ -6,7 +6,7 @@ import SectionTitle from '../utilities/sectionTitle/SectionTitle';
 import LogoTitle from '../../images/PropuestasAsignadas.png';
 import LogoProposing from '../../images/EmpresaB.png';
 import LogoAlly from '../../images/EmpresaA.png';
-import './TrackAssignment.css'
+import './trackAssignment.css'
 import { Image } from 'react-bootstrap';
 
 class TrackAssignment extends React.Component {
@@ -17,7 +17,7 @@ class TrackAssignment extends React.Component {
             allycompany: null
         }
     }
-
+    
     render() {
         const titleProps = {
             text: "Reto en Desarrollo",
@@ -74,7 +74,7 @@ class TrackAssignment extends React.Component {
                                 <Card className="trackAssignmentCard my-2">
                                     <Card.Body className="">
                                         <Card.Text>
-                                            Nota de la sesión 1
+                                            Note de la sesión 1
                                         </Card.Text>
                                         <footer className="blockquote-footer">
                                             Octubre 12 de 2019
@@ -84,7 +84,7 @@ class TrackAssignment extends React.Component {
                                 <Card className="trackAssignmentCard my-2">
                                     <Card.Body className="">
                                         <Card.Text>
-                                            Nota de la sesión 2
+                                            Note de la sesión 2
                                         </Card.Text>
                                         <footer className="blockquote-footer">
                                             Octubre 20 de 2019
@@ -94,7 +94,7 @@ class TrackAssignment extends React.Component {
                                 <Card className="trackAssignmentCard my-2">
                                     <Card.Body className="">
                                         <Card.Text>
-                                            Nota de la sesión 3
+                                            Note de la sesión 3
                                         </Card.Text>
                                         <footer className="blockquote-footer">
                                             Noviembre 05 de 2019
@@ -106,8 +106,8 @@ class TrackAssignment extends React.Component {
                     </Col>
                 </Row>
             </Container>
-        );
-    }
-}
-
+                );
+            }
+        }
+        
 export default TrackAssignment;
