@@ -17,7 +17,7 @@ class TrackAssignment extends React.Component {
             allycompany: null
         }
     }
-    
+
     render() {
         const titleProps = {
             text: "Reto en Desarrollo",
@@ -74,7 +74,7 @@ class TrackAssignment extends React.Component {
                                 <Card className="trackAssignmentCard my-2">
                                     <Card.Body className="">
                                         <Card.Text>
-                                            Note de la sesión 1
+                                            Nota de la sesión 1
                                         </Card.Text>
                                         <footer className="blockquote-footer">
                                             Octubre 12 de 2019
@@ -84,7 +84,7 @@ class TrackAssignment extends React.Component {
                                 <Card className="trackAssignmentCard my-2">
                                     <Card.Body className="">
                                         <Card.Text>
-                                            Note de la sesión 2
+                                            Nota de la sesión 2
                                         </Card.Text>
                                         <footer className="blockquote-footer">
                                             Octubre 20 de 2019
@@ -94,7 +94,7 @@ class TrackAssignment extends React.Component {
                                 <Card className="trackAssignmentCard my-2">
                                     <Card.Body className="">
                                         <Card.Text>
-                                            Note de la sesión 3
+                                            Nota de la sesión 3
                                         </Card.Text>
                                         <footer className="blockquote-footer">
                                             Noviembre 05 de 2019
@@ -106,8 +106,8 @@ class TrackAssignment extends React.Component {
                     </Col>
                 </Row>
             </Container>
-                );
-            }
-        }
-        
+        );
+    }
+}
+
 export default TrackAssignment;
