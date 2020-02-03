@@ -25,10 +25,10 @@ class ChallengeCard extends React.Component {
             classNameBackgroundColor = "challengeCardNewSendedColor"
             break;
          case "yellow":
-            classNameBackgroundColor = "challengeCardNewFinishedColor" 
+            classNameBackgroundColor = "challengeCardNewFinishedColor"
             break;
          case "red":
-            classNameBackgroundColor = "challengeCardNewRejectedColor" 
+            classNameBackgroundColor = "challengeCardNewRejectedColor"
             break;
          default:
             break;
@@ -70,27 +70,72 @@ class ChallengeCard extends React.Component {
                      </Col>
                   </Row>
                   <Row className="d-flex justify-content-end mt-2 mt-md-1">
-                     {
-                        !this.props.isUserAnAdmin &&
-                        (
-                           <Link to={{
-                              pathname: "/home/challengeDescription",
-                              state: {
-                                 idChallenge: this.props.challengeId,
-                                 challengeName: this.props.challengeName,
-                                 companyName: this.props.companyName,
-                                 companyDescription: this.props.companyDescription,
-                                 challengeDescription: this.props.challengeDescription,
-                                 categories: this.props.categories,
-                                 challengeDate: this.props.challengeDate
-                              }
-                           }}
-                              className="blueLink mr-4 mt-2"
-                           >
-                              Ver más
-                           </Link>
-                        )
-                     }
+                     {(() => {
+                        if (!this.props.isUserAnAdmin) {
+                           if (this.props.selectedNextRoute) {
+                              return (
+                                 <Link to={{
+                                    pathname: this.props.selectedNextRoute,
+                                    state: {
+                                       idChallenge: this.props.challengeId,
+                                       challengeName: this.props.challengeName,
+                                       companyName: this.props.companyName,
+                                       companyDescription: this.props.companyDescription,
+                                       challengeDescription: this.props.challengeDescription,
+                                       categories: this.props.categories,
+                                       challengeDate: this.props.challengeDate
+                                    }
+                                 }}
+                                    className="blueLink mr-4 mt-2"
+                                 >
+                                    Ver más
+                              </Link>
+                              )
+                           } else {
+                              return (
+                                 <Link to={{
+                                    pathname: this.props.selectedNextRoute,
+                                    state: {
+                                       idChallenge: this.props.challengeId,
+                                       challengeName: this.props.challengeName,
+                                       companyName: this.props.companyName,
+                                       companyDescription: this.props.companyDescription,
+                                       challengeDescription: this.props.challengeDescription,
+                                       categories: this.props.categories,
+                                       challengeDate: this.props.challengeDate
+                                    }
+                                 }}
+                                    className="blueLink mr-4 mt-2"
+                                 >
+                                    Ver más
+                              </Link>
+                              )
+                           }
+                        }
+                     })()}
+
+                     {/* // !this.props.isUserAnAdmin &&
+                        // (
+                        //    this.props.assignedProposal &&
+                        //    (
+                        //       <Link to={{
+                        //          pathname: "/home/challengeDescription",
+                        //          state: {
+                        //             idChallenge: this.props.challengeId,
+                        //             challengeName: this.props.challengeName,
+                        //             companyName: this.props.companyName,
+                        //             companyDescription: this.props.companyDescription,
+                        //             challengeDescription: this.props.challengeDescription,
+                        //             categories: this.props.categories,
+                        //             challengeDate: this.props.challengeDate
+                        //          }
+                        //       }}
+                        //          className="blueLink mr-4 mt-2"
+                        //       >
+                        //          Ver más
+                        //       </Link>
+                        //    )
+                        // ) */}
                   </Row>
                   <Row className="challengeCardCategories mx-0 mt-2 mt-md-1">
                      <Col sm={3} md={2} className="d-flex justify-content-left justify-content-sm-center">

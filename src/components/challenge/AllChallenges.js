@@ -267,6 +267,7 @@ class AllChallenges extends React.Component {
                                  {this.state.renderedChallenges.map((item, index) => {
                                     return (
                                        <ChallengeCard
+                                          selectedNextRoute="/home/challengeDescription"
                                           key={index}
                                           challengeId={item.id_challenge}
                                           challengeName={item.challenge_name}

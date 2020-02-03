@@ -26,6 +26,7 @@ class ProposalList extends React.Component {
          totalElements: 0,
          elementsDisplayed: 5,
          renderedChallenges: [],
+         nextRoute: "",
          loadingChallenges: false,
          token: getToken()
       }
@@ -34,16 +35,16 @@ class ProposalList extends React.Component {
    async componentDidMount() {
       switch (this.props.location.pathname) {
          case "/home/sendedProposals":
-            await this.setState({ color: "green", title: 'Propuestas Enviadas', img: propuestasEnviadas, actualStatus: "SEND" });
+            await this.setState({ color: "green", title: 'Propuestas Enviadas', img: propuestasEnviadas, actualStatus: "SEND", nextRoute: "/home/sendedProposals/details" });
             break;
          case "/home/rejectedProposals":
-            await this.setState({ color: "red", title: 'Propuestas Rechazadas', img: propuestasRechazadas, actualStatus: "REJECTED" });
+            await this.setState({ color: "red", title: 'Propuestas Rechazadas', img: propuestasRechazadas, actualStatus: "REJECTED", nextRoute: "/home/rejectedProposals/details" });
             break;
          case "/home/assignedProposals":
-            await this.setState({ color: "blue", title: 'Propuestas Asignadas', img: propuestasAsignadas, actualStatus: "ASSIGNED" });
+            await this.setState({ color: "blue", title: 'Propuestas Asignadas', img: propuestasAsignadas, actualStatus: "ASSIGNED", nextRoute: "/home/asignedProposals/details" });
             break;
          case "/home/challengesFinished":
-            await this.setState({ color: "yellow", title: 'Retos Terminados', img: retosTerminados, actualStatus: "FINISHED" });
+            await this.setState({ color: "yellow", title: 'Retos Terminados', img: retosTerminados, actualStatus: "FINISHED", nextRoute: "/home/challengesFinished/details" });
             break;
          default:
             break;
@@ -115,6 +116,7 @@ class ProposalList extends React.Component {
                                     {this.state.renderedChallenges.map((item, index) => {
                                        return (
                                           <ChallengeCard
+                                             selectedNextRoute={this.state.nextRoute}
                                              key={index}
                                              challengeId={item.challenge.id_challenge}
                                              challengeName={item.challenge.challenge_name}
@@ -157,7 +159,6 @@ class ProposalList extends React.Component {
                   }
                </Col>
             </Row>
-
          </Container>
       )
    }
