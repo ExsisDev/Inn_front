@@ -1,3 +1,11 @@
+#trackAssigmentChallengeName{
+    font-weight: bolder;
+}
+#trackAssigmentCompanyDescription{
+    font-style:italic ;
+    line-height: 1.2rem;
+    font-size: 1.1rem;
+}
 /*Logo and Title of Companies*/
 
 .trackAssigmentCompanyTitle {
@@ -5,8 +13,8 @@
 }
 
 .trackAssignmentImageCenterRounded {
-	height: 110px;
-	width: 110px;
+	height: 90px;
+	width: 90px;
 	background: white no-repeat center;
 	background-size: contain;
 }
@@ -20,6 +28,7 @@
 /* Description */
 .trackAssigmentSubTitle {
     font-weight: 600;
+    font-size: 1rem;
 }
 
 /* Card */
@@ -27,4 +36,24 @@
 .trackAssignmentCard {
     background-color: #f0f0f0 !important;
     border-radius: 1rem !important;
+}
+.trackAssigmentText{
+    white-space: pre-wrap;
+    font-size: 0.8rem;
+    line-height: 0.95rem;
+    padding-left: 5px;
+}
+
+.trackAssignmentTextarea{
+    border-radius: 10px !important;
+    background-color: #e8e8e8!important;
+    resize: none;
+}
+
+.trackAssignmentButton{
+    border-radius: 20px !important;
+    height: 28px !important;
+    background-color: #fa995d !important;
+    border: none !important;
+
 }
