@@ -58,13 +58,18 @@ class ChallengeCard extends React.Component {
                            <Col className="px-0">
                               <Card.Title className="challengeCardName text-center text-md-center text-lg-left "><b>{this.props.challengeName}</b></Card.Title>
                            </Col>
-                           <Col xs="1">
-                              <IconContext.Provider value={{ className: "logoutIcon" }}>
-                                 <span className="crossLink" onClick={this.props.deleteChallenge}>
-                                    <IoIosCloseCircle />
-                                 </span>
-                              </IconContext.Provider>
-                           </Col>
+                           {
+                              this.props.isUserAnAdmin &&
+                              (
+                                 <Col xs="1">
+                                    <IconContext.Provider value={{ className: "logoutIcon" }}>
+                                       <span className="crossLink" onClick={this.props.deleteChallenge}>
+                                          <IoIosCloseCircle />
+                                       </span>
+                                    </IconContext.Provider>
+                                 </Col>
+                              )
+                           }
                         </Row>
                         <Card.Text className="challengeCardCompanyDescription">
                            {this.props.companyDescription}
