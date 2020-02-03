@@ -1,12 +1,20 @@
 import React from 'react';
 import { Col, Card, Row, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
+
 
 import BackNavigator from '../utilities/backNavigator/BackNavigator';
 import './ChallengeDetails.css';
 
 
 const ChallengeDetails = (props) => {
+
+   if (!props.location.state) {
+      return (
+         <Redirect to="/home" />
+      );
+   }
 
    return (
       <Container fluid className="d-flex justify-content-center">

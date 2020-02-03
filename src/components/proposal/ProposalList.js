@@ -38,7 +38,7 @@ class ProposalList extends React.Component {
             await this.setState({ color: "green", title: 'Propuestas Enviadas', img: propuestasEnviadas, actualStatus: "SEND", nextRoute: "/home/sendedProposals/details" });
             break;
          case "/home/rejectedProposals":
-            await this.setState({ color: "red", title: 'Propuestas Rechazadas', img: propuestasRechazadas, actualStatus: "REJECTED", nextRoute: "/home/rejectedProposals/details" });
+            await this.setState({ color: "red", title: 'Propuestas Rechazadas', img: propuestasRechazadas, actualStatus: "REJECTED", nextRoute: "/home/sendedProposals/details" });
             break;
          case "/home/assignedProposals":
             await this.setState({ color: "blue", title: 'Propuestas Asignadas', img: propuestasAsignadas, actualStatus: "ASSIGNED", nextRoute: "/home/asignedProposals/details" });
@@ -116,8 +116,8 @@ class ProposalList extends React.Component {
                                     {this.state.renderedChallenges.map((item, index) => {
                                        return (
                                           <ChallengeCard
-                                             selectedNextRoute={this.state.nextRoute}
                                              key={index}
+                                             selectedNextRoute={this.state.nextRoute}
                                              challengeId={item.challenge.id_challenge}
                                              challengeName={item.challenge.challenge_name}
                                              challengeDescription={item.challenge.challenge_description}
@@ -125,6 +125,10 @@ class ProposalList extends React.Component {
                                              companyDescription={item.challenge.company.company_description}
                                              categories={item.categories}
                                              color={this.state.color}
+                                             proposalData={{ 
+                                                solution_description: item.solution_description, 
+                                                resources_description: item.proposal_resources, 
+                                                proposal_state_name: item.proposal_state.proposal_state_name}}
                                           />
                                        );
                                     })}

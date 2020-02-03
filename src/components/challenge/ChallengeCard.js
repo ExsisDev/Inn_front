@@ -1,9 +1,10 @@
 import React from 'react';
-import { Col, Card, Row } from 'react-bootstrap';
+import { Col, Card, Row, Image } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { IconContext } from "react-icons";
 import { IoIosCloseCircle } from 'react-icons/io';
 
+import LogoProposing from '../../images/EmpresaB.png';
 import './ChallengeCard.css';
 
 class ChallengeCard extends React.Component {
@@ -11,7 +12,7 @@ class ChallengeCard extends React.Component {
       super(props)
 
       this.state = {
-         color: this.props.color
+         color: this.props.color || ""
       }
    }
 
@@ -37,23 +38,34 @@ class ChallengeCard extends React.Component {
          <Col className="mb-5">
             <Card className={`formBox challengeCardBox ${classNameBackgroundColor}`}>
                <Card.Body className="px-lg-3">
-                  <Row className="mx-0">
-                     <Col className="offset-lg-2">
-                        <Card.Title className="challengeCardName text-center text-md-center text-lg-left "><b>{this.props.challengeName}</b></Card.Title>
-                     </Col>
-                     <Col xs="1">
-                        <IconContext.Provider value={{ className: "logoutIcon" }}>
-                           <span className="crossLink" onClick={this.props.deleteChallenge}>
-                              <IoIosCloseCircle />
-                           </span>
-                        </IconContext.Provider>
-                     </Col>
-                  </Row>
                   <Row className="font-italic mx-0">
                      <Col className="mb-sm-3" lg={2}>
-                        <b><i>{this.props.companyName}:</i></b>
+                        <Row className="mx-0">
+                           <Col className="px-0 d-flex justify-content-center">
+                              <div className="challengeCardImageBox rounded-circle d-flex align-items-center">
+                                 <Image src={LogoProposing} className="challengeCardImage" />
+                              </div>
+                           </Col>
+                        </Row>
+                        <Row className="mx-0">
+                           <Col className="px-0">
+                              <b><i>{this.props.companyName}</i></b>
+                           </Col>
+                        </Row>
                      </Col>
                      <Col lg={10}>
+                        <Row className="mx-0">
+                           <Col className="px-0">
+                              <Card.Title className="challengeCardName text-center text-md-center text-lg-left "><b>{this.props.challengeName}</b></Card.Title>
+                           </Col>
+                           <Col xs="1">
+                              <IconContext.Provider value={{ className: "logoutIcon" }}>
+                                 <span className="crossLink" onClick={this.props.deleteChallenge}>
+                                    <IoIosCloseCircle />
+                                 </span>
+                              </IconContext.Provider>
+                           </Col>
+                        </Row>
                         <Card.Text className="challengeCardCompanyDescription">
                            {this.props.companyDescription}
                         </Card.Text>
@@ -72,7 +84,7 @@ class ChallengeCard extends React.Component {
                   <Row className="d-flex justify-content-end mt-2 mt-md-1">
                      {(() => {
                         if (!this.props.isUserAnAdmin) {
-                           if (this.props.selectedNextRoute) {
+                           if (this.props.proposalData) {
                               return (
                                  <Link to={{
                                     pathname: this.props.selectedNextRoute,
@@ -83,7 +95,8 @@ class ChallengeCard extends React.Component {
                                        companyDescription: this.props.companyDescription,
                                        challengeDescription: this.props.challengeDescription,
                                        categories: this.props.categories,
-                                       challengeDate: this.props.challengeDate
+                                       challengeDate: this.props.challengeDate,
+                                       proposalData: this.props.proposalData
                                     }
                                  }}
                                     className="blueLink mr-4 mt-2"
@@ -113,29 +126,6 @@ class ChallengeCard extends React.Component {
                            }
                         }
                      })()}
-
-                     {/* // !this.props.isUserAnAdmin &&
-                        // (
-                        //    this.props.assignedProposal &&
-                        //    (
-                        //       <Link to={{
-                        //          pathname: "/home/challengeDescription",
-                        //          state: {
-                        //             idChallenge: this.props.challengeId,
-                        //             challengeName: this.props.challengeName,
-                        //             companyName: this.props.companyName,
-                        //             companyDescription: this.props.companyDescription,
-                        //             challengeDescription: this.props.challengeDescription,
-                        //             categories: this.props.categories,
-                        //             challengeDate: this.props.challengeDate
-                        //          }
-                        //       }}
-                        //          className="blueLink mr-4 mt-2"
-                        //       >
-                        //          Ver más
-                        //       </Link>
-                        //    )
-                        // ) */}
                   </Row>
                   <Row className="challengeCardCategories mx-0 mt-2 mt-md-1">
                      <Col sm={3} md={2} className="d-flex justify-content-left justify-content-sm-center">

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Row, Col, Card, Image, Form, Button } from 'react-bootstrap';
+import { Container, Row, Col, Image, Form, Button } from 'react-bootstrap';
 
 import BackNavigator from '../utilities/backNavigator/BackNavigator';
 import SectionTitle from '../utilities/sectionTitle/SectionTitle';
@@ -100,36 +100,6 @@ class TrackAssignment extends React.Component {
                         <Row>
                             <Col className="text-left">
                                 <h5 className="trackAssigmentSubTitle">Notas de la Empresa Aliada:</h5>
-                                {/* <Card className="trackAssignmentCard my-2">
-                                    <Card.Body className="">
-                                        <Card.Text>
-                                            Note de la sesión 1
-                                        </Card.Text>
-                                        <footer className="blockquote-footer">
-                                            Octubre 12 de 2019
-                                        </footer>
-                                    </Card.Body>
-                                </Card>
-                                <Card className="trackAssignmentCard my-2">
-                                    <Card.Body className="">
-                                        <Card.Text>
-                                            Note de la sesión 2
-                                        </Card.Text>
-                                        <footer className="blockquote-footer">
-                                            Octubre 20 de 2019
-                                        </footer>
-                                    </Card.Body>
-                                </Card>
-                                <Card className="trackAssignmentCard my-2">
-                                    <Card.Body className="">
-                                        <Card.Text>
-                                            Note de la sesión 3
-                                        </Card.Text>
-                                        <footer className="blockquote-footer">
-                                            Noviembre 05 de 2019
-                                        </footer>
-                                    </Card.Body>
-                                </Card> */}
                             </Col>
                         </Row>
                         { !this.state.isAdmin &&
