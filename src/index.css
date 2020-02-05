@@ -31,6 +31,17 @@ body {
   color: black;
 }
 
+.btn.btnDefaultRounded {
+  border-radius: 2rem;
+  width: 200px;
+  color: white;
+}
+
+.formInput {
+  margin-top: 1.5rem;
+  border-radius: 20px !important;
+}
+
 /* a {
   color: inherit !important;
 }
@@ -54,10 +65,7 @@ code {
   background-color: #f0f0f0 !important;
 }
 
-.formInput {
-  margin-top: 1.5vh;
-  border-radius: 20px !important;
-}
+
 
 .formButton {
   margin-top: 1vh;

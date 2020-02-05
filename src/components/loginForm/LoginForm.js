@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Row, Col } from 'react-bootstrap';
 import { Link, withRouter, Redirect } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
@@ -131,14 +131,16 @@ class LoginForm extends React.Component {
       }
 
       return (
-         <div>
+         <Row className="d-flex justify-content-center">
             {
                isLogged && <Redirect to="/home" />
             }
-            <div className="loginFormCenterContent">
-               <h6 className="mt-3 mb-3"> Iniciar Sesión </h6>
-               <Form validated={this.state.validated} onSubmit={this.handleSubmit}>
-                  <Form.Group controlId="email">
+            <Col xs={11}>
+               <div className="d-flex justify-content-center">
+                  <h6 className="mt-4 d-inline-block loginFormTittle"> Iniciar Sesión </h6>
+               </div>
+               <Form validated={this.state.validated} onSubmit={this.handleSubmit} className="d-flex flex-column align-items-center">
+                  <Form.Group controlId="email" className="w-100">
                      <Form.Control className="formInput"
                         name="email"
                         type="email"
@@ -148,7 +150,7 @@ class LoginForm extends React.Component {
                         required
                      />
                   </Form.Group>
-                  <Form.Group controlId="password">
+                  <Form.Group controlId="password" className="w-100">
                      <Form.Control className="formInput"
                         name="password"
                         type="password"
@@ -160,7 +162,7 @@ class LoginForm extends React.Component {
                      />
                   </Form.Group>
                   <Button id="btnLoginForm"
-                     className="sendButton mt-4"
+                     className="btnDefaultRounded mt-4"
                      variant="warning"
                      type="submit"
                      disabled={isLoading}
@@ -168,9 +170,11 @@ class LoginForm extends React.Component {
                      {isLoading ? 'Iniciando Sesión...' : 'Iniciar Sesión'}
                   </Button>
                </Form>
-               <Link to="/recover-password/email" id="loginFormLinkForgetPassword" >Olvidé mi contraseña</Link>
-            </div>
-         </div>
+               <div className="d-flex justify-content-center mt-2 mb-4">
+                  <Link to="/recover-password/email" id="loginFormLinkForgetPassword" >Olvidé mi contraseña</Link>
+               </div>
+            </Col>
+         </Row>
       );
    }
 }

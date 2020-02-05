@@ -1,11 +1,12 @@
-.loginFormCenterContent {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.loginFormTittle {
+    color: white;
 }
 
-#loginFormLinkForgetPassword {
+.log {
+    height: 300px;
+}
+
+a#loginFormLinkForgetPassword {
     color: white;
     font-size: 0.7rem;
-    margin-top: 1vh;
 }
