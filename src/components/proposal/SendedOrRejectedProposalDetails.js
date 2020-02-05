@@ -1,8 +1,9 @@
 import React from "react";
-import { Col, Card, Row, Container } from 'react-bootstrap';
+import { Col, Card, Row, Container, Image } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
 
 import BackNavigator from '../utilities/backNavigator/BackNavigator';
+import LogoProposing from '../../images/EmpresaB.png';
 import './SendedOrRejectedProposalDetails.css';
 
 const SendedOrRejectedProposalDetails = (props) => {
@@ -23,20 +24,29 @@ const SendedOrRejectedProposalDetails = (props) => {
                      <Card className="formBox proposalFormCardBox py-3">
                         <Card.Body className="pr-lg-5">
                            <Row className="mx-0">
-                              <Col className="offset-lg-2">
-                                 <Card.Title className="challengeDetailsName text-center text-md-center text-lg-left">
-                                    <b>{props.location.state.challengeName}</b>
-                                 </Card.Title>
+                              <Col lg={2} className="px-0 d-flex justify-content-center">
+                                 <div className="proposalFormImageBox rounded-circle d-flex align-items-center">
+                                    <Image src={LogoProposing} className="proposalFormImage" />
+                                 </div>
+                              </Col>
+                              <Col lg={10}>
+                                 <Row className="mx-0 mt-2">
+                                    <Col className="px-0">
+                                       <Card.Title className="challengeDetailsName text-center text-md-center text-lg-left">
+                                          <b>{props.location.state.challengeName}</b>
+                                       </Card.Title>
+                                    </Col>
+                                 </Row>
+                                 <Row className="mx-0">
+                                    <Col className="px-0">
+                                       <Card.Text className="text-justify">
+                                          <i className="proposalFormHeaderText"> {props.location.state.companyDescription}</i>
+                                       </Card.Text>
+                                    </Col>
+                                 </Row>
                               </Col>
                            </Row>
                            <Row className="mx-0">
-                              <Col className="offset-lg-2">
-                                 <Card.Text className="text-justify">
-                                    <i className="proposalFormHeaderText">{props.location.state.companyDescription}</i>
-                                 </Card.Text>
-                              </Col>
-                           </Row>
-                           <Row className="mx-0 my-3">
                               <Col className="offset-lg-2 text-left">
                                  <span><b>Descripción de la solución:</b></span>
                               </Col>
@@ -46,7 +56,7 @@ const SendedOrRejectedProposalDetails = (props) => {
                                  <span>{props.location.state.proposalData.solution_description}</span>
                               </Col>
                            </Row>
-                           <Row className="mx-0 my-3">
+                           <Row className="mx-0 mt-5">
                               <Col className="offset-lg-2 text-left">
                                  <span><b>Nuestra solución y recursos:</b></span>
                               </Col>
