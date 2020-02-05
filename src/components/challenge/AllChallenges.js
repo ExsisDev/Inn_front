@@ -268,6 +268,7 @@ class AllChallenges extends React.Component {
                                     return (
                                        <ChallengeCard
                                           key={index}
+                                          selectedNextRoute="/home/challengeDescription"
                                           challengeId={item.id_challenge}
                                           challengeName={item.challenge_name}
                                           companyName={item.company.company_name}

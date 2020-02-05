@@ -17,6 +17,7 @@ import ProposalForm from '../proposal/ProposalForm';
 import ProposalsMenu from '../proposal/ProposalsMenu';
 import ProposalList from '../proposal/ProposalList';
 import TrackAssignment from '../trackAssignment/TrackAssignment';
+import SendedOrRejectedProposalDetails from '../proposal/SendedOrRejectedProposalDetails';
 import './Home.css';
 
 class Home extends React.Component {
@@ -57,6 +58,7 @@ class Home extends React.Component {
                                 <AdminRoute path="/home/challenge" component={CreateChallenge} />
                                 <AllyRoute path="/home/challengeDescription" component={ChallengeDetais} />
                                 <AllyRoute path="/home/newProposal" component={ProposalForm} />
+                                <AllyRoute path="/home/sendedProposals/details" component={SendedOrRejectedProposalDetails} />
                                 <AllyRoute path="/home/sendedProposals" component={ProposalList} />
                                 <AllyRoute path="/home/rejectedProposals" component={ProposalList}  />
                                 <AllyRoute path="/home/assignedProposals" component={ProposalList} />

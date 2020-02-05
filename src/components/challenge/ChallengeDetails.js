@@ -1,12 +1,21 @@
 import React from 'react';
-import { Col, Card, Row, Container } from 'react-bootstrap';
+import { Col, Card, Row, Container, Image } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
+
 
 import BackNavigator from '../utilities/backNavigator/BackNavigator';
+import LogoProposing from '../../images/EmpresaB.png';
 import './ChallengeDetails.css';
 
 
 const ChallengeDetails = (props) => {
+
+   if (!props.location.state) {
+      return (
+         <Redirect to="/home" />
+      );
+   }
 
    return (
       <Container fluid className="d-flex justify-content-center">
@@ -17,16 +26,27 @@ const ChallengeDetails = (props) => {
                   <Col className="">
                      <Card className="formBox challengeDetailsCardBox pr-4">
                         <Card.Body className="px-lg-3 d-flex flex-column justify-content-center">
-                           <Row className="mx-0">
-                              <Col className="offset-lg-2">
-                                 <Card.Title className="challengeDetailsName text-center text-md-center text-lg-left"><b>{props.location.state.challengeName}</b></Card.Title>
-                              </Col>
-                           </Row>
                            <Row className="font-italic mx-0">
                               <Col className="mb-sm-3" lg={2}>
-                                 <b><i>{props.location.state.companyName}:</i></b>
+                                 <Row className="mx-0">
+                                    <Col className="px-0 d-flex justify-content-center">
+                                       <div className="challengeDetailsImageBox rounded-circle d-flex align-items-center">
+                                          <Image src={LogoProposing} className="challengeDetailsImage" />
+                                       </div>
+                                    </Col>
+                                 </Row>
+                                 <Row className="mx-0">
+                                    <Col className="px-0">
+                                       <b><i>{props.location.state.companyName}</i></b>
+                                    </Col>
+                                 </Row>
                               </Col>
                               <Col lg={10}>
+                                 <Row className="mx-0">
+                                    <Col className="px-0">
+                                       <Card.Title className="challengeDetailsName text-center text-md-center text-lg-left mt-2"><b>{props.location.state.challengeName}</b></Card.Title>
+                                    </Col>
+                                 </Row>
                                  <Card.Text className="challengeDetailsCompanyDescription text-justify">
                                     {props.location.state.companyDescription}
                                  </Card.Text>

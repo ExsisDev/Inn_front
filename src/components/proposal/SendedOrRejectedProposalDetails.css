@@ -1,0 +1,19 @@
+.sendedOrRejectedProposalDetailsGreenNotification{
+   border-radius: 20px;
+   background-color: #44e274;
+   color: white;
+   padding: 5px 15px;
+   margin-top: 20px;
+   width: auto;
+   display: inline-block;
+}
+
+.sendedOrRejectedProposalDetailsRedNotification{
+   background-color: #d14848;
+   border-radius: 20px;
+   color: white;
+   padding: 5px 15px;
+   margin-top: 20px;
+   width: auto;
+   display: inline-block;
+}
