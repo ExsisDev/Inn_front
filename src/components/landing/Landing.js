@@ -23,24 +23,42 @@ const Landing = () => {
     } else {
 
         return (
-            <Container className="landing d-flex flex-column align-items-center" fluid>
-                <Row id="landingFirstRow" className="d-flex justify-content-center align-items-center">
-                    <Col md={5} xl={4} lg={4} sm={6} className="landingMain">
-                        <div className="landingBorder">
-                            <Switch>
-                                <Route path="/" exact component={WelcomeText} />
-                                <Route path="/login" exact component={LoginForm} />
-                                <Route path="/recover-password/email" exact component={RecoverPasswordEmail} />
-                                <Route path="/recover-password" exact component={RecoverNewPassword} />
-                                <Redirect from="*" to="/pageNotFound" />
-                            </Switch>
+            // <Container className="landing d-flex flex-column align-items-center" fluid>
+            //     <Row id="landingFirstRow" className="d-flex justify-content-center align-items-center">
+            //         <Col md={5} xl={4} lg={4} sm={6} className="landingMain">
+            //             <div className="landingBorder">
+            //                 <Switch>
+            //                     <Route path="/" exact component={WelcomeText} />
+            //                     <Route path="/login" exact component={LoginForm} />
+            //                     <Route path="/recover-password/email" exact component={RecoverPasswordEmail} />
+            //                     <Route path="/recover-password" exact component={RecoverNewPassword} />
+            //                     <Redirect from="*" to="/pageNotFound" />
+            //                 </Switch>
+            //             </div>
+            //         </Col>
+            //     </Row>
+            //     <Row className="justify-content-center">
+            //         <Col xs={6} md={4} lg={4} className="landingImgLogo">
+            //             <Image src={innovaCamarLogo} alt="logo innovalab" fluid />
+            //         </Col >
+            //     </Row>
+            // </Container>
+            <Container fluid className="landing">
+                <Row className="landingLoginBox">
+                    <Col lg={{ span: 4, offset: 4 }} md={{ span: 6, offset: 3 }} sm={{ span: 8, offset: 2 }} xs={{ span: 10, offset: 1 }} className=" d-flex align-items-center">
+                        <div className="landingLogin w-100">
+                            <div className="landingSquareLine h-100 w-100">
+                                <Switch>
+                                    <Route path="/" exact component={WelcomeText} />
+                                </Switch>
+                            </div>
                         </div>
                     </Col>
                 </Row>
-                <Row className="justify-content-center">
-                    <Col xs={6} md={4} lg={4} className="landingImgLogo">
+                <Row className="landingImage d-flex justify-content-center">
+                    <Col lg={{ span: 5 }} md={{ span: 7 }} sm={{ span: 9 }} xs={{ span: 11 }}>
                         <Image src={innovaCamarLogo} alt="logo innovalab" fluid />
-                    </Col >
+                    </Col>
                 </Row>
             </Container>
         );

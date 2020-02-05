@@ -1,15 +1,35 @@
-.landing {
-    position: absolute;    
-    min-height: 100vh;
-    background-image: url("../../images/background1.jpg");
-    background-position: center center;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-}
+  .landing {
+      height: 100vh;
+      background-image: linear-gradient(rgb(255, 255, 255, 0.1), rgb(255, 255, 255, 0.1)), url("../../images/background1.jpg");
+      background-position: center center;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+  }
 
-#landingFirstRow {
+  .landingLoginBox {
+      height: 80vh;
+  }
+
+  .landingLogin {
+      /* height: 70%; */
+      padding: 1.2rem;
+      border-radius: 12%;
+      background-color: rgba(20, 100, 170, 0.8);
+      background-image: linear-gradient(rgba(20, 100, 170, 0.5), rgba(78, 182, 246, 0.5));
+  }
+
+  .landingImage {
+      height: 20vh;
+  }
+
+  .landingSquareLine {
+      border-radius: 12%;
+      border: 2px solid white;
+  }
+
+  /*#landingFirstRow {
     flex: 1;
 }
 
@@ -43,4 +63,4 @@
     .landingMain {
         max-width: 60% !important;
     }
-}
+} */

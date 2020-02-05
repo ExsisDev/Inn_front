@@ -1,17 +1,11 @@
-.welcomeText {
-    margin: 3vh 0 1vw 0;
-    padding: 0 2vw;
+.welcomeTextBox {
+    padding: 0 1.8rem;
 }
 
-.welcomeText p {
-    text-align: justify;
-    margin-bottom: 4vw;
-    font-size: 1.05rem;
-    line-height: 118%;
-}
-
-#btnLoginWelcome {
-    border-radius: 12px;
+p.welcomeText {
     color: white;
-    font-size: 1.17rem;
+    text-align: justify;
+    font-size: 1.2rem;
+    word-spacing: -0.1rem;
+    line-height: normal;
 }
