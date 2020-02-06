@@ -56,6 +56,7 @@ class Home extends React.Component {
                                 <AdminRoute path="/home/ally/create" component={CreateAlly} />
                                 <AdminRoute path="/home/ally" component={AllAllies} />
                                 <AdminRoute path="/home/challenge" component={CreateChallenge} />
+                                <AdminRoute path="/home/challengeProposals" component={CreateChallenge} />
                                 <AllyRoute path="/home/challengeDescription" component={ChallengeDetais} />
                                 <AllyRoute path="/home/newProposal" component={ProposalForm} />
                                 <AllyRoute path="/home/sendedProposals/details" component={SendedOrRejectedProposalDetails} />
