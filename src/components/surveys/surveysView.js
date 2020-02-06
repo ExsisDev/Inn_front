@@ -22,25 +22,79 @@ const SurveysView = (props) => {
                             <h3 className="surveyViewTitle ">Encuesta</h3>
                         </Col>
                     </Row>
-                    <Row>
+                    <Row className="mb-4">
                         <Col>
-                            <Card className="surveysViewCard">
-                                <Card.Body>
-                                    <Card.Title className="text-left mb-2">Pregunta 1</Card.Title>
-                                    <Card.Text className="text-justify"> De acuerdo con la propuesta recibida inicialmente, ¿crees que la propuesta fue la manera maás adecuada de proceder con tu reto?</Card.Text>
-                                    <Form className="form-inline">
-                                        
-                                        <Form.Check label="Si" type={"radio"} id="left" className="form-inline form-check-inline" />
-                                        <Form.Check label="No" type={"radio"} id="rigth" className="form-inline form-check-inline" />
-                                    </Form>
-                                </Card.Body>
-                            </Card>
+
+                            <Form className="">
+                                <Card className="surveysViewCard">
+                                    <Card.Body>
+                                        <Card.Title className="text-left mb-2">Pregunta 1</Card.Title>
+                                        <Card.Text className="surveyViewText text-justify"> De acuerdo con la propuesta recibida inicialmente, ¿crees que la propuesta fue la manera maás adecuada de proceder con tu reto?</Card.Text>
+                                        <div className="survayViewRadio form-check form-check-inline">
+                                            <input className="survayViewRadio form-check-input" type="radio" id="left"></input>
+                                            <label className="survayViewRadio form-check-label" for="inlineRadio1">Si</label>
+                                        </div>
+                                        <div className="survayViewRadio form-check form-check-inline">
+                                            <input className="survayViewRadio form-check-input" type="radio" id="rigth"></input>
+                                            <label className="survayViewRadio form-check-label" for="inlineRadio2">No</label>
+                                        </div>
+                                    </Card.Body>
+                                </Card>
+                            </Form>
+
+
+                        </Col>
+                    </Row>
+                    <Row className="mb-4">
+                        <Col>
+
+                            <Form className="">
+                                <Card className="surveysViewCard">
+                                    <Card.Body>
+                                        <Card.Title className="text-left mb-2">Pregunta 2</Card.Title>
+                                        <Card.Text className="surveyViewText text-justify">¿Cómo clasificarias el servicio presentado por la empresa que realizo el reto que propusiste? </Card.Text>
+                                        <div className="survayViewRadio form-check form-check-inline">
+                                            <input className="survayViewRadio form-check-input" type="radio" id="left"></input>
+                                            <label className="survayViewRadio form-check-label" for="inlineRadio1">Muy satisfecho</label>
+                                        </div>
+                                        <div className="survayViewRadio form-check form-check-inline">
+                                            <input className="survayViewRadio form-check-input" type="radio" id="rigth"></input>
+                                            <label className="survayViewRadio form-check-label" for="inlineRadio2">Puede mejorar</label>
+                                        </div>
+                                    </Card.Body>
+                                </Card>
+                            </Form>
+
+
+                        </Col>
+                    </Row>
+                    <Row className="mb-4">
+                        <Col>
+
+                            <Form className="">
+                                <Card className="surveysViewCard">
+                                    <Card.Body>
+                                        <Card.Title className="text-left mb-2">Pregunta 3</Card.Title>
+                                        <Card.Text className="surveyViewText text-justify">¿Crees que la experiencia que asegura tener la empresa que realizó tu reto es acertada? </Card.Text>
+                                        <div className="survayViewRadio form-check form-check-inline">
+                                            <input className="survayViewRadio form-check-input" type="radio" id="left"></input>
+                                            <label className="survayViewRadio form-check-label" for="inlineRadio1">Si</label>
+                                        </div>
+                                        <div className="survayViewRadio form-check form-check-inline">
+                                            <input className="survayViewRadio form-check-input" type="radio" id="rigth"></input>
+                                            <label className="survayViewRadio form-check-label" for="inlineRadio2">No</label>
+                                        </div>
+                                    </Card.Body>
+                                </Card>
+                            </Form>
+
+
                         </Col>
                     </Row>
                 </Col>
             </Row>
         </Container >
-    )
-}
-
+                )
+            }
+            
 export default SurveysView;

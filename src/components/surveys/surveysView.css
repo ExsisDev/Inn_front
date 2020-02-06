@@ -1,8 +1,19 @@
 .surveyViewTitle{
     font-weight: 700;
+    color: #a5a5a5;
 
 }
 .card.surveysViewCard{
     background-color: #f0f0f0;
     border-radius: 25px;
+    width: auto;
+}
+.surveyViewText{
+    font-style:italic;
+}
+
+.survayViewRadio{
+    width: 30%;
+    font-weight: 600;
+
 }
