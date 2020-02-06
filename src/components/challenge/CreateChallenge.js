@@ -236,7 +236,6 @@ class CreateChallenge extends React.Component {
                      <SectionTitle titleProps={{ img: plusIcon, imgAlt: 'Plus sign', text: 'Crear Nuevo Reto' }} />
                      <Row className="d-fex justify-content-center">
                         <Col className="p-0">
-
                            <div className="formBox">
                               <Row className="m-0 d-flex justify-content-center">
                                  <Col sm={10} className="createChallengeFormCentering">
