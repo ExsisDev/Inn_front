@@ -6,15 +6,15 @@ import HumanResource from './HumanResource';
 
 const HumanResourceList = (props) => {
     return (
-        <CardDeck className="m-0" >
-            <Row className="m-0 justify-content-between">
+        <CardDeck className="mx-0" >
+            <Row className="m-0">
                 {
                     props.people.map(person => {
                         return (
-                            <Col key={person.resource_name} lg={12/props.cols}>
-                                <HumanResource person={person} 
-                                               handleDelete={props.handleDelete}
-                                               edit={props.edit}
+                            <Col key={person.resource_name} lg={12 / props.cols} md={18 / props.cols}>
+                                <HumanResource person={person}
+                                    handleDelete={props.handleDelete}
+                                    edit={props.edit}
                                 />
                             </Col>
                         );
