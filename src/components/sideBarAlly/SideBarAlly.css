@@ -1,25 +1,32 @@
-.sideBarAllyLateralBar {
-   max-width: 20%;
+.sideNav {
+   height: 100vh;
+   width: 25rem;
+   position: fixed;
+   z-index: 1;
+   top: 0;
+   left: 0;
    background-color: #313333;
-   min-height: 100vh;
-}
-
-.sideBarAllyBox {
-   height: 200px;
-   width: 100%;
-   padding: 10px 0;
+   overflow-x: hidden;
+   transition: 0.3s;
 }
 
 .sideBarAllyLogo {
    height: 80%;
-   width: auto;
-   border: 1px white solid;
+   border: 0.1rem white solid;
    background-color: azure;
 }
 
 .sideBarAllyText {
-   height: 60px;
-   margin-bottom: 20px;
+   height: 6rem;
+   margin-bottom: 2rem;
+}
+
+.sideBarAllyText h3 {
+   font-size: 2.2rem;
+}
+
+.sideBarAllyText~a:hover {
+   text-decoration: none;
 }
 
 .sideBarAllyText h3 {
@@ -28,7 +35,7 @@
 }
 
 .sideBarAllyLinkBox {
-   height: 80px;
+   height: 8rem;
 }
 
 .sideBarAllyLinkBox:hover {
@@ -44,19 +51,18 @@ a .sideBarAllyLinkBox:hover {
    background-color: #272626 !important;
 }
 
-@media only screen and (max-width: 576px) {}
+.sideBarAllyText~a {
+   width: 250px;
+}
 
-@media only screen and (max-width: 768px) {}
-
-@media only screen and (max-width: 1050px) {
-   .sideBarAllyLateralBar {
-      max-width: 200px !important;
-      visibility: collapse;
+@media screen and (max-width: 768px) {
+   .sideNav {
+      width: 0;
    }
 }
 
-@media only screen and (max-width: 1200px) {
-   .sideBarAllyText h3 {
-      font-size: 25px !important;
+@media screen and (min-width: 768px) {
+   #closeBtn {
+      visibility: hidden;
    }
 }

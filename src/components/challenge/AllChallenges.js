@@ -208,9 +208,9 @@ class AllChallenges extends React.Component {
 
    render() {
       return (
-         <Container fluid ref={this.begginingPage}>
-            <Row className="mx-0 justify-content-center h-100" >
-               <Col className="d-flex flex-column" xl={11}>
+         <Container className="contentWidth" ref={this.begginingPage}>
+            <Row className="mx-0 justify-content-end h-100" >
+               <Col className="d-flex flex-column">
                   <Row className="mx-0 d-flex justify-content-center">
                      <Col>
                         <Row className="my-4 mx-0">

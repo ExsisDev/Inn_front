@@ -31,39 +31,3 @@
       border-radius: 12%;
       border: 2px solid white;
   }
-
-  /*#landingFirstRow {
-    flex: 1;
-}
-
-.landingMain {    
-    padding: 12px;
-    max-width: 90%;    
-    border-radius: 12%;
-    background-color: rgba(20, 100, 170, 0.8);
-    background-image: linear-gradient(rgba(20, 100, 170, 0.5), rgba(78, 182, 246, 0.5));
-}
-
-.landingBorder {
-    border: 2px solid white;
-    border-radius: 12%;
-    color: white;
-    padding: 20px 10px;
-}
-
-.landingImgLogo {    
-    padding: 0 !important;
-    margin-bottom: 50px; 
-}
-
-@media (min-width: 1200px){
-    .landingMain {
-        max-width: 26% !important;
-    }
-}
-
-@media (min-width: 460px) and (max-width: 576px){
-    .landingMain {
-        max-width: 60% !important;
-    }
-} */
