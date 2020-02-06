@@ -137,9 +137,9 @@ class LoginForm extends React.Component {
             }
             <Col xs={11}>
                <div className="d-flex justify-content-center">
-                  <h6 className="mt-4 d-inline-block loginFormTittle"> Iniciar Sesión </h6>
+                  <h6 className="mt-5 d-inline-block loginFormTittle"> Iniciar Sesión </h6>
                </div>
-               <Form validated={this.state.validated} onSubmit={this.handleSubmit} className="d-flex flex-column align-items-center">
+               <Form validated={this.state.validated} onSubmit={this.handleSubmit} className="d-flex flex-column align-items-center mt-4">
                   <Form.Group controlId="email" className="w-100">
                      <Form.Control className="formInput"
                         name="email"
@@ -150,7 +150,7 @@ class LoginForm extends React.Component {
                         required
                      />
                   </Form.Group>
-                  <Form.Group controlId="password" className="w-100">
+                  <Form.Group controlId="password" className="w-100 mt-3">
                      <Form.Control className="formInput"
                         name="password"
                         type="password"
@@ -162,7 +162,7 @@ class LoginForm extends React.Component {
                      />
                   </Form.Group>
                   <Button id="btnLoginForm"
-                     className="btnDefaultRounded mt-4"
+                     className="btnDefaultRounded mt-5"
                      variant="warning"
                      type="submit"
                      disabled={isLoading}
@@ -170,8 +170,8 @@ class LoginForm extends React.Component {
                      {isLoading ? 'Iniciando Sesión...' : 'Iniciar Sesión'}
                   </Button>
                </Form>
-               <div className="d-flex justify-content-center mt-2 mb-4">
-                  <Link to="/recover-password/email" id="loginFormLinkForgetPassword" >Olvidé mi contraseña</Link>
+               <div className="d-flex justify-content-center mt-3 mb-5">
+                  <Link to="/recover-password/email" id="loginFormLinkForgetPassword" className="text-white">Olvidé mi contraseña</Link>
                </div>
             </Col>
          </Row>

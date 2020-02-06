@@ -6,13 +6,13 @@ import './WelcomeText.css'
 
 const WelcomeText = () => {
     return (
-        <div className="welcomeTextBox d-flex justify-content-center h-100 flex-column my-lg-5 my-4">
-            <p className="welcomeText">
+        <div className="d-flex justify-content-center h-100 flex-column p-5 py-lg-5">
+            <p className="welcomeText my-lg-5">
                 Bienvenido al portal de impulso TIC de innovalab
                 y la Cámara de comercio de Bogotá, para continuar
                 por favor inicia sesión
             </p>
-            <Button as={Link} to="/login" className="btnDefault mt-3 mt-sm-5" variant="warning" block>Iniciar Sesión</Button>
+            <Button as={Link} to="/login" className="btnDefault mt-4 mt-md-5 mt-lg-5" variant="warning" block>Iniciar Sesión</Button>
         </div>
     )
 }

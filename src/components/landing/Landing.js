@@ -44,14 +44,15 @@ const Landing = () => {
             //     </Row>
             // </Container>
             <Container fluid className="landing">
-                <Row className="landingLoginBox d-flex justify-content-center">
-                    <Col lg={{ span: 4}} md={{ span: 6}} sm={{ span: 8}} xs={{ span: 10 }} className=" d-flex align-items-center">
-                        <div className="landingLogin w-100">
+                <Row className="landingLoginBox d-flex justify-content-center ">
+                    <Col lg={{ span: 4 }} md={{ span: 6 }} sm={{ span: 8 }} xs={{ span: 10 }} className=" d-flex align-items-center">
+                        <div className="landingLogin w-100 mx-4">
                             <div className="landingSquareLine h-100 w-100">
                                 <Switch>
                                     <Route path="/" exact component={WelcomeText} />
                                     <Route path="/login" exact component={LoginForm} />
                                     <Route path="/recover-password/email" exact component={RecoverPasswordEmail} />
+                                    <Route path="/recover-password" exact component={RecoverNewPassword} />
                                 </Switch>
                             </div>
                         </div>
@@ -59,7 +60,9 @@ const Landing = () => {
                 </Row>
                 <Row className="landingImage d-flex justify-content-center">
                     <Col lg={{ span: 5 }} md={{ span: 7 }} sm={{ span: 9 }} xs={{ span: 11 }}>
-                        <Image fluid src={innovaCamarLogo} alt="logo innovalab" />
+                        <div className="landingImageBox">
+                            <Image src={innovaCamarLogo} alt="logo innovalab" height="100%" width="100%"/>
+                        </div>
                     </Col>
                 </Row>
             </Container>

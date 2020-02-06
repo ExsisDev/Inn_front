@@ -1,11 +1,7 @@
-.welcomeTextBox {
-    padding: 0 1.8rem;
-}
-
 p.welcomeText {
     color: white;
     text-align: justify;
-    font-size: 1.2rem;
-    word-spacing: -0.1rem;
+    font-size: 1.8rem;
+    word-spacing: -0.2rem;
     line-height: normal;
 }

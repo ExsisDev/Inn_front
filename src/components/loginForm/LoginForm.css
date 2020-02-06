@@ -1,12 +1,9 @@
 .loginFormTittle {
+    font-size: 1.6rem;
     color: white;
 }
 
-.log {
-    height: 300px;
-}
 
 a#loginFormLinkForgetPassword {
-    color: white;
-    font-size: 0.7rem;
+    font-size: 1.2rem;
 }

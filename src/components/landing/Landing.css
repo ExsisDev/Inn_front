@@ -1,6 +1,6 @@
   .landing {
       height: 100vh;
-      background-image: linear-gradient(rgb(255, 255, 255, 0.1), rgb(255, 255, 255, 0.1)), url("../../images/background1.jpg");
+      background-image: linear-gradient(to right bottom, rgba(255, 217, 0, 0.1), rgba(255, 255, 255, 0.2)), url("../../images/background1.jpg");
       background-position: center center;
       -webkit-background-size: cover;
       -moz-background-size: cover;
@@ -21,6 +21,10 @@
 
   .landingImage {
       height: 20vh;
+  }
+
+  .landingImageBox {
+      height: 60%; 
   }
 
   .landingSquareLine {
