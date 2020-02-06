@@ -51,6 +51,7 @@ const Landing = () => {
                                 <Switch>
                                     <Route path="/" exact component={WelcomeText} />
                                     <Route path="/login" exact component={LoginForm} />
+                                    <Route path="/recover-password/email" exact component={RecoverPasswordEmail} />
                                 </Switch>
                             </div>
                         </div>
