@@ -61,7 +61,7 @@ class SideBar extends React.Component {
                   </div>
                </a>
             </div>
-            <span style={{ fontSize: "30px", cursor: "pointer" }} onClick={this.openNav}>&#9776;</span>
+            <span style={{ fontSize: "30px", cursor: "pointer", position: "fixed" }} onClick={this.openNav}>&#9776;</span>
          </div>
          // <div className="sideBarAllyLateralBar d-flex flex-column">
          //    <div className="sideBarAllyBox d-flex justify-content-center mt-2">

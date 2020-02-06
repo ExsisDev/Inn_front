@@ -65,4 +65,7 @@ a .sideBarAllyLinkBox:hover {
    #closeBtn {
       visibility: hidden;
    }
+   .sideNav {
+      width: 25rem;
+   }
 }
