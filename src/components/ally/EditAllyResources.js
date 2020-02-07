@@ -39,7 +39,7 @@ class EditAllyResources extends React.Component {
         this.profile = React.createRef();
         this.experience = React.createRef();
     }
-   
+
     componentDidMount() {
         this.chargeResourcesToStatus();
     }
@@ -202,7 +202,7 @@ class EditAllyResources extends React.Component {
 
         } else {
             return (
-                <div className="px-5">
+                <div className="px-0 px-sm-5">
                     {_.isEmpty(this.state.allyResources) && this.renderNoResources()}
 
                     <HumanResourceList cols="3"
@@ -239,8 +239,16 @@ class EditAllyResources extends React.Component {
                         </Row>
                         <Row className="contentDataEditAllyResources mx-0">
                             <Col>
-                                <h1>Administrar Recursos</h1>
-                                {this.renderView()}
+                                <Row className="mx-0">
+                                    <Col>
+                                        <h1>Administrar Recursos</h1>
+                                    </Col>
+                                </Row>
+                                <Row className="mx-0 mt-5 d-flex justify-content-center">
+                                    <Col lg={10}>
+                                        {this.renderView()}
+                                    </Col>
+                                </Row>
                             </Col>
                         </Row>
                         <Modal show={this.state.showModal} onHide={this.close}>
