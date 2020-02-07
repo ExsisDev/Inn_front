@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { Container, Row, Col, Form } from 'react-bootstrap';
+import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import _ from "lodash";
 import { toast } from 'react-toastify';
 
@@ -8,6 +8,7 @@ import HeaderWithUserLogo from '../utilities/headerWithUserLogo/HeaderWithUserLo
 import HumanResourceList from '../utilities/humanResource/HumanResourceList';
 import { getToken } from '../../commons/tokenManagement';
 import img from '../../images/EmpresaA.png';
+import ReactLoading from 'react-loading';
 import './AllyProfile.css';
 import 'react-toastify/dist/ReactToastify.css';
 

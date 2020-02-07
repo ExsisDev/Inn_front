@@ -6,7 +6,7 @@ import SectionTitle from '../utilities/sectionTitle/SectionTitle';
 import LogoTitle from '../../images/PropuestasAsignadas.png';
 import LogoProposing from '../../images/EmpresaB.png';
 import LogoAlly from '../../images/EmpresaA.png';
-import './TrackAssignment.css'
+import './TrackAssignment.css';
 
 class TrackAssignment extends React.Component {
     constructor(props) {
