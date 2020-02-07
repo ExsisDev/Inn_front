@@ -1,0 +1,54 @@
+.assignedProposalDetailsHeaders {
+   font-weight: 550;
+}
+
+.assignedProposalDetailsCompanyDescription {
+   font-size: 18px;
+}
+
+.assignedProposalDetailsLabelBox {
+   width: auto;
+   margin: 0;
+   padding: 3px 15px;
+   border-radius: 20px 20px 0 0;
+   background-color: #80c3c6;
+   color: white;
+}
+
+.assignedProposalDetailsNewNote {
+   background-color: #80c3c6;
+}
+
+.btn#assignedProposalDetailsAggregateNoteBtn{
+   border-radius: 20px;
+   width: auto;
+   background-color: #80c3c6;
+   color: white;
+   border-color: #80c3c6;
+   padding: 3px 23px;
+}
+
+.btn#assignedProposalDetailsAggregateNoteBtn:hover, .btn#assignedProposalDetailsAggregateNoteBtn:active {
+   background-color: #3abbc2;
+   border-color: #3abbc2;
+}
+
+.btn.assignedProposalDetailsFinishBtn#assignedProposalDetailsAggregateNoteBtn {
+   background-color: #fa995d;
+   border-color: #fa995d;
+}
+
+.btn.assignedProposalDetailsFinishBtn#assignedProposalDetailsAggregateNoteBtn:hover, .btn.assignedProposalDetailsFinishBtn#assignedProposalDetailsAggregateNoteBtn:active {
+   background-color: #f16e1c;
+   border-color: #f16e1c;
+}
+
+textarea.assignedProposalDetailsLabelTextArea {
+   resize: none;
+   color: black;
+   border-radius: 0 0 20px 20px;
+}
+
+textarea.assignedProposalDetailsLabelTextArea:focus {
+   border-color: white !important;
+}
