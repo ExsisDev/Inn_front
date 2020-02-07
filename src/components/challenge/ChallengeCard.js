@@ -134,13 +134,13 @@ class ChallengeCard extends React.Component {
                               <Link to={{
                                  pathname: this.props.selectedNextRoute,
                                  state: {
-                                    // idChallenge: this.props.challengeId,
-                                    // challengeName: this.props.challengeName,
-                                    // companyName: this.props.companyName,
-                                    // companyDescription: this.props.companyDescription,
-                                    // challengeDescription: this.props.challengeDescription,
-                                    // categories: this.props.categories,
-                                    // challengeDate: this.props.challengeDate
+                                    idChallenge: this.props.challengeId,
+                                    challengeName: this.props.challengeName,
+                                    companyName: this.props.companyName,
+                                    companyDescription: this.props.companyDescription,
+                                    challengeDescription: this.props.challengeDescription,
+                                    categories: this.props.categories,
+                                    challengeDate: this.props.challengeDate
                                  }
                               }}
                                  className="blueLink mr-4 mt-2"
