@@ -10,3 +10,17 @@
 .allyProfileContentData {
     margin-top: 130px;
 }
+
+.allyProfileFormButton {
+    width: 160px;
+}
+
+.allyProfileHeaderColor{
+    color: #7b7b7b;
+    font-size: x-large;
+ }
+
+ .allyProfileLoadingChart{
+     margin-top: 30vh;
+ }
+
