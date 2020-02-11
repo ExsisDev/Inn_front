@@ -61,6 +61,7 @@ class Home extends React.Component {
                                 <AllyRoute path="/home/newProposal" component={ProposalForm} />
                                 <AllyRoute path="/home/sendedProposals/details" component={SendedOrRejectedProposalDetails} />
                                 <AllyRoute path="/home/asignedProposals/details" component={AssignedProposalDetails} />
+                                <AllyRoute path="/home/challengesFinished/details" component={AssignedProposalDetails} />
                                 <AllyRoute path="/home/sendedProposals" component={ProposalList} />
                                 <AllyRoute path="/home/rejectedProposals" component={ProposalList}  />
                                 <AllyRoute path="/home/assignedProposals" component={ProposalList} />

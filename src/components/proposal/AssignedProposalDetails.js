@@ -1,19 +1,61 @@
 import React from 'react';
+import axios from 'axios';
 import { Col, Row, Container, Image, Button, Card } from 'react-bootstrap';
+import { Redirect } from 'react-router-dom';
+import ReactLoading from 'react-loading';
 
 import BackNavigator from '../utilities/backNavigator/BackNavigator';
 import LogoProposing from '../../images/EmpresaB.png';
 import './AssignedProposalDetails.css';
+import { getToken } from '../../commons/tokenManagement';
 
 class AssignedProposalDetails extends React.Component {
    constructor() {
       super();
       this.state = {
-         disabledFinishButton : true
+         disabledFinishButton: true,
+         showNewNoteAndComments: true,
+         all_notes: [],
+         count_notes: 0,
+         loading_notes: true,
+         token: getToken()
       };
    }
 
+   componentDidMount() {
+      if (this.props.location.pathname === "/home/challengesFinished/details") {
+         this.setState({ showNewNoteAndComments: false })
+      }
+      this.getNotesByChallenges();
+   }
+
+   async getNotesByChallenges() {
+      let URL = `${process.env.REACT_APP_BACK_URL}/notes/${this.props.location.state.idChallenge}`;
+      const token = this.state.token;
+      await this.setState({ loading_notes: true });
+
+
+      await axios.get(URL, {
+         headers: { 'x-auth-token': `${token}` }
+
+      }).then((result) => {
+         if (result.data) {
+            this.setState({ all_notes: result.data, count_notes: result.data.length, loading_notes: false });
+         }
+      }).catch((error) => {
+         this.setState({ all_notes: [], loading_notes: false });
+
+      });
+
+   }
+
    render() {
+
+      if (!this.props.location.state) {
+         return (
+            <Redirect to="/home" />
+         );
+      }
 
       return (
          <Container fluid className="d-flex justify-content-center">
@@ -76,56 +118,86 @@ class AssignedProposalDetails extends React.Component {
                               <Row className="mx-0 mt-3">
                                  <Col className="offset-lg-2 py-2 text-left">
                                     <h6 className="trackAssigmentSubTitle mb-3">Notas: </h6>
-                                    <Row className="mx-0">
-                                       <Col>
-                                          <div class="form-group shadow-textarea">
-                                             <label for="textArea1" className="assignedProposalDetailsLabelBox">Notas sesión I</label>
-                                             <textarea class="assignedProposalDetailsLabelTextArea form-control z-depth-1" id="textArea1" disabled value="asdasdasdaasdasdasdaasdasdasdaasdasdasdaasdasdasdaasdasdasdaasdasdasdaasdasdasdaasdasdasdaasdasdasda"></textarea>
+                                    {
+                                       this.state.loading_notes ?
+                                          (
+                                             <div className="d-flex justify-content-center flex-grow-1">
+                                                <ReactLoading className="d-flex align-items-center allChallengesSvgContainer" type={"spokes"} color={"#313333"} />
+                                             </div>
+                                          )
+                                          :
+                                          (
+                                             <div>
+                                                {this.state.all_notes.map((item) => {
+                                                   return (
+                                                      <Row key={item.note_header} className="mx-0">
+                                                         <Col>
+                                                            <div className="form-group shadow-textarea">
+                                                               <label htmlFor="textArea1" className="assignedProposalDetailsLabelBox">{item.note_header}</label>
+                                                               <textarea className="assignedProposalDetailsLabelTextArea form-control z-depth-1" id="textArea1" disabled value={item.note_content}></textarea>
+                                                            </div>
+                                                         </Col>
+                                                      </Row>
+                                                   )
+                                                })
+                                                }
+                                             </div>
+                                          )
+
+                                    }
+
+
+                                    {
+                                       this.state.showNewNoteAndComments &&
+                                       (
+                                          <div>
+                                             <Row className="mx-0">
+                                                <Col>
+                                                   <div className="form-group shadow-textarea">
+                                                      <label htmlFor="textArea3" className="assignedProposalDetailsLabelBox assignedProposalDetailsNewNote">Nueva Nota</label>
+                                                      <textarea className="assignedProposalDetailsLabelTextArea form-control z-depth-1" id="textArea3"></textarea>
+                                                   </div>
+                                                </Col>
+                                             </Row>
+                                             <Row className="mx-0">
+                                                <Col className="d-flex justify-content-end">
+                                                   <Button id="assignedProposalDetailsAggregateNoteBtn">Añadir Nota</Button>
+                                                </Col>
+                                             </Row>
                                           </div>
-                                       </Col>
-                                    </Row>
-                                    <Row className="mx-0">
-                                       <Col>
-                                          <div class="form-group shadow-textarea">
-                                             <label for="textArea2" className="assignedProposalDetailsLabelBox">Notas sesión II</label>
-                                             <textarea class="assignedProposalDetailsLabelTextArea form-control z-depth-1" id="textArea2" disabled value="asdasdasdaasdasdasdaasdasdasdaasdasdasdaasdasdasdaasdasdasdaasdasdasdaasdasdasdaasdasdasdaasdasdasda"></textarea>
-                                          </div>
-                                       </Col>
-                                    </Row>
-                                    <Row className="mx-0">
-                                       <Col>
-                                          <div class="form-group shadow-textarea">
-                                             <label for="textArea3" className="assignedProposalDetailsLabelBox assignedProposalDetailsNewNote">Nueva Nota</label>
-                                             <textarea class="assignedProposalDetailsLabelTextArea form-control z-depth-1" id="textArea3"></textarea>
-                                          </div>
-                                       </Col>
-                                    </Row>
-                                    <Row className="mx-0">
-                                       <Col className="d-flex justify-content-end">
-                                          <Button id="assignedProposalDetailsAggregateNoteBtn">Añadir Nota</Button>
-                                       </Col>
-                                    </Row>
+                                       )
+                                    }
                                  </Col>
                               </Row>
                               <Row className="mx-0">
                                  <Col className="offset-lg-2 py-2 text-left">
                                     <Row className="mx-0">
                                        <Col>
-                                          <label for="textArea4" className="trackAssigmentSubTitle">Comentarios: </label>
-                                          <textarea class="form-control z-depth-1" id="textArea4" rows="4"></textarea>
+                                          <label htmlFor="textArea4" className="trackAssigmentSubTitle">Comentarios: </label>
+                                          {
+                                             this.state.showNewNoteAndComments &&
+                                             (
+                                                <textarea className="form-control z-depth-1" id="textArea4" rows="4"></textarea>
+                                             )
+                                          }
                                        </Col>
                                     </Row>
                                  </Col>
                               </Row>
-                              <Row className="mx-0">
-                                 <Col className="offset-lg-2 py-2 text-left">
-                                    <Row className="mx-0 mt-4">
-                                       <Col className="d-flex justify-content-center">
-                                          <Button id="assignedProposalDetailsAggregateNoteBtn" className="assignedProposalDetailsFinishBtn" disabled={this.state.disabledFinishButton}>Finalizar reto</Button>
+                              {
+                                 this.state.showNewNoteAndComments &&
+                                 (
+                                    <Row className="mx-0">
+                                       <Col className="offset-lg-2 py-2 text-left">
+                                          <Row className="mx-0 mt-4">
+                                             <Col className="d-flex justify-content-center">
+                                                <Button id="assignedProposalDetailsAggregateNoteBtn" className="assignedProposalDetailsFinishBtn" disabled={this.state.disabledFinishButton}>Finalizar reto</Button>
+                                             </Col>
+                                          </Row>
                                        </Col>
                                     </Row>
-                                 </Col>
-                              </Row>
+                                 )
+                              }
                            </Card.Body>
                         </Card>
                      </Col>
@@ -135,6 +207,9 @@ class AssignedProposalDetails extends React.Component {
          </Container>
       );
    }
+
+
 }
+
 
 export default AssignedProposalDetails;
