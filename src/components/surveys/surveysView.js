@@ -1,46 +1,148 @@
 import React from "react";
+import axios from 'axios';
 import { Col, Card, Row, Container, Form } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
 
 import BackNavigator from '../utilities/backNavigator/BackNavigator';
 import LogoProposing from '../../images/EmpresaB.png';
+import { getToken } from '../../commons/tokenManagement';
 import './surveysView.css';
 
-const SurveysView = (props) => {
-    function question() {
+class SurveysView extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            array_answers: [],
+            token: getToken()
+        };
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+    questions_test = [
+        {
+            question_body: "De acuerdo con la propuesta recibida inicialmente, ¿crees que la propuesta fue la manera maás adecuada de proceder con tu reto?",
+            answer_option: ["Si", "No"],
+            id_question: 3,
+            id_survey: 5
+        },
+        {
+            question_body: "¿Cómo clasificarias el servicio presentado por la empresa que realizo el reto que propusiste?",
+            answer_option: ["Muy Satisfecho", "Puede mejorar", "Insatisfecho", "Trsite", "Contento"],
+            id_question: 4,
+            id_survey: 5
+        }
+    ]
+
+    handleSubmit(e) {
+        debugger;
+        let URL=`${process.env.REACT_APP_BACK_URL}/surveys`;
+        const token= this.state.token;
+        const answer_object_array = this.state.array_answers;
+        axios.post(URL, answer_object_array, {
+            headers: { 'x-auth-token': `${token}` }
+         }).then((result)=>{
+            
+        }).catch((error) => {
+
+        });
+       alert("Se envio la información");
+       console.log(answer_object_array);
+       
+    }
+    async handleChange(e) {
+        var answer_temp = e.currentTarget.value;
+        var id_q_temp = e.currentTarget.name;
+        var flag= false;
+        await this.setState((state) => {
+            let oldArray = state.array_answers;
+            
+            oldArray.find((answer_item) => {
+                if( answer_item.id_q === id_q_temp ){
+                    answer_item.answer = answer_temp;
+                    flag=true;
+                    return flag;
+                }
+                
+                return flag;
+            })
+            
+            let newArray = flag===false ? oldArray.concat([{ id_q: id_q_temp, answer: answer_temp }]) : oldArray;
+            return {
+                array_answers: newArray
+            }
+        })
+
+        // [{id_q: e.currentTarget.name, answer: e.currentTarget.value}]
+        // this.state.array_answers.find((ans) => {
+        //     if (ans.id_q === e.currentTarget.name) {
+        //         ans.answer = e.currentTarget.value;
+        //     } else {
+        //         this.state.array_answers = this.state.array_answers.concat([{ id_q: e.currentTarget.name, answer: e.currentTarget.value }])
+        //     }
+        // }
+
+        console.log(this.state.array_answers);
+    }
+
+
+    render() {
         return (
-            <div></div>
+            <Container fluid className="d-flex justify-content-center">
+                <Row className="h-100 d-flex justify-content-center">
+                    <Col sm={11} className="d-flex flex-column align-items-center">
+                        <BackNavigator />
+                        <Row className="">
+                            <Col className="">
+                                <h3 className="surveyViewTitle ">Encuesta</h3>
+                            </Col>
+                        </Row>
+                        <Row className="mb-4">
+                            <Col>
+
+                                <Form className="" onSubmit={this.handleSubmit}>
+                                    {
+                                        this.questions_test.map((question, index) => {
+                                            return (
+                                                <Card key={"map_" + index} className="surveysViewCard mb-4">
+                                                    <Card.Body>
+                                                        <Card.Title className="text-left mb-2">Pregunta {(index + 1)}</Card.Title>
+                                                        <Card.Text className="surveyViewText text-justify"> {question.question_body}</Card.Text>
+                                                        {
+                                                            question.answer_option.map((option, index_option) => {
+                                                                return (
+                                                                    <div key={"map_" + index_option} className="survayViewRadio form-check form-check-inline">
+                                                                        <input type="radio"
+                                                                            value={option}
+                                                                            onChange={this.handleChange}
+                                                                            name={'question_' + question.id_question}
+                                                                            className="survayViewRadio form-check-input"
+                                                                            id={"answer_" + index_option}>
+                                                                        </input>
+                                                                        <label className="survayViewRadio form-check-label" htmlFor="inlineRadio1">{option}</label>
+                                                                    </div>
+                                                                )
+                                                            })
+                                                        }
+
+
+                                                    </Card.Body>
+
+                                                </Card>
+                                            )
+                                        })
+                                    }
+                                    <input type="submit" value="Submit" />
+                                </Form>
+
+
+                            </Col>
+                        </Row>
+
+                    </Col>
+                </Row>
+            </Container >
         )
     }
-    return (
-        <Container fluid className="d-flex justify-content-center">
-            <Row className="h-100 d-flex justify-content-center">
-                <Col sm={11} className="d-flex flex-column align-items-center">
-                    <BackNavigator />
-                    <Row className="">
-                        <Col className="">
-                            <h3 className="surveyViewTitle ">Encuesta</h3>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col>
-                            <Card className="surveysViewCard">
-                                <Card.Body>
-                                    <Card.Title className="text-left mb-2">Pregunta 1</Card.Title>
-                                    <Card.Text className="text-justify"> De acuerdo con la propuesta recibida inicialmente, ¿crees que la propuesta fue la manera maás adecuada de proceder con tu reto?</Card.Text>
-                                    <Form className="form-inline">
-                                        
-                                        <Form.Check label="Si" type={"radio"} id="left" className="form-inline form-check-inline" />
-                                        <Form.Check label="No" type={"radio"} id="rigth" className="form-inline form-check-inline" />
-                                    </Form>
-                                </Card.Body>
-                            </Card>
-                        </Col>
-                    </Row>
-                </Col>
-            </Row>
-        </Container >
-    )
 }
 
 export default SurveysView;
