@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Col, Row, Container, Image, Button, Card } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
 import ReactLoading from 'react-loading';
+import { toast } from 'react-toastify';
 
 import BackNavigator from '../utilities/backNavigator/BackNavigator';
 import LogoProposing from '../../images/EmpresaB.png';
@@ -19,13 +20,27 @@ class AssignedProposalDetails extends React.Component {
          loadingNotes: true,
          showAddComment: false,
          noteBody: "",
+         finalComment: "",
          token: getToken()
       };
 
-      this.showCommentBox = this.showCommentBox.bind(this);
+      this.handleFinishButton = this.handleFinishButton.bind(this);
       this.createNewNote = this.createNewNote.bind(this);
       this.newNoteArea = React.createRef();
    }
+
+
+   toastConfiguration = {
+      position: "top-right",
+      autoClose: 4000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      closeButton: false,
+      containerId: 'A'
+   }
+
 
    componentDidMount() {
       if (this.props.location.pathname === "/home/challengesFinished/details") {
@@ -33,6 +48,7 @@ class AssignedProposalDetails extends React.Component {
       }
       this.getNotesByChallenges();
    }
+
 
    async getNotesByChallenges() {
       let URL = `${process.env.REACT_APP_BACK_URL}/notes/${this.props.location.state.idChallenge}`;
@@ -55,6 +71,11 @@ class AssignedProposalDetails extends React.Component {
    }
 
    async createNewNote(e) {
+      if(this.state.noteBody === ""){
+         this.notifyError("No puede estar vacía la nueva nota");
+         return;
+      }
+
       let URL = `${process.env.REACT_APP_BACK_URL}/notes`;
       const token = this.state.token;
 
@@ -89,10 +110,39 @@ class AssignedProposalDetails extends React.Component {
       });
 
       this.newNoteArea.current.value = "";
+      await this.setState({noteBody: ""});
    }
 
-   showCommentBox(e) {
+
+   updateComment(){
+      let URL = `${process.env.REACT_APP_BACK_URL}/challenges/${this.props.location.state.idChallenge}`;
+      const token = this.state.token;
+
+      let newComment = {
+         final_comment: this.state.finalComment
+      };
+
+      axios.put(URL, newComment, {
+         headers: { 'x-auth-token': `${token}` }
+      }).then((response)=> {
+         console.log(response)
+      }).catch((error) => {
+
+      })
+   }
+
+
+   handleFinishButton(e) {
       e.preventDefault();
+      if(this.state.showAddComment){
+         if(this.state.finalComment === ""){
+            this.notifyError("Ingresa tus comentarios finales para terminar");
+            return;
+         }
+         if(window.confirm("Deseas finalizar el reto?")) {
+            this.updateComment();
+         }
+      }
       this.setState({ showAddComment: true });
    }
 
@@ -100,6 +150,18 @@ class AssignedProposalDetails extends React.Component {
    handleChange = (e) => {
       this.setState({ [e.target.name]: e.target.value });
    }
+
+
+   /**
+	 * Toast de error
+	 */
+   notifyError = (errorMessage) => toast.error(errorMessage, this.toastConfiguration);
+
+
+	/**
+	 * Toast de exito
+	 */
+   notifySuccess = (successMessage) => toast.success(successMessage, this.toastConfiguration);
 
 
    render() {
@@ -181,7 +243,7 @@ class AssignedProposalDetails extends React.Component {
                                           :
                                           (
                                              <div>
-                                                {this.state.all_notes == 0 ?
+                                                {this.state.all_notes === 0 ?
                                                    (
                                                       <h6 className="mb-3">No se encontraron elementos</h6>
                                                    )
@@ -204,7 +266,6 @@ class AssignedProposalDetails extends React.Component {
                                              </div>
                                           )
                                     }
-
 
                                     {
                                        this.state.showCompleteForm &&
@@ -231,7 +292,7 @@ class AssignedProposalDetails extends React.Component {
                                                          <Row className="mx-0">
                                                             <Col>
                                                                <label htmlFor="textArea4" className="trackAssigmentSubTitle">Comentarios: </label>
-                                                               <textarea autoFocus className="form-control z-depth-1" id="textArea4" rows="4" placeholder="Ingresa tus comentarios antes de terminar"></textarea>
+                                                               <textarea autoFocus className="form-control z-depth-1 assignedProposalDetailsTextAreaComment" id="textArea4" name="finalComment" rows="4" placeholder="Ingresa tus comentarios antes de terminar" onChange={this.handleChange}></textarea>
                                                             </Col>
                                                          </Row>
                                                       </Col>
@@ -240,10 +301,9 @@ class AssignedProposalDetails extends React.Component {
                                              }
                                              <Row className="mx-0 mt-5">
                                                 <Col className="d-flex justify-content-end">
-                                                   <Button id="assignedProposalDetailsAggregateNoteBtn" className="assignedProposalDetailsFinishBtn" onClick={this.showCommentBox}>{this.state.showAddComment ? 'Terminar' : 'Finalizar reto'}</Button>
+                                                   <Button id="assignedProposalDetailsAggregateNoteBtn" className="assignedProposalDetailsFinishBtn" onClick={this.handleFinishButton}> {this.state.showAddComment ? 'Terminar' : 'Finalizar reto'}</Button>
                                                 </Col>
                                              </Row>
-
                                           </div>
                                        )
                                     }
