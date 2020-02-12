@@ -6,6 +6,7 @@ import { Container, Row } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 
 import { getToken } from '../../commons/tokenManagement';
+import {USER_ROLES} from '../../commons/enums';
 import AllyForm from './AllyForm';
 import BackNavigator from '../utilities/backNavigator/BackNavigator';
 import SectionTitle from '../utilities/sectionTitle/SectionTitle';
@@ -105,7 +106,7 @@ class CreateAlly extends React.Component {
             ally_month_experimentation_hours: this.state.monthExpHours,
             ally_challenge_ideation_hours: this.state.challengeIdeaHours,
             ally_challenge_experimentation_hours: this.state.challengeExpHours,
-            fk_id_role: 2,
+            fk_id_role: USER_ROLES.ALLY,
             fk_user_state: 1,
             ally_resources: this.state.resources,
             ally_categories: this.getIdCategories(this.state.categoriesSelected)

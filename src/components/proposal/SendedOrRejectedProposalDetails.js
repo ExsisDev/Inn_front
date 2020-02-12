@@ -21,7 +21,7 @@ const SendedOrRejectedProposalDetails = (props) => {
                <BackNavigator />
                <Row className="h-100 d-flex justify-content-center align-items-center my-4">
                   <Col className="">
-                     <Card className="formBox proposalFormCardBox py-3">
+                     <Card className="formBox proposalFormCardBox pb-4">
                         <Card.Body className="pr-lg-5">
                            <Row className="mx-0">
                               <Col lg={2} className="px-0 d-flex justify-content-center">

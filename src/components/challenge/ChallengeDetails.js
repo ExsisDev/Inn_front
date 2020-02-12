@@ -62,7 +62,7 @@ const ChallengeDetails = (props) => {
                                  </Card.Text>
                               </Col>
                            </Row>
-                           <Row className="challengeDetailsCategories mx-0 mt-2 mt-md-4">
+                           <Row className="text-small mx-0 mt-2 mt-md-4">
                               <Col sm={3} md={2} className="d-flex justify-content-left justify-content-sm-center">
                                  <span className="w-auto"><i>Categorías:</i></span>
                               </Col>
