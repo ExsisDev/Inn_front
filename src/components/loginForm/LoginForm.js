@@ -76,7 +76,7 @@ class LoginForm extends React.Component {
          })
          .catch(error => {
             if (!error.response) {
-               this.notify("Algo salió mal.");
+               this.notifyError("Algo salió mal.");
                return;
             }
 
@@ -91,7 +91,7 @@ class LoginForm extends React.Component {
             } else {
                msg = "Error inesperado, intente más tarde."
             }
-            this.notify(msg);
+            this.notifyError(msg);
             this.deactivateButton(false);
          })
    }
@@ -107,17 +107,12 @@ class LoginForm extends React.Component {
       this.setState({ isLoading: bool })
    }
 
-   notify = (error) => toast.error(error,
-      {
-         position: "top-right",
-         autoClose: 5000,
-         hideProgressBar: false,
-         closeOnClick: true,
-         pauseOnHover: true,
-         draggable: true,
-         closeButton: false
-      }
-   );
+   
+   /**
+	 * Toast de error
+	 */
+   notifyError = (errorMessage) => toast.error(errorMessage, this.toastConfiguration);
+
 
    getIntegerPart(decimal) {
       return Math.ceil(decimal)
