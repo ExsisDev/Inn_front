@@ -13,13 +13,18 @@ class AssignedProposalDetails extends React.Component {
    constructor() {
       super();
       this.state = {
-         disabledFinishButton: true,
-         showNewNoteAndComments: true,
+         showCompleteForm: true,
          all_notes: [],
          count_notes: 0,
-         loading_notes: true,
+         loadingNotes: true,
+         showAddComment: false,
+         noteBody: "",
          token: getToken()
       };
+
+      this.showCommentBox = this.showCommentBox.bind(this);
+      this.createNewNote = this.createNewNote.bind(this);
+      this.newNoteArea = React.createRef();
    }
 
    componentDidMount() {
@@ -40,14 +45,62 @@ class AssignedProposalDetails extends React.Component {
 
       }).then((result) => {
          if (result.data) {
-            this.setState({ all_notes: result.data, count_notes: result.data.length, loading_notes: false });
+            this.setState({ all_notes: result.data, count_notes: result.data.length, loadingNotes: false });
          }
       }).catch((error) => {
-         this.setState({ all_notes: [], loading_notes: false });
+         this.setState({ all_notes: [], loadingNotes: false });
 
       });
 
    }
+
+   async createNewNote(e) {
+      let URL = `${process.env.REACT_APP_BACK_URL}/notes`;
+      const token = this.state.token;
+
+      let newNote = {
+         fk_id_challenge: this.props.location.state.idChallenge,
+         note_content: this.state.noteBody,
+         note_header: "Notas Sesión " + (this.state.count_notes + 1)
+      }
+
+      await this.setState((state, props) => {
+         let count = state.count_notes + 1;
+         return {
+            count_notes: count
+         }
+      })
+
+      await axios.post(URL, newNote, {
+         headers: { 'x-auth-token': `${token}` }
+      }).then((result) => {
+         if (result.data) {
+            this.setState((state, props) => {
+               let allNotesOld = state.all_notes;
+               let allNotesNew = allNotesOld.concat([result.data])
+               return {
+                  all_notes: allNotesNew
+               };
+            });
+
+         }
+      }).catch((error) => {
+
+      });
+
+      this.newNoteArea.current.value = "";
+   }
+
+   showCommentBox(e) {
+      e.preventDefault();
+      this.setState({ showAddComment: true });
+   }
+
+
+   handleChange = (e) => {
+      this.setState({ [e.target.name]: e.target.value });
+   }
+
 
    render() {
 
@@ -119,7 +172,7 @@ class AssignedProposalDetails extends React.Component {
                                  <Col className="offset-lg-2 py-2 text-left">
                                     <h6 className="trackAssigmentSubTitle mb-3">Notas: </h6>
                                     {
-                                       this.state.loading_notes ?
+                                       this.state.loadingNotes ?
                                           (
                                              <div className="d-flex justify-content-center flex-grow-1">
                                                 <ReactLoading className="d-flex align-items-center allChallengesSvgContainer" type={"spokes"} color={"#313333"} />
@@ -128,83 +181,81 @@ class AssignedProposalDetails extends React.Component {
                                           :
                                           (
                                              <div>
-                                                {this.state.all_notes.map((item) => {
-                                                   return (
-                                                      <Row key={item.note_header} className="mx-0">
-                                                         <Col>
-                                                            <div className="form-group shadow-textarea">
-                                                               <label htmlFor="textArea1" className="assignedProposalDetailsLabelBox">{item.note_header}</label>
-                                                               <textarea className="assignedProposalDetailsLabelTextArea form-control z-depth-1" id="textArea1" disabled value={item.note_content}></textarea>
-                                                            </div>
-                                                         </Col>
-                                                      </Row>
+                                                {this.state.all_notes == 0 ?
+                                                   (
+                                                      <h6 className="mb-3">No se encontraron elementos</h6>
                                                    )
-                                                })
+                                                   :
+                                                   (
+                                                      this.state.all_notes.map((item, index) => {
+                                                         return (
+                                                            <Row key={item.note_header + index} className="mx-0">
+                                                               <Col className="px-0">
+                                                                  <div className="form-group shadow-textarea">
+                                                                     <label htmlFor="textArea1" className="assignedProposalDetailsLabelBox">{item.note_header}</label>
+                                                                     <textarea className="assignedProposalDetailsLabelTextArea form-control z-depth-1" id="textArea1" disabled value={item.note_content}></textarea>
+                                                                  </div>
+                                                               </Col>
+                                                            </Row>
+                                                         )
+                                                      })
+                                                   )
                                                 }
                                              </div>
                                           )
-
                                     }
 
 
                                     {
-                                       this.state.showNewNoteAndComments &&
+                                       this.state.showCompleteForm &&
                                        (
                                           <div>
                                              <Row className="mx-0">
-                                                <Col>
+                                                <Col className="px-0">
                                                    <div className="form-group shadow-textarea">
                                                       <label htmlFor="textArea3" className="assignedProposalDetailsLabelBox assignedProposalDetailsNewNote">Nueva Nota</label>
-                                                      <textarea className="assignedProposalDetailsLabelTextArea form-control z-depth-1" id="textArea3"></textarea>
+                                                      <textarea className="assignedProposalDetailsLabelTextArea form-control z-depth-1" name="noteBody" id="textArea3" ref={this.newNoteArea} onChange={this.handleChange}></textarea>
                                                    </div>
                                                 </Col>
                                              </Row>
                                              <Row className="mx-0">
                                                 <Col className="d-flex justify-content-end">
-                                                   <Button id="assignedProposalDetailsAggregateNoteBtn">Añadir Nota</Button>
+                                                   <Button id="assignedProposalDetailsAggregateNoteBtn" onClick={this.createNewNote}>Añadir Nota</Button>
                                                 </Col>
                                              </Row>
+                                             {
+                                                this.state.showAddComment &&
+                                                (
+                                                   <Row className="mx-0">
+                                                      <Col className="text-left">
+                                                         <Row className="mx-0">
+                                                            <Col>
+                                                               <label htmlFor="textArea4" className="trackAssigmentSubTitle">Comentarios: </label>
+                                                               <textarea autoFocus className="form-control z-depth-1" id="textArea4" rows="4" placeholder="Ingresa tus comentarios antes de terminar"></textarea>
+                                                            </Col>
+                                                         </Row>
+                                                      </Col>
+                                                   </Row>
+                                                )
+                                             }
+                                             <Row className="mx-0 mt-5">
+                                                <Col className="d-flex justify-content-end">
+                                                   <Button id="assignedProposalDetailsAggregateNoteBtn" className="assignedProposalDetailsFinishBtn" onClick={this.showCommentBox}>{this.state.showAddComment ? 'Terminar' : 'Finalizar reto'}</Button>
+                                                </Col>
+                                             </Row>
+
                                           </div>
                                        )
                                     }
                                  </Col>
                               </Row>
-                              <Row className="mx-0">
-                                 <Col className="offset-lg-2 py-2 text-left">
-                                    <Row className="mx-0">
-                                       <Col>
-                                          <label htmlFor="textArea4" className="trackAssigmentSubTitle">Comentarios: </label>
-                                          {
-                                             this.state.showNewNoteAndComments &&
-                                             (
-                                                <textarea className="form-control z-depth-1" id="textArea4" rows="4"></textarea>
-                                             )
-                                          }
-                                       </Col>
-                                    </Row>
-                                 </Col>
-                              </Row>
-                              {
-                                 this.state.showNewNoteAndComments &&
-                                 (
-                                    <Row className="mx-0">
-                                       <Col className="offset-lg-2 py-2 text-left">
-                                          <Row className="mx-0 mt-4">
-                                             <Col className="d-flex justify-content-center">
-                                                <Button id="assignedProposalDetailsAggregateNoteBtn" className="assignedProposalDetailsFinishBtn" disabled={this.state.disabledFinishButton}>Finalizar reto</Button>
-                                             </Col>
-                                          </Row>
-                                       </Col>
-                                    </Row>
-                                 )
-                              }
                            </Card.Body>
                         </Card>
-                     </Col>
-                  </Row>
-               </Col>
-            </Row>
-         </Container>
+                     </Col >
+                  </Row >
+               </Col >
+            </Row >
+         </Container >
       );
    }
 
