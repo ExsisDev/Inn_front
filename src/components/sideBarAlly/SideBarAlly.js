@@ -35,9 +35,9 @@ class SideBar extends React.Component {
    render() {
       return (
          <div>
-            <Container ref={this.sideBarAlly} className="sideNav d-flex flex-column align-items-center">
+            <Container ref={this.sideBarAlly} id="sideNav" className="d-flex flex-column">
                <a href="javascript:void(0)" id="closeBtn" onClick={this.closeNav}>&times;</a>
-               <Row className="row d-flex justify-content-center">
+               <Row className="d-flex justify-content-center">
                   <Col xs={8}>
                      <Link to="/adminProfile" >
                         <img className="sideBarAllyLogo rounded-circle w-100" src={logoAlly} alt="Admin logo" />
@@ -46,33 +46,33 @@ class SideBar extends React.Component {
                </Row>
                <Row className="mt-3">
                   <Col>
-                     <div className="sideBarAllyText d-flex align-items-center">
+                     <div className="sideBarAllyText d-flex justify-content-center align-items-center">
                         <h3 className="bigText">Empresa</h3>
                      </div>
                   </Col>
                </Row>
-               <Row className="w-100">
-                  <Col className="p-0">
+               <Row className="sideBarAllyLinkBox">
+                  <Col className="d-flex justify-content-center align-items-center">
                      <Link to="/home">
-                        <div className="sideBarAllyLinkBox d-flex align-items-center justify-content-center">
+                        <div className="">
                            <p className="midText">Todos los retos</p>
                         </div>
                      </Link>
                   </Col>
                </Row>
-               <Row className="w-100">
-                  <Col className="p-0">
+               <Row className="sideBarAllyLinkBox">
+                  <Col className="d-flex justify-content-center align-items-center">
                      <Link to="/home/ongoingChallenges">
-                        <div className="sideBarAllyLinkBox d-flex align-items-center justify-content-center">
+                        <div className="">
                            <p className="midText">Retos en curso</p>
                         </div>
                      </Link>
                   </Col>
                </Row>
-               <Row className="mt-auto w-100">
-                  <Col className="p-0">
-                     <a  onClick={logOut} href="/">
-                        <div className="sideBarAllyLinkBox d-flex align-items-center justify-content-center">
+               <Row className="sideBarAllyLinkBox mt-auto">
+                  <Col>
+                     <a onClick={logOut} href="/">
+                        <div className="sideBarAllyLinkBox d-flex justify-content-center align-items-center">
                            <IconContext.Provider value={{ color: "white" }}>
                               <p className="midText"><IoIosLogOut /><span className="ml-2">Cerrar sesión</span></p>
                            </IconContext.Provider>
@@ -81,37 +81,8 @@ class SideBar extends React.Component {
                   </Col>
                </Row>
             </Container>
-            {/* <span style={{ fontSize: "30px", cursor: "pointer", position: "fixed" }} onClick={this.openNav}>&#9776;</span> */}
+            <span style={{ fontSize: "30px", cursor: "pointer", position: "fixed" }} onClick={this.openNav}>&#9776;</span>
          </div>
-         // <div className="sideBarAllyLateralBar d-flex flex-column">
-         //    <div className="sideBarAllyBox d-flex justify-content-center mt-2">
-         //       <span>
-         //          <Link to="/adminProfile" className="w-auto">
-         //             <img className="sideBarAllyLogo align-self-center rounded-circle" src={logoAlly} alt="Admin logo" />
-         //          </Link>
-         //       </span>
-         //    </div>
-         // <div className="sideBarAllyText d-flex align-items-center">
-         //    <h3>Empresa</h3>
-         // </div>
-         //    <Link to="/home" >
-         //       <div className="sideBarAllyLinkBox d-flex align-items-center">
-         //          <p>Todos los retos</p>
-         //       </div>
-         //    </Link>
-         //    <Link to="/home/ongoingChallenges" >
-         //       <div className="sideBarAllyLinkBox d-flex align-items-center">
-         //          <p>Retos en curso</p>
-         //       </div>
-         //    </Link>
-         //    <a className="mt-auto" onClick={logOut} href="/">
-         //       <div className="sideBarAllyLinkBox d-flex align-items-center">
-         //          <IconContext.Provider value={{ color: "white", className: "logoutIcon" }}>
-         //             <p><IoIosLogOut /><span>Cerrar sesión</span></p>
-         //          </IconContext.Provider>
-         //       </div>
-         //    </a>
-         // </div>
       );
    }
 }

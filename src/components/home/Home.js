@@ -44,14 +44,18 @@ class Home extends React.Component {
 
         return (
             <div>
-                <Container fluid className="p-0">
-                    <Row noGutters>
-                        <Col className="d-flex">
+                <Container fluid className="p-0 d-flex">
+                    <Row>
+                        <Col>
                             {
                                 this.state.role === this.ALLY
                                     ? <SideBarAlly />
                                     : <SideBarAdmin />
                             }
+                        </Col>
+                    </Row>
+                    <Row className="ml-auto">
+                        <Col>
                             <Switch>
                                 <AdminRoute path="/home/ally/create" component={CreateAlly} />
                                 <AdminRoute path="/home/ally" component={AllAllies} />
@@ -60,7 +64,7 @@ class Home extends React.Component {
                                 <AllyRoute path="/home/newProposal" component={ProposalForm} />
                                 <AllyRoute path="/home/sendedProposals/details" component={SendedOrRejectedProposalDetails} />
                                 <AllyRoute path="/home/sendedProposals" component={ProposalList} />
-                                <AllyRoute path="/home/rejectedProposals" component={ProposalList}  />
+                                <AllyRoute path="/home/rejectedProposals" component={ProposalList} />
                                 <AllyRoute path="/home/assignedProposals" component={ProposalList} />
                                 <AllyRoute path="/home/challengesFinished" component={ProposalList} />
                                 <AllyRoute path="/home/ongoingChallenges" component={ProposalsMenu} />

@@ -1,6 +1,5 @@
-.sideNav.container {
+#sideNav.container {
    height: 100vh;
-   padding: 0;
    width: 25rem;
    position: fixed;
    z-index: 1;
@@ -34,25 +33,18 @@
    height: 8rem;
 }
 
-.sideBarAllyLinkBox:hover {
-   background-color: #333333;
-}
-
-a .sideBarAllyLinkBox p {
+.row.sideBarAllyLinkBox p {
    color: white;
    margin: 0;
 }
 
-a .sideBarAllyLinkBox:hover {
-   background-color: #272626 !important;
+.row.sideBarAllyLinkBox:hover {
+   background-color: #272626 ;
 }
 
-.sideBarAllyText ~ a {
-   width: 25rem;
-}
 
 @media screen and (max-width: 768px) {
-   .sideNav {
+   #sideNav {
       width: 0;
    }
 }
@@ -61,7 +53,7 @@ a .sideBarAllyLinkBox:hover {
    #closeBtn {
       visibility: hidden;
    }
-   .sideNav {
+   #sideNav {
       width: 25rem;
    }
 }
