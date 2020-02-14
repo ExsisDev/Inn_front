@@ -36,9 +36,16 @@ class SideBar extends React.Component {
          <div>
             <div ref={this.sideBarAlly} className="sideNav d-flex flex-column align-items-center">
                <a href="javascript:void(0)" id="closeBtn" onClick={this.closeNav}>&times;</a>
-               <Link to="/adminProfile" className="d-flex justify-content-center">
+               <div className="d-flex justify-content-center">
+                  <span>
+                     <Link to="/adminProfile" className="w-auto">
+                        <img className="sideBarAllyLogo align-self-center rounded-circle" src={logoAlly} alt="Admin logo" />
+                     </Link>
+                  </span>
+               </div>
+               {/* <Link to="/adminProfile" className="d-flex justify-content-center">
                   <img className="sideBarAllyLogo align-self-center rounded-circle" src={logoAlly} alt="Admin logo" />
-               </Link>
+               </Link> */}
                <div className="sideBarAllyText d-flex align-items-center">
                   <h3>Empresa</h3>
                </div>
