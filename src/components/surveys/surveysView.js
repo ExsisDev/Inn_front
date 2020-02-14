@@ -12,6 +12,8 @@ class SurveysView extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            all_questions: [],
+            count_questions:0,
             array_answers: [],
             token: getToken()
         };
@@ -32,6 +34,29 @@ class SurveysView extends React.Component {
             id_survey: 5
         }
     ]
+
+    async getQuestionData(){
+        debugger;
+        const URL = `${process.env.REACT_APP_BACK_URL}/surveys/${this.props.location.state.idChallenge}`;
+        const token= this.state.token;
+        await axios.get(URL,{
+            headers: { 'x-auth-token': `${token}` }
+        })
+        .then( (result) => {
+            if(result.data){
+                this.setState({
+                   all_questions: result.data,
+                   count_questions: result.data.length
+                });
+            }
+
+        }).catch((error) => {
+            this.setState({all_questions:[], count_questions: 0});
+        });
+    }
+
+
+
 
     handleSubmit(e) {
         debugger;
