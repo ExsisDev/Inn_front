@@ -30,6 +30,7 @@ class AssignedProposalDetails extends React.Component {
       this.handleFinishButton = this.handleFinishButton.bind(this);
       this.createNewNote = this.createNewNote.bind(this);
       this.updateChallengeAndProposal = this.updateChallengeAndProposal.bind(this);
+      this.getFinalComment = this.getFinalComment.bind(this);
       this.newNoteArea = React.createRef();
    }
 
@@ -51,6 +52,26 @@ class AssignedProposalDetails extends React.Component {
          this.setState({ showCompleteForm: false })
       }
       this.getNotesByChallenges();
+      this.getFinalComment();
+   }
+
+
+   getFinalComment(){
+      let URL = `${process.env.REACT_APP_BACK_URL}/challenges/finalComment/${this.props.location.state.idChallenge}`;
+      const token = this.state.token;
+
+      let comment = "";
+
+      axios.get(URL, {
+         headers: { 'x-auth-token': `${token}` }
+      }).then((result) => {
+         if (result.data) {
+            this.setState({finalComment: result.data});
+         }
+      }).catch((error) => {
+
+      });
+
    }
 
 
@@ -73,6 +94,7 @@ class AssignedProposalDetails extends React.Component {
       });
 
    }
+
 
    async createNewNote(e) {
       if (this.state.noteBody === "") {
@@ -182,7 +204,7 @@ class AssignedProposalDetails extends React.Component {
          }
       }
       this.setState({ showAddComment: true });
-   }
+   }   
 
 
    handleChange = (e) => {
@@ -361,7 +383,7 @@ class AssignedProposalDetails extends React.Component {
                                           </Row>
                                           <Row className="mx-0">
                                              <Col className="offset-lg-2 py-2 text-justify">
-                                                <span className="pl-2 text-small d-inline-block">{this.props.location.state.proposalData.resources_description}</span>
+                                                <span className="pl-2 text-small d-inline-block">{this.state.finalComment}</span>
                                              </Col>
                                           </Row>
                                        </div>
