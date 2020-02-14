@@ -21,6 +21,14 @@ html body {
   box-sizing: inherit;
 }
 
+/* Links */
+
+a {
+  text-decoration: none !important;
+}
+
+/* Botones */
+
 .btn.btnDefault {
   border-radius: 1.2rem;
   color: white;
@@ -38,6 +46,8 @@ html body {
   color: white;
 }
 
+/* Inputs */
+
 .formInput {
   margin-top: 1.5rem;
   border-radius: 2rem !important;
@@ -45,6 +55,16 @@ html body {
 
 .form-control.formInput {
   font-size: 1.6rem;
+}
+
+/* Fuentes */
+
+.bigText {
+  font-size: 2.5rem;
+}
+
+.midText {
+  font-size: 1.8rem;
 }
 
 /* .container.contentWidth {

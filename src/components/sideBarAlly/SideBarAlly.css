@@ -1,5 +1,6 @@
-.sideNav {
+.sideNav.container {
    height: 100vh;
+   padding: 0;
    width: 25rem;
    position: fixed;
    z-index: 1;
@@ -11,7 +12,6 @@
 }
 
 .sideBarAllyLogo {
-   height: 65%;
    border: 0.1rem white solid;
    background-color: azure;
 }
@@ -21,11 +21,7 @@
    margin-bottom: 2rem;
 }
 
-.sideBarAllyText h3 {
-   font-size: 2.2rem;
-}
-
-.sideBarAllyText~a:hover {
+.sideBarAllyText ~ a:hover {
    text-decoration: none;
 }
 
@@ -51,8 +47,8 @@ a .sideBarAllyLinkBox:hover {
    background-color: #272626 !important;
 }
 
-.sideBarAllyText~a {
-   width: 250px;
+.sideBarAllyText ~ a {
+   width: 25rem;
 }
 
 @media screen and (max-width: 768px) {
