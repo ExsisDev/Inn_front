@@ -77,6 +77,7 @@ class LoginForm extends React.Component {
          .catch(error => {
             if (!error.response) {
                this.notifyError("Algo salió mal.");
+               this.deactivateButton(false);
                return;
             }
 
