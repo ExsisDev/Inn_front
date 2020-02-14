@@ -208,8 +208,24 @@ class AllChallenges extends React.Component {
 
    render() {
       return (
-         <Container ref={this.begginingPage} id="allChallengesComponent">
-            <Row className="mx-0 justify-content-end h-100" >
+         <Container ref={this.begginingPage} id="allChallengesComponent" >
+            <Row>
+               <Col>
+                  <Row>
+                     <Col xs={2}>
+                        <Form onSubmit={this.handleSearchButton}>
+                           <InputGroup>
+                              <InputGroup.Prepend className="w-auto">
+                                 <Button className="allChallengesIconButton" variant="outline-secondary" type="submit"></Button>
+                              </InputGroup.Prepend>
+                              <FormControl className="allChallengesSearchChallengeText normalText" aria-describedby="basic-addon1" type="input" placeholder="Buscar reto" name="searchElement" onChange={this.handleChange} />
+                           </InputGroup>
+                        </Form>
+                     </Col>
+                  </Row>
+               </Col>
+            </Row>
+            {/*<Row className="mx-0 justify-content-end h-100" >
                <Col className="d-flex flex-column">
                   <Row className="mx-0 d-flex justify-content-center">
                      <Col>
@@ -325,7 +341,7 @@ class AllChallenges extends React.Component {
                      Eliminar
                   </Button>
                </Modal.Footer>
-            </Modal>
+            </Modal> */}
          </Container>
       );
    }

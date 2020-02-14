@@ -54,7 +54,7 @@ class Home extends React.Component {
                             }
                         </Col>
                     </Row>
-                    <Row className="ml-auto">
+                    <Row className="w-100" noGutters>
                         <Col>
                             <Switch>
                                 <AdminRoute path="/home/ally/create" component={CreateAlly} />

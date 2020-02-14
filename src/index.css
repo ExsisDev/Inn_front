@@ -67,6 +67,10 @@ a {
   font-size: 1.8rem;
 }
 
+.normalText {
+  font-size: 1.6rem;
+}
+
 /* .container.contentWidth {
   width: calc(100% - 250px);
   margin-left: auto;

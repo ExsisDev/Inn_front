@@ -34,7 +34,7 @@ class SideBar extends React.Component {
 
    render() {
       return (
-         <div>
+         <div className="sticky-top ">
             <Container ref={this.sideBarAlly} id="sideNav" className="d-flex flex-column">
                <a href="javascript:void(0)" id="closeBtn" onClick={this.closeNav}>&times;</a>
                <Row className="d-flex justify-content-center">
