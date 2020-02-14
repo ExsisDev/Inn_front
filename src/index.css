@@ -47,18 +47,18 @@ html body {
   font-size: 1.6rem;
 }
 
-.container.contentWidth {
+/* .container.contentWidth {
   width: calc(100% - 250px);
   margin-left: auto;
   margin-right: 0;
-}
+} */
 
-@media screen and (max-width: 768px) {
+/* @media screen and (max-width: 768px) {
   .container.contentWidth {
     width: 100%;
     margin-right: auto;
   }
-}
+} */
 
 
 /* a {

@@ -208,7 +208,7 @@ class AllChallenges extends React.Component {
 
    render() {
       return (
-         <Container className="contentWidth" ref={this.begginingPage}>
+         <Container ref={this.begginingPage}>
             <Row className="mx-0 justify-content-end h-100" >
                <Col className="d-flex flex-column">
                   <Row className="mx-0 d-flex justify-content-center">

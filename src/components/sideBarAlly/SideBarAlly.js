@@ -21,7 +21,6 @@ class SideBar extends React.Component {
    }
 
    componentDidMount() {
-      console.log(this.sideBarAlly.current)
    }
 
    closeNav() {
