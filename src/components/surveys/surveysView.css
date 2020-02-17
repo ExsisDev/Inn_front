@@ -12,8 +12,12 @@
     font-style:italic;
 }
 
-.survayViewRadio{
+.surveyViewRadio{
     width: 30%;
     font-weight: 600;
 
+}
+.surveySubmitBotton{
+    width: auto;
+    background-color: forestgreen;
 }

@@ -49,7 +49,6 @@ class AssignedProposalDetails extends React.Component {
          }
       }).catch((error) => {
          this.setState({ all_notes: [], loadingNotes: false });
-
       });
 
    }

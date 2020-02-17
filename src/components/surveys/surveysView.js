@@ -19,44 +19,47 @@ class SurveysView extends React.Component {
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.componentDidMount = this.componentDidMount.bind(this);
     }
-    questions_test = [
-        {
-            question_body: "De acuerdo con la propuesta recibida inicialmente, ¿crees que la propuesta fue la manera maás adecuada de proceder con tu reto?",
-            answer_option: ["Si", "No"],
-            id_question: 3,
-            id_survey: 5
-        },
-        {
-            question_body: "¿Cómo clasificarias el servicio presentado por la empresa que realizo el reto que propusiste?",
-            answer_option: ["Muy Satisfecho", "Puede mejorar", "Insatisfecho", "Trsite", "Contento"],
-            id_question: 4,
-            id_survey: 5
-        }
-    ]
+    // questions_test = [
+    //     {
+    //         question_body: "De acuerdo con la propuesta recibida inicialmente, ¿crees que la propuesta fue la manera maás adecuada de proceder con tu reto?",
+    //         answer_option: ["Si", "No"],
+    //         id_question: 3,
+    //         id_survey: 5
+    //     },
+    //     {
+    //         question_body: "¿Cómo clasificarias el servicio presentado por la empresa que realizo el reto que propusiste?",
+    //         answer_option: ["Muy Satisfecho", "Puede mejorar", "Insatisfecho", "Trsite", "Contento"],
+    //         id_question: 4,
+    //         id_survey: 5
+    //     }
+    // ]
+
+    componentDidMount(){
+        // this.getQuestionData();
+    }
 
     async getQuestionData(){
-        debugger;
         const URL = `${process.env.REACT_APP_BACK_URL}/surveys/${this.props.location.state.idChallenge}`;
         const token= this.state.token;
         await axios.get(URL,{
             headers: { 'x-auth-token': `${token}` }
         })
         .then( (result) => {
-            if(result.data){
-                this.setState({
-                   all_questions: result.data,
-                   count_questions: result.data.length
-                });
-            }
+            console.log(result);
+            
+            // if(result.data){
+            //     this.setState({
+            //        all_questions: result.data,
+            //        count_questions: result.data.length
+            //     });
+            // }
 
         }).catch((error) => {
             this.setState({all_questions:[], count_questions: 0});
         });
     }
-
-
-
 
     handleSubmit(e) {
         debugger;
@@ -74,6 +77,7 @@ class SurveysView extends React.Component {
        console.log(answer_object_array);
        
     }
+
     async handleChange(e) {
         var answer_temp = e.currentTarget.value;
         var id_q_temp = e.currentTarget.name;
@@ -96,16 +100,6 @@ class SurveysView extends React.Component {
                 array_answers: newArray
             }
         })
-
-        // [{id_q: e.currentTarget.name, answer: e.currentTarget.value}]
-        // this.state.array_answers.find((ans) => {
-        //     if (ans.id_q === e.currentTarget.name) {
-        //         ans.answer = e.currentTarget.value;
-        //     } else {
-        //         this.state.array_answers = this.state.array_answers.concat([{ id_q: e.currentTarget.name, answer: e.currentTarget.value }])
-        //     }
-        // }
-
         console.log(this.state.array_answers);
     }
 
@@ -126,7 +120,7 @@ class SurveysView extends React.Component {
 
                                 <Form className="" onSubmit={this.handleSubmit}>
                                     {
-                                        this.questions_test.map((question, index) => {
+                                        this.state.all_questions.map(async (question, index) => {
                                             return (
                                                 <Card key={"map_" + index} className="surveysViewCard mb-4">
                                                     <Card.Body>
@@ -135,12 +129,12 @@ class SurveysView extends React.Component {
                                                         {
                                                             question.answer_option.map((option, index_option) => {
                                                                 return (
-                                                                    <div key={"map_" + index_option} className="survayViewRadio form-check form-check-inline">
+                                                                    <div key={"map_" + index_option} className="surveyViewRadio form-check form-check-inline">
                                                                         <input type="radio"
                                                                             value={option}
                                                                             onChange={this.handleChange}
                                                                             name={'question_' + question.id_question}
-                                                                            className="survayViewRadio form-check-input"
+                                                                            className="surveyViewRadio form-check-input"
                                                                             id={"answer_" + index_option}>
                                                                         </input>
                                                                         <label className="survayViewRadio form-check-label" htmlFor="inlineRadio1">{option}</label>
@@ -156,7 +150,7 @@ class SurveysView extends React.Component {
                                             )
                                         })
                                     }
-                                    <input type="submit" value="Submit" />
+                                    <input type="submit" value="Enviar" className="surveySubmitBotton"/>
                                 </Form>
 
 
