@@ -48,10 +48,13 @@ textarea.assignedProposalDetailsLabelTextArea:focus {
    background-color: #128ab33d;
 }
 
-.btn.assignedProposalDetailsFinishBtn#assignedProposalDetailsAggregateNoteBtn  {
+.btn.assignedProposalDetailsFinishBtn#assignedProposalDetailsAggregateNoteBtn {
    background-color: #fa995d;
    border-color: #fa995d;
-   
+}
+
+.assignedProposalDetailsTextAreaComment {
+   resize: none;
 }
 
 /* .btn.assignedProposalDetailsFinishBtn#assignedProposalDetailsAggregateNoteBtn:hover, .btn.assignedProposalDetailsFinishBtn#assignedProposalDetailsAggregateNoteBtn:active, .btn.assignedProposalDetailsFinishBtn#assignedProposalDetailsAggregateNoteBtn:focus {
