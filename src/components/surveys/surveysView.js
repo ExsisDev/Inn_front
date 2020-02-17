@@ -73,25 +73,20 @@ class SurveysView extends React.Component {
         var answer_temp = e.currentTarget.value;
         var id_q_temp = e.currentTarget.name;
         var flag = false;
-        await this.setState((state) => {
+        this.setState((state) => {
             let oldArray = state.array_answers;
 
             oldArray.find((answer_item) => {
-                if (answer_item.id_q === id_q_temp) {
+                if (answer_item.fk_id_question === id_q_temp) {
                     answer_item.answer = answer_temp;
-                    flag = true;
-                    return flag;
+                    flag = true;                    
                 }
+            });
 
-                return flag;
-            })
-
-            let newArray = flag === false ? oldArray.concat([{ fk_id_survey, fk_id_question: id_q_temp, answer: answer_temp }]) : oldArray;
-            return {
-                array_answers: newArray
-            }
+            let newArray = flag ? oldArray : oldArray.concat([{ fk_id_survey, fk_id_question: id_q_temp, answer: answer_temp }]);
+            console.log(newArray);
+            return { array_answers: newArray };
         })
-        console.log(this.state.array_answers);
     }
 
 
