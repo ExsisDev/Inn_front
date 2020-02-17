@@ -12,12 +12,25 @@
     font-style:italic;
 }
 
-.surveyViewRadio{
-    width: 30%;
-    font-weight: 600;
+.surveyViewRadioAndLabel input, .surveyViewRadioAndLabel label{
+    width: auto;
+}
 
+.surveyViewRadioAndLabel {
+    margin-left: 20px;
+    margin-bottom: 15px;
+}
+
+.surveyViewRadio.option.form-check-input{
+    margin-left: 50px;
 }
 .surveySubmitBotton{
-    width: auto;
-    background-color: forestgreen;
+    background-color: #498cf9;
+    border: none;
+    color: white;
+    width: 150px;
+    height: 40px;
+    border-radius: 15px;
+    float: right;
+    font-size: 20px;
 }

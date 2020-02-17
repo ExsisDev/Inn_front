@@ -233,7 +233,7 @@ class AssignedProposalDetails extends React.Component {
 
       if (this.state.redirect) {
          return (
-            <Redirect to="/home/challengesFinished" />
+            <Redirect to = {`/home/ally/surveys/${this.props.location.state.idChallenge}`} />
          );
       }
 
