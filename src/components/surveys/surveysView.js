@@ -14,26 +14,14 @@ class SurveysView extends React.Component {
         this.state = {
             all_questions: [],
             array_answers: [],
+            fk_id_survey_temp: 0,
             token: getToken()
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.componentDidMount = this.componentDidMount.bind(this);
     }
-    // questions_test = [
-    //     {
-    //         question_body: "De acuerdo con la propuesta recibida inicialmente, ¿crees que la propuesta fue la manera maás adecuada de proceder con tu reto?",
-    //         answer_option: ["Si", "No"],
-    //         id_question: 3,
-    //         id_survey: 5
-    //     },
-    //     {
-    //         question_body: "¿Cómo clasificarias el servicio presentado por la empresa que realizo el reto que propusiste?",
-    //         answer_option: ["Muy Satisfecho", "Puede mejorar", "Insatisfecho", "Trsite", "Contento"],
-    //         id_question: 4,
-    //         id_survey: 5
-    //     }
-    // ]
+ 
 
     componentDidMount() {
         this.getQuestionData();
@@ -42,6 +30,7 @@ class SurveysView extends React.Component {
     async getQuestionData() {
         const URL = `${process.env.REACT_APP_BACK_URL}/surveys/${this.props.match.params.idChallenge}`;
         const token = this.state.token;
+
         await axios.get(URL, {
             headers: { 'x-auth-token': `${token}` }
         })
@@ -53,7 +42,9 @@ class SurveysView extends React.Component {
                     this.setState((state, props) => {
                         return {
                             all_questions: newArray
+
                         }
+
                     });
                 }
 
@@ -66,7 +57,7 @@ class SurveysView extends React.Component {
         let URL = `${process.env.REACT_APP_BACK_URL}/surveys`;
         const token = this.state.token;
         const answer_object_array = this.state.array_answers;
-        axios.post(URL, answer_object_array, {
+        axios.put(URL, answer_object_array, {
             headers: { 'x-auth-token': `${token}` }
         }).then((result) => {
 
@@ -78,7 +69,7 @@ class SurveysView extends React.Component {
 
     }
 
-    async handleChange(e) {
+    async handleChange(e, fk_id_survey) {
         var answer_temp = e.currentTarget.value;
         var id_q_temp = e.currentTarget.name;
         var flag = false;
@@ -95,7 +86,7 @@ class SurveysView extends React.Component {
                 return flag;
             })
 
-            let newArray = flag === false ? oldArray.concat([{ id_q: id_q_temp, answer: answer_temp }]) : oldArray;
+            let newArray = flag === false ? oldArray.concat([{ fk_id_survey, fk_id_question: id_q_temp, answer: answer_temp }]) : oldArray;
             return {
                 array_answers: newArray
             }
@@ -133,7 +124,7 @@ class SurveysView extends React.Component {
                                                                         <Form.Check inline
                                                                             type={'radio'}
                                                                             value={option}
-                                                                            onChange={this.handleChange}
+                                                                            onChange={(event) => {this.handleChange(event, question.id_survey)}}
                                                                             name={question.id_question}
                                                                             id={question.id_question}
                                                                             label={option}
