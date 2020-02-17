@@ -4,3 +4,7 @@
     font-size: 1.1rem;
     font-weight: bold;
 }
+
+.allyFormCreateButton {
+    padding: 0 15px;
+}

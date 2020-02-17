@@ -2,7 +2,8 @@
     border-radius: 20px !important;
     box-shadow: 0px 5px 10px gray;
     background-color: #f0f0f0 !important;
-    height: 20rem;
+    height: 320px;
+    width: 230px;
 }
 
 .humanResourceCardImage {
