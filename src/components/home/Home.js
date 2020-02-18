@@ -54,7 +54,7 @@ class Home extends React.Component {
         this.setState((state) => {
             let isShortScreen = window.innerWidth <= 760;
             let sideBarClassAdded = isShortScreen ? "sideBarAllyClosed" : "sideBarAllyOpened";
-            let columnClassAdded = isShortScreen ? "mx-0" : "mr-0";
+            let columnClassAdded = isShortScreen ? "mx-0" : "homeDecreaseColumn";
             return {
                 shortScreen: isShortScreen,
                 sideBarNewClassState: sideBarClassAdded,
@@ -79,27 +79,30 @@ class Home extends React.Component {
             <div>
                 <Container fluid className="d-flex homeMainContainer px-0">
                     <Row noGutters className="w-100">
-                        {
-                            this.state.role === this.ALLY
-                                ? <SideBarAlly className={this.state.sideBarNewClassState} handleClassStateBtn={this.handleClassState} />
-                                : <SideBarAdmin />
-                        }
-                        <Col className={this.state.columnNewClassState}>
-                            <Switch>
-                                <AdminRoute path="/home/ally/create" component={CreateAlly} />
-                                <AdminRoute path="/home/ally" component={AllAllies} />
-                                <AdminRoute path="/home/challenge" component={CreateChallenge} />
-                                <AllyRoute path="/home/challengeDescription" component={ChallengeDetais} />
-                                <AllyRoute path="/home/newProposal" component={ProposalForm} />
-                                <AllyRoute path="/home/sendedProposals/details" component={SendedOrRejectedProposalDetails} />
-                                <AllyRoute path="/home/sendedProposals" component={ProposalList} />
-                                <AllyRoute path="/home/rejectedProposals" component={ProposalList} />
-                                <AllyRoute path="/home/assignedProposals" component={ProposalList} />
-                                <AllyRoute path="/home/challengesFinished" component={ProposalList} />
-                                <AllyRoute path="/home/ongoingChallenges" component={ProposalsMenu} />
-                                <SharedRoute path="/home/assignment" component={TrackAssignment} />
-                                <SharedRoute path="/home" component={AllChallenges} />
-                            </Switch>
+                        <Col>
+
+                            {
+                                this.state.role === this.ALLY
+                                    ? <SideBarAlly className={this.state.sideBarNewClassState} handleClassStateBtn={this.handleClassState} />
+                                    : <SideBarAdmin />
+                            }
+                            <div className={this.state.columnNewClassState}>
+                                <Switch>
+                                    <AdminRoute path="/home/ally/create" component={CreateAlly} />
+                                    <AdminRoute path="/home/ally" component={AllAllies} />
+                                    <AdminRoute path="/home/challenge" component={CreateChallenge} />
+                                    <AllyRoute path="/home/challengeDescription" component={ChallengeDetais} />
+                                    <AllyRoute path="/home/newProposal" component={ProposalForm} />
+                                    <AllyRoute path="/home/sendedProposals/details" component={SendedOrRejectedProposalDetails} />
+                                    <AllyRoute path="/home/sendedProposals" component={ProposalList} />
+                                    <AllyRoute path="/home/rejectedProposals" component={ProposalList} />
+                                    <AllyRoute path="/home/assignedProposals" component={ProposalList} />
+                                    <AllyRoute path="/home/challengesFinished" component={ProposalList} />
+                                    <AllyRoute path="/home/ongoingChallenges" component={ProposalsMenu} />
+                                    <SharedRoute path="/home/assignment" component={TrackAssignment} />
+                                    <SharedRoute path="/home" component={AllChallenges} />
+                                </Switch>
+                            </div>
                         </Col>
                     </Row>
                 </Container>

@@ -2,6 +2,6 @@
    height: 100vh;
 }
 
-.homeDecreaseColumn {
+div.homeDecreaseColumn {
    width: calc(100% - 25rem);
 }
