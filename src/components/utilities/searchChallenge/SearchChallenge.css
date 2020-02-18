@@ -1,7 +1,3 @@
- .searchChallengeRow {
-   height: 4.5rem;
- }
-
  .searchChallengeTextInput {
    -webkit-appearance: none;
    -moz-appearance: none;
@@ -24,3 +20,7 @@
  button.searchChallengeIconButton.btn {
    z-index: 0;
  } 
+
+ .searchChallengeImage {
+   height: 4.5rem;
+ }
