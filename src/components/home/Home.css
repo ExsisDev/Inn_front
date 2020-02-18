@@ -4,4 +4,5 @@
 
 div.homeDecreaseColumn {
    width: calc(100% - 25rem);
+   float: right;
 }

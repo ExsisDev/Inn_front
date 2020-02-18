@@ -208,7 +208,7 @@ class AllChallenges extends React.Component {
 
    render() {
       return (
-         <Container ref={this.begginingPage} id="allChallengesComponent" >
+         <Container fluid ref={this.begginingPage} id="allChallengesComponent" >
             <SearchChallenge handleChange={this.handleChange} handleSearchButton={this.handleSearchButton}/>
             {/*<Row className="mx-0 justify-content-end h-100" >
                <Col className="d-flex flex-column">
