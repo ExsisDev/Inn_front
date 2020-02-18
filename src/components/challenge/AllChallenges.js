@@ -8,7 +8,7 @@ import Pagination from "react-js-pagination";
 import ReactLoading from 'react-loading';
 import ChallengeCard from './ChallengeCard';
 
-import innovaCamaraLogo from '../../images/innovaCamaraLogo.png';
+import SearchChallenge from '../utilities/searchChallenge/SearchChallenge';
 import plusSign from '../../images/newChallenge.png';
 import { getToken, getTokenData } from '../../commons/tokenManagement';
 import 'react-toastify/dist/ReactToastify.css';
@@ -209,22 +209,7 @@ class AllChallenges extends React.Component {
    render() {
       return (
          <Container ref={this.begginingPage} id="allChallengesComponent" >
-            <Row>
-               <Col>
-                  <Row>
-                     <Col xs={2}>
-                        <Form onSubmit={this.handleSearchButton}>
-                           <InputGroup>
-                              <InputGroup.Prepend className="w-auto">
-                                 <Button className="allChallengesIconButton" variant="outline-secondary" type="submit"></Button>
-                              </InputGroup.Prepend>
-                              <FormControl className="allChallengesSearchChallengeText normalText" aria-describedby="basic-addon1" type="input" placeholder="Buscar reto" name="searchElement" onChange={this.handleChange} />
-                           </InputGroup>
-                        </Form>
-                     </Col>
-                  </Row>
-               </Col>
-            </Row>
+            <SearchChallenge handleChange={this.handleChange} handleSearchButton={this.handleSearchButton}/>
             {/*<Row className="mx-0 justify-content-end h-100" >
                <Col className="d-flex flex-column">
                   <Row className="mx-0 d-flex justify-content-center">

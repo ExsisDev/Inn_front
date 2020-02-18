@@ -10,33 +10,22 @@ import './SideBarAlly.css';
 
 class SideBar extends React.Component {
 
-   constructor() {
-      super();
+   constructor(props) {
+      super(props);
       this.state = {
-         redirectionActive: false
+         redirectionActive: false,
+         classState: props.className
       }
 
       this.sideBarAlly = React.createRef();
-      this.openNav = this.openNav.bind(this);
-      this.closeNav = this.closeNav.bind(this);
    }
 
-   componentDidMount() {
-   }
-
-   closeNav() {
-      this.sideBarAlly.current.style.width = "0";
-   }
-
-   openNav() {
-      this.sideBarAlly.current.style.width = "250px";
-   }
 
    render() {
       return (
-         <div className="sticky-top ">
-            <Container ref={this.sideBarAlly} id="sideNav" className="d-flex flex-column">
-               <a href="javascript:void(0)" id="closeBtn" onClick={this.closeNav}>&times;</a>
+         <div >
+            <Container ref={this.sideBarAlly} id="sideNav" className={`d-flex flex-column ${this.props.className}`}>
+               <a href="#" id="closeBtn" onClick={this.props.handleClassStateBtn}>&times;</a>
                <Row className="d-flex justify-content-center">
                   <Col xs={8}>
                      <Link to="/adminProfile" >
@@ -81,7 +70,7 @@ class SideBar extends React.Component {
                   </Col>
                </Row>
             </Container>
-            <span style={{ fontSize: "30px", cursor: "pointer", position: "fixed" }} onClick={this.openNav}>&#9776;</span>
+            <span style={{ fontSize: "30px", cursor: "pointer", position: "fixed", zIndex: "50" }} onClick={this.props.handleClassStateBtn}>&#9776;</span>
          </div>
       );
    }

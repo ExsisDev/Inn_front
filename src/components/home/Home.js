@@ -18,6 +18,7 @@ import ProposalsMenu from '../proposal/ProposalsMenu';
 import ProposalList from '../proposal/ProposalList';
 import TrackAssignment from '../trackAssignment/TrackAssignment';
 import SendedOrRejectedProposalDetails from '../proposal/SendedOrRejectedProposalDetails';
+import { USER_ROLES } from '../../commons/enums';
 import './Home.css';
 
 class Home extends React.Component {
@@ -27,35 +28,63 @@ class Home extends React.Component {
 
         this.state = {
             token: getToken(),
-            role: 0
+            role: 0,
+            shortScreen: false,
+            sideBarNewClassState: "",
+            columnNewClassState: ""
         }
+
+        this.handleClassState = this.handleClassState.bind(this);
     }
 
-    ALLY = 1;
-    ADMIN = 2;
+
+    ALLY = USER_ROLES.ALLY;
+    ADMIN = USER_ROLES.ADMINISTRATOR;
+
 
     componentDidMount() {
         let tokenData = getTokenData(this.state.token);
         this.setState({ role: tokenData.fk_id_role });
+        window.addEventListener("resize", this.resize.bind(this));
+        this.resize();
+    }
+
+
+    resize() {
+        this.setState((state) => {
+            let isShortScreen = window.innerWidth <= 760;
+            let sideBarClassAdded = isShortScreen ? "sideBarAllyClosed" : "sideBarAllyOpened";
+            let columnClassAdded = isShortScreen ? "mx-0" : "mr-0";
+            return {
+                shortScreen: isShortScreen,
+                sideBarNewClassState: sideBarClassAdded,
+                columnNewClassState: columnClassAdded
+            }
+        });
+    }
+
+
+    handleClassState() {
+        this.setState((state) => {
+            let opositeClass = state.sideBarNewClassState === "sideBarAllyClosed" ? "sideBarAllyOpened" : "sideBarAllyClosed";
+            return {
+                sideBarNewClassState: opositeClass
+            };
+        });
     }
 
 
     render() {
-
         return (
             <div>
-                <Container fluid className="p-0 d-flex">
-                    <Row>
-                        <Col>
-                            {
-                                this.state.role === this.ALLY
-                                    ? <SideBarAlly />
-                                    : <SideBarAdmin />
-                            }
-                        </Col>
-                    </Row>
-                    <Row className="w-100" noGutters>
-                        <Col>
+                <Container fluid className="d-flex homeMainContainer px-0">
+                    <Row noGutters className="w-100">
+                        {
+                            this.state.role === this.ALLY
+                                ? <SideBarAlly className={this.state.sideBarNewClassState} handleClassStateBtn={this.handleClassState} />
+                                : <SideBarAdmin />
+                        }
+                        <Col className={this.state.columnNewClassState}>
                             <Switch>
                                 <AdminRoute path="/home/ally/create" component={CreateAlly} />
                                 <AdminRoute path="/home/ally" component={AllAllies} />

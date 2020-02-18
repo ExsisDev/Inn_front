@@ -3,7 +3,21 @@
    width: 25rem;
    background-color: #313333;
    overflow-x: hidden;
-   transition: 0.3s;
+   transition: all ease 0.5s;
+   position: fixed;
+   z-index: 100;
+}
+
+#sideNav .row{
+   width: 25rem;
+}
+
+#sideNav.sideBarAllyClosed.container {
+   width: 0;
+}
+
+#sideNav.sideBarAllyOpened.container {
+   width: 25rem;
 }
 
 .sideBarAllyLogo {
@@ -38,19 +52,9 @@
    background-color: #272626 ;
 }
 
-
-@media screen and (max-width: 768px) {
-   #sideNav.container {
-      width: 0;
-      padding: 0;
-   }
-}
-
 @media screen and (min-width: 768px) {
    #closeBtn {
       visibility: hidden;
    }
-   #sideNav {
-      width: 25rem;
-   }
-}
+
+} 

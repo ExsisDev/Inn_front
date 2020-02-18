@@ -6,7 +6,7 @@ html {
   font-size: 62.5%;
 }
 
-html body {
+body {
   color: #747474;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   font-size: 1.6rem;
@@ -25,6 +25,23 @@ html body {
 
 a {
   text-decoration: none !important;
+}
+
+/* Bootstrap */
+
+div.row {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+div.col {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+div.container {
+  padding-right: 0;
+  padding-left: 0;
 }
 
 /* Botones */
@@ -46,7 +63,7 @@ a {
   color: white;
 }
 
-/* Inputs */
+/* Inputs y forms*/
 
 .formInput {
   margin-top: 1.5rem;
@@ -55,6 +72,14 @@ a {
 
 .form-control.formInput {
   font-size: 1.6rem;
+}
+
+.form-control.normalText {
+  font-size: 1.6rem;
+}
+
+input.form-control:focus, button.btn:focus {
+  box-shadow: none;
 }
 
 /* Fuentes */
@@ -83,7 +108,6 @@ a {
     margin-right: auto;
   }
 } */
-
 
 /* a {
   color: inherit !important;

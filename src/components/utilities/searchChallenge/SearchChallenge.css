@@ -1,0 +1,26 @@
+ .searchChallengeRow {
+   height: 4.8rem;
+ }
+
+ .searchChallengeTextInput {
+   -webkit-appearance: none;
+   -moz-appearance: none;
+   background-color: #e8e8e8 !important;
+   border-color: #e8e8e8 !important;
+   border-top-right-radius: 20px !important;
+   border-bottom-right-radius: 20px !important;
+ }
+
+ .searchChallengeIconButton {
+   width: 30px;
+   background: url('../../../images/find.png') no-repeat left;
+   background-position-x: 10px;
+   background-color: #e8e8e8 !important;
+   border-color: #e8e8e8 !important;
+   border-top-left-radius: 20px !important;
+   border-bottom-left-radius: 20px !important;
+ }
+
+ button.searchChallengeIconButton.btn {
+   z-index: 0;
+ } 
