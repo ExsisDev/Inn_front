@@ -84,7 +84,7 @@ class Home extends React.Component {
                             {
                                 this.state.role === this.ALLY
                                     ? <SideBarAlly className={this.state.sideBarNewClassState} handleClassStateBtn={this.handleClassState} />
-                                    : <SideBarAdmin />
+                                    : <SideBarAdmin className={this.state.sideBarNewClassState} handleClassStateBtn={this.handleClassState} />
                             }
                             <div className={this.state.columnNewClassState}>
                                 <Switch>

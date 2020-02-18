@@ -28,8 +28,8 @@ class SideBar extends React.Component {
                <a href="#" id="closeBtn" onClick={this.props.handleClassStateBtn}>&times;</a>
                <Row className="d-flex justify-content-center">
                   <Col xs={8}>
-                     <Link to="/adminProfile" >
-                        <img className="sideBarAllyLogo rounded-circle w-100" src={logoAlly} alt="Admin logo" />
+                     <Link to="/ally/profile" >
+                        <img className="sideBarAllyLogo rounded-circle w-100" src={logoAlly} alt="Ally logo" />
                      </Link>
                   </Col>
                </Row>

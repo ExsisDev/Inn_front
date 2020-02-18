@@ -209,7 +209,33 @@ class AllChallenges extends React.Component {
    render() {
       return (
          <Container fluid ref={this.begginingPage} id="allChallengesComponent" >
-            <SearchChallenge handleChange={this.handleChange} handleSearchButton={this.handleSearchButton}/>
+            <SearchChallenge handleChange={this.handleChange} handleSearchButton={this.handleSearchButton} />
+            {
+               this.state.isAdminFunctionality &&
+               (
+                  <Row className="mx-0 mb-3">
+                     <Col sm={12} md={9} className="order-2 order-md-1">
+                        <Navbar collapseOnSelect expand="lg">
+                           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                           <Navbar.Collapse id="responsive-navbar-nav">
+                              <Nav className="align-items-center">
+                                 <Nav.Link ref={this.link1} className="allChallengesCircle allChallengesRed allChallengesNavLink mx-4 mx-lg-2 px-0" href="#Unassigned" onClick={(e) => this.handleClickLink(e, "CREATED")}><span>Retos Sin Asignar</span></Nav.Link>
+                                 <Nav.Link ref={this.link2} className="allChallengesCircle allChallengesBlue allChallengesNavLink mx-4 mx-lg-2 px-0" href="#Assigned" onClick={(e) => this.handleClickLink(e, "ASSIGNED")}><span>Retos Asignados</span></Nav.Link>
+                                 <Nav.Link ref={this.link3} className="allChallengesCircle allChallengesGreen allChallengesNavLink mx-4 mx-lg-2 px-0" href="#Finished" onClick={(e) => this.handleClickLink(e, "FINISHED")}><span>Retos Finalizados</span></Nav.Link>
+                              </Nav>
+                           </Navbar.Collapse>
+                        </Navbar>
+                     </Col>
+                     <Col sm={12} md={3} className="order-1 order-md-2 d-flex align-items-center justify-content-xl-end justify-content-center p-0">
+                        <Link to="home/challenge" className="allChallengesLinkCreateChallenge"><img className="allChallengesPlusCreateChallenge w-auto mr-1" src={plusSign} alt="Plus"></img>Crear Reto</Link>
+                     </Col>
+                  </Row>
+
+               )
+            }
+            <Row>
+
+            </Row>
             {/*<Row className="mx-0 justify-content-end h-100" >
                <Col className="d-flex flex-column">
                   <Row className="mx-0 d-flex justify-content-center">

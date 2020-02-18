@@ -1,51 +1,74 @@
 import React from 'react';
+import { Container, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { IconContext } from "react-icons";
 import { IoIosLogOut } from 'react-icons/io';
 
 import { logOut } from '../../commons/tokenManagement';
 import logoAdmin from '../../images/logoAdmin.png';
-import './SideBarAdmin.css';
 
 class SideBar extends React.Component {
 
-   constructor() {
-      super();
+   constructor(props) {
+      super(props);
       this.state = {
-         redirectionActive: false
+         redirectionActive: false,
+         classState: props.className
       }
+
+      this.sideBarAlly = React.createRef();
    }
 
    render() {
       return (
-         <div className="sideBarAdminLateralBar d-flex flex-column">
-            <div className="sideBarAdminLogoBox d-flex justify-content-center">
-               <span>
-                  <Link to="/adminProfile" className="w-auto">
-                     <img className="sideBarAdminLogo align-self-center" src={logoAdmin} alt="Admin logo" />
-                  </Link>
-               </span>
-            </div>
-            <div className="sideBarAdminText d-flex align-items-center">
-               <h3>Administrador</h3>
-            </div>
-            <Link to="/home" >
-               <div className="sideBarAdminLinkBox d-flex align-items-center">
-                  <p>Retos</p>
-               </div>
-            </Link>
-            <Link to="/home/ally" >
-               <div className="sideBarAdminLinkBox d-flex align-items-center">
-                  <p>Administrar usuarios</p>
-               </div>
-            </Link>
-            <a className="mt-auto" onClick={logOut} href="/">
-               <div className="sideBarAdminLinkBox d-flex align-items-center">
-                  <IconContext.Provider value={{ color: "white", className: "logoutIcon" }}>
-                     <p><IoIosLogOut /><span>Cerrar sesión</span></p>
-                  </IconContext.Provider>
-               </div>
-            </a>
+         <div >
+            <Container ref={this.sideBarAlly} id="sideNav" className={`d-flex flex-column ${this.props.className}`}>
+               <a href="#" id="closeBtn" onClick={this.props.handleClassStateBtn}>&times;</a>
+               <Row className="d-flex justify-content-center">
+                  <Col xs={8}>
+                     <Link to="/adminProfile" >
+                        <img className="sideBarAllyLogo rounded-circle w-100" src={logoAdmin} alt="Admin logo" />
+                     </Link>
+                  </Col>
+               </Row>
+               <Row className="mt-3">
+                  <Col>
+                     <div className="sideBarAllyText d-flex justify-content-center align-items-center">
+                        <h3 className="bigText">Administrador</h3>
+                     </div>
+                  </Col>
+               </Row>
+               <Row className="sideBarAllyLinkBox">
+                  <Col className="d-flex justify-content-center align-items-center">
+                     <Link to="/home">
+                        <div className="">
+                           <p className="midText">Retos</p>
+                        </div>
+                     </Link>
+                  </Col>
+               </Row>
+               <Row className="sideBarAllyLinkBox">
+                  <Col className="d-flex justify-content-center align-items-center">
+                     <Link to="/home/ally">
+                        <div className="">
+                           <p className="midText">Administrar usuarios</p>
+                        </div>
+                     </Link>
+                  </Col>
+               </Row>
+               <Row className="sideBarAllyLinkBox mt-auto">
+                  <Col>
+                     <a onClick={logOut} href="/">
+                        <div className="sideBarAllyLinkBox d-flex justify-content-center align-items-center">
+                           <IconContext.Provider value={{ color: "white" }}>
+                              <p className="midText"><IoIosLogOut /><span className="ml-2">Cerrar sesión</span></p>
+                           </IconContext.Provider>
+                        </div>
+                     </a>
+                  </Col>
+               </Row>
+            </Container>
+            <span style={{ fontSize: "30px", cursor: "pointer", position: "fixed", zIndex: "50" }} onClick={this.props.handleClassStateBtn}>&#9776;</span>
          </div>
       );
    }
