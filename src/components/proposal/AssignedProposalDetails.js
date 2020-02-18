@@ -308,7 +308,7 @@ class AssignedProposalDetails extends React.Component {
                                           :
                                           (
                                              <div>
-                                                {this.state.all_notes === 0 ?
+                                                {this.state.all_notes === [] ?
                                                    (
                                                       <h6 className="mb-3">No se encontraron elementos</h6>
                                                    )
