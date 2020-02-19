@@ -367,7 +367,7 @@ class AssignedProposalDetails extends React.Component {
                                                       <Row className="mx-0">
                                                          <Col>
                                                             <label htmlFor="textArea4" className="trackAssigmentSubTitle">Comentarios: </label>
-                                                            <textarea autoFocus className="form-control z-depth-1 assignedProposalDetailsTextAreaComment" id="textArea4" name="finalComment" rows="4" placeholder="Ingresa tus comentarios antes de terminar" onChange={this.handleChange}></textarea>
+                                                            <textarea autoFocus className="form-control z-depth-1 assignedProposalDetailsTextAreaComment" id="textArea4" name="finalComment" rows="4" placeholder="Ingresa tus comentarios antes de terminar" value={this.state.finalComment} onChange={this.handleChange} required></textarea>
                                                          </Col>
                                                       </Row>
                                                    </Col>

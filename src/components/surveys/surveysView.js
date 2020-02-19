@@ -124,13 +124,7 @@ class SurveysView extends React.Component {
 
     render() {
 
-        if (this.state.redirect ){
-            return (
-                <Redirect to="/home" />
-            );
-        }
-
-        if (this.props.location.state === undefined ){
+        if (this.state.redirect || this.props.location.state === undefined ){
             return (
                 <Redirect to="/home/onGoingChallenges" />
             );
