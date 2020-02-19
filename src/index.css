@@ -9,7 +9,7 @@ html {
 body {
   color: #747474;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-  font-size: 1.6rem;
+  font-size: 1.6rem !important;
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -25,6 +25,7 @@ body {
 
 a {
   text-decoration: none !important;
+  color: #747474 !important;
 }
 
 /* Bootstrap */

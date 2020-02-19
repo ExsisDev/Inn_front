@@ -213,28 +213,81 @@ class AllChallenges extends React.Component {
             {
                this.state.isAdminFunctionality &&
                (
-                  <Row className="mx-0 mb-3">
-                     <Col sm={12} md={9} className="order-2 order-md-1">
-                        <Navbar collapseOnSelect expand="lg">
+                  <Row className="d-flex justify-content-center mt-4">
+                     <Col xs={12} className="d-flex justify-content-center order-2">
+                        <Navbar collapseOnSelect expand="lg" className="d-flex justify-content-center w-100">
                            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                            <Navbar.Collapse id="responsive-navbar-nav">
-                              <Nav className="align-items-center">
-                                 <Nav.Link ref={this.link1} className="allChallengesCircle allChallengesRed allChallengesNavLink mx-4 mx-lg-2 px-0" href="#Unassigned" onClick={(e) => this.handleClickLink(e, "CREATED")}><span>Retos Sin Asignar</span></Nav.Link>
-                                 <Nav.Link ref={this.link2} className="allChallengesCircle allChallengesBlue allChallengesNavLink mx-4 mx-lg-2 px-0" href="#Assigned" onClick={(e) => this.handleClickLink(e, "ASSIGNED")}><span>Retos Asignados</span></Nav.Link>
-                                 <Nav.Link ref={this.link3} className="allChallengesCircle allChallengesGreen allChallengesNavLink mx-4 mx-lg-2 px-0" href="#Finished" onClick={(e) => this.handleClickLink(e, "FINISHED")}><span>Retos Finalizados</span></Nav.Link>
+                              <Nav className="d-flex align-items-center w-100">
+                                 <Nav.Link ref={this.link1} className="text-center allChallengesCircle allChallengesRed allChallengesNavLink mx-4 mx-lg-2 px-0" href="#Unassigned" onClick={(e) => this.handleClickLink(e, "CREATED")}><span>Retos Sin Asignar</span></Nav.Link>
+                                 <Nav.Link ref={this.link2} className="text-center allChallengesCircle allChallengesBlue allChallengesNavLink mx-4 mx-lg-2 px-0" href="#Assigned" onClick={(e) => this.handleClickLink(e, "ASSIGNED")}><span>Retos Asignados</span></Nav.Link>
+                                 <Nav.Link ref={this.link3} className="text-center allChallengesCircle allChallengesGreen allChallengesNavLink mx-4 mx-lg-2 px-0" href="#Finished" onClick={(e) => this.handleClickLink(e, "FINISHED")}><span>Retos Finalizados</span></Nav.Link>
+                                 <Nav.Link href="home/challenge" className="allChallengesCreateLink mt-2"><img className="allChallengesPlusImg" src={plusSign} alt="Plus"></img><span className="ml-2">Crear Reto</span></Nav.Link>
                               </Nav>
                            </Navbar.Collapse>
                         </Navbar>
                      </Col>
-                     <Col sm={12} md={3} className="order-1 order-md-2 d-flex align-items-center justify-content-xl-end justify-content-center p-0">
-                        <Link to="home/challenge" className="allChallengesLinkCreateChallenge"><img className="allChallengesPlusCreateChallenge w-auto mr-1" src={plusSign} alt="Plus"></img>Crear Reto</Link>
-                     </Col>
                   </Row>
-
                )
             }
-            <Row>
+            <Row className="mt-4 px-4">
+               {this.state.loadingChallenges ?
+                  (
+                     <div className="d-flex justify-content-center flex-grow-1">
+                        <ReactLoading className="d-flex align-items-center allChallengesSvgContainer" type={"spokes"} color={"#313333"} />
+                     </div>
+                  )
+                  :
+                  this.state.renderedChallenges.length > 0 ?
+                     (
+                        <div>
+                           <Row className="mx-0 d-flex flex-column">
+                              {this.state.renderedChallenges.map((item, index) => {
+                                 return (
+                                    <ChallengeCard
+                                       key={index}
+                                       selectedNextRoute="/home/challengeDescription"
+                                       challengeId={item.id_challenge}
+                                       challengeName={item.challenge_name}
+                                       companyName={item.company.company_name}
+                                       companyDescription={item.company.company_description}
+                                       challengeDescription={item.challenge_description}
+                                       categories={item.categories}
+                                       deleteChallenge={() => this.showDeleteModal(item.id_challenge)}
+                                       isUserAnAdmin={this.state.isAdminFunctionality}
+                                       challengeDate={new Date(item.close_date).getDate() + "/" + (new Date(item.close_date).getMonth() + 1) + "/" + new Date(item.close_date).getFullYear()}
+                                    />
+                                 );
+                              })
+                              }
+                           </Row>
+                           {
+                              this.state.totalElements > this.state.elementsDisplayed &&
 
+                              <Row className="mx-0 d-flex justify-content-center">
+                                 <Col xs={8} sm={6} md={4} xl={3} >
+                                    <Pagination
+                                       activePage={this.state.actualPage}
+                                       itemsCountPerPage={this.state.elementsDisplayed}
+                                       totalItemsCount={this.state.totalElements}
+                                       pageRangeDisplayed={3}
+                                       itemClass="page-item boxNumber"
+                                       linkClass="page-link boxLink px-0"
+                                       innerClass="pagination d-flex justify-content-center align-self-end"
+                                       onChange={this.handlePageChange.bind(this)}
+                                    />
+                                 </Col>
+                              </Row>
+                           }
+                        </div>
+                     )
+                     :
+                     (
+                        <div>
+                           <h3 className="mt-3">No se encontraron retos</h3>
+                        </div>
+                     )
+               }
             </Row>
             {/*<Row className="mx-0 justify-content-end h-100" >
                <Col className="d-flex flex-column">

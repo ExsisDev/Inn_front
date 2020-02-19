@@ -86,7 +86,7 @@ class Home extends React.Component {
                                     ? <SideBarAlly className={this.state.sideBarNewClassState} handleClassStateBtn={this.handleClassState} />
                                     : <SideBarAdmin className={this.state.sideBarNewClassState} handleClassStateBtn={this.handleClassState} />
                             }
-                            <div className={this.state.columnNewClassState}>
+                            <div className={`${this.state.columnNewClassState} pt-lg-5 px-4`}>
                                 <Switch>
                                     <AdminRoute path="/home/ally/create" component={CreateAlly} />
                                     <AdminRoute path="/home/ally" component={AllAllies} />

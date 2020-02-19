@@ -4,9 +4,14 @@
 
 /* Links de navegación */
 
-/* .allChallengesNavLink {
-  width: 215px;
+.allChallengesNavLink {
+  width: 30%;
   opacity: 0.5;
+}
+
+.allChallengesCreateLink {
+  width: 34%;
+  text-align: right;
 }
 
 .allChallengesCircle.allChallengesRed:after {
@@ -27,23 +32,34 @@
   color: #dce249;
 }
 
-.allChallengesPlusCreateChallenge {
+.allChallengesPlusImg {
   height: 22px;
   width: 26px;
-} */
+}
 
 /* Solo se activan cuando el elemento tiene active y linkSelected (se hace click)*/
 
-/* .allChallengesCircle.active {
+.allChallengesCircle.active {
   opacity: unset;
 }
 
 .allChallengesLinkCreateChallenge {
-  width: 101px !important;
-} */
+  width: 10.1rem !important;
+}
 
 /* Elementos de carga */
 
-/* .allChallengesSvgContainer {
+.allChallengesSvgContainer {
   height: auto !important;
-} */
+}
+
+@media screen and (max-width: 991px) {
+  .allChallengesNavLink {
+    width: 21.5rem;
+    opacity: 0.5;
+  }
+
+  .allChallengesCreateLink {
+    text-align: center;
+  }
+}
