@@ -20,6 +20,7 @@ import TrackAssignment from '../trackAssignment/TrackAssignment';
 import SendedOrRejectedProposalDetails from '../proposal/SendedOrRejectedProposalDetails';
 import AssignedProposalDetails from '../proposal/AssignedProposalDetails';
 import './Home.css';
+import SurveysView from '../surveys/surveysView';
 
 class Home extends React.Component {
 
@@ -54,6 +55,7 @@ class Home extends React.Component {
                                     : <SideBarAdmin />
                             }
                             <Switch>
+                                <AllyRoute path="/home/ally/surveys" component={SurveysView}/>
                                 <AdminRoute path="/home/ally/create" component={CreateAlly} />
                                 <AdminRoute path="/home/ally" component={AllAllies} />
                                 <AdminRoute path="/home/challenge" component={CreateChallenge} />

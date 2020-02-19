@@ -25,7 +25,7 @@ class SideBar extends React.Component {
                      <img className="sideBarAllyLogo align-self-center rounded-circle" src={logoAlly} alt="Admin logo" />
                   </Link>
                </span>
-            </div>
+            </div> 
             <div className="sideBarAllyText d-flex align-items-center">
                <h3>Empresa</h3>
             </div>
