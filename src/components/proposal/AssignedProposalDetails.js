@@ -56,7 +56,7 @@ class AssignedProposalDetails extends React.Component {
    }
 
 
-   getFinalComment(){
+   getFinalComment() {
       let URL = `${process.env.REACT_APP_BACK_URL}/challenges/finalComment/${this.props.location.state.idChallenge}`;
       const token = this.state.token;
 
@@ -66,7 +66,7 @@ class AssignedProposalDetails extends React.Component {
          headers: { 'x-auth-token': `${token}` }
       }).then((result) => {
          if (result.data) {
-            this.setState({finalComment: result.data});
+            this.setState({ finalComment: result.data });
          }
       }).catch((error) => {
 
@@ -203,7 +203,7 @@ class AssignedProposalDetails extends React.Component {
          }
       }
       this.setState({ showAddComment: true });
-   }   
+   }
 
 
    handleChange = (e) => {
@@ -232,11 +232,20 @@ class AssignedProposalDetails extends React.Component {
       }
 
       if (this.state.redirect) {
+         console.log("Redirigido a la encuesta");
+
          return (
-            <Redirect to = {`/home/ally/surveys/${this.props.location.state.idChallenge}`} />
+            <Redirect to={{
+               pathname : "/home/ally/surveys",
+               state : {
+                  idChallenge: this.props.location.state.idChallenge
+               }
+            }}
+            />
          );
       }
 
+      
       return (
          <Container fluid className="d-flex justify-content-center">
             <Row className="h-100 d-flex justify-content-center">

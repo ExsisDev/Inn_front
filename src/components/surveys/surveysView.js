@@ -18,10 +18,13 @@ class SurveysView extends React.Component {
             array_answers: [],
             fk_id_survey_temp: 0,
             loadingQuestions: true,
+            challenge_state: 0,
+            redirect: false,
             token: getToken()
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.challengeState = this.challengeState.bind(this);
         this.componentDidMount = this.componentDidMount.bind(this);
     }
 
@@ -38,11 +41,13 @@ class SurveysView extends React.Component {
 
 
     componentDidMount() {
-        this.getQuestionData();
+        if (this.props.location.state !== undefined) {
+            this.getQuestionData();
+        }
     }
 
     async getQuestionData() {
-        const URL = `${process.env.REACT_APP_BACK_URL}/surveys/${this.props.match.params.idChallenge}`;
+        const URL = `${process.env.REACT_APP_BACK_URL}/surveys/${this.props.location.state.idChallenge}`;
         const token = this.state.token;
         await axios.get(URL, {
             headers: { 'x-auth-token': `${token}` }
@@ -68,12 +73,25 @@ class SurveysView extends React.Component {
         axios.put(URL, answer_object_array, {
             headers: { 'x-auth-token': `${token}` }
         }).then((result) => {
-            this.setState({ redirect: true });
             this.notifySuccess("La encuesta fue enviada");
+            this.setState({ redirect: true });
         }).catch((error) => {
             this.notifyError("La encuesta no pudo ser enviada ");
         });
     }
+    
+    async challengeState(){
+        const URL = `${process.env.REACT_APP_BACK_URL}/surveys/${this.props.match.params.idChallenge}`;
+        const token = this.state.token;
+        axios.get(URL, {
+            headers: { 'x-auth-token': `${token}` }
+        }).then((result) => {
+            
+        }).catch((error) => {
+            
+        });
+    }
+
 
     async handleChange(e, fk_id_survey) {
         var answer_temp = e.currentTarget.value;
@@ -93,7 +111,6 @@ class SurveysView extends React.Component {
             return { array_answers: newArray };
         })
     }
-
     /**
 	 * Toast de error
 	 */
@@ -106,9 +123,16 @@ class SurveysView extends React.Component {
 
 
     render() {
-        if (!this.props.location.state || this.state.redirect) {
+
+        if (this.state.redirect ){
             return (
                 <Redirect to="/home" />
+            );
+        }
+
+        if (this.props.location.state === undefined ){
+            return (
+                <Redirect to="/home/onGoingChallenges" />
             );
         }
 
@@ -126,23 +150,23 @@ class SurveysView extends React.Component {
                             <Col>
                                 {
                                     this.state.loadingQuestions ?
-                                        (
-                                            <div className="d-flex justify-content-center flex-grow-1">
+                                    (
+                                        <div className="d-flex justify-content-center flex-grow-1">
                                                 <ReactLoading className="d-flex align-items-center allChallengesSvgContainer" type={"spokes"} color={"#313333"} />
                                             </div>
 
-                                        )
-                                        :
-                                        (
-                                            <div>
+)
+:
+(
+    <div>
                                                 {
                                                     this.state.all_questions.length === 0 ?
-                                                        (
-                                                            <h3 className="mb-5">No se encontraron elementos</h3>
+                                                    (
+                                                        <h3 className="mb-5">No se encontraron elementos</h3>
                                                         )
                                                         :
                                                         (
-
+                                                            
                                                             (
                                                                 <Form className="" onSubmit={this.handleSubmit}>
                                                                     {
@@ -165,7 +189,7 @@ class SurveysView extends React.Component {
                                                                                                             id={question.id_question}
                                                                                                             label={option}
                                                                                                             className="surveyViewRadioAndLabel"
-                                                                                                        />
+                                                                                                            />
                                                                                                     </div>
                                                                                                 )
                                                                                             })
@@ -178,12 +202,12 @@ class SurveysView extends React.Component {
                                                                     <input type="submit" value="Enviar" className="surveySubmitBotton" />
                                                                 </Form>
                                                             )
-
-
+                                                            
+                                                            
+                                                            )
+                                                        } </div>
                                                         )
-                                                } </div>
-                                        )
-                                }
+                                                    }
 
                             </Col>
                         </Row>
@@ -192,6 +216,7 @@ class SurveysView extends React.Component {
                 </Row>
             </Container >
         )
+       
     }
 }
 
