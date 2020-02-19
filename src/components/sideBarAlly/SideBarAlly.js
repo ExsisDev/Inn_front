@@ -33,7 +33,7 @@ class SideBar extends React.Component {
                <div className="sideBarAllyLinkBox d-flex align-items-center">
                   <p>Todos los retos</p>
                </div>
-            </Link>
+            </Link> 
             <Link to="/home/ongoingChallenges" >
                <div className="sideBarAllyLinkBox d-flex align-items-center">
                   <p>Retos en curso</p>
