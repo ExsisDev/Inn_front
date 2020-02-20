@@ -86,15 +86,15 @@ input.form-control:focus, button.btn:focus {
 /* Fuentes */
 
 .bigText {
-  font-size: 2.5rem;
+  font-size: 2.5rem !important;
 }
 
 .midText {
-  font-size: 1.8rem;
+  font-size: 1.8rem !important;
 }
 
 .normalText {
-  font-size: 1.6rem;
+  font-size: 1.6rem !important;
 }
 
 /* Espacios */

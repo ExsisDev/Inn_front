@@ -49,9 +49,6 @@
 
 /* Elementos de carga */
 
-.allChallengesSvgContainer {
-  height: auto !important;
-}
 
 @media screen and (max-width: 991px) {
   .allChallengesNavLink {
