@@ -211,24 +211,28 @@ class AllChallenges extends React.Component {
          <Container fluid ref={this.begginingPage} id="allChallengesComponent" >
             <SearchChallenge handleChange={this.handleChange} handleSearchButton={this.handleSearchButton} />
             {
-               this.state.isAdminFunctionality &&
-               (
-                  <Row className="d-flex justify-content-center mt-4">
-                     <Col xs={12} className="d-flex justify-content-center order-2">
-                        <Navbar collapseOnSelect expand="lg" className="d-flex justify-content-center w-100">
-                           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-                           <Navbar.Collapse id="responsive-navbar-nav">
-                              <Nav className="d-flex align-items-center w-100">
-                                 <Nav.Link ref={this.link1} className="text-center allChallengesCircle allChallengesRed allChallengesNavLink mx-4 mx-lg-2 px-0" href="#Unassigned" onClick={(e) => this.handleClickLink(e, "CREATED")}><span>Retos Sin Asignar</span></Nav.Link>
-                                 <Nav.Link ref={this.link2} className="text-center allChallengesCircle allChallengesBlue allChallengesNavLink mx-4 mx-lg-2 px-0" href="#Assigned" onClick={(e) => this.handleClickLink(e, "ASSIGNED")}><span>Retos Asignados</span></Nav.Link>
-                                 <Nav.Link ref={this.link3} className="text-center allChallengesCircle allChallengesGreen allChallengesNavLink mx-4 mx-lg-2 px-0" href="#Finished" onClick={(e) => this.handleClickLink(e, "FINISHED")}><span>Retos Finalizados</span></Nav.Link>
-                                 <Nav.Link href="home/challenge" className="allChallengesCreateLink mt-2"><img className="allChallengesPlusImg" src={plusSign} alt="Plus"></img><span className="ml-2">Crear Reto</span></Nav.Link>
-                              </Nav>
-                           </Navbar.Collapse>
-                        </Navbar>
-                     </Col>
-                  </Row>
-               )
+               this.state.isAdminFunctionality ?
+                  (
+                     <Row className="d-flex justify-content-center mt-4">
+                        <Col xs={12} className="d-flex justify-content-center order-2">
+                           <Navbar collapseOnSelect expand="lg" className="d-flex justify-content-center w-100">
+                              <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                              <Navbar.Collapse id="responsive-navbar-nav">
+                                 <Nav className="d-flex align-items-center w-100">
+                                    <Nav.Link ref={this.link1} className="text-center allChallengesCircle allChallengesRed allChallengesNavLink mx-4 mx-lg-2 px-0" href="#Unassigned" onClick={(e) => this.handleClickLink(e, "CREATED")}><span>Retos Sin Asignar</span></Nav.Link>
+                                    <Nav.Link ref={this.link2} className="text-center allChallengesCircle allChallengesBlue allChallengesNavLink mx-4 mx-lg-2 px-0" href="#Assigned" onClick={(e) => this.handleClickLink(e, "ASSIGNED")}><span>Retos Asignados</span></Nav.Link>
+                                    <Nav.Link ref={this.link3} className="text-center allChallengesCircle allChallengesGreen allChallengesNavLink mx-4 mx-lg-2 px-0" href="#Finished" onClick={(e) => this.handleClickLink(e, "FINISHED")}><span>Retos Finalizados</span></Nav.Link>
+                                    <Nav.Link href="home/challenge" className="allChallengesCreateLink mt-2"><img className="allChallengesPlusImg" src={plusSign} alt="Plus"></img><span className="ml-2">Crear Reto</span></Nav.Link>
+                                 </Nav>
+                              </Navbar.Collapse>
+                           </Navbar>
+                        </Col>
+                     </Row>
+                  )
+                  :
+                  (
+                     <div className="bigSpace"></div>
+                  )
             }
             <Row className="mt-4 px-4">
                {this.state.loadingChallenges ?
@@ -264,16 +268,16 @@ class AllChallenges extends React.Component {
                            {
                               this.state.totalElements > this.state.elementsDisplayed &&
 
-                              <Row className="mx-0 d-flex justify-content-center">
+                              <Row className="mx-0 mb-4 d-flex justify-content-center">
                                  <Col xs={8} sm={6} md={4} xl={3} >
                                     <Pagination
                                        activePage={this.state.actualPage}
                                        itemsCountPerPage={this.state.elementsDisplayed}
                                        totalItemsCount={this.state.totalElements}
                                        pageRangeDisplayed={3}
-                                       itemClass="page-item boxNumber"
-                                       linkClass="page-link boxLink px-0"
-                                       innerClass="pagination d-flex justify-content-center align-self-end"
+                                       itemClass="page-item"
+                                       linkClass="page-link linkPage px-0 text-center"
+                                       innerClass="pagination"
                                        onChange={this.handlePageChange.bind(this)}
                                     />
                                  </Col>

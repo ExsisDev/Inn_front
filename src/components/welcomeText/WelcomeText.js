@@ -12,7 +12,7 @@ const WelcomeText = () => {
                 y la Cámara de comercio de Bogotá, para continuar
                 por favor inicia sesión
             </p>
-            <Button as={Link} to="/login" className="btnDefault mt-4 mt-md-5 mt-lg-5" variant="warning" block>Iniciar Sesión</Button>
+            <Button as={Link} to="/login" className="btnDefault mt-4 mt-md-5 mt-lg-5 text-white" variant="warning" block>Iniciar Sesión</Button>
         </div>
     )
 }

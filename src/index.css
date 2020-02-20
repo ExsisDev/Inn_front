@@ -25,7 +25,7 @@ body {
 
 a {
   text-decoration: none !important;
-  color: #747474 !important;
+  color: #747474 ;
 }
 
 /* Bootstrap */
@@ -95,6 +95,54 @@ input.form-control:focus, button.btn:focus {
 
 .normalText {
   font-size: 1.6rem;
+}
+
+/* Espacios */
+
+.bigSpace {
+  margin-top: 60px;
+}
+
+/* Cajas */
+
+/* .formBox {
+  border-radius: 20px !important;
+  box-shadow: 0px 3px 5px gray !important;
+  background-color: #f0f0f0 !important;
+} */
+
+
+/* Paginación */
+
+li.page-item {
+  width: 30px;
+}
+
+li.page-item.active a.page-link, li.page-item a.page-link:hover{
+  background-color: #313333;
+  color: white;
+  box-shadow: none;
+  border-color: #313333;
+  transition: all ease .4s;
+}
+
+li.page-item a.page-link,  li.page-item.disabled a.page-link{
+  color: black ;
+  background-color: white ;
+  border-color: transparent;
+  border-radius: 20px;
+}
+
+li.page-item:first-child .page-link {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+li.page-item:last-child .page-link {
+  border-top-left-radius: 0;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 0;
 }
 
 /* .container.contentWidth {
@@ -202,23 +250,7 @@ button.sendButton {
 
 /* Paginacion */
 
-/* .page-item.boxNumber.disabled .page-link.boxLink {
-  color: black !important;
-  background-color: white !important;
-  border-color: transparent;
-}
-
-.page-link.boxLink {
-  color: black !important;
-  background-color: white !important;
-  border: none !important;
-}
-
-.page-link.boxLink:hover, .page-link.boxLink:focus, .page-item.boxNumber.active .page-link.boxLink {
-  background-color: #313333 !important;
-  color: white !important;
-  box-shadow: none !important;
-} */
+/*  */
 
 /* Elementos de carga */
 
