@@ -39,21 +39,81 @@ class ChallengeCard extends React.Component {
             <Card className={`grayRoundedBox challengeCardBox ${classNameBackgroundColor}`}>
                <Card.Body className="">
                   <Row>
-                     <Col>
+                     <Col xs={12} lg={2} className="d-flex flex-column align-items-center">
+                        <div className="challengeCardImageBox rounded-circle d-flex justify-content-center">
+                           <Image src={LogoProposing} className="challengeCardImage" />
+                        </div>
+                        <b><i>{this.props.companyName}</i></b>
                      </Col>
-                     <Col>
+                     <Col xs={12} lg={10} className="mt-3">
+                        <Card.Title className="text-center text-lg-left normalText"><b>{this.props.challengeName}</b></Card.Title>
+                        <Card.Text className="challengeCardCompanyDescription mt-lg-4">
+                           {this.props.companyDescription}
+                        </Card.Text>
+                     </Col>
+                  </Row>
+                  <Row className="mt-lg-5">
+                     <Col xs={12} lg={2} className="mt-5 mt-lg-0 d-flex justify-content-center justify-content-lg-end">
+                        <span className="font-weight-bold font-italic">Reto:</span>
+                     </Col>
+                     <Col xs={12} lg={10}>
+                        <Card.Text className="challengeCardDescription">
+                           {this.props.challengeDescription}
+                        </Card.Text>
+                     </Col>
+                     <Col className="d-flex justify-content-end">
+                        {(() => {
+                           if (!this.props.isUserAnAdmin) {
+                              if (this.props.proposalData) {
+                                 return (
+                                    <Link to={{
+                                       pathname: this.props.selectedNextRoute,
+                                       state: {
+                                          idChallenge: this.props.challengeId,
+                                          challengeName: this.props.challengeName,
+                                          companyName: this.props.companyName,
+                                          companyDescription: this.props.companyDescription,
+                                          challengeDescription: this.props.challengeDescription,
+                                          categories: this.props.categories,
+                                          challengeDate: this.props.challengeDate,
+                                          proposalData: this.props.proposalData
+                                       }
+                                    }}
+                                       className="font-weight-bold blueLink mr-4 mt-2"
+                                    >
+                                       Ver más
+                               </Link>
+                                 )
+                              } else {
+                                 return (
+                                    <Link to={{
+                                       pathname: this.props.selectedNextRoute,
+                                       state: {
+                                          idChallenge: this.props.challengeId,
+                                          challengeName: this.props.challengeName,
+                                          companyName: this.props.companyName,
+                                          companyDescription: this.props.companyDescription,
+                                          challengeDescription: this.props.challengeDescription,
+                                          categories: this.props.categories,
+                                          challengeDate: this.props.challengeDate
+                                       }
+                                    }}
+                                       className="font-weight-bold blueLink mr-4 mt-2"
+                                    >
+                                       Ver más
+                               </Link>
+                                 )
+                              }
+                           }
+                        })()}
                      </Col>
                   </Row>
                   <Row>
-                     <Col>
+                     <Col xs={2} className="d-flex justify-content-lg-end">
+                        <span className="w-auto font-italic challengeCardHashTags smallText">Categorías: </span>
                      </Col>
-                     <Col>
-                     </Col>
-                  </Row>
-                  <Row>
-                     <Col>
-                     </Col>
-                     <Col>
+                     <Col xs={10} className="d-flex">
+                        <span className="w-auto font-italic challengeCardHashTags smallText">{this.props.categories.map((item) => { return (`#${item.split(' ').map(a => a.trim()).map(a => a[0].toUpperCase() + a.substring(1)).join("")} `) })}</span>
                      </Col>
                   </Row>
                </Card.Body>

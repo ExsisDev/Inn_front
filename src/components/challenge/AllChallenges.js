@@ -1,7 +1,6 @@
 import React from 'react';
 import axios from "axios";
-import { Container, Row, Col, Nav, Navbar, InputGroup, Button, FormControl, Form, Modal } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Container, Row, Col, Nav, Navbar, Button, Modal } from 'react-bootstrap';
 import _ from 'lodash';
 import { toast } from 'react-toastify';
 import Pagination from "react-js-pagination";
@@ -277,7 +276,7 @@ class AllChallenges extends React.Component {
                                        pageRangeDisplayed={3}
                                        itemClass="page-item"
                                        linkClass="page-link linkPage px-0 text-center"
-                                       innerClass="pagination"
+                                       innerClass="pagination d-flex justify-content-center"
                                        onChange={this.handlePageChange.bind(this)}
                                     />
                                  </Col>

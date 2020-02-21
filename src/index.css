@@ -25,7 +25,7 @@ body {
 
 a {
   text-decoration: none !important;
-  color: #747474 ;
+  color: #747474;
 }
 
 /* Bootstrap */
@@ -97,6 +97,14 @@ input.form-control:focus, button.btn:focus {
   font-size: 1.6rem !important;
 }
 
+.smallText {
+  font-size: 1.3rem !important;
+}
+
+.fontGreyColor {
+  color: #747474;
+}
+
 /* Espacios */
 
 .bigSpace {
@@ -106,11 +114,10 @@ input.form-control:focus, button.btn:focus {
 /* Cajas */
 
 div.grayRoundedBox {
-  border-radius: 20px ;
-  box-shadow: 0px 3px 5px gray ;
-  background-color: #f0f0f0 ;
+  border-radius: 20px;
+  box-shadow: 0px 3px 5px gray;
+  background-color: #f0f0f0;
 }
-
 
 /* Paginación */
 
@@ -118,7 +125,7 @@ li.page-item {
   width: 30px;
 }
 
-li.page-item.active a.page-link, li.page-item a.page-link:hover{
+li.page-item.active a.page-link, li.page-item a.page-link:hover {
   background-color: #313333;
   color: white;
   box-shadow: none;
@@ -126,16 +133,18 @@ li.page-item.active a.page-link, li.page-item a.page-link:hover{
   transition: all ease .4s;
 }
 
-li.page-item a.page-link,  li.page-item.disabled a.page-link{
-  color: black ;
-  background-color: white ;
+li.page-item a.page-link, li.page-item.disabled a.page-link {
+  color: black;
+  background-color: white;
   border-color: transparent;
   border-radius: 20px;
 }
 
 li.page-item:first-child .page-link {
+  border-top-left-radius: 20px;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
+  border-bottom-left-radius: 20px;
 }
 
 li.page-item:last-child .page-link {

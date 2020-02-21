@@ -77,7 +77,7 @@ class Home extends React.Component {
     render() {
         return (
             <div>
-                <Container fluid className="d-flex homeMainContainer px-0">
+                <Container fluid className="d-flex homeMainContainer px-0 fontGreyColor">
                     <Row noGutters className="w-100">
                         <Col>
 

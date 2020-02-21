@@ -11,9 +11,16 @@
    margin: 0 auto;
 }
 
-/* .challengeCardBox {
-   width: 100% !important;
+.challengeCardCompanyDescription {
+   text-align: justify;
+   overflow: hidden;
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   font-style: italic;
+   -webkit-box-orient: vertical;
+   -webkit-line-clamp: 3;
 }
+
 
 .challengeCardNewSendedColor {
    background-color: #cbf2d7 !important;
@@ -31,6 +38,12 @@
    background-color: #fdffd6 !important;
 }
 
+/* .challengeCardBox {
+   width: 100% !important;
+}
+
+
+
 .challengeCardName {
    text-align: left !important;
    background-color: inherit;
@@ -47,17 +60,6 @@
    height: 74%;
    width: auto;
    margin: 0 auto;
-}
-
-.challengeCardCompanyDescription {
-   text-align: start;
-   font-size: 1em;
-   text-align: start;
-   overflow: hidden;
-   text-overflow: ellipsis;
-   display: -webkit-box;
-   -webkit-box-orient: vertical;
-   -webkit-line-clamp: 3;
 }
 
 .challengeCardDescription {
