@@ -18,7 +18,7 @@ const SearchChallenge = (props) => {
                   </InputGroup>
                </Form>
             </Col>
-            <Col xs={12} lg={7} className="h-100 order-1 order-lg-2 d-flex justify-content-center justify-content-lg-end mt-3 mt-lg-0">
+            <Col xs={12} lg={7} className="order-1 order-lg-2 d-flex justify-content-center justify-content-lg-end mt-3 mt-lg-0">
                <img className="searchChallengeImage" src={innovaCamaraLogo} alt="innovaCamaralogo" />
             </Col>
          </Row>

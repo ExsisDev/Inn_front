@@ -1,4 +1,17 @@
-.challengeCardBox {
+.challengeCardImageBox {
+   height: 90px;
+   width: 90px;
+   background: white no-repeat center;
+   background-size: contain;
+}
+
+.challengeCardImage {
+   height: 74%;
+   width: auto;
+   margin: 0 auto;
+}
+
+/* .challengeCardBox {
    width: 100% !important;
 }
 
@@ -62,4 +75,4 @@
 
 .challengeCardHashTags {
    text-align: left;
-}
+} */
