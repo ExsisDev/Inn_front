@@ -207,7 +207,7 @@ class AllChallenges extends React.Component {
 
    render() {
       return (
-         <Container fluid ref={this.begginingPage} id="allChallengesComponent" className="d-flex flex-column">
+         <Container fluid ref={this.begginingPage} id="allChallengesComponent" className="d-flex flex-column h-100">
             <SearchChallenge handleChange={this.handleChange} handleSearchButton={this.handleSearchButton} />
             {
                this.state.isAdminFunctionality ?

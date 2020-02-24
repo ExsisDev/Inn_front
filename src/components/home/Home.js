@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Switch } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
 
@@ -76,7 +76,7 @@ class Home extends React.Component {
 
     render() {
         return (
-            <div>
+            <Fragment>
                 <Container fluid className="d-flex homeMainContainer px-0 fontGreyColor">
                     <Row noGutters className="w-100">
                         <Col>
@@ -106,7 +106,7 @@ class Home extends React.Component {
                         </Col>
                     </Row>
                 </Container>
-            </div>
+            </Fragment>
         )
     }
 }

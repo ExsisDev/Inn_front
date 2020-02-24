@@ -67,7 +67,7 @@ class ChallengeCard extends React.Component {
                   </Row>
                   <Row className="mt-lg-4">
                      <Col xs={12} lg={2} className="mt-5 mt-lg-0 px-0 d-flex justify-content-center justify-content-lg-end">
-                        <span className="font-weight-bold font-italic">Reto:</span>
+                        <span className="font-weight-bold font-italic mr-lg-4">Reto:</span>
                      </Col>
                      <Col xs={12} lg={10} className="mb-2">
                         <Card.Text className="text-justify">

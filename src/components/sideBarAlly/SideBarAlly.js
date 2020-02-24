@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { IconContext } from "react-icons";
@@ -23,7 +23,7 @@ class SideBar extends React.Component {
 
    render() {
       return (
-         <div >
+         <Fragment >
             <Container ref={this.sideBarAlly} id="sideNav" className={`d-flex flex-column ${this.props.className}`}>
                <a href="javascript:void(0)" id="closeBtn" onClick={this.props.handleClassStateBtn}>&times;</a>
                <Row className="d-flex justify-content-center">
@@ -71,7 +71,7 @@ class SideBar extends React.Component {
                </Row>
             </Container>
             <span style={{ fontSize: "30px", cursor: "pointer", position: "fixed", zIndex: "50" }} onClick={this.props.handleClassStateBtn}>&#9776;</span>
-         </div>
+         </Fragment>
       );
    }
 }

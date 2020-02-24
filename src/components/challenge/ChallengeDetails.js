@@ -18,9 +18,9 @@ const ChallengeDetails = (props) => {
    }
 
    return (
-      <Container fluid id="challengeDetails" className="pt-0">
+      <Container fluid id="challengeDetails" className="pt-0 d-flex flex-column">
          <BackNavigator />
-         <Row className="h-100">
+         <Row className="flex-grow-1 align-items-center my-4 my-lg-0">
             <Col xs={12}>
                <Card className={`grayRoundedBox`}>
                   <Card.Body className="challengeCardRightPadding">
@@ -40,7 +40,7 @@ const ChallengeDetails = (props) => {
                      </Row>
                      <Row className="mt-lg-4">
                         <Col xs={12} lg={2} className="mt-5 mt-lg-0 px-0 d-flex justify-content-center justify-content-lg-end">
-                           <span className="font-weight-bold font-italic">Reto:</span>
+                           <span className="font-weight-bold font-italic mr-lg-4">Reto:</span>
                         </Col>
                         <Col xs={12} lg={10} className="mb-2">
                            <Card.Text className="challengeCardDescription text-justify">
@@ -48,7 +48,7 @@ const ChallengeDetails = (props) => {
                            </Card.Text>
                         </Col>
                      </Row>
-                     <Row className="my-4">
+                     <Row className="my-5">
                         <Col xs={5} lg={2} className="d-flex justify-content-lg-end px-lg-0">
                            <span className="w-auto font-italic smallText">Categorías: </span>
                         </Col>
@@ -56,12 +56,12 @@ const ChallengeDetails = (props) => {
                            <span className="w-auto font-italic smallText">{props.location.state.categories.map((item) => { return (`#${item.split(' ').map(a => a.trim()).map(a => a[0].toUpperCase() + a.substring(1)).join("")} `) })}</span>
                         </Col>
                      </Row>
-                     <Row className="mt-lg-5">
-                        <Col xs={6} lg={3} className="d-flex justify-content-end justify-content-lg-end px-0">
-                           <span className="font-weight-bold font-italic">{"Fecha de cierre: "}</span>
+                     <Row className="mt-lg-5 mb-3">
+                        <Col xs={6} lg={3} className="d-flex justify-content-end justify-content-lg-end px-0 ">
+                           <span className="font-weight-bold font-italic mr-lg-4 midText">{"Fecha de cierre: "}</span>
                         </Col>
-                        <Col xs={6} lg={3} className="d-flex justify-content-start">
-                           <span className="font-weight-bold font-italic">&nbsp;&nbsp;&nbsp;&nbsp;{props.location.state.challengeDate}</span>
+                        <Col xs={6} lg={3} className="d-flex justify-content-start px-0">
+                           <span className="font-weight-bold font-italic midText ">&nbsp;&nbsp;&nbsp;&nbsp;{props.location.state.challengeDate}</span>
                         </Col>
                         <Col xs={12} lg={6} className="d-flex justify-content-end mt-4 mt-lg-0">
                            <Link
