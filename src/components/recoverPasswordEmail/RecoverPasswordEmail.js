@@ -60,7 +60,6 @@ const RecoverPasswordEmail = () => {
             <Form.Label> Recuperar Contraseña </Form.Label>
             <Form.Group controlId="formBasicEmail">
                <Form.Label className="mt-4 recoverPasswordEmailRecoveryText">Ingresa el correo asociado a la cuenta</Form.Label>
-               <Form.Label className="mt-4 recoverPasswordEmailRecoveryText">Ingresa el correo asociado a la cuenta</Form.Label>
                <Form.Control className="formInput" type="email" placeholder="E-mail" ref={email} required />
             </Form.Group>
             <Button className="sendButton mt-4 mb-4" variant="warning" type="submit">

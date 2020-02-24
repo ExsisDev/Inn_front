@@ -30,9 +30,7 @@ const Landing = () => {
                             <Switch>
                                 <Route path="/" exact component={WelcomeText} />
 
-                                <Route path="/login" component={LoginForm} />
-                                <Route path="/recover-password/email" component={RecoverPasswordEmail} />
-                                <Route path="/recover-password" component={RecoverNewPassword} />
+                                <Route path="/login" component={LoginForm} />                                
                                 <Route path="/login" exact component={LoginForm} />
                                 <Route path="/recover-password/email" exact component={RecoverPasswordEmail} />
                                 <Route path="/recover-password/:idUser/:token" component={RecoverNewPassword} />
