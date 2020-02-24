@@ -1,5 +1,5 @@
 import React from 'react';
-import { Col, Card, Row, Container, Form, Button } from 'react-bootstrap';
+import { Col, Card, Row, Container, Form, Button, Image } from 'react-bootstrap';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
@@ -7,6 +7,7 @@ import { PROPOSAL_STATE } from '../../commons/enums';
 import BackNavigator from '../utilities/backNavigator/BackNavigator';
 import NumberArrowUpDown from '../utilities/numberArrowUpDown/NumberArrowUpDown';
 import { getToken, getTokenData } from '../../commons/tokenManagement';
+import LogoProposing from '../../images/EmpresaB.png';
 import './ProposalForm.css';
 
 
@@ -112,7 +113,7 @@ class ProposalForm extends React.Component {
          ideation_hours: this.state.ideationHours,
          experimentation_hours: this.state.experimentationHours,
          solution_description: this.state.description,
-         proposal_is_assigned: false
+         proposal_resources: this.state.resources
       }
 
       let url = `${process.env.REACT_APP_BACK_URL}/proposals`;
@@ -180,20 +181,29 @@ class ProposalForm extends React.Component {
                         <Card className="formBox proposalFormCardBox">
                            <Card.Body className="pr-lg-5">
                               <Row className="mx-0">
-                                 <Col className="offset-lg-2">
-                                    <Card.Title className="challengeDetailsName text-center text-md-center text-lg-left">
-                                       <b>{this.props.location.state.challengeName}</b>
-                                    </Card.Title>
+                                 <Col lg={2} className="px-0 d-flex justify-content-center">
+                                    <div className="proposalFormImageBox rounded-circle d-flex align-items-center">
+                                       <Image src={LogoProposing} className="proposalFormImage" />
+                                    </div>
+                                 </Col>
+                                 <Col lg={10}>
+                                    <Row className="mx-0 mt-2">
+                                       <Col className="px-0">
+                                          <Card.Title className="challengeDetailsName text-center text-md-center text-lg-left">
+                                             <b>{this.props.location.state.challengeName}</b>
+                                          </Card.Title>
+                                       </Col>
+                                    </Row>
+                                    <Row className="mx-0">
+                                       <Col className="px-0">
+                                          <Card.Text className="text-justify">
+                                             <i className="proposalFormHeaderText"> Vas a aplicar a este reto con tu propia solución del problema, completa los siguientes campos para continuar</i>
+                                          </Card.Text>
+                                       </Col>
+                                    </Row>
                                  </Col>
                               </Row>
-                              <Row className="mx-0">
-                                 <Col className="offset-lg-2">
-                                    <Card.Text className="text-justify">
-                                       <i className="proposalFormHeaderText"> Vas a aplicar a este reto con tu propia solución del problema, completa los siguientes campos para continuar</i>
-                                    </Card.Text>
-                                 </Col>
-                              </Row>
-                              <Form className="mt-4" onSubmit={this.handleSubmition}>
+                              <Form className="" onSubmit={this.handleSubmition}>
                                  <Form.Row>
                                     <Form.Group as={Col} style={{ paddingLeft: '15px' }} controlId="proposalFormInput1" className="offset-lg-2">
                                        <Form.Label className="proposalFormInputLabels text-left">

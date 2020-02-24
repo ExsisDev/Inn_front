@@ -41,13 +41,13 @@ class EditAllyResources extends React.Component {
     }
 
     componentDidMount() {
-        this.chargeResourcesToState();
+        this.chargeResourcesToStatus();
     }
 
     /**
      * Obtener recursos asociados al aliado y guardarlos en el estado
      */
-    chargeResourcesToState() {
+    chargeResourcesToStatus() {
         const token = getToken();
         const url = `${process.env.REACT_APP_BACK_URL}/resources/${this.state.idAlly}`;
         axios.get(url, { headers: { 'x-auth-token': `${token}` } })
@@ -75,8 +75,8 @@ class EditAllyResources extends React.Component {
         axios.post(url, resource, { headers: { 'x-auth-token': `${token}` } })
             .then(answer => {
                 this.notifySuccess("Recurso creado");
-                this.changeStateCreateResource();
-                this.chargeResourcesToState();
+                this.changeStatusCreateResource();
+                this.chargeResourcesToStatus();
             })
             .catch(error => {
                 console.log(error);
@@ -99,7 +99,7 @@ class EditAllyResources extends React.Component {
             url,
             { headers: { 'x-auth-token': `${token}` } }
         ).then(res => {
-            this.removeResourceFromState();
+            this.removeResourceFromStatus();
             this.setState({ idResourceToDelete: 0 });
             this.notifySuccess("Recurso eliminado con exito")
         }).catch(error => {
@@ -110,7 +110,7 @@ class EditAllyResources extends React.Component {
     /**
      * Remueve del estado el recurso con id igual al id guardado en el estado (state.idResourceToDelete).
      */
-    removeResourceFromState = () => {
+    removeResourceFromStatus = () => {
         let { allyResources, idResourceToDelete } = this.state;
         _.remove(allyResources, function (resource) {
             return resource.id_resource === idResourceToDelete;
@@ -142,7 +142,7 @@ class EditAllyResources extends React.Component {
     /**
      * Modifica el estado de createResource (false - true)
      */
-    changeStateCreateResource = () => {
+    changeStatusCreateResource = () => {
         const back = this.state.createResource;
         this.setState({ createResource: !back });
     }
@@ -228,7 +228,7 @@ class EditAllyResources extends React.Component {
                     <div>
                         <Row className="justify-content-end mx-0">
                             <Col md="5">
-                                <Button className="allyBtnCreateAllyResources" onClick={this.changeStateCreateResource}>
+                                <Button className="allyBtnCreateAllyResources" onClick={this.changeStatusCreateResource}>
                                     {
                                         !this.state.createResource
                                             ? "Crear recurso"

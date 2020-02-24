@@ -31,3 +31,16 @@
 .challengeDetailsHashTags {
    text-align: left;
 }
+
+.challengeDetailsImageBox{
+   height: 90px;
+   width: 90px;
+   background: white no-repeat center;
+   background-size: contain;
+}
+
+.challengeDetailsImage {
+   height: 74%;
+   width: auto;
+   margin: 0 auto;
+}

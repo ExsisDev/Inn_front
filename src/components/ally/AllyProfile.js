@@ -1,7 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { Container, Row, Col, Form, Modal, Button } from 'react-bootstrap';
-import ReactLoading from 'react-loading';
+import { Container, Row, Col, Form } from 'react-bootstrap';
 import _ from "lodash";
 import { toast } from 'react-toastify';
 

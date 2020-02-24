@@ -5,7 +5,9 @@ export const USER_ROLES = {
 
 export const PROPOSAL_STATE = {
     SEND: 1,
-    REJECTED: 2
+    REJECTED: 2,
+    ASSIGNED: 3,
+    FINISHED: 4
 }
 
 export const CHALLENGE_STATE = {

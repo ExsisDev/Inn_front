@@ -1,5 +1,6 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 import innovaCamaraLogo from '../../images/innovaCamaraLogo.png';
 import propuestasEnviadas from '../../images/PropuestasEnviadas.png';
@@ -25,25 +26,45 @@ const ProposalsMenu = () => {
                </Row>
                <Row className="mx-0 h-100 d-flex justify-content-center">
                   <Col xs={12} md={6} className="d-flex flex-column align-items-center justify-content-start justify-content-md-center mb-3 mb-md-0">
-                     <img className="proposalsMenuImgButton rounded-circle" src={propuestasEnviadas} alt="Propuestas enviadas" />
+                     <Link to={{
+                        pathname: '/home/sendedProposals',
+                     }}
+                        className="rounded-circle w-auto">
+                        <img className="proposalsMenuImgButton rounded-circle" src={propuestasEnviadas} alt="Propuestas enviadas" />
+                     </Link>
                      <span className="proposalMenuTextButton mt-3">Propuestas Enviadas</span>
                   </Col>
                   <Col xs={12} md={6} className="d-flex flex-column align-items-center justify-content-start justify-content-md-center mb-3 mb-md-0">
-                     <img className="proposalsMenuImgButton rounded-circle" src={propuestasRechazadas} alt="Propuestas rechazadas" />
+                     <Link to={{
+                        pathname: '/home/rejectedProposals',
+                     }}
+                        className="rounded-circle w-auto">
+                        <img className="proposalsMenuImgButton rounded-circle" src={propuestasRechazadas} alt="Propuestas rechazadas" />
+                     </Link >
                      <span className="proposalMenuTextButton mt-3">Propuestas Rechazadas</span>
                   </Col>
                   <Col xs={12} md={6} className="d-flex flex-column align-items-center mb-3 mb-md-0">
-                     <img className="proposalsMenuImgButton rounded-circle" src={propuestasAsignadas} alt="Propuestas asignadas" />
+                     <Link to={{
+                        pathname: '/home/assignedProposals',
+                     }}
+                        className="rounded-circle w-auto">
+                        <img className="proposalsMenuImgButton rounded-circle" src={propuestasAsignadas} alt="Propuestas asignadas" />
+                     </Link>
                      <span className="proposalMenuTextButton mt-3">Propuestas Asignadas</span>
                   </Col>
                   <Col xs={12} md={6} className="d-flex flex-column align-items-center mb-3 mb-md-0">
-                     <img className="proposalsMenuImgButton rounded-circle" src={retosTerminados} alt="Propuestas asignadas" />
+                     <Link to={{
+                        pathname: '/home/challengesFinished',
+                     }}
+                        className="rounded-circle w-auto">
+                        <img className="proposalsMenuImgButton rounded-circle" src={retosTerminados} alt="Propuestas asignadas" />
+                     </Link>
                      <span className="proposalMenuTextButton mt-3">Retos Terminados</span>
                   </Col>
                </Row>
             </Col>
          </Row>
-      </Container>
+      </Container >
    )
 }
 

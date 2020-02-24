@@ -29,3 +29,16 @@
    color: #eca761;
    font-weight: 600;
 }
+
+.proposalFormImageBox {
+   height: 120px;
+   width: 120px;
+   background: white no-repeat center;
+   background-size: contain;
+}
+
+.proposalFormImage {
+   height: 74%;
+   width: auto;
+   margin: 0 auto;
+}
