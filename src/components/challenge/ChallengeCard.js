@@ -36,7 +36,7 @@ class ChallengeCard extends React.Component {
       }
       return (
          <Col className="mb-5">
-            <Card className={`grayRoundedBox challengeCardBox ${classNameBackgroundColor}`}>
+            <Card className={`grayRoundedBox ${classNameBackgroundColor}`}>
                <Card.Body className="challengeCardRightPadding">
                   <Row className="mt-2">
                      {
@@ -70,7 +70,7 @@ class ChallengeCard extends React.Component {
                         <span className="font-weight-bold font-italic">Reto:</span>
                      </Col>
                      <Col xs={12} lg={10} className="mb-2">
-                        <Card.Text className="challengeCardDescription text-justify">
+                        <Card.Text className="text-justify">
                            {this.props.challengeDescription}
                         </Card.Text>
                      </Col>
@@ -123,10 +123,10 @@ class ChallengeCard extends React.Component {
                   </Row>
                   <Row className="mb-4">
                      <Col xs={5} lg={2} className="d-flex justify-content-lg-end px-lg-0">
-                        <span className="w-auto font-italic challengeCardHashTags smallText">Categorías: </span>
+                        <span className="w-auto font-italic smallText">Categorías: </span>
                      </Col>
                      <Col xs={12} lg={10} className="d-flex">
-                        <span className="w-auto font-italic challengeCardHashTags smallText">{this.props.categories.map((item) => { return (`#${item.split(' ').map(a => a.trim()).map(a => a[0].toUpperCase() + a.substring(1)).join("")} `) })}</span>
+                        <span className="w-auto font-italic smallText">{this.props.categories.map((item) => { return (`#${item.split(' ').map(a => a.trim()).map(a => a[0].toUpperCase() + a.substring(1)).join("")} `) })}</span>
                      </Col>
                   </Row>
                </Card.Body>
