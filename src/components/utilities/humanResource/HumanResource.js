@@ -7,8 +7,8 @@ import './HumanResource.css';
 
 const HumanResource = (props) => {
     return (
-        <Card className="humanResourceCardBox mx-0 my-2 py-3 align-items-end">
-            <Button variant="Link" className="w-25 p-0"
+        <Card className="humanResourceCardBox mx-auto mb-3">
+            <Button variant="Link" className="w-25 p-0 ml-auto mt-3"
                 onClick={() => props.handleDelete(props.person)}
             >
                 <MdDelete />

@@ -265,7 +265,7 @@ class CreateAlly extends React.Component {
             imgAlt: "logo crear nuevo aliado"
         }
         return (
-            <Container className="d-flex flex-column align-items-center px-5">
+            <Container className="d-flex flex-column align-items-center px-0 px-lg-5">
                 {
                     this.state.isCreated &&
                     <Redirect to="/home/ally" />
