@@ -25,7 +25,7 @@ const Landing = () => {
         return (
             <Container fluid className="landing">
                 <Row className="landingLoginBox d-flex justify-content-center ">
-                    <Col lg={{ span: 4 }} md={{ span: 6 }} sm={{ span: 8 }} xs={{ span: 10 }} className=" d-flex align-items-center">
+                    <Col lg={{ span: 4 }} md={{ span: 6 }} sm={{ span: 8 }} xs={{ span: 10 }} className="landingChartWidth d-flex align-items-center">
                         <div className="landingLogin w-100 mx-4">
                             <div className="landingSquareLine h-100 w-100">
                                 <Switch>

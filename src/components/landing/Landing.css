@@ -24,10 +24,16 @@
   }
 
   .landingImageBox {
-      height: 60%; 
+      height: 60%;
   }
 
   .landingSquareLine {
       border-radius: 12%;
       border: 2px solid white;
+  }
+
+  @media screen and (min-width: 1400px) {
+      .landingChartWidth {
+          max-width: 30% !important;
+      }
   }
