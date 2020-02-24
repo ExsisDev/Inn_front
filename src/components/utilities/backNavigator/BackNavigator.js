@@ -28,13 +28,13 @@ const BackNavigator = (props) => {
     }
 
     return (
-        <Row className={`mt-3 align-items-center ${black}`}>
-            <Col xs={6} sm={2} md={2} className="order-1 order-sm-0 p-0 mt-3 mt-sm-1">
+        <Row className={`mt-4 mt-lg-0 ${black}`}>
+            <Col xs={12} sm={2} className="order-2 order-sm-1 d-flex justify-content-center justify-content-sm-start mt-5 mt-sm-0">
                 <BackButton dark={props.dark} />
             </Col>
-            <Col xs={12} sm={{ span: 3, offset: 7 }} md={{ span: 3, offset: 7 }} className="order-0 order-sm-1 p-0">
-                <div className="ml-auto d-flex justify-content-center justify-content-sm-end">
-                    <img className="align-self-center backNavigatorLogo" src={logo} alt="logo icon" />
+            <Col xs={12} sm={10} className="order-1 order-sm-2 d-flex justify-content-center justify-content-sm-end">
+                <div className="">
+                    <img className="backNavigatorImgHeight" src={logo} alt="logo icon" />
                 </div>
             </Col>
             {

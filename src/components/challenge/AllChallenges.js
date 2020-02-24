@@ -244,7 +244,7 @@ class AllChallenges extends React.Component {
                   this.state.renderedChallenges.length > 0 ?
                      (
                         <Col>
-                           <Row className="mx-0 d-flex flex-column">
+                           <Row className="mx-0 flex-column">
                               {this.state.renderedChallenges.map((item, index) => {
                                  return (
                                     <ChallengeCard
@@ -267,7 +267,7 @@ class AllChallenges extends React.Component {
                            {
                               this.state.totalElements > this.state.elementsDisplayed &&
 
-                              <Row className="mx-0 mb-4 d-flex justify-content-center">
+                              <Row className="mx-0 mb-4 justify-content-center">
                                  <Col xs={8} sm={6} md={4} xl={3} >
                                     <Pagination
                                        activePage={this.state.actualPage}

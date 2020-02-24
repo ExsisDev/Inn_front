@@ -21,10 +21,10 @@ const BackButton = (props) => {
 	if (props.dark) {
 		black = "black";
 		backBtn = backButtonBlackImg;
-  }
+	}
 
 	return (
-		<Button variant="link" className={"backButton px-0 d-flex justify-content-start align-items-center " + props.className + " " + black} onClick={() => history.goBack()}>
+		<Button variant="link" className={"backButton px-0 d-flex justify-content-start align-items-center midText " + props.className + " " + black} onClick={() => history.goBack()}>
 			<Image src={backBtn} alt="Back button" className="backButtonImg" />
 			Volver
 		</Button>

@@ -21,7 +21,6 @@
    -webkit-line-clamp: 3;
 }
 
-
 .challengeCardNewSendedColor {
    background-color: #cbf2d7 !important;
 }
@@ -37,11 +36,17 @@
 .challengeCardNewFinishedColor {
    background-color: #fdffd6 !important;
 }
- 
-.challengeCardCrossLinkBox{
+
+.challengeCardCrossLinkBox {
    margin-bottom: -20px;
 }
 
- .challengeCardcrossLink:hover {
+.challengeCardcrossLink:hover {
    color: red !important;
- }
+}
+
+@media screen and (min-width: 992px) {
+   .card-body.challengeCardRightPadding {
+      padding-right: 50px;
+   }
+}

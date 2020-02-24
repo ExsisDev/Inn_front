@@ -154,6 +154,11 @@ li.page-item:last-child .page-link {
   border-bottom-left-radius: 0;
 }
 
+@media screen and (max-width: 576px){
+  .bigSpace {
+    margin-top: 30px;
+  }
+}
 /* .container.contentWidth {
   width: calc(100% - 250px);
   margin-left: auto;

@@ -25,7 +25,7 @@ class SideBar extends React.Component {
       return (
          <div >
             <Container ref={this.sideBarAlly} id="sideNav" className={`d-flex flex-column ${this.props.className}`}>
-               <a href="#" id="closeBtn" onClick={this.props.handleClassStateBtn}>&times;</a>
+               <a href="javascript:void(0)" id="closeBtn" onClick={this.props.handleClassStateBtn}>&times;</a>
                <Row className="d-flex justify-content-center">
                   <Col xs={8}>
                      <Link to="/ally/profile" >

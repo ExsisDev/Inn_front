@@ -7,7 +7,7 @@ import './SearchChallenge.css';
 const SearchChallenge = (props) => {
       let classes = props.className || "";
       return (
-         <Row className={`d-flex ${classes}`}>
+         <Row className={`${classes}`}>
             <Col xs={12} lg={5} className="order-2 order-lg-1 mt-3 mt-lg-0">
                <Form className="h-100" onSubmit={props.handleSearchButton}>
                   <InputGroup className="h-100">
