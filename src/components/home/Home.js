@@ -16,7 +16,7 @@ import ChallengeDetais from '../challenge/ChallengeDetails';
 import ProposalForm from '../proposal/ProposalForm';
 import ProposalsMenu from '../proposal/ProposalsMenu';
 import ProposalList from '../proposal/ProposalList';
-import TrackAssignment from '../trackAssignment/TrackAssignment';
+import TrackAssignment from '../TrackAssignment/TrackAssignment';
 import SendedOrRejectedProposalDetails from '../proposal/SendedOrRejectedProposalDetails';
 import SelectProposalChallenge from '../challenge/SelectProposalChallenge';
 import './Home.css';
