@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import { Form, Button } from 'react-bootstrap';
 import { toast } from 'react-toastify';
@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import './RecoverPasswordEmail.css';
 
 const RecoverPasswordEmail = () => {
+   const [isSending, setIsSending] = useState(false);
    const email = React.createRef();
    const toastConfiguration = {
       position: "top-right",
@@ -15,11 +16,12 @@ const RecoverPasswordEmail = () => {
       pauseOnHover: true,
       draggable: true,
       closeButton: false,
-      containerId: 'A'
+      containerId: 'A'      
    }
 
    function handleSubmit(event) {
       event.preventDefault();
+      setIsSending(true);
       const url = `${process.env.REACT_APP_BACK_URL}/login/recoverPassword`;
       const user_email = email.current.value;
 
@@ -27,7 +29,9 @@ const RecoverPasswordEmail = () => {
       axios.post(url, { user_email })
          .then(res => {
             notifySuccess("hemos generado un link de recuperación. Revisa tu correo.");
+            setIsSending(false);
          }).catch(error => {
+            setIsSending(false);
             if (error.response){               
                notifyError(error.response.data);
             }else{
@@ -62,8 +66,8 @@ const RecoverPasswordEmail = () => {
                <Form.Label className="mt-4 recoverPasswordEmailRecoveryText">Ingresa el correo asociado a la cuenta</Form.Label>
                <Form.Control className="formInput" type="email" placeholder="E-mail" ref={email} required />
             </Form.Group>
-            <Button className="sendButton mt-4 mb-4" variant="warning" type="submit">
-               Enviar
+            <Button className="sendButton mt-4 mb-4" variant="warning" type="submit" disabled={isSending}>
+               {isSending ? "Enviando..." : "Enviar"}
             </Button>
          </Form>
       </div>
