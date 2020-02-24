@@ -1,0 +1,34 @@
+.selectProposalCardProp {
+    background-color: #dddddd !important;
+}
+
+.buttonsProposal > button {
+    margin-top: 1vh;
+    border-radius: 20px !important;
+    color: #fff;
+    background-color: #dedddd !important;
+    border-color: #dedddd !important;
+}
+
+
+.formButtonProposal {
+    margin-top: 1vh;
+    border-radius: 20px !important;
+    color: white !important;
+    background-color: #75de95 !important;
+    border-color: #75de95 !important;
+  }
+
+.input-group .input-group-text {
+    background-color: #dddddd !important;
+    border-color: #dddddd !important;
+}
+
+.input-group-text {
+    width: 5rem;
+}
+
+.radioText {
+    font-weight: 700;
+    font-size: 1.2rem;
+}
