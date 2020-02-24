@@ -38,22 +38,35 @@ class ChallengeCard extends React.Component {
          <Col className="mb-5">
             <Card className={`grayRoundedBox challengeCardBox ${classNameBackgroundColor}`}>
                <Card.Body className="">
-                  <Row>
+                  <Row className="mt-2">
+                     {
+                        this.props.isUserAnAdmin &&
+                        (
+                           <Col xs="12" className="challengeCardCrossLinkBox d-flex justify-content-end ">
+                              <IconContext.Provider value={{ className: "" }}>
+                                 <span className="challengeCardcrossLink" onClick={this.props.deleteChallenge}>
+                                    <IoIosCloseCircle />
+                                 </span>
+                              </IconContext.Provider>
+                           </Col>
+                        )
+                     }
                      <Col xs={12} lg={2} className="d-flex flex-column align-items-center">
                         <div className="challengeCardImageBox rounded-circle d-flex justify-content-center">
                            <Image src={LogoProposing} className="challengeCardImage" />
                         </div>
-                        <b><i>{this.props.companyName}</i></b>
+                        {/* <b><i>{this.props.companyName}</i></b> */}
                      </Col>
-                     <Col xs={12} lg={10} className="mt-3">
-                        <Card.Title className="text-center text-lg-left normalText"><b>{this.props.challengeName}</b></Card.Title>
+                     <Col xs={12} lg={10} className=" d-flex flex-column justify-content-center">
+
+                        <Card.Title className="text-center text-lg-left normalText mt-3 mt-lg-0"><b>{this.props.challengeName}</b></Card.Title>
                         <Card.Text className="challengeCardCompanyDescription mt-lg-4">
                            {this.props.companyDescription}
                         </Card.Text>
                      </Col>
                   </Row>
                   <Row className="mt-lg-5">
-                     <Col xs={12} lg={2} className="mt-5 mt-lg-0 d-flex justify-content-center justify-content-lg-end">
+                     <Col xs={12} lg={2} className="mt-5 mt-lg-0 px-0 d-flex justify-content-center justify-content-lg-end">
                         <span className="font-weight-bold font-italic">Reto:</span>
                      </Col>
                      <Col xs={12} lg={10}>
@@ -108,11 +121,11 @@ class ChallengeCard extends React.Component {
                         })()}
                      </Col>
                   </Row>
-                  <Row>
-                     <Col xs={2} className="d-flex justify-content-lg-end">
+                  <Row className="mb-4">
+                     <Col xs={5} lg={2} className="d-flex justify-content-lg-end px-0">
                         <span className="w-auto font-italic challengeCardHashTags smallText">Categorías: </span>
                      </Col>
-                     <Col xs={10} className="d-flex">
+                     <Col xs={12} lg={10} className="d-flex">
                         <span className="w-auto font-italic challengeCardHashTags smallText">{this.props.categories.map((item) => { return (`#${item.split(' ').map(a => a.trim()).map(a => a[0].toUpperCase() + a.substring(1)).join("")} `) })}</span>
                      </Col>
                   </Row>

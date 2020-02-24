@@ -41,8 +41,8 @@ class SideBar extends React.Component {
                   </Col>
                </Row>
                <Row className="sideBarAllyLinkBox">
-                  <Col className="d-flex justify-content-center align-items-center">
-                     <Link to="/home">
+                  <Col>
+                     <Link to="/home" className="d-flex justify-content-center align-items-center h-100 w-100">
                         <div className="">
                            <p className="midText">Todos los retos</p>
                         </div>
@@ -50,8 +50,8 @@ class SideBar extends React.Component {
                   </Col>
                </Row>
                <Row className="sideBarAllyLinkBox">
-                  <Col className="d-flex justify-content-center align-items-center">
-                     <Link to="/home/ongoingChallenges">
+                  <Col>
+                     <Link to="/home/ongoingChallenges" className="d-flex justify-content-center align-items-center h-100 w-100">
                         <div className="">
                            <p className="midText">Retos en curso</p>
                         </div>
@@ -60,7 +60,7 @@ class SideBar extends React.Component {
                </Row>
                <Row className="sideBarAllyLinkBox mt-auto">
                   <Col>
-                     <a onClick={logOut} href="/">
+                     <a onClick={logOut} href="/" className="d-flex justify-content-center align-items-center h-100 w-100">
                         <div className="sideBarAllyLinkBox d-flex justify-content-center align-items-center">
                            <IconContext.Provider value={{ color: "white" }}>
                               <p className="midText"><IoIosLogOut /><span className="ml-2">Cerrar sesión</span></p>

@@ -1,6 +1,6 @@
 .challengeCardImageBox {
-   height: 90px;
-   width: 90px;
+   height: 120px;
+   width: 120px;
    background: white no-repeat center;
    background-size: contain;
 }
@@ -37,44 +37,11 @@
 .challengeCardNewFinishedColor {
    background-color: #fdffd6 !important;
 }
-
-/* .challengeCardBox {
-   width: 100% !important;
+ 
+.challengeCardCrossLinkBox{
+   margin-bottom: -20px;
 }
 
-
-
-.challengeCardName {
-   text-align: left !important;
-   background-color: inherit;
-}
-
-.challengeCardImageBox {
-   height: 90px;
-   width: 90px;
-   background: white no-repeat center;
-   background-size: contain;
-}
-
-.challengeCardImage {
-   height: 74%;
-   width: auto;
-   margin: 0 auto;
-}
-
-.challengeCardDescription {
-   text-align: start;
-   overflow: hidden;
-   text-overflow: ellipsis;
-   display: -webkit-box;
-   -webkit-box-orient: vertical;
-   -webkit-line-clamp: 3;
-}
-
-.challengeCardCategories {
-   font-size: 13px;
-}
-
-.challengeCardHashTags {
-   text-align: left;
-} */
+ .challengeCardcrossLink:hover {
+   color: red !important;
+ }

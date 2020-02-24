@@ -39,8 +39,8 @@ class SideBar extends React.Component {
                   </Col>
                </Row>
                <Row className="sideBarAllyLinkBox">
-                  <Col className="d-flex justify-content-center align-items-center">
-                     <Link to="/home">
+                  <Col>
+                     <Link to="/home" className="d-flex justify-content-center align-items-center h-100 w-100">
                         <div className="">
                            <p className="midText">Retos</p>
                         </div>
@@ -48,8 +48,8 @@ class SideBar extends React.Component {
                   </Col>
                </Row>
                <Row className="sideBarAllyLinkBox">
-                  <Col className="d-flex justify-content-center align-items-center">
-                     <Link to="/home/ally">
+                  <Col>
+                     <Link to="/home/ally" className="d-flex justify-content-center align-items-center h-100 w-100">
                         <div className="">
                            <p className="midText">Administrar usuarios</p>
                         </div>
