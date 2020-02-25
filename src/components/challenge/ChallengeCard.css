@@ -38,7 +38,7 @@
 
 .challengeCardCompanyDescription {
    text-align: start;
-   font-size: 1em;
+   font-size: 16px;
    text-align: start;
    overflow: hidden;
    text-overflow: ellipsis;
@@ -54,10 +54,6 @@
    display: -webkit-box;
    -webkit-box-orient: vertical;
    -webkit-line-clamp: 3;
-}
-
-.challengeCardCategories {
-   font-size: 13px;
 }
 
 .challengeCardHashTags {

@@ -125,10 +125,13 @@ class ProposalList extends React.Component {
                                              companyDescription={item.challenge.company.company_description}
                                              categories={item.categories}
                                              color={this.state.color}
-                                             proposalData={{ 
-                                                solution_description: item.solution_description, 
-                                                resources_description: item.proposal_resources, 
-                                                proposal_state_name: item.proposal_state.proposal_state_name}}
+                                             proposalData={{
+                                                fk_id_challenge: item.fk_id_challenge,
+                                                fk_id_ally: item.fk_id_ally,
+                                                solution_description: item.solution_description,
+                                                resources_description: item.proposal_resources,
+                                                proposal_state_name: item.proposal_state.proposal_state_name
+                                             }}
                                           />
                                        );
                                     })}

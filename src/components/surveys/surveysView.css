@@ -1,0 +1,36 @@
+.surveyViewTitle{
+    font-weight: 700;
+    color: #a5a5a5;
+
+}
+.card.surveysViewCard{
+    background-color: #f0f0f0;
+    border-radius: 25px;
+    width: auto;
+}
+.surveyViewText{
+    font-style:italic;
+}
+
+.surveyViewRadioAndLabel input, .surveyViewRadioAndLabel label{
+    width: auto;
+}
+
+.surveyViewRadioAndLabel {
+    margin-left: 20px;
+    margin-bottom: 15px;
+}
+
+.surveyViewRadio.option.form-check-input{
+    margin-left: 50px;
+}
+.surveySubmitBotton{
+    background-color: #498cf9;
+    border: none;
+    color: white;
+    width: 150px;
+    height: 40px;
+    border-radius: 15px;
+    float: right;
+    font-size: 20px;
+}

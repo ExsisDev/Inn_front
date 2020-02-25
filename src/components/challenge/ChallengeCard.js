@@ -151,12 +151,12 @@ class ChallengeCard extends React.Component {
                         }
                      })()}
                   </Row>
-                  <Row className="challengeCardCategories mx-0 mt-2 mt-md-1">
+                  <Row className="mx-0 mt-2 mt-md-1 text-small">
                      <Col sm={3} md={2} className="d-flex justify-content-left justify-content-sm-center">
                         <span className="w-auto"><b><i>Categorías:</i></b></span>
                      </Col>
                      <Col sm={9} md={10} className="d-flex justify-content-start">
-                        <i className="w-auto challengeCardHashTags">{this.props.categories.map((item) => { return (`#${item.split(' ').map(a => a.trim()).map(a => a[0].toUpperCase() + a.substring(1)).join("")} `) })}</i>
+                        <i className="w-auto challengeCardHashTags ">{this.props.categories.map((item) => { return (`#${item.split(' ').map(a => a.trim()).map(a => a[0].toUpperCase() + a.substring(1)).join("")} `) })}</i>
                      </Col>
                   </Row>
                </Card.Body>
