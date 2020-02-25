@@ -1,0 +1,28 @@
+.headerWithUserLogoProfile {
+	background-color: #333333;
+}
+
+.headerWithUserLogoLogOutButton {
+	color: white !important;
+}
+
+.headerWithUserLogoImageCenterRoundedBox {
+	height: 120px;
+}
+
+.headerWithUserLogoImageCenterRounded {
+	height: 250px;
+	width: 250px;
+	background: white no-repeat center;
+	background-size: contain;
+}
+
+@media only screen and (min-width: 576px) {
+	.headerWithUserLogoImageCenterRounded {
+		margin-top: -140px;
+	}
+
+	.headerWithUserLogoImageCenterRoundedBox {
+		height: 20px;
+	}
+}

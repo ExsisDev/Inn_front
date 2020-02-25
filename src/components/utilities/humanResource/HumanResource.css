@@ -1,0 +1,26 @@
+.humanResourceCardBox {
+    border-radius: 20px !important;
+    box-shadow: 0px 5px 10px gray;
+    background-color: #f0f0f0 !important;
+    height: 320px;
+    width: 230px;
+}
+
+.humanResourceCardImage {
+    width: 70px !important;
+    height: 70px;
+}
+
+.humanResourceCardTitle {
+    font-weight: 500;
+    font-size: .9rem !important;
+}
+
+.humanResourceCardText {
+    font-size: .7rem;
+}
+
+.humanResourceExperienceText {
+    height: 4rem;
+    overflow-y: auto;
+}

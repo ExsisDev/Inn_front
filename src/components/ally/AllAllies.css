@@ -1,0 +1,29 @@
+/* Create button */
+
+.allyBtnCreateAlly {
+    width: 50%;
+    background-color: orange !important;
+    color: white !important;
+    border-radius: 50px !important;
+    border: none !important;
+    font-size: 1.17rem !important;
+}
+
+@media only screen and (min-width: 768px) {
+    .allyBtnCreateAlly {
+        width: 20%;
+    }
+}
+
+/* Table */
+
+.allyTextStyleTable {
+    font-weight: bold;
+    font-size: 1.18rem !important;
+    color: #7b7b7b !important;
+}
+
+.allyTextStyleTableCompany {
+    font-weight: bold;
+    color: #7b7b7b !important;
+}

@@ -1,0 +1,141 @@
+/* div {
+  border: 1px solid red; 
+} */
+
+body {
+  color: #747474 !important;
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: inherit !important;
+}
+
+a:hover {
+  text-decoration: none !important;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.btn-link:focus, .btn-link:hover {
+  text-decoration: none !important;
+}
+
+.formBox {
+  border-radius: 20px !important;
+  box-shadow: 0px 3px 5px gray !important;
+  background-color: #f0f0f0 !important;
+}
+
+.formInput {
+  margin-top: 1.5vh;
+  border-radius: 20px !important;
+}
+
+.formButton {
+  margin-top: 1vh;
+  border-radius: 20px !important;
+  color: white !important;
+}
+
+.formSelect {
+  margin-top: 1.5vh;
+  border-radius: 20px !important;
+}
+
+.formDate {
+  margin-top: 1.5vh;
+  border-radius: 20px !important;
+}
+
+.form-control:focus {
+  border-color: black !important;
+  box-shadow: none !important;
+}
+
+button.sendButton {
+  width: 60%;
+  max-height: 5vh;
+  color: white;
+  border-radius: 18px;    
+  padding-top: 0;
+}
+
+.backgndColor {
+  background-color: #e8e8e8 !important;
+}
+
+.textLeft {
+  text-align: left;
+}
+
+.paddingBox {
+  padding: 40px;
+}
+
+.logoutIcon {
+  width: 40px;
+}
+
+.crossLink:hover {
+  color: red !important;
+}
+
+.errorMessage {
+  color: red;
+  margin: 0;
+  padding: 0 15px;
+}
+
+.Toastify{
+  width: auto;
+}
+
+.blueLink {
+  width: auto;
+  color: #4976f2 !important;
+  font-weight: 600 !important;
+}
+
+/* Paginacion */
+
+.page-item.boxNumber.disabled .page-link.boxLink {
+  color: black !important;
+  background-color: white !important;
+  border-color: transparent;
+}
+
+.page-link.boxLink {
+  color: black !important;
+  background-color: white !important;
+  border: none !important;
+}
+
+.page-link.boxLink:hover, .page-link.boxLink:focus, .page-item.boxNumber.active .page-link.boxLink {
+  background-color: #313333 !important;
+  color: white !important;
+  box-shadow: none !important;
+}
+
+/* Elementos de carga */
+
+.loadingSvgContainer {
+  margin-top: 200px;
+  height: auto !important;
+}
+
+/* removable list */
+
+.listRemovable {
+  list-style-type: none;
+  min-height: 60px;
+}

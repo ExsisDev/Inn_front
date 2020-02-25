@@ -1,0 +1,22 @@
+
+.adminProfileHeaderColor{
+   color: #7b7b7b;
+}
+
+.adminProfilePasswordInputs {
+   background-color: #e8e8e8 !important;
+   min-width: 200px;
+}
+
+.adminProfileAcceptButtonChangePassword {
+   min-width: 100px !important;
+}
+
+@media only screen and (max-width: 576px) {
+   .adminProfilePasswordInputs {
+      max-width: 200px !important;
+   }
+   .adminProfileAcceptButtonChangePassword {
+      width: 100px !important;
+   }
+}

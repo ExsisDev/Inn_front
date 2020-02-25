@@ -1,0 +1,48 @@
+{
+  "name": "innovalab_wa",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "axios": "^0.19.0",
+    "bootstrap": "^4.3.1",
+    "i18n": "^0.8.4",
+    "jquery": "^3.4.1",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.15",
+    "luxon": "^1.21.3",
+    "react": "^16.11.0",
+    "react-bootstrap": "^1.0.0-beta.14",
+    "react-burger-menu": "^2.6.13",
+    "react-dom": "^16.11.0",
+    "react-icons": "^3.8.0",
+    "react-js-pagination": "^3.0.2",
+    "react-loading": "^2.0.3",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "3.2.0",
+    "react-toastify": "^5.4.1",
+    "toastr": "^2.1.4",
+    "typescript": "^3.7.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {}
+}

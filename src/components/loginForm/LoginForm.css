@@ -1,0 +1,15 @@
+* {
+    width: 100%;
+}
+
+.loginFormCenterContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#loginFormLinkForgetPassword {
+    color: white;
+    font-size: 0.7rem;
+    margin-top: 1vh;
+}

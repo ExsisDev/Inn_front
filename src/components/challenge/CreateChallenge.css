@@ -1,0 +1,39 @@
+/* form  */
+
+.createChallengeFormCentering{
+   margin: 40px 0 5px 0;
+}
+
+.createChallengeName{
+   background-color: #e8e8e8 !important;
+}
+
+.createChallengeTextArea {
+   resize: none;
+   background-color: #e8e8e8 !important;
+}
+
+.createChallengeSelectCategoryCompany {
+   padding: 5px;
+   -webkit-appearance: none;
+   -moz-appearance: none;
+   background: url(http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png) no-repeat right #e8e8e8;
+   background-position-x: 195px;
+   width: 220px !important;
+   background-color: #e8e8e8 !important;
+}
+
+.createChallengeDateWidth {
+   width: 230px !important;
+   background-color: #e8e8e8 !important;
+}
+
+.createChallengeCreateButton{
+   width: 120px;
+   height: 35px;
+   padding-top: 0 !important;
+   border-radius: 18px !important;
+   background-color: #fa995d !important;
+   color: white !important;
+   font-size: 18px !important;
+}

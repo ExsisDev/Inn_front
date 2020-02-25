@@ -1,0 +1,44 @@
+.proposalFormCardBox {
+   width: 100% !important;
+   min-height: 50vh;
+}
+
+.proposalFormHeaderText {
+   font-size: 14px;
+}
+
+.proposalFormInputLabels {
+   font-weight: 600;
+}
+
+.proposalFormTextArea {
+   resize: none;
+   background-color: #e8e8e8 !important;
+}
+
+.proposalFormNumberSelector {
+   border: none;
+}
+
+.proposalFormGreen {
+   color: #72d32b;
+   font-weight: 600;
+}
+
+.proposalFormOrange {
+   color: #eca761;
+   font-weight: 600;
+}
+
+.proposalFormImageBox {
+   height: 120px;
+   width: 120px;
+   background: white no-repeat center;
+   background-size: contain;
+}
+
+.proposalFormImage {
+   height: 74%;
+   width: auto;
+   margin: 0 auto;
+}

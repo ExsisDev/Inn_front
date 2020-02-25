@@ -1,0 +1,14 @@
+
+.sectionTitleBox{
+    max-height: 8vh;   
+}
+
+.sectionTitleLogo{
+    height: 40px;
+    width: auto;
+}
+ 
+.sectionTitleText{
+    color: #B4B4B4;
+    font-weight: bold;
+}

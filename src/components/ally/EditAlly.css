@@ -1,0 +1,33 @@
+.editAllyTitle {
+    font-weight: bold;    
+}
+
+.editAllyContentData {
+    margin-top: 130px;
+}
+
+.editAllyLabelInput {
+    text-align: end;
+}
+
+.editAllyTextStyle {
+    font-size: 1.4rem !important;
+    color: #7b7b7b !important;
+}
+
+.editAllyHoursEdit {
+    width: 40% !important;    
+}
+
+@media only screen and (max-width: 768px){
+    .editAllyInputReadOnly {
+        text-align: center;
+    }
+    .editAllyLabelInput {
+        text-align: center;
+    }
+    .editAllyHoursEdit {
+        margin: auto;
+    }
+}
+

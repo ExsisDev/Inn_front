@@ -1,0 +1,10 @@
+.allyFormTitles {    
+    text-align: left;
+    color: #747474;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.allyFormCreateButton {
+    padding: 0 15px;
+}

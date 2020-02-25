@@ -1,0 +1,81 @@
+.allChallengesSearchChallengeText {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: #e8e8e8 !important;
+  border-color: #e8e8e8 !important;
+  border-top-right-radius: 20px !important;
+  border-bottom-right-radius: 20px !important;
+}
+
+
+.allChallengesSearchChallengeText:focus {
+  border-color: #e8e8e8 !important;
+}
+
+
+.allChallengesIconButton {
+  width: 30px;
+  background: url('../../images/find.png') no-repeat left;
+  background-position-x: 10px;
+  background-color: #e8e8e8 !important;
+  border-color: #e8e8e8 !important;
+  border-top-left-radius: 20px !important;
+  border-bottom-left-radius: 20px !important;
+}
+
+
+.allChallengesIconButton:focus {
+  box-shadow: none !important;
+}
+
+
+.allChallengesCamaraLogo {
+  height: 38px;
+  width: auto;
+}
+
+/* Links de navegación */
+
+.allChallengesNavLink {
+  width: 215px;
+  opacity: 0.5;
+}
+
+.allChallengesCircle.allChallengesRed:after {
+  content: " \25CF";
+  font-size: 22px;
+  color: #d89393;
+}
+
+.allChallengesCircle.allChallengesBlue:after {
+  content: " \25CF";
+  font-size: 22px;
+  color: #6ae18e;
+}
+
+.allChallengesCircle.allChallengesGreen:after {
+  content: " \25CF";
+  font-size: 22px;
+  color: #dce249;
+}
+
+.allChallengesPlusCreateChallenge {
+  height: 22px;
+  width: 26px;
+}
+
+/* Solo se activan cuando el elemento tiene active y linkSelected (se hace click)*/
+
+.allChallengesCircle.active {
+  opacity: unset;
+}
+
+.allChallengesLinkCreateChallenge {
+  width: 101px !important;
+}
+
+/* Elementos de carga */
+
+.allChallengesSvgContainer {
+  height: auto !important;
+}

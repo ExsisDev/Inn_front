@@ -1,0 +1,9 @@
+.backNavigatorLogo {
+    height: 38px;
+    width: auto;
+}
+
+.backNavigatorBlack {
+    background-color: #343434;
+    color: white !important;
+}
