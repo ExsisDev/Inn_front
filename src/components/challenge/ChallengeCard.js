@@ -59,7 +59,9 @@ class ChallengeCard extends React.Component {
                      </Col>
                      <Col xs={12} lg={10} className=" d-flex flex-column justify-content-center">
 
-                        <Card.Title className="text-center text-lg-left normalText mt-3 mt-lg-0"><b>{this.props.challengeName}</b></Card.Title>
+                        <Card.Title className="text-center text-lg-left normalText mt-3 mt-lg-0">
+                           <span className="font-weight-bold midText">{this.props.challengeName}</span>
+                        </Card.Title>
                         <Card.Text className="challengeCardCompanyDescription mt-lg-4">
                            {this.props.companyDescription}
                         </Card.Text>

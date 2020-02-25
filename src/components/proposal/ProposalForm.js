@@ -172,10 +172,81 @@ class ProposalForm extends React.Component {
 
    render() {
       return (
-         <Container fluid className="d-flex justify-content-center">
-            <Row className="h-100 d-flex justify-content-center">
+         <Container fluid id="proposalForm" className="d-flex flex-column h-100">
+            <BackNavigator />
+            <Row className="flex-grow-1 align-items-center my-4 my-lg-0">
+               <Col>
+                  <Card className="grayRoundedBox">
+                     <Card.Body className="challengeCardRightPadding">
+                        <Row className="mt-2">
+                           <Col xs={12} lg={2} className="d-flex flex-column align-items-center">
+                              <div className="challengeCardImageBox rounded-circle d-flex justify-content-center">
+                                 <Image src={LogoProposing} className="challengeCardImage" />
+                              </div>
+                              {/* <b><i>{this.props.companyName}</i></b> */}
+                           </Col>
+                           <Col xs={12} lg={10} className=" d-flex flex-column justify-content-center">
+                              <Card.Title className="text-center text-lg-left normalText mt-3 mt-lg-0">
+                                 <span className="font-weight-bold midText">{this.props.location.state.challengeName}</span>
+                              </Card.Title>
+                              <Card.Text className="challengeCardCompanyDescription">
+                                 <span className="font-italic"> Vas a aplicar a este reto con tu propia solución del problema, completa los siguientes campos para continuar</span>
+                              </Card.Text>
+                           </Col>
+                        </Row>
+                        <Row>
+                           <Col xs={12} lg={{ offset: 2, span: 10 }}>
+                              <Form>
+                                 <Form.Row>
+                                    <Form.Group as={Col} controlId="proposalFormInput1">
+                                       <Form.Label className="proposalFormInputLabels">
+                                          Descripción de la solución:
+                                       </Form.Label>
+                                       <Form.Control as="textarea" className="formInput proposalFormTextArea" name="description" onChange={this.handleChange}>
+                                       </Form.Control>
+                                    </Form.Group>
+                                 </Form.Row>
+                                 <Form.Row>
+                                    <Form.Group as={Col} controlId="proposalFormInput2">
+                                       <Form.Label className="proposalFormInputLabels">
+                                          Recursos adicionales requeridos:
+                                       </Form.Label>
+                                       <Form.Control as="textarea" className="formInput proposalFormTextArea" name="resources" onChange={this.handleChange}>
+                                       </Form.Control>
+                                    </Form.Group>
+                                 </Form.Row>
+                                 <Form.Row >
+                                    <Form.Group as={Col} lg={4} className="proposalFormGreen d-flex flex-column" controlId="ideaHours">
+                                       <Form.Label>
+                                          <NumberArrowUpDown handleUpArrow={this.handleUpIdeationArrow} handleDownArrow={this.handleDownIdeationArrow} hours={this.state.ideationHours} />
+                                       </Form.Label>
+                                       <Form.Label className="d-flex justify-content-center">
+                                          <span className="font-italic">Horas de ideación</span>
+                                       </Form.Label>
+                                    </Form.Group>
+                                    <Form.Group as={Col} lg={4} className="proposalFormOrange d-flex flex-column" controlId="expHours">
+                                       <Form.Label>
+                                          <NumberArrowUpDown handleUpArrow={this.handleUpExperimentationArrow} handleDownArrow={this.handleDownExperimentationArrow} hours={this.state.experimentationHours} />
+                                       </Form.Label>
+                                       <Form.Label className="d-flex justify-content-center">
+                                          <span className="font-italic">Horas de experimentación</span>
+                                       </Form.Label>
+                                    </Form.Group>
+                                    <Form.Group as={Col} lg={4} className="d-flex justify-content-end">
+                                       <Button variant="link" type="submit" className="w-auto blueLink normalText font-weight-bold" disabled={this.state.isLoading}>
+                                          {this.state.isLoading ? "Enviando..." : "Siguiente"}
+                                       </Button>
+                                    </Form.Group>
+                                 </Form.Row>
+                              </Form>
+                           </Col>
+                        </Row>
+                     </Card.Body>
+                  </Card>
+               </Col>
+            </Row>
+            {/* <Row className="h-100 d-flex justify-content-center">
                <Col sm={11} className="d-flex flex-column align-items-center">
-                  <BackNavigator />
                   <Row className="h-100 d-flex justify-content-center align-items-center my-4">
                      <Col className="">
                         <Card className="formBox proposalFormCardBox">
@@ -251,8 +322,89 @@ class ProposalForm extends React.Component {
                      </Col>
                   </Row>
                </Col>
-            </Row>
+            </Row> */}
          </Container >
+         // <Container fluid className="d-flex justify-content-center">
+         //    <Row className="h-100 d-flex justify-content-center">
+         //       <Col sm={11} className="d-flex flex-column align-items-center">
+         //          <BackNavigator />
+         //          <Row className="h-100 d-flex justify-content-center align-items-center my-4">
+         //             <Col className="">
+         //                <Card className="formBox proposalFormCardBox">
+         //                   <Card.Body className="pr-lg-5">
+         //                      <Row className="mx-0">
+         //                         <Col lg={2} className="px-0 d-flex justify-content-center">
+         //                            <div className="proposalFormImageBox rounded-circle d-flex align-items-center">
+         //                               <Image src={LogoProposing} className="proposalFormImage" />
+         //                            </div>
+         //                         </Col>
+         //                         <Col lg={10}>
+         //                            <Row className="mx-0 mt-2">
+         //                               <Col className="px-0">
+         //                                  <Card.Title className="challengeDetailsName text-center text-md-center text-lg-left">
+         //                                     <b>{this.props.location.state.challengeName}</b>
+         //                                  </Card.Title>
+         //                               </Col>
+         //                            </Row>
+         //                            <Row className="mx-0">
+         //                               <Col className="px-0">
+         //                                  <Card.Text className="text-justify">
+         //                                     <i className="proposalFormHeaderText"> Vas a aplicar a este reto con tu propia solución del problema, completa los siguientes campos para continuar</i>
+         //                                  </Card.Text>
+         //                               </Col>
+         //                            </Row>
+         //                         </Col>
+         //                      </Row>
+         //                      <Form className="" onSubmit={this.handleSubmition}>
+         //                         <Form.Row>
+         //                            <Form.Group as={Col} style={{ paddingLeft: '15px' }} controlId="proposalFormInput1" className="offset-lg-2">
+         //                               <Form.Label className="proposalFormInputLabels text-left">
+         //                                  Descripción de la solución:
+         //                               </Form.Label>
+         //                               <Form.Control as="textarea" className="formInput proposalFormTextArea" name="description" onChange={this.handleChange}>
+         //                               </Form.Control>
+         //                            </Form.Group>
+         //                         </Form.Row>
+         //                         <Form.Row>
+         //                            <Form.Group as={Col} style={{ paddingLeft: '15px' }} controlId="proposalFormInput2" className="offset-lg-2">
+         //                               <Form.Label className="proposalFormInputLabels text-left">
+         //                                  Recursos adicionales requeridos:
+         //                               </Form.Label>
+         //                               <Form.Control as="textarea" className="formInput proposalFormTextArea" name="resources" onChange={this.handleChange}>
+         //                               </Form.Control>
+         //                            </Form.Group>
+         //                         </Form.Row>
+         //                         <Form.Row >
+         //                            <Form.Group as={Col} lg={{ span: 3, offset: 3 }} className="align-items-baseline proposalFormGreen" controlId="ideaHours">
+         //                               <Form.Label className="mb-0">
+         //                                  <NumberArrowUpDown handleUpArrow={this.handleUpIdeationArrow} handleDownArrow={this.handleDownIdeationArrow} hours={this.state.ideationHours} />
+         //                               </Form.Label>
+         //                               <Form.Label>
+         //                                  <i>Horas de ideación</i>
+         //                               </Form.Label>
+         //                            </Form.Group>
+         //                            <Form.Group as={Col} lg="3" className="align-items-baseline proposalFormOrange" controlId="ideaHours">
+         //                               <Form.Label className="mb-0">
+         //                                  <NumberArrowUpDown handleUpArrow={this.handleUpExperimentationArrow} handleDownArrow={this.handleDownExperimentationArrow} hours={this.state.experimentationHours} />
+         //                               </Form.Label>
+         //                               <Form.Label>
+         //                                  <i>Horas de experimentación</i>
+         //                               </Form.Label>
+         //                            </Form.Group>
+         //                            <Form.Group as={Col} lg="3" className="d-flex align-items-end justify-content-end">
+         //                               <Button variant="link" type="submit" className="w-auto blueLink" disabled={this.state.isLoading}>
+         //                                  {this.state.isLoading ? "Enviando..." : "Siguiente"}
+         //                               </Button>
+         //                            </Form.Group>
+         //                         </Form.Row>
+         //                      </Form>
+         //                   </Card.Body>
+         //                </Card>
+         //             </Col>
+         //          </Row>
+         //       </Col>
+         //    </Row>
+         // </Container >
       );
    }
 

@@ -1,4 +1,25 @@
-.proposalFormCardBox {
+.proposalFormInputLabels {
+   font-weight: 600;
+}
+
+textarea.proposalFormTextArea {
+   resize: none;
+   background-color: #e8e8e8;
+   padding: 5px 10px;
+}
+
+.proposalFormGreen {
+   color: #72d32b;
+   font-weight: 600;
+}
+
+.proposalFormOrange {
+   color: #eca761;
+   font-weight: 600;
+}
+
+
+/* .proposalFormCardBox {
    width: 100% !important;
    min-height: 50vh;
 }
@@ -7,9 +28,7 @@
    font-size: 14px;
 }
 
-.proposalFormInputLabels {
-   font-weight: 600;
-}
+
 
 .proposalFormTextArea {
    resize: none;
@@ -41,4 +60,4 @@
    height: 74%;
    width: auto;
    margin: 0 auto;
-}
+} */

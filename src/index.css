@@ -28,6 +28,10 @@ a {
   color: #747474;
 }
 
+button.btn-link:hover {
+  text-decoration: none;
+}
+
 /* Bootstrap */
 
 div.row {
@@ -81,6 +85,11 @@ div.container {
 
 input.form-control:focus, button.btn:focus {
   box-shadow: none;
+}
+
+div .form-control:focus {
+  border-color: unset;
+  box-shadow: unset;
 }
 
 /* Fuentes */

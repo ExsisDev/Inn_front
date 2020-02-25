@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Row, Col, Form, InputGroup, Button, FormControl } from 'react-bootstrap'
 
 import innovaCamaraLogo from '../../../images/innovaCamaraLogo.png';
