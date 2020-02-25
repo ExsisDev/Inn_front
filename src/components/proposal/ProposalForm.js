@@ -197,7 +197,7 @@ class ProposalForm extends React.Component {
                         <Row>
                            <Col xs={12} lg={{ offset: 2, span: 10 }}>
                               <Form>
-                                 <Form.Row>
+                                 <Form.Row className="mt-5 mt-lg-0">
                                     <Form.Group as={Col} controlId="proposalFormInput1">
                                        <Form.Label className="proposalFormInputLabels">
                                           Descripción de la solución:
@@ -233,7 +233,7 @@ class ProposalForm extends React.Component {
                                        </Form.Label>
                                     </Form.Group>
                                     <Form.Group as={Col} lg={4} className="d-flex justify-content-end">
-                                       <Button variant="link" type="submit" className="w-auto blueLink normalText font-weight-bold" disabled={this.state.isLoading}>
+                                       <Button variant="link" type="submit" className="w-auto blueLink midText font-weight-bold" disabled={this.state.isLoading}>
                                           {this.state.isLoading ? "Enviando..." : "Siguiente"}
                                        </Button>
                                     </Form.Group>
