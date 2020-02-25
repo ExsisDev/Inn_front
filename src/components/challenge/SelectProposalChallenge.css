@@ -2,14 +2,6 @@
     background-color: #dddddd !important;
 }
 
-.buttonsProposal > button {
-    margin-top: 1vh;
-    border-radius: 20px !important;
-    color: #fff;
-    background-color: #dedddd !important;
-    border-color: #dedddd !important;
-}
-
 
 .formButtonProposal {
     margin-top: 1vh;
@@ -31,4 +23,8 @@
 .radioText {
     font-weight: 700;
     font-size: 1.2rem;
+}
+
+.proposalsAllyHoursEdit {
+    width: 40% !important;    
 }
