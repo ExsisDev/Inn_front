@@ -174,7 +174,7 @@ class ProposalForm extends React.Component {
       return (
          <Container fluid id="proposalForm" className="d-flex flex-column h-100">
             <BackNavigator />
-            <Row className="flex-grow-1 align-items-center my-4 my-lg-0">
+            <Row className="flex-grow-1 align-items-center my-4 my-lg-0 px-4">
                <Col>
                   <Card className="grayRoundedBox">
                      <Card.Body className="challengeCardRightPadding">
