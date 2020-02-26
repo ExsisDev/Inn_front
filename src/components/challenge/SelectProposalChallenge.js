@@ -145,7 +145,7 @@ class SelectProposalChallenge extends React.Component {
          });
 
       } else {
-         const url = `${process.env.REACT_APP_BACK_URL}/proposals/${this.props.location.state.idChallenge}/${this.state.selectProposal}`;
+         const url = `${process.env.REACT_APP_BACK_URL}/proposals/assign/${this.props.location.state.idChallenge}/${this.state.selectProposal}`;
          axios.put(url, {}, {
             headers: { 'x-auth-token': `${this.state.token}` }
          }).then(() => {
