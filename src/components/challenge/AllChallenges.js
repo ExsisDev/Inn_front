@@ -31,6 +31,7 @@ class AllChallenges extends React.Component {
          challengeToDelete: null,
          elementsDisplayed: 5,
          isAdminFunctionality: false,
+         nextRoute: "",
          token: getToken(),
          role: 0
       }
@@ -38,7 +39,6 @@ class AllChallenges extends React.Component {
       this.link2 = React.createRef();
       this.link3 = React.createRef();
       this.begginingPage = React.createRef();
-
    }
 
    toastId = null;
@@ -103,6 +103,7 @@ class AllChallenges extends React.Component {
    async handleClickLink(e, state) {
       await this.setState({ actualStatus: state, loadingChallenges: true, searchPaginationActive: false, actualPage: 1 });
       await this.getChallengesByPageAndStatus(this.state.actualPage, state, false);
+      await this.handleNextRoute();
    }
 
 
@@ -132,6 +133,32 @@ class AllChallenges extends React.Component {
       e.preventDefault();
       await this.setState({ loadingChallenges: true, searchPaginationActive: true, actualPage: 1 });
       await this.getChallengesByPageAndStatus(this.state.actualPage, this.state.actualStatus, true);
+   }
+
+
+   /**
+    * Manejo de la redireccion para el ver mas
+    */
+   handleNextRoute = () => {
+      if (this.state.isAdminFunctionality) {
+         console.log("is an admin")
+         switch (this.state.actualStatus) {
+            case "CREATED":
+               this.setState({ nextRoute: "/home/challengeProposals" });
+               break;
+            case "ASSIGNED":
+               this.setState({ nextRoute: "/home/challengeAssignedDetails" });
+               break;
+            case "FINISHED":
+               this.setState({ nextRoute: "/home/challengeFinishedDetails" });
+               break;
+            default:
+               break;
+         }
+      } else {
+         this.setState({ nextRoute: "/home/challengeDescription" });
+      }
+      return;
    }
 
 
@@ -268,7 +295,7 @@ class AllChallenges extends React.Component {
                                     return (
                                        <ChallengeCard
                                           key={index}
-                                          selectedNextRoute={this.state.isAdminFunctionality ? "/home/challengeProposals" : "/home/challengeDescription"}
+                                          selectedNextRoute={this.state.nextRoute}
                                           challengeId={item.id_challenge}
                                           challengeName={item.challenge_name}
                                           companyName={item.company.company_name}
