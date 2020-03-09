@@ -20,6 +20,8 @@ import TrackAssignment from '../trackAssignment/TrackAssignment';
 import SendedOrRejectedProposalDetails from '../proposal/SendedOrRejectedProposalDetails';
 import SelectProposalChallenge from '../challenge/SelectProposalChallenge';
 import AssignedProposalDetails from '../proposal/AssignedProposalDetails';
+import ChallengeAssignedDetails from '../challenge/ChallengeAssignedDetails';
+import ChallengeFinishedDetails from '../challenge/ChallengeFinishedDetails';
 import './Home.css';
 import SurveysView from '../surveys/surveysView';
 
@@ -61,6 +63,8 @@ class Home extends React.Component {
                                 <AdminRoute path="/home/ally" component={AllAllies} />
                                 <AdminRoute path="/home/challenge" component={CreateChallenge} />
                                 <AdminRoute path="/home/challengeProposals" component={SelectProposalChallenge} />
+                                <AdminRoute path="/home/challengeAssignedDetails" component={ChallengeAssignedDetails} />
+                                <AdminRoute path="/home/challengeFinishedDetails" component={ChallengeFinishedDetails} />
                                 <AllyRoute path="/home/challengeDescription" component={ChallengeDetais} />
                                 <AllyRoute path="/home/newProposal" component={ProposalForm} />
                                 <AllyRoute path="/home/sendedProposals/details" component={SendedOrRejectedProposalDetails} />
