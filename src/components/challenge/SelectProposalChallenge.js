@@ -7,13 +7,9 @@ import {
    Container,
    Image,
    InputGroup,
-   DropdownButton,
-   Dropdown,
-   ButtonGroup,
    Form,
    ToggleButton
 } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
 import axios from "axios";
 import ReactLoading from 'react-loading';
 import { toast } from 'react-toastify';
@@ -23,7 +19,7 @@ import sendIcon from '../../images/PropuestasEnviadas.png';
 import SectionTitle from '../utilities/sectionTitle/SectionTitle';
 import BackNavigator from '../utilities/backNavigator/BackNavigator';
 import LogoProposing from '../../images/EmpresaB.png';
-import { getToken, getTokenData } from '../../commons/tokenManagement';
+import { getToken } from '../../commons/tokenManagement';
 import HumanResourceList from '../utilities/humanResource/HumanResourceList';
 import './SelectProposalChallenge.css';
 
@@ -120,9 +116,9 @@ class SelectProposalChallenge extends React.Component {
     */
    handleSubmitProposal = async (e) => {
       e.preventDefault();
-      
+
       this.notifyUpdate("Verificando Asignación");
-      
+
       if (this.state.newProposal) {
          let newProposal = {
             fk_id_challenge: this.props.location.state.idChallenge,
@@ -133,9 +129,9 @@ class SelectProposalChallenge extends React.Component {
             solution_description: "Esta es una propuesta de solución para la pesente propuesta generada por el Administrador de sitio.",
             proposal_resources: "El aliado debe establecer los recursos."
          }
-         
+
          let url = `${process.env.REACT_APP_BACK_URL}/proposals`;
-         
+
          await axios.post(url, newProposal, {
             headers: { 'x-auth-token': `${this.state.token}` }
          }).then((result) => {
@@ -152,9 +148,9 @@ class SelectProposalChallenge extends React.Component {
             this.notifySuccess("Propuesta asignada exitosamente");
             this.getProposalsByChallenge();
          })
-         .catch((error) => {
-            this.notifyError(error.response.data);
-         });
+            .catch((error) => {
+               this.notifyError(error.response.data);
+            });
       }
    }
 
@@ -169,9 +165,9 @@ class SelectProposalChallenge extends React.Component {
       });
    }
 
-    /*
-    *   Notificacion Tosat
-    */
+   /*
+   *   Notificacion Tosat
+   */
    notifyUpdate = (msg) => toast.info(msg, this.toastConfiguration);
 
    /**

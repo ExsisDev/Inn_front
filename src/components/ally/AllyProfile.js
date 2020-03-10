@@ -12,8 +12,6 @@ import img from '../../images/EmpresaA.png';
 import './AllyProfile.css';
 import 'react-toastify/dist/ReactToastify.css';
 
-const categories = [{ id: 12354, name: "Block Chain" }, { id: 15436, name: "Transformacion digital" }];
-
 class AllyProfile extends React.Component {
     constructor(props) {
         super(props);
@@ -110,12 +108,10 @@ class AllyProfile extends React.Component {
         let isValid = true;
         this.setState({ errorIdea: null, errorExp: null });
         if (newHours.ally_challenge_ideation_hours > this.state.ally.ally_month_ideation_hours) {
-            let message = "Las horas de ideación por reto no pueden ser mayores a las horas de ideación mensuales.";
             // this.setState({ errorIdea: message });
             isValid = false;
         }
         if (newHours.ally_challenge_experimentation_hours > this.state.ally.ally_month_experimentation_hours) {
-            let message = "Las horas de experimentación por reto no pueden ser mayores a las horas de experimentación mensuales.";
             // this.setState({ errorExp: message });
             isValid = false;
         }

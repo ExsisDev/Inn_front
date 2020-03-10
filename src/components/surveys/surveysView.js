@@ -6,7 +6,6 @@ import ReactLoading from 'react-loading';
 import { toast } from 'react-toastify';
 
 import BackNavigator from '../utilities/backNavigator/BackNavigator';
-import LogoProposing from '../../images/EmpresaB.png';
 import { getToken } from '../../commons/tokenManagement';
 import './surveysView.css';
 

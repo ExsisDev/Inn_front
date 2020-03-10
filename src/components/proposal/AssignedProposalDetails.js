@@ -60,8 +60,6 @@ class AssignedProposalDetails extends React.Component {
       let URL = `${process.env.REACT_APP_BACK_URL}/challenges/finalComment/${this.props.location.state.idChallenge}`;
       const token = this.state.token;
 
-      let comment = "";
-
       axios.get(URL, {
          headers: { 'x-auth-token': `${token}` }
       }).then((result) => {
@@ -236,8 +234,8 @@ class AssignedProposalDetails extends React.Component {
 
          return (
             <Redirect to={{
-               pathname : "/home/ally/surveys",
-               state : {
+               pathname: "/home/ally/surveys",
+               state: {
                   idChallenge: this.props.location.state.idChallenge
                }
             }}
@@ -245,7 +243,7 @@ class AssignedProposalDetails extends React.Component {
          );
       }
 
-      
+
       return (
          <Container fluid className="d-flex justify-content-center">
             <Row className="h-100 d-flex justify-content-center">
