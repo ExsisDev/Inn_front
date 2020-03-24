@@ -49,7 +49,6 @@ class AllAlies extends React.Component {
                 });
             })
             .catch(error => {
-                console.log(error);
             });
     }
 
@@ -78,7 +77,7 @@ class AllAlies extends React.Component {
                             <div>
                                 <Image src={logoCompany} style={imageStyle} roundedCircle />
                                 <Link to={`/ally/edit/${ally.id_ally}`}
-                                      style={{display: "block"}}
+                                    style={{ display: "block" }}
                                 >
                                     {ally.ally_name}
                                 </Link>
@@ -137,20 +136,23 @@ class AllAlies extends React.Component {
                         </Row>
                     )
                 }
-                <Row className="mx-0 d-flex justify-content-center">
-                    <Col xs={8} sm={6} md={4} xl={3} >
-                        <Pagination
-                            activePage={this.state.currentPage}
-                            itemsCountPerPage={4}
-                            totalItemsCount={this.state.totalAllies}
-                            pageRangeDisplayed={3}
-                            itemClass="page-item boxNumber"
-                            linkClass="page-link boxLink px-0"
-                            innerClass="pagination d-flex justify-content-center align-self-end"
-                            onChange={this.handlePageChange.bind(this)}
-                        />
-                    </Col>
-                </Row>
+                {
+                    this.state.totalAllies > this.state.allies.length &&
+                    <Row className="mx-0 d-flex justify-content-center">
+                        <Col xs={8} sm={6} md={4} xl={3} >
+                            <Pagination
+                                activePage={this.state.currentPage}
+                                itemsCountPerPage={4}
+                                totalItemsCount={this.state.totalAllies}
+                                pageRangeDisplayed={3}
+                                itemClass="page-item boxNumber"
+                                linkClass="page-link boxLink px-0"
+                                innerClass="pagination d-flex justify-content-center align-self-end"
+                                onChange={this.handlePageChange.bind(this)}
+                            />
+                        </Col>
+                    </Row>
+                }
             </Container>
         );
     }

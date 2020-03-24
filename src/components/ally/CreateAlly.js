@@ -76,7 +76,6 @@ class CreateAlly extends React.Component {
                 this.setState({ categories: res.data });
             })
             .catch(error => {
-                console.log(error);
             });
     }
 
@@ -118,14 +117,13 @@ class CreateAlly extends React.Component {
             newAlly,
             { headers: { 'x-auth-token': `${this.state.token}` } }
         ).then(res => {
-            msg = "Aliado creado con éxito."
-            this.updateSuccess(msg);
+            this.success();
             setTimeout(() => {
                 this.setState({ isCreated: true });
             }, 3500);
         }).catch(error => {
             msg = "Algo salio mal. " + error.response.data;
-            this.updateError(msg);
+            this.error(msg);
         })
     }
 
@@ -142,7 +140,7 @@ class CreateAlly extends React.Component {
             this.setState({ errorIdea: message });
             isValid = false;
         }
-        if (this.state.monthExpHours < this.state.challengeExpHours) {
+        if (parseInt(this.state.monthExpHours) < parseInt(this.state.challengeExpHours)) {
             let message = "Las horas de experimentación por reto no pueden ser mayores a las horas de experimentación mensuales.";
             this.setState({ errorExp: message });
             isValid = false;
@@ -151,9 +149,9 @@ class CreateAlly extends React.Component {
     }
 
 
-    notify = () => this.toastId = toast.info("creando...", this.toastConfiguration);
-    updateSuccess = (msg) => toast.update(this.toastId, { render: msg, type: toast.TYPE.SUCCESS });
-    updateError = (msg) => toast.update(this.toastId, { render: msg, type: toast.TYPE.ERROR });
+    notify = () => this.toastId = toast.info("Creando...", this.toastConfiguration);
+    success = () => this.toastId = toast.success("Aliado creado", this.toastConfiguration);
+    error = (msg) => this.toastId = toast.success("No se pudo crear. " + msg, this.toastConfiguration);
 
 
     getIdCategories(categoriesArray) {

@@ -9,7 +9,7 @@ import { DateTime } from 'luxon';
 import jwt from 'jsonwebtoken';
 import _ from 'lodash';
 
-import {CHALLENGE_STATE} from '../../commons/enums';
+import { CHALLENGE_STATE } from '../../commons/enums';
 import { getToken } from '../../commons/tokenManagement';
 import SectionTitle from '../utilities/sectionTitle/SectionTitle';
 import BackNavigator from '../utilities/backNavigator/BackNavigator';
@@ -89,7 +89,6 @@ class CreateChallenge extends React.Component {
             this.setState({ allCompanies: res.data });
          })
          .catch(error => {
-            console.log(error);
          });
    }
 
@@ -108,7 +107,6 @@ class CreateChallenge extends React.Component {
             this.setState({ allCategories: res.data });
          })
          .catch(error => {
-            console.log(error);
          });
    }
 
@@ -143,7 +141,6 @@ class CreateChallenge extends React.Component {
    handleDeleteClick = e => {
       const categoryToDelete = e.currentTarget.dataset.name;
       const indexToDelete = e.currentTarget.dataset.indexarray;
-      console.log(e.currentTarget.dataset.indexarray)
       let newArray = [];
       let newArray2 = [];
       _.assign(newArray, this.state.categoriesSelected);
@@ -189,7 +186,6 @@ class CreateChallenge extends React.Component {
             .catch((error) => {
                this.setState({ isCreating: false });
                this.notifyError("Hubo un problema al crear el reto");
-               console.log(error);
             });
       }
 

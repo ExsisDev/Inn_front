@@ -150,7 +150,6 @@ class AssignedProposalDetails extends React.Component {
       return axios.put(URL, newComment, {
          headers: { 'x-auth-token': `${token}` }
       }).then((response) => {
-         console.log(response);
       }).catch((error) => {
 
       })
@@ -230,8 +229,6 @@ class AssignedProposalDetails extends React.Component {
       }
 
       if (this.state.redirect) {
-         console.log("Redirigido a la encuesta");
-
          return (
             <Redirect to={{
                pathname: "/home/ally/surveys",

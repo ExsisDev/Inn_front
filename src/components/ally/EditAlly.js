@@ -29,18 +29,18 @@ class EditAlly extends React.Component {
             errorIdea: "",
             errorExp: "",
             token: getToken()
-        }       
+        }
 
         this.toastConfiguration = {
-			position: "top-right",
-			autoClose: 3000,
-			hideProgressBar: true,
-			closeOnClick: true,
-			pauseOnHover: true,
-			draggable: true,
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
             closeButton: false,
             containerId: 'A'
-		}
+        }
     }
 
     toastId = null;
@@ -66,7 +66,6 @@ class EditAlly extends React.Component {
                 this.setState({ categories: res.data });
             })
             .catch(error => {
-                console.log(error);
             });
     }
 
@@ -91,7 +90,6 @@ class EditAlly extends React.Component {
                 });
             })
             .catch(error => {
-                console.log(error);
             });
     }
 
@@ -178,7 +176,7 @@ class EditAlly extends React.Component {
         });
     }
 
-    
+
     /**
      * Notificación de actualización
      */
@@ -189,7 +187,7 @@ class EditAlly extends React.Component {
      * Notificación de éxito
      */
     updateSuccess = (msg) => {
-        toast.update(this.toastId, { render: msg, type: toast.TYPE.SUCCESS, autoClose: 3000});
+        toast.update(this.toastId, { render: msg, type: toast.TYPE.SUCCESS, autoClose: 3000 });
     }
 
 
@@ -282,11 +280,11 @@ class EditAlly extends React.Component {
         }
         return isValid;
     }
-    
+
     render() {
         let properties = _.pick(this.state.ally, ['user_email', 'ally_nit', 'ally_web_page', 'ally_phone']);
         const idAlly = this.props.match.params.idAlly;
-        if ( this.state.isUpdated ) {
+        if (this.state.isUpdated) {
             return <Redirect to="/home/ally" />;
         }
         return (
@@ -413,7 +411,7 @@ class EditAlly extends React.Component {
                                         </Button>
                                     </Col>
                                     <Col md={{ span: 3, offset: 1, order: 1 }}
-                                         lg={{ span: 2, offset: 1, order: 1 }}
+                                        lg={{ span: 2, offset: 1, order: 1 }}
                                     >
                                         <Button className="formButton"
                                             size="sm"

@@ -1,16 +1,7 @@
 import React from 'react';
-import {
-   Row,
-   Card,
-   Col,
-   Button,
-   Container,
-   Image,
-   InputGroup,
-   Form,
-   ToggleButton
-} from 'react-bootstrap';
+import { Row, Card, Col, Button, Container, Image, InputGroup, Form } from 'react-bootstrap';
 import axios from "axios";
+import { Redirect } from 'react-router-dom';
 import ReactLoading from 'react-loading';
 import { toast } from 'react-toastify';
 import { PROPOSAL_STATE } from '../../commons/enums';
@@ -27,6 +18,7 @@ class SelectProposalChallenge extends React.Component {
    constructor(props) {
       super();
       this.state = {
+         homeRedirection: false,
          renderedProposals: [],
          alliesList: [],
          token: getToken(),
@@ -99,7 +91,7 @@ class SelectProposalChallenge extends React.Component {
     * Manejo de radio buttons de seleccion de propuestas
     */
    handleSelectedProposal = (e) => {
-      this.state.newProposal = false;
+      this.setState({ newProposal: false });
       if (this.state.selectProposal == e.target.value) {
          this.setState({
             selectProposal: ""
@@ -141,7 +133,7 @@ class SelectProposalChallenge extends React.Component {
          });
 
       } else {
-         const url = `${process.env.REACT_APP_BACK_URL}/proposals/${this.props.location.state.idChallenge}/${this.state.selectProposal}`;
+         const url = `${process.env.REACT_APP_BACK_URL}/proposals/assign/${this.props.location.state.idChallenge}/${this.state.selectProposal}`;
          axios.put(url, {}, {
             headers: { 'x-auth-token': `${this.state.token}` }
          }).then(() => {
@@ -152,6 +144,10 @@ class SelectProposalChallenge extends React.Component {
                this.notifyError(error.response.data);
             });
       }
+
+      await setTimeout(() => {
+         this.setState({ homeRedirection: true });
+      }, 2000);
    }
 
    /**
@@ -181,6 +177,11 @@ class SelectProposalChallenge extends React.Component {
    notifyError = (msg) => toast.error(msg, this.toastConfiguration);
 
    render() {
+      if (this.state.homeRedirection) {
+         return (
+            <Redirect to="/home" />
+         )
+      }
       return (
          <Container fluid className="d-flex justify-content-center">
             <Row className="h-100 d-flex justify-content-center">
@@ -389,7 +390,7 @@ class SelectProposalChallenge extends React.Component {
                                                 <Col sm={3}>
                                                    <Button type="submit" className={"formButtonProposal"}>
                                                       Asignar
-                                          </Button>
+                                                   </Button>
                                                 </Col>
                                              </Row>
                                           </Form>

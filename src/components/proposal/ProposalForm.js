@@ -2,11 +2,12 @@ import React from 'react';
 import { Col, Card, Row, Container, Form, Button, Image } from 'react-bootstrap';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { Redirect } from 'react-router-dom';
 
 import { PROPOSAL_STATE } from '../../commons/enums';
 import BackNavigator from '../utilities/backNavigator/BackNavigator';
 import NumberArrowUpDown from '../utilities/numberArrowUpDown/NumberArrowUpDown';
-import { getToken, getTokenData } from '../../commons/tokenManagement';
+import { getToken } from '../../commons/tokenManagement';
 import LogoProposing from '../../images/EmpresaB.png';
 import './ProposalForm.css';
 
@@ -23,6 +24,8 @@ class ProposalForm extends React.Component {
          description: "",
          resources: "",
          isLoading: false,
+         redirect: false,
+         idAlly: 0,
          token: getToken()
       }
 
@@ -42,6 +45,7 @@ class ProposalForm extends React.Component {
 
    componentDidMount() {
       this.getHoursOfAlly();
+      this.getCurrentAlly();
    }
 
 
@@ -92,6 +96,21 @@ class ProposalForm extends React.Component {
       ));
    }
 
+
+   /**
+    * Obtener el aliado actual
+    */
+   getCurrentAlly() {
+      const url = `${process.env.REACT_APP_BACK_URL}/allies/me`;
+      axios.get(url, {
+         headers: { 'x-auth-token': `${this.state.token}` }
+      }).then((result) => {
+         this.setState({ idAlly: result.data.id_ally });
+      }).catch((error) => {
+         throw error;
+      });
+   }
+
    /**
     * Crear un nueva propuesta para el reto
     * @param {Object} newProposal 
@@ -108,7 +127,7 @@ class ProposalForm extends React.Component {
 
       let newProposal = {
          fk_id_challenge: this.props.location.state.idChallenge,
-         fk_id_ally: getTokenData(this.state.token).id_user,
+         fk_id_ally: this.state.idAlly,
          fk_id_proposal_state: PROPOSAL_STATE.SEND,
          ideation_hours: this.state.ideationHours,
          experimentation_hours: this.state.experimentationHours,
@@ -120,11 +139,15 @@ class ProposalForm extends React.Component {
 
       await axios.post(url, newProposal, {
          headers: { 'x-auth-token': `${this.state.token}` }
+
       }).then((result) => {
          this.notifySuccess("Propuesta creada");
+         setTimeout(() => {
+            this.setState({ redirect: true });
+         }, 2000);
 
       }).catch((error) => {
-         this.notifyError(error.response.data);
+         typeof error.response.data === "object" ? this.notifyError("No se pudo crear la propuesta") : this.notifyError(error.response.data);
 
       });
 
@@ -148,12 +171,11 @@ class ProposalForm extends React.Component {
       })
          .then(res => {
             this.setState({
-               maxIdeationHours: res.data.ally_month_ideation_hours,
-               maxExperimentationHours: res.data.ally_month_experimentation_hours,
+               maxIdeationHours: res.data.ally_challenge_ideation_hours,
+               maxExperimentationHours: res.data.ally_challenge_experimentation_hours,
             });
          })
          .catch(error => {
-            console.log(error);
          });
    }
 
@@ -171,6 +193,11 @@ class ProposalForm extends React.Component {
 
 
    render() {
+      if (this.state.redirect) {
+         return (
+            <Redirect to="/home/sendedProposals" />
+         )
+      }
       return (
          <Container fluid className="d-flex justify-content-center">
             <Row className="h-100 d-flex justify-content-center">

@@ -7,10 +7,11 @@ import BackNavigator from '../utilities/backNavigator/BackNavigator';
 import SectionTitle from '../utilities/sectionTitle/SectionTitle';
 import alertIcon from '../../images/PropuestasAsignadas.png';
 import { getToken } from "../../commons/tokenManagement";
+import "./ChallengeAssignedDetails.css";
 
 class ChallengeAssignedDetails extends Component {
-   
-   constructor(){
+
+   constructor() {
       super();
       this.state = {
          token: getToken(),
@@ -20,24 +21,22 @@ class ChallengeAssignedDetails extends Component {
 
 
    componentDidMount() {
-      console.log(this.props.location.state.idChallenge)
       this.getProposalAssignedByChallenge(this.props.location.state.idChallenge);
    }
 
 
-   async getProposalAssignedByChallenge(idChallenge){
+   async getProposalAssignedByChallenge(idChallenge) {
       let url = `${process.env.REACT_APP_BACK_URL}/proposals/proposalAssigned/${idChallenge}`;
       const token = this.state.token;
 
       await axios.get(url, {
          headers: { 'x-auth-token': `${token}` }
       }).then((result) => {
-         if(result.data) {
-            this.setState({proposal: result.data});
-            console.log(result.data);
+         if (result.data) {
+            this.setState({ proposal: result.data });
          }
       }).catch((error) => {
-         this.setState({proposal: {}});
+         this.setState({ proposal: {} });
       })
    }
 
@@ -55,6 +54,17 @@ class ChallengeAssignedDetails extends Component {
                <Col sm={11} className="d-flex flex-column align-items-center">
                   <BackNavigator />
                   <SectionTitle titleProps={{ img: alertIcon, imgAlt: 'alert', text: 'Reto en Desarrollo' }} />
+                  <Row className="d-fex justify-content-center">
+                     <Col className="p-0">
+                        <div className="formBox">
+                           <Row className="m-0 d-flex justify-content-center">
+                              <Col xs={9} className="challengeAssignedDetailsPadding">
+                              
+                              </Col>
+                           </Row>
+                        </div>
+                     </Col>
+                  </Row>
                </Col>
             </Row>
          </Container>

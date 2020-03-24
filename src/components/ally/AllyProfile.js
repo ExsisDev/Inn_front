@@ -52,7 +52,6 @@ class AllyProfile extends React.Component {
         const url = `${process.env.REACT_APP_BACK_URL}/allies/me`;
         axios.get(url, { headers: { 'x-auth-token': `${this.state.token}` } })
             .then(res => {
-                console.log(res);
                 this.setState({ ally: res.data, isLoading: false });
             }).then(() => {
                 const url = `${process.env.REACT_APP_BACK_URL}/resources/${this.state.ally.id_ally}`;
@@ -62,8 +61,6 @@ class AllyProfile extends React.Component {
                     })
             })
             .catch(error => {
-                console.log(error);
-                console.log("Algo salió mal");
             });
     }
 

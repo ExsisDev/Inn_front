@@ -55,8 +55,6 @@ class EditAllyResources extends React.Component {
                 this.setState({ allyResources: res.data, isLoading: false });
             })
             .catch(error => {
-                console.log(error);
-                console.log("Algo salió mal");
             });
     }
     /**
@@ -79,8 +77,6 @@ class EditAllyResources extends React.Component {
                 this.chargeResourcesToStatus();
             })
             .catch(error => {
-                console.log(error);
-
                 this.notifyError("Algo salió mal");
             })
     }

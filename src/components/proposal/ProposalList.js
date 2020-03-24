@@ -55,7 +55,7 @@ class ProposalList extends React.Component {
 
 
    /**
-    * Obtener todos los retos según la página, el estado y opcionalmente una palabra clave
+    * Obtener todos los retos según la página, el estado 
     */
    async getProposalsByPageAndStatus(page, status) {
 
@@ -76,7 +76,6 @@ class ProposalList extends React.Component {
 
       });
 
-      // await this.begginingPage.current.scrollIntoView();
    }
 
 

@@ -141,7 +141,6 @@ class AllChallenges extends React.Component {
     */
    handleNextRoute = () => {
       if (this.state.isAdminFunctionality) {
-         console.log("is an admin")
          switch (this.state.actualStatus) {
             case "CREATED":
                this.setState({ nextRoute: "/home/challengeProposals" });
