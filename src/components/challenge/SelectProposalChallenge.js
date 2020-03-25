@@ -26,7 +26,7 @@ class SelectProposalChallenge extends React.Component {
          loadingAllies: true,
          loadingResources: true,
          newProposal: false,
-         selectProposal: ""
+         selectedProposalIdAlly: ""
       }
       this.hoursIdea = React.createRef();
       this.hoursExpe = React.createRef();
@@ -92,13 +92,13 @@ class SelectProposalChallenge extends React.Component {
     */
    handleSelectedProposal = (e) => {
       this.setState({ newProposal: false });
-      if (this.state.selectProposal == e.target.value) {
+      if (this.state.selectedProposalIdAlly == e.target.value) {
          this.setState({
-            selectProposal: ""
+            selectedProposalIdAlly: ""
          });
       } else {
          this.setState({
-            selectProposal: e.target.value
+            selectedProposalIdAlly: e.target.value
          });
       }
    }
@@ -111,6 +111,9 @@ class SelectProposalChallenge extends React.Component {
 
       this.notifyUpdate("Verificando Asignación");
 
+      var urlProposalCreation = `${process.env.REACT_APP_BACK_URL}/proposals`;
+      var urlProposalAssign = `${process.env.REACT_APP_BACK_URL}/proposals/assign/${this.props.location.state.idChallenge}/${this.state.selectedProposalIdAlly}`;
+
       if (this.state.newProposal) {
          let newProposal = {
             fk_id_challenge: this.props.location.state.idChallenge,
@@ -118,13 +121,11 @@ class SelectProposalChallenge extends React.Component {
             fk_id_proposal_state: PROPOSAL_STATE.ASSIGNED,
             ideation_hours: parseInt(this.hoursIdea.current.value),
             experimentation_hours: parseInt(this.hoursExpe.current.value),
-            solution_description: "Esta es una propuesta de solución para la pesente propuesta generada por el Administrador de sitio.",
+            solution_description: "Esta es una propuesta de solución para la presente propuesta generada por el Administrador de sitio.",
             proposal_resources: "El aliado debe establecer los recursos."
          }
 
-         let url = `${process.env.REACT_APP_BACK_URL}/proposals`;
-
-         await axios.post(url, newProposal, {
+         await axios.post(urlProposalCreation, newProposal, {
             headers: { 'x-auth-token': `${this.state.token}` }
          }).then((result) => {
             this.notifySuccess("Propuesta asignada exitosamente");
@@ -132,18 +133,17 @@ class SelectProposalChallenge extends React.Component {
             this.notifyError(error.response.data);
          });
 
-      } else {
-         const url = `${process.env.REACT_APP_BACK_URL}/proposals/assign/${this.props.location.state.idChallenge}/${this.state.selectProposal}`;
-         axios.put(url, {}, {
-            headers: { 'x-auth-token': `${this.state.token}` }
-         }).then(() => {
-            this.notifySuccess("Propuesta asignada exitosamente");
-            this.getProposalsByChallenge();
-         })
-            .catch((error) => {
-               this.notifyError(error.response.data);
-            });
       }
+
+      await axios.put(urlProposalAssign, {}, {
+         headers: { 'x-auth-token': `${this.state.token}` }
+      }).then(() => {
+         this.notifySuccess("Propuesta asignada exitosamente");
+         this.getProposalsByChallenge();
+      }).catch((error) => {
+         this.notifyError(error.response.data);
+      });
+
 
       await setTimeout(() => {
          this.setState({ homeRedirection: true });
@@ -156,7 +156,7 @@ class SelectProposalChallenge extends React.Component {
    addNewProposal = (e) => {
       e.preventDefault();
       this.setState({
-         selectProposal: e.target.value,
+         selectedProposalIdAlly: e.target.value,
          newProposal: true
       });
    }
@@ -284,7 +284,7 @@ class SelectProposalChallenge extends React.Component {
                                                                               <InputGroup as={Col} className="d-flex justify-content-end">
                                                                                  <InputGroup.Radio
                                                                                     value={`${proposal.fk_id_ally}`}
-                                                                                    checked={this.state.selectProposal == proposal.fk_id_ally}
+                                                                                    checked={this.state.selectedProposalIdAlly == proposal.fk_id_ally}
                                                                                     onChange={this.handleSelectedProposal}
                                                                                  />
                                                                                  <Form.Label className="w-auto radioText text-center text-md-center text-lg-right my-1">Seleccionar</Form.Label>
